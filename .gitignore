@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.idea/
+bower_components/
+public/build/
+public/css/
+public/js/
+.env
+_ide_helper*

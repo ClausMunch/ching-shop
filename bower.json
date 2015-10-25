@@ -1,0 +1,19 @@
+{
+  "name": "ching-shop",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "homepage": "https://www.ching-shop.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5"
+  }
+}
