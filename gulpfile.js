@@ -8,6 +8,12 @@ elixir(function (mix) {
 });
 
 elixir(function (mix) {
+    mix.styles([
+        'ching-shop.css'
+    ], 'public/css/ching-shop.css', 'public/css');
+});
+
+elixir(function (mix) {
     mix.scripts([
         'bower_components/jquery/dist/jquery.js',
         'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js'

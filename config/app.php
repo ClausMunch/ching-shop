@@ -198,7 +198,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class
+        'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
 
     ],
 

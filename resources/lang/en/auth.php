@@ -15,5 +15,9 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'email' => 'email',
+    'email-placeholder' => 'your.name@example.com',
+    'password' => 'password',
+    'login' => 'Log in'
 
 ];

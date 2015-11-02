@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Ching Shop</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('page-title', 'Ching Shop')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('body')
+    <h1>Ching Shop</h1>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+    <p>Lorem ipsum foo bar</p>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Ching Shop</div>
-            </div>
-        </div>
-    </body>
-</html>
+    <h2>Beautiful 3D pop-up card</h2>
+@endsection

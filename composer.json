@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "graham-campbell/htmlmin": "~4.1",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "predis/predis": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -22,7 +23,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Testing\\": "tests/"
         }
     },
     "autoload-dev": {
