@@ -144,10 +144,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        ChingShop\Providers\AppServiceProvider::class,
+        ChingShop\Providers\AuthServiceProvider::class,
+        ChingShop\Providers\EventServiceProvider::class,
+        ChingShop\Providers\RouteServiceProvider::class,
 
     ],
 

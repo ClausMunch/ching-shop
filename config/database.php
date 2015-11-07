@@ -61,7 +61,13 @@ return [
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-            'strict'    => false,
+            'strict'    => true,
+        ],
+
+        'testing' => [
+            'driver'   => 'sqlite',
+            'database' => database_path('test_db.sqlite'),
+            'prefix'   => '',
         ],
 
         'pgsql' => [

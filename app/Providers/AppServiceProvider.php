@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace ChingShop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

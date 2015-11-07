@@ -2,16 +2,15 @@
 
 Route::group(
     [
-        'as'         => 'staff::',
         'prefix'     => 'staff',
         'middleware' => [
             'auth',
         ]
     ],
     function () {
-        Route::get('dashboard', ['as' => 'dashboard', function () {
-            return 'staff dashboard';
-        }]);
+        Route::controller('dashboard', 'Staff\DashboardController', [
+            'getIndex' => 'staff.dashboard'
+        ]);
     }
 );
 

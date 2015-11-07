@@ -8,13 +8,13 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "graham-campbell/htmlmin": "~4.1",
-        "barryvdh/laravel-ide-helper": "^2.1",
         "doctrine/dbal": "^2.5",
-        "predis/predis": "^1.0"
+        "predis/predis": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
+        "mockery/mockery": "dev-master#971dcdfdc2239b3d516672139f4368c19f6c2060 as 0.9.5",
         "phpunit/phpunit": "~5.0",
         "phpspec/phpspec": "~2.1"
     },
@@ -23,7 +23,7 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/",
+            "ChingShop\\": "app/",
             "Testing\\": "tests/"
         }
     },
@@ -41,10 +41,10 @@
             "php artisan clear-compiled"
         ],
         "post-update-cmd": [
-            "php artisan ide-helper:generate",
-            "php artisan ide-helper:models --write",
             "php artisan optimize",
-            "php artisan config:cache"
+            "php artisan config:cache",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:models --write"
         ],
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""

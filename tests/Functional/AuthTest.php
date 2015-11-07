@@ -2,9 +2,7 @@
 
 namespace Testing\Functional;
 
-use Testing\TestCase;
-
-class AuthTest extends TestCase
+class AuthTest extends FunctionalTest
 {
     /**
      * Should be able to visit login page
@@ -35,7 +33,7 @@ class AuthTest extends TestCase
     {
         $email = str_random() . '@ching-shop.com';
         $password = str_random(16);
-        factory(\App\User::class)->create([
+        $user = factory(\ChingShop\User\UserResource::class)->create([
             'email'    => $email,
             'password' => bcrypt($password),
         ]);
@@ -44,6 +42,8 @@ class AuthTest extends TestCase
             ->type($email, 'email')
             ->type($password, 'password')
             ->press('Log in')
-            ->seePageIs(route('staff::dashboard'));
+            ->seePageIs(route('staff.dashboard'));
+
+        $user->delete();
     }
 }

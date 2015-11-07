@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace ChingShop\Jobs;
 
 use Illuminate\Bus\Queueable;
 

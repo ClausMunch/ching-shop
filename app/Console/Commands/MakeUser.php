@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace ChingShop\Console\Commands;
 
-use App\User;
+use ChingShop\User\UserResource;
 
 use Illuminate\Console\Command;
 
@@ -47,7 +47,7 @@ class MakeUser extends Command
             $this->warn("Setting randomly generated password `{$password}`");
         }
 
-        $newUser = new User;
+        $newUser = new UserResource;
         $newUser->setAttribute('email', $email);
         $newUser->setAttribute('password', bcrypt($password));
         $newUser->save();

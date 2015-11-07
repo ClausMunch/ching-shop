@@ -2,6 +2,8 @@
 'use strict';
 
 var elixir = require('laravel-elixir');
+var gulp = require('gulp');
+var shell = require('gulp-shell');
 
 elixir(function (mix) {
     mix.sass('ching-shop.scss');
@@ -37,3 +39,18 @@ elixir(function (mix) {
         'public/build/fonts/'
     );
 });
+
+elixir(function (mix) {
+    mix.task('generate-test-db');
+});
+
+gulp.task('generate-test-db', shell.task(
+    [
+        'rm -f ./database/test_db.sqlite',
+        'touch ./database/test_db.sqlite',
+        'php artisan migrate:refresh --seed --database="testing" --env="testing"'
+    ],
+    {
+        verbose: true
+    }
+));
