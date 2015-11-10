@@ -2,27 +2,36 @@
 
 namespace Testing\Unit\ChingShop\Action;
 
+use ChingShop\User\UserResource;
 use Testing\Unit\UnitTest;
 
 use Mockery\MockInterface;
+
 use ChingShop\Actions\MakeUser;
 
+use ChingShop\User\Role;
 use ChingShop\Validation\Validation;
 use ChingShop\Validation\ValidationFailure;
+use ChingShop\User\RoleResource;
+
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use Mockery;
 
 class MakeUserTest extends UnitTest
 {
     /** @var MakeUser */
-    private $userProvider;
+    private $makeUser;
 
     /** @var Validation|MockInterface */
     private $validation;
 
     /** @var Hasher|MockInterface */
     private $hasher;
+
+    /** @var RoleResource|MockInterface */
+    private $roleResource;
 
     /**
      * Set up MakeUser action with mock validator
@@ -33,8 +42,9 @@ class MakeUserTest extends UnitTest
 
         $this->hasher = $this->makeMock(Hasher::class);
         $this->validation = $this->makeMock(Validation::class);
+        $this->roleResource = $this->makeMock(RoleResource::class);
 
-        $this->userProvider = new MakeUser($this->validation, $this->hasher);
+        $this->makeUser = new MakeUser($this->validation, $this->hasher, $this->roleResource);
     }
 
     /**
@@ -49,10 +59,30 @@ class MakeUserTest extends UnitTest
         $this->mockPasswordHashing($password);
         $this->mockValidation();
 
-        $user = $this->userProvider->make($email, $password, $isStaff);
+        $this->roleResource->shouldNotReceive('mustFindByName');
+        $this->roleResource->shouldNotReceive('roles');
+
+        $user = $this->makeUser->make($email, $password, $isStaff);
 
         $this->assertSame($email, $user->email());
         $this->assertFalse($user->isStaff());
+    }
+
+    /**
+     * Should be able to make a staff user
+     */
+    public function testCanMakeStaffUser()
+    {
+        $email = $this->generator()->anyEmail();
+        $password = $this->generator()->anyString();
+        $isStaff = true;
+
+        $this->mockPasswordHashing($password);
+        $this->mockValidation();
+
+        $this->expectStaffRoleAssociation();
+
+        $this->makeUser->make($email, $password, $isStaff);
     }
 
     /**
@@ -62,12 +92,12 @@ class MakeUserTest extends UnitTest
     {
         $email = $this->generator()->anyEmail();
         $password = $this->generator()->anyString();
-        $isStaff = $this->generator()->anyBoolean();
+        $isStaff = false;
 
         $mockHash = $this->mockPasswordHashing($password);
         $this->mockValidation();
 
-        $user = $this->userProvider->make($email, $password, $isStaff);
+        $user = $this->makeUser->make($email, $password, $isStaff);
 
         $this->assertSame($mockHash, $user->hashedPassword());
     }
@@ -88,7 +118,7 @@ class MakeUserTest extends UnitTest
 
         $this->mockValidation($email, $password, false);
 
-        $this->userProvider->make(
+        $this->makeUser->make(
             $email,
             $password,
             $this->generator()->anyBoolean()
@@ -120,5 +150,23 @@ class MakeUserTest extends UnitTest
             $email && $password ? compact('email', 'password') : Mockery::any(),
             Mockery::any()
         )->andReturn($pass);
+    }
+
+    /**
+     * Expect a user to be added to the staff role
+     */
+    private function expectStaffRoleAssociation()
+    {
+        $this->roleResource->shouldReceive('mustFindByName')
+            ->with(Role::STAFF)
+            ->once()
+            ->andReturn($this->roleResource);
+        $usersRelationship = $this->makeMock(BelongsToMany::class);
+        $this->roleResource->shouldReceive('users')
+            ->once()
+            ->andReturn($usersRelationship);
+        $usersRelationship->shouldReceive('save')
+            ->with(Mockery::type(UserResource::class))
+            ->once();
     }
 }

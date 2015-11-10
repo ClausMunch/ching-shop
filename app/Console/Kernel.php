@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \ChingShop\Console\Commands\Inspire::class,
         \ChingShop\Console\Commands\MakeUser::class,
     ];
 

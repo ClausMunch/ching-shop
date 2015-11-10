@@ -3,6 +3,7 @@
 namespace ChingShop\User;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * ChingShop\User\Role
@@ -24,11 +25,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RoleResource extends Model
 {
+    const USER_ASSOCIATION_TABLE = 'role_user';
+    const FOREIGN_KEY = 'role_id';
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * The database table used by the model.
+     *
+     * @var string
      */
-    public function users()
+    protected $table = 'roles';
+
+    /**
+     * @param string $roleName
+     * @return RoleResource
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function mustFindByName(string $roleName): RoleResource
     {
-        return $this->belongsToMany('ChingShop\User');
+        return $this->where('name', $roleName)->firstOrFail();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            UserResource::class,
+            self::USER_ASSOCIATION_TABLE,
+            self::FOREIGN_KEY,
+            UserResource::FOREIGN_KEY
+        );
     }
 }

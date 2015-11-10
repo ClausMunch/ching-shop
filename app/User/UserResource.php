@@ -10,6 +10,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 /**
  * Class UserResource
  *
@@ -36,8 +38,7 @@ class UserResource extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
-    /** @var \Illuminate\Database\Eloquent\Collection */
-    public $roles;
+    const FOREIGN_KEY = 'user_id';
 
     /**
      * The database table used by the model.
@@ -61,10 +62,15 @@ class UserResource extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function roles()
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany('ChingShop\User\RoleResource');
+        return $this->belongsToMany(
+            RoleResource::class,
+            RoleResource::USER_ASSOCIATION_TABLE,
+            self::FOREIGN_KEY,
+            RoleResource::FOREIGN_KEY
+        );
     }
 }

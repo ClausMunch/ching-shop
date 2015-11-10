@@ -4,6 +4,8 @@ namespace ChingShop\Actions;
 
 use ChingShop\User\User;
 use ChingShop\User\UserResource;
+use ChingShop\User\Role;
+use ChingShop\User\RoleResource;
 
 use ChingShop\Validation\Validation;
 use ChingShop\Validation\ValidationFailure;
@@ -11,11 +13,14 @@ use Illuminate\Contracts\Hashing\Hasher;
 
 class MakeUser
 {
-        /** @var Validation */
+    /** @var Validation */
     private $validation;
 
     /** @var Hasher */
     private $hasher;
+
+    /** @var RoleResource */
+    private $roleResource;
 
     /** @var array */
     private $validationRules = [
@@ -29,11 +34,13 @@ class MakeUser
     /**
      * @param Validation $validation
      * @param Hasher $hasher
+     * @param RoleResource $roleResource
      */
-    public function __construct(Validation $validation, Hasher $hasher)
+    public function __construct(Validation $validation, Hasher $hasher, RoleResource $roleResource)
     {
         $this->validation = $validation;
         $this->hasher = $hasher;
+        $this->roleResource = $roleResource;
     }
 
     /**
@@ -41,6 +48,7 @@ class MakeUser
      * @param string $password
      * @param bool $isStaff
      * @return User
+     * @throws ValidationFailure
      */
     public function make(string $email, string $password, bool $isStaff): User
     {
@@ -51,6 +59,11 @@ class MakeUser
         $userResource = new UserResource;
         $userResource->email = $email;
         $userResource->password = $this->hasher->make($password);
+
+        if ($isStaff) {
+            $staffRole = $this->roleResource->mustFindByName(Role::STAFF);
+            $staffRole->users()->save($userResource);
+        }
 
         return new User($userResource);
     }

@@ -2,6 +2,8 @@
 
 namespace ChingShop\Console\Commands;
 
+use ChingShop\User\Role;
+use ChingShop\User\RoleResource;
 use ChingShop\User\UserResource;
 
 use Illuminate\Console\Command;
@@ -14,7 +16,7 @@ class MakeUser extends Command
      *
      * @var string
      */
-    protected $signature = 'make:user {--email=} {--admin}';
+    protected $signature = 'make:user {--email=} {--password=} {--staff}';
 
     /**
      * The console command description.
@@ -38,29 +40,39 @@ class MakeUser extends Command
      */
     public function handle()
     {
-        $email = $this->option('email') ?
-            $this->option('email') : $this->_generateEmailAddress();
+        if ($this->option('email')) {
+            $email = $this->option('email');
+        } else {
+            $email = $this->generateEmailAddress();
+        }
 
-        $password = $this->secret('Give a password (type "r" for random password)');
-        if ($password === 'r') {
+        if ($this->option('password')) {
+            $password = $this->option('password');
+        } else {
             $password = str_random(18);
             $this->warn("Setting randomly generated password `{$password}`");
         }
 
-        $newUser = new UserResource;
-        $newUser->setAttribute('email', $email);
-        $newUser->setAttribute('password', bcrypt($password));
-        $newUser->save();
+        $userResource = new UserResource;
+        $userResource->setAttribute('email', $email);
+        $userResource->setAttribute('password', bcrypt($password));
+        $userResource->save();
+
+        if ($this->option('staff')) {
+            $staffRole = (new RoleResource)->mustFindByName(Role::STAFF);
+            $userResource->roles()->sync([$staffRole->id]);
+            $this->warn('Granted staff role to new user');
+        }
 
         $this->info(
-            "Created new user with ID `{$newUser->id}` and email `{$newUser->email}`"
+            "Created new user with ID `{$userResource->id}` and email `{$userResource->email}`"
         );
     }
 
     /**
      * @return string
      */
-    private function _generateEmailAddress()
+    private function generateEmailAddress()
     {
         return strtolower(str_random(16)) . '@ching-shop.com';
     }
