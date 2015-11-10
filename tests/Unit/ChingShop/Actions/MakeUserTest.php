@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Action;
 
-use ChingShop\User\UserResource;
+use ChingShop\User\User;
 use Testing\Unit\UnitTest;
 
 use Mockery\MockInterface;
@@ -12,7 +12,6 @@ use ChingShop\Actions\MakeUser;
 use ChingShop\User\Role;
 use ChingShop\Validation\Validation;
 use ChingShop\Validation\ValidationFailure;
-use ChingShop\User\RoleResource;
 
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -30,8 +29,8 @@ class MakeUserTest extends UnitTest
     /** @var Hasher|MockInterface */
     private $hasher;
 
-    /** @var RoleResource|MockInterface */
-    private $roleResource;
+    /** @var Role|MockInterface */
+    private $role;
 
     /**
      * Set up MakeUser action with mock validator
@@ -42,9 +41,9 @@ class MakeUserTest extends UnitTest
 
         $this->hasher = $this->makeMock(Hasher::class);
         $this->validation = $this->makeMock(Validation::class);
-        $this->roleResource = $this->makeMock(RoleResource::class);
+        $this->role = $this->makeMock(Role::class);
 
-        $this->makeUser = new MakeUser($this->validation, $this->hasher, $this->roleResource);
+        $this->makeUser = new MakeUser($this->validation, $this->hasher, $this->role);
     }
 
     /**
@@ -59,8 +58,8 @@ class MakeUserTest extends UnitTest
         $this->mockPasswordHashing($password);
         $this->mockValidation();
 
-        $this->roleResource->shouldNotReceive('mustFindByName');
-        $this->roleResource->shouldNotReceive('roles');
+        $this->role->shouldNotReceive('mustFindByName');
+        $this->role->shouldNotReceive('roles');
 
         $user = $this->makeUser->make($email, $password, $isStaff);
 
@@ -157,16 +156,16 @@ class MakeUserTest extends UnitTest
      */
     private function expectStaffRoleAssociation()
     {
-        $this->roleResource->shouldReceive('mustFindByName')
+        $this->role->shouldReceive('mustFindByName')
             ->with(Role::STAFF)
             ->once()
-            ->andReturn($this->roleResource);
+            ->andReturn($this->role);
         $usersRelationship = $this->makeMock(BelongsToMany::class);
-        $this->roleResource->shouldReceive('users')
+        $this->role->shouldReceive('users')
             ->once()
             ->andReturn($usersRelationship);
         $usersRelationship->shouldReceive('save')
-            ->with(Mockery::type(UserResource::class))
+            ->with(Mockery::type(User::class))
             ->once();
     }
 }

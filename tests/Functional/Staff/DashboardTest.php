@@ -3,11 +3,11 @@
 namespace Testing\Functional\Staff;
 
 use Testing\Functional\FunctionalTest;
-use ChingShop\User\UserResource;
+use ChingShop\User\User;
 
 class DashboardTest extends FunctionalTest
 {
-    /** @var UserResource */
+    /** @var User */
     private $user;
 
     /**
@@ -19,7 +19,7 @@ class DashboardTest extends FunctionalTest
 
         $email = str_random() . '@ching-shop.com';
         $password = str_random(16);
-        $this->user = factory(\ChingShop\User\UserResource::class)->create([
+        $this->user = factory(\ChingShop\User\User::class)->create([
             'email'    => $email,
             'password' => bcrypt($password),
         ]);

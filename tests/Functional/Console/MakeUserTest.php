@@ -8,8 +8,8 @@ use DB;
 use Hash;
 use Artisan;
 
+use ChingShop\User\UserLogic;
 use ChingShop\User\User;
-use ChingShop\User\UserResource;
 
 class MakeUserTest extends FunctionalTest
 {
@@ -33,13 +33,13 @@ class MakeUserTest extends FunctionalTest
     public function testGeneratesEmailIfNoneGiven()
     {
         $originalUserCount = DB::table('users')->count();
-        $originalLatestUserResource = $this->fetchLatestUserResource();
+        $originalLatestUserResource = $this->fetchLatestUser();
 
         Artisan::call('make:user');
 
         $this->assertEquals($originalUserCount + 1, DB::table('users')->count());
 
-        $newLatestUserResource = $this->fetchLatestUserResource();
+        $newLatestUserResource = $this->fetchLatestUser();
 
         $this->assertNotEquals($originalLatestUserResource->id, $newLatestUserResource->id);
         $this->assertStringEndsWith('@ching-shop.com', $newLatestUserResource->email);
@@ -56,7 +56,7 @@ class MakeUserTest extends FunctionalTest
             '--password' => $password
         ]);
 
-        $userResource = $this->fetchLatestUserResource();
+        $userResource = $this->fetchLatestUser();
 
         $this->assertTrue(Hash::check($password, $userResource->password));
     }
@@ -70,21 +70,19 @@ class MakeUserTest extends FunctionalTest
             '--staff' => true,
         ]);
 
-        $userResource = $this->fetchLatestUserResource();
-
-        $user = new User($userResource);
+        $user = $this->fetchLatestUser();
 
         $this->assertTrue($user->isStaff());
     }
 
     /**
-     * @return UserResource
+     * @return User
      */
-    private function fetchLatestUserResource(): UserResource
+    private function fetchLatestUser(): User
     {
-        $latestUserResource = UserResource::with('roles')
+        $latestUserResource = User::with('roles')
             ->orderBy('updated_at', 'desc')
             ->first();
-        return $latestUserResource ? $latestUserResource : new UserResource;
+        return $latestUserResource ? $latestUserResource : new User;
     }
 }

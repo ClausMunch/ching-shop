@@ -3,13 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-use ChingShop\User\RoleResource;
-use ChingShop\User\UserResource;
+use ChingShop\User\Role;
+use ChingShop\User\User;
 
 class CreateRoleUserTable extends Migration
 {
     /** @var string */
-    private $tableName = RoleResource::USER_ASSOCIATION_TABLE;
+    private $tableName = Role::USER_ASSOCIATION_TABLE;
 
     /**
      * Run the migrations.
@@ -21,20 +21,20 @@ class CreateRoleUserTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer(RoleResource::FOREIGN_KEY)->unsigned();
-            $table->integer(UserResource::FOREIGN_KEY)->unsigned();
+            $table->integer(Role::FOREIGN_KEY)->unsigned();
+            $table->integer(User::FOREIGN_KEY)->unsigned();
 
-            $table->foreign(RoleResource::FOREIGN_KEY)
+            $table->foreign(Role::FOREIGN_KEY)
                 ->references('id')
                 ->on('roles')
                 ->onDelete('cascade');
 
-            $table->foreign(UserResource::FOREIGN_KEY)
+            $table->foreign(User::FOREIGN_KEY)
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->unique([UserResource::FOREIGN_KEY, RoleResource::FOREIGN_KEY]);
+            $table->unique([User::FOREIGN_KEY, Role::FOREIGN_KEY]);
         });
     }
 

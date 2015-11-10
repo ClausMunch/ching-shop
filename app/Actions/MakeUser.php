@@ -3,9 +3,7 @@
 namespace ChingShop\Actions;
 
 use ChingShop\User\User;
-use ChingShop\User\UserResource;
 use ChingShop\User\Role;
-use ChingShop\User\RoleResource;
 
 use ChingShop\Validation\Validation;
 use ChingShop\Validation\ValidationFailure;
@@ -19,7 +17,7 @@ class MakeUser
     /** @var Hasher */
     private $hasher;
 
-    /** @var RoleResource */
+    /** @var Role */
     private $roleResource;
 
     /** @var array */
@@ -34,9 +32,9 @@ class MakeUser
     /**
      * @param Validation $validation
      * @param Hasher $hasher
-     * @param RoleResource $roleResource
+     * @param Role $roleResource
      */
-    public function __construct(Validation $validation, Hasher $hasher, RoleResource $roleResource)
+    public function __construct(Validation $validation, Hasher $hasher, Role $roleResource)
     {
         $this->validation = $validation;
         $this->hasher = $hasher;
@@ -56,16 +54,16 @@ class MakeUser
             throw new ValidationFailure();
         }
 
-        $userResource = new UserResource;
-        $userResource->email = $email;
-        $userResource->password = $this->hasher->make($password);
+        $user = new User;
+        $user->email = $email;
+        $user->password = $this->hasher->make($password);
 
         if ($isStaff) {
             $staffRole = $this->roleResource->mustFindByName(Role::STAFF);
-            $staffRole->users()->save($userResource);
+            $staffRole->users()->save($user);
         }
 
-        return new User($userResource);
+        return $user;
     }
 
     /**

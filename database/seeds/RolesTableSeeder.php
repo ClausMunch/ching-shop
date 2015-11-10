@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 
 use ChingShop\User\Role;
-use ChingShop\User\RoleResource;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,6 +13,6 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        RoleResource::create(['name' => Role::STAFF]);
+        Role::create(['name' => Role::STAFF]);
     }
 }

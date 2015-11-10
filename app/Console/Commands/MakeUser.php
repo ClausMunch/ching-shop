@@ -3,8 +3,7 @@
 namespace ChingShop\Console\Commands;
 
 use ChingShop\User\Role;
-use ChingShop\User\RoleResource;
-use ChingShop\User\UserResource;
+use ChingShop\User\User;
 
 use Illuminate\Console\Command;
 
@@ -53,19 +52,19 @@ class MakeUser extends Command
             $this->warn("Setting randomly generated password `{$password}`");
         }
 
-        $userResource = new UserResource;
-        $userResource->setAttribute('email', $email);
-        $userResource->setAttribute('password', bcrypt($password));
-        $userResource->save();
+        $user = new User;
+        $user->setAttribute('email', $email);
+        $user->setAttribute('password', bcrypt($password));
+        $user->save();
 
         if ($this->option('staff')) {
-            $staffRole = (new RoleResource)->mustFindByName(Role::STAFF);
-            $userResource->roles()->sync([$staffRole->id]);
+            $staffRole = (new Role)->mustFindByName(Role::STAFF);
+            $user->roles()->sync([$staffRole->id]);
             $this->warn('Granted staff role to new user');
         }
 
         $this->info(
-            "Created new user with ID `{$userResource->id}` and email `{$userResource->email}`"
+            "Created new user with ID `{$user->id}` and email `{$user->email}`"
         );
     }
 

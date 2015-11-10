@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => ChingShop\User\UserResource::class,
+    'model' => ChingShop\User\User::class,
 
     /*
     |--------------------------------------------------------------------------

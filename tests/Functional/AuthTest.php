@@ -33,7 +33,7 @@ class AuthTest extends FunctionalTest
     {
         $email = str_random() . '@ching-shop.com';
         $password = str_random(16);
-        $user = factory(\ChingShop\User\UserResource::class)->create([
+        $user = factory(\ChingShop\User\User::class)->create([
             'email'    => $email,
             'password' => bcrypt($password),
         ]);

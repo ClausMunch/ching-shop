@@ -5,7 +5,7 @@ namespace ChingShop\Providers;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-use ChingShop\User\UserResource;
+use ChingShop\User\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        $gate->define('administer', function (UserResource $user) {
+        $gate->define('administer', function (User $user) {
             return $user->roles->contains('name', 'admin');
         });
     }

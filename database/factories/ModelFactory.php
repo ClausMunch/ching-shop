@@ -12,7 +12,7 @@
 */
 
 /** @var Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(ChingShop\User\UserResource::class, function (Faker\Generator $faker) {
+$factory->define(ChingShop\User\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
