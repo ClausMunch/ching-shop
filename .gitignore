@@ -10,3 +10,4 @@ public/css/
 public/js/
 .env
 _ide_helper*
+.vagrant/
