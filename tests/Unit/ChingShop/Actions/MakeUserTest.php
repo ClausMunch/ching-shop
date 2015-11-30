@@ -10,7 +10,7 @@ use Mockery\MockInterface;
 use ChingShop\Actions\MakeUser;
 
 use ChingShop\User\Role;
-use ChingShop\Validation\Validation;
+use ChingShop\Validation\ValidationInterface;
 use ChingShop\Validation\ValidationFailure;
 
 use Illuminate\Contracts\Hashing\Hasher;
@@ -23,7 +23,7 @@ class MakeUserTest extends UnitTest
     /** @var MakeUser */
     private $makeUser;
 
-    /** @var Validation|MockInterface */
+    /** @var ValidationInterface|MockInterface */
     private $validation;
 
     /** @var Hasher|MockInterface */
@@ -40,7 +40,7 @@ class MakeUserTest extends UnitTest
         parent::setUp();
 
         $this->hasher = $this->makeMock(Hasher::class);
-        $this->validation = $this->makeMock(Validation::class);
+        $this->validation = $this->makeMock(ValidationInterface::class);
         $this->role = $this->makeMock(Role::class);
 
         $this->makeUser = new MakeUser($this->validation, $this->hasher, $this->role);

@@ -13,11 +13,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \ChingShop\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \ChingShop\Http\Middleware\VerifyCsrfToken::class,
+
+        Middleware\EncryptCookies::class,
+        Middleware\VerifyCsrfToken::class,
 
         \GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware::class,
     ];
@@ -28,8 +29,9 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \ChingShop\Http\Middleware\Authenticate::class,
+        'auth'       => Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \ChingShop\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest'      => Middleware\RedirectIfAuthenticated::class,
+        'staff'      => Middleware\StaffOnly::class
     ];
 }

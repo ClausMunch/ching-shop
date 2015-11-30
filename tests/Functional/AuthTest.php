@@ -2,6 +2,8 @@
 
 namespace Testing\Functional;
 
+use ChingShop\Actions\MakeUser;
+
 class AuthTest extends FunctionalTest
 {
     /**
@@ -33,10 +35,7 @@ class AuthTest extends FunctionalTest
     {
         $email = str_random() . '@ching-shop.com';
         $password = str_random(16);
-        $user = factory(\ChingShop\User\User::class)->create([
-            'email'    => $email,
-            'password' => bcrypt($password),
-        ]);
+        $user = $this->makeUser()->make($email, $password, true);
 
         $this->visit(route('auth.login'))
             ->type($email, 'email')
@@ -45,5 +44,16 @@ class AuthTest extends FunctionalTest
             ->seePageIs(route('staff.dashboard'));
 
         $user->delete();
+    }
+
+    /**
+     * @return MakeUser
+     */
+    private function makeUser(): MakeUser
+    {
+        if (!isset($this->makeUser)) {
+            $this->makeUser = app(MakeUser::class);
+        }
+        return $this->makeUser;
     }
 }

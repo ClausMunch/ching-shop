@@ -5,12 +5,15 @@ Route::group(
         'prefix'     => 'staff',
         'middleware' => [
             'auth',
+            'staff'
         ]
     ],
     function () {
-        Route::controller('dashboard', 'Staff\DashboardController', [
-            'getIndex' => 'staff.dashboard'
+        Route::get('dashboard', [
+            'uses' => 'Staff\DashboardController@getIndex',
+            'as'   => 'staff.dashboard'
         ]);
+        Route::resource('products', 'Staff\ProductController');
     }
 );
 

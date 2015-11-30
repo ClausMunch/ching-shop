@@ -28,7 +28,7 @@ $brand-danger:          $colour-danger;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               $colour-paper;
+$body-bg:               #fff;
 //** Global text color on `<body>`.
 $text-color:            $colour-ink;
 
@@ -67,8 +67,8 @@ $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor(($font-size-base * $line-height-base)) !default; // ~20px
 
 //** By default, this inherits from the `<body>`.
-$headings-font-family:    $font-brand;
-$headings-font-weight:    500 !default;
+$headings-font-family:    $font-sans;
+$headings-font-weight:    700 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          inherit !default;
 

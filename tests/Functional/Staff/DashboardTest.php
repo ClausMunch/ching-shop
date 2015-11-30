@@ -4,11 +4,15 @@ namespace Testing\Functional\Staff;
 
 use Testing\Functional\FunctionalTest;
 use ChingShop\User\User;
+use ChingShop\Actions\MakeUser;
 
 class DashboardTest extends FunctionalTest
 {
     /** @var User */
     private $user;
+
+    /** @var MakeUser */
+    private $makeUser;
 
     /**
      * Set up user for dashboard testing
@@ -19,10 +23,7 @@ class DashboardTest extends FunctionalTest
 
         $email = str_random() . '@ching-shop.com';
         $password = str_random(16);
-        $this->user = factory(\ChingShop\User\User::class)->create([
-            'email'    => $email,
-            'password' => bcrypt($password),
-        ]);
+        $this->user = $this->makeUser()->make($email, $password, true);
     }
 
     /**
@@ -42,5 +43,16 @@ class DashboardTest extends FunctionalTest
         $this->actingAs($this->user)
             ->visit(route('staff.dashboard'))
             ->seePageIs(route('staff.dashboard'));
+    }
+
+    /**
+     * @return MakeUser
+     */
+    private function makeUser(): MakeUser
+    {
+        if (!isset($this->makeUser)) {
+            $this->makeUser = app(MakeUser::class);
+        }
+        return $this->makeUser;
     }
 }

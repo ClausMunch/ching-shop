@@ -5,13 +5,13 @@ namespace ChingShop\Actions;
 use ChingShop\User\User;
 use ChingShop\User\Role;
 
-use ChingShop\Validation\Validation;
+use ChingShop\Validation\ValidationInterface;
 use ChingShop\Validation\ValidationFailure;
 use Illuminate\Contracts\Hashing\Hasher;
 
 class MakeUser
 {
-    /** @var Validation */
+    /** @var ValidationInterface */
     private $validation;
 
     /** @var Hasher */
@@ -30,11 +30,11 @@ class MakeUser
     private $messages = [];
 
     /**
-     * @param Validation $validation
+     * @param ValidationInterface $validation
      * @param Hasher $hasher
      * @param Role $roleResource
      */
-    public function __construct(Validation $validation, Hasher $hasher, Role $roleResource)
+    public function __construct(ValidationInterface $validation, Hasher $hasher, Role $roleResource)
     {
         $this->validation = $validation;
         $this->hasher = $hasher;

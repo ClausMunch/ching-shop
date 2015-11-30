@@ -17,7 +17,8 @@
         "mockery/mockery": "dev-master#971dcdfdc2239b3d516672139f4368c19f6c2060 as 0.9.5",
         "phpunit/phpunit": "~5.0",
         "phpspec/phpspec": "~2.1",
-        "laravel/homestead": "dev-php-7"
+        "laravel/homestead": "dev-php-7",
+        "laracasts/generators": "^1.1"
     },
     "autoload": {
         "classmap": [

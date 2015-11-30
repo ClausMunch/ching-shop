@@ -24,7 +24,24 @@ interface Generator
     public function anyString(): string;
 
     /**
+     * @param string $unwanted
+     * @return string
+     */
+    public function anyStringOtherThan(string $unwanted): string;
+
+    /**
+     * @return int
+     */
+    public function anyInteger(): int;
+
+    /**
      * @return string
      */
     public function anyEmail(): string;
+
+    /**
+     * @param array $options
+     * @return mixed
+     */
+    public function anyOneOf(array $options);
 }

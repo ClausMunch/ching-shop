@@ -32,9 +32,30 @@ class FakerGenerator implements Generator
         $length = mt_rand(1, Generator::SANE_ITERATION_LIMIT);
         for ($i = 0; $i < $length; $i++) {
             $chr = mt_rand(0x0000, Generator::UTF8_MAX);
-            $string .= mb_convert_encoding("&#{$chr};", 'UTF-8', 'HTML-ENTITIES');
+            $string .= mb_convert_encoding(
+                "&#{$chr};",
+                'UTF-8',
+                'HTML-ENTITIES'
+            );
         }
         return $string;
+    }
+
+    /**
+     * @param string $unwanted
+     * @return string
+     */
+    public function anyStringOtherThan(string $unwanted): string
+    {
+        return strrev($unwanted) . $this->faker()->shuffleString($unwanted);
+    }
+
+    /**
+     * @return int
+     */
+    public function anyInteger(): int
+    {
+        return $this->faker()->randomNumber();
     }
 
     /**
@@ -43,6 +64,15 @@ class FakerGenerator implements Generator
     public function anyEmail(): string
     {
         return $this->faker()->email;
+    }
+
+    /**
+     * @param array $options
+     * @return mixed
+     */
+    public function anyOneOf(array $options)
+    {
+        return $this->faker()->randomElement($options);
     }
 
     /**

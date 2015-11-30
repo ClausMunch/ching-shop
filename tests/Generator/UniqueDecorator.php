@@ -41,7 +41,7 @@ class UniqueDecorator implements Generator
      */
     public function anyBoolean(): bool
     {
-        return $this->ensureUnusedValue(function () {
+        return $this->ensureUnusedValue(function() {
             return $this->generator->anyBoolean();
         });
     }
@@ -52,8 +52,30 @@ class UniqueDecorator implements Generator
      */
     public function anyString(): string
     {
-        return $this->ensureUnusedValue(function () {
+        return $this->ensureUnusedValue(function() {
             return $this->generator->anyString();
+        });
+    }
+
+    /**
+     * @param string $unwanted
+     * @return string
+     * @throws GenerationException
+     */
+    public function anyStringOtherThan(string $unwanted): string
+    {
+        return $this->ensureUnusedValue(function() use ($unwanted) {
+            return $this->generator->anyStringOtherThan($unwanted);
+        });
+    }
+
+    /**
+     * @return int
+     */
+    public function anyInteger(): int
+    {
+        return $this->ensureUnusedValue(function() {
+            return $this->generator->anyInteger();
         });
     }
 
@@ -63,8 +85,19 @@ class UniqueDecorator implements Generator
      */
     public function anyEmail(): string
     {
-        return $this->ensureUnusedValue(function () {
+        return $this->ensureUnusedValue(function() {
             return $this->generator->anyEmail();
+        });
+    }
+
+    /**
+     * @param array $options
+     * @return mixed
+     */
+    public function anyOneOf(array $options)
+    {
+        return $this->ensureUnusedValue(function() use ($options) {
+            return $this->generator->anyOneOf($options);
         });
     }
 

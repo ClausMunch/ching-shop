@@ -21,7 +21,7 @@
     </div>
 
 <script async src="{{ elixir('js/ching-shop.js') }}"></script>
-<link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab:300|Roboto:300'
+<link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab|Roboto+Condensed:700'
       property='stylesheet'
       rel='stylesheet'
       type='text/css'>

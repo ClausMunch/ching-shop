@@ -2,7 +2,7 @@
 
 namespace ChingShop\Validation;
 
-interface Validation
+interface ValidationInterface
 {
     /**
      * @param array $testData

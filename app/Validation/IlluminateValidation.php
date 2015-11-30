@@ -5,7 +5,7 @@ namespace ChingShop\Validation;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\Validator;
 
-class IlluminateValidation implements Validation
+class IlluminateValidation implements ValidationInterface
 {
     /** @var Factory */
     private $factory;
