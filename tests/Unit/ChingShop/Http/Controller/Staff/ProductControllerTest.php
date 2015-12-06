@@ -7,6 +7,7 @@ use Testing\Unit\UnitTest;
 
 use Mockery\MockInterface;
 
+use ChingShop\Image\ImageRepository;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Requests\PersistProductRequest;
@@ -31,6 +32,9 @@ class ProductControllerTest extends UnitTest
     /** @var ResponseFactory|MockInterface */
     private $responseFactory;
 
+    /** @var ImageRepository|MockInterface */
+    private $imageRepository;
+
     /**
      * Initialise product controller with mock dependencies
      */
@@ -41,11 +45,13 @@ class ProductControllerTest extends UnitTest
         $this->productRepository = $this->makeMock(ProductRepository::class);
         $this->viewFactory = $this->makeMock(ViewFactory::class);
         $this->responseFactory = $this->makeMock(ResponseFactory::class);
+        $this->imageRepository = $this->makeMock(ImageRepository::class);
 
         $this->productController = new ProductController(
             $this->productRepository,
             $this->viewFactory,
-            $this->responseFactory
+            $this->responseFactory,
+            $this->imageRepository
         );
     }
 
@@ -108,6 +114,7 @@ class ProductControllerTest extends UnitTest
 
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
+        $this->mockNewImageUpload($storeProductRequest);
 
         $product = $this->makeMock(Product::class);
         $this->productRepository->shouldReceive('create')
@@ -206,6 +213,8 @@ class ProductControllerTest extends UnitTest
             )
             ->andReturn($redirect);
 
+        $this->mockNewImageUpload($storeProductRequest);
+
         $response = $this->productController->update(
             $storeProductRequest, $SKU
         );
@@ -235,5 +244,19 @@ class ProductControllerTest extends UnitTest
             ->with($viewName, $bindData)
             ->andReturn($view);
         return $view;
+    }
+
+    /**
+     * @param MockInterface $storeProductRequest
+     */
+    private function mockNewImageUpload(MockInterface $storeProductRequest)
+    {
+        $storeProductRequest->shouldReceive('hasFile')
+            ->with(ProductController::IMAGE_UPLOAD_PARAMETER)
+            ->andReturn($this->generator()->anyBoolean());
+        $storeProductRequest->shouldReceive('file')
+            ->with('new-image')
+            ->andReturn([]);
+        $this->imageRepository->shouldReceive('attachUploadedImagesToProduct');
     }
 }

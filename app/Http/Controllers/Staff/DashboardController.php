@@ -15,4 +15,12 @@ class DashboardController extends Controller
     {
         return view('staff.dashboard.index');
     }
+
+    /**
+     * Display PHP info output
+     */
+    public function getPhpInfo()
+    {
+        phpinfo();
+    }
 }

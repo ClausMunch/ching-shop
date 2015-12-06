@@ -21,5 +21,13 @@ Add this line to your hosts file (e.g. `/etc/hosts`):
 192.168.10.10   www.ching-shop.dev
 ```
 
+Then ssh into the box and check everything is set up and working:
+
+```bash
+vagrant ssh
+cd ~/sites/ching-shop
+phpunit
+```
+
 You should now be able to access the development site at
-http://www.ching-shop.dev, and to ssh into the box with `vagrant ssh`.
+http://www.ching-shop.dev

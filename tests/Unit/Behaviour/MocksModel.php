@@ -33,9 +33,9 @@ trait MocksModel
 
     /**
      * @param string $methodName
-     * @param $value
+     * @param mixed $value
      */
-    protected function mockModelMethod(string $methodName, $value)
+    protected function mockModelMethod(string $methodName, $value = null)
     {
         $this->mockModel()->shouldReceive($methodName)
             ->zeroOrMoreTimes()

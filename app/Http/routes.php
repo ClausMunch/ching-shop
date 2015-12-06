@@ -14,6 +14,7 @@ Route::group(
             'as'   => 'staff.dashboard'
         ]);
         Route::resource('products', 'Staff\ProductController');
+        Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
     }
 );
 

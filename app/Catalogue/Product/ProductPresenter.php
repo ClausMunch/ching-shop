@@ -3,6 +3,7 @@
 namespace ChingShop\Catalogue\Product;
 
 use ChingShop\Http\View\HttpCrud;
+use ChingShop\Image\Image;
 
 class ProductPresenter implements HttpCrud
 {
@@ -63,5 +64,13 @@ class ProductPresenter implements HttpCrud
     public function crudID(): string
     {
         return $this->SKU();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|Image[]
+     */
+    public function images()
+    {
+        return $this->product->images;
     }
 }

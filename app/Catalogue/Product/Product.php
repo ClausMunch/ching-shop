@@ -3,6 +3,9 @@
 namespace ChingShop\Catalogue\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+use ChingShop\Image\Image;
 
 /**
  * ChingShop\Catalogue\Product\Product
@@ -17,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereUpdatedAt($value)
  * @property string $name
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereName($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
  */
 class Product extends Model
 {
@@ -32,5 +36,21 @@ class Product extends Model
     public function isStored(): bool
     {
         return (bool) $this->id;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function images(): BelongsToMany
+    {
+        return $this->belongsToMany(Image::class);
+    }
+
+    /**
+     * @param int[] $imageIDs
+     */
+    public function attachImages(array $imageIDs)
+    {
+        $this->images()->attach($imageIDs);
     }
 }

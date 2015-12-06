@@ -9,6 +9,8 @@ public/build/
 public/css/
 public/js/
 public/img/
+public/filesystem/
+storage/
 .env
 _ide_helper*
 .vagrant/

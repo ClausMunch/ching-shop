@@ -80,7 +80,10 @@ class ProductRepository
     public function presentBySKU(string $sku): ProductPresenter
     {
         /** @var Product $product */
-        $product = $this->productResource->where('sku', $sku)->first();
+        $product = $this->productResource
+            ->where('sku', $sku)
+            ->with('images')
+            ->first();
         if (!$product) {
             return $this->presentEmpty();
         }

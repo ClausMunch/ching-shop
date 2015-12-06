@@ -31,8 +31,9 @@ class PersistProductRequest extends Request
     public function rules(HttpRequest $request)
     {
         return [
-            'name' => $this->nameRules($request),
-            'sku'  => $this->skuRules($request)
+            'name'      => $this->nameRules($request),
+            'sku'       => $this->skuRules($request),
+//            'new-image.*' => 'image|max:5000',
         ];
     }
 

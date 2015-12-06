@@ -45,7 +45,12 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('app'),
+            'root'   => storage_path('app/filesystem'),
+        ],
+
+        'local-public' => [
+            'driver' => 'local',
+            'root'   => public_path('filesystem')
         ],
 
         'ftp' => [
@@ -64,10 +69,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key'    => env('S3_KEY', 'your-key'),
+            'secret' => env('S3_SECRET', 'your-secret'),
+            'region' => env('S3_REGION', 'eu-west-1'),
+            'bucket' => env('S3_BUCKET', 'ching-shop-static'),
         ],
 
         'rackspace' => [

@@ -139,7 +139,7 @@ class ProductRepositoryTest extends UnitTest
         $sku = $this->generator()->anyString();
 
         $product = $this->makeMock(Product::class);
-        $this->productResource->shouldReceive('where->first')
+        $this->productResource->shouldReceive('where->with->first')
             ->andReturn($product);
 
         $presenter = $this->productRepository->presentBySKU($sku);

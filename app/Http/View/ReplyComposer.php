@@ -71,7 +71,7 @@ class ReplyComposer
     /**
      * @return MessageBag
      */
-    private function errors(): MessageBag
+    private function errors()
     {
         if (!isset($this->errors)) {
             $this->errors = $this->sessionStore->get(
@@ -84,7 +84,7 @@ class ReplyComposer
     /**
      * @return MessageBag
      */
-    private function oldInput(): MessageBag
+    private function oldInput()
     {
         if (!isset($this->oldInput)) {
             $this->oldInput = new MessageBag(

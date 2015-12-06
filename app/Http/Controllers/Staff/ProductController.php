@@ -12,11 +12,15 @@ use ChingShop\Http\Requests;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\Requests\PersistProductRequest;
 
+use ChingShop\Image\ImageRepository;
+use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
 
 class ProductController extends Controller
 {
+    const IMAGE_UPLOAD_PARAMETER = 'new-image';
+
     /** @var ProductRepository */
     private $productRepository;
 
@@ -26,20 +30,26 @@ class ProductController extends Controller
     /** @var ResponseFactory */
     private $responseFactory;
 
+    /** @var ImageRepository */
+    private $imageRepository;
+
     /**
      * ProductController constructor.
      * @param ProductRepository $productRepository
      * @param ViewFactory $viewFactory
      * @param ResponseFactory $responseFactory
+     * @param ImageRepository $imageRepository
      */
     public function __construct(
         ProductRepository $productRepository,
         ViewFactory $viewFactory,
-        ResponseFactory $responseFactory
+        ResponseFactory $responseFactory,
+        ImageRepository $imageRepository
     ) {
         $this->productRepository = $productRepository;
         $this->viewFactory = $viewFactory;
         $this->responseFactory = $responseFactory;
+        $this->imageRepository = $imageRepository;
     }
 
     /**
@@ -73,6 +83,7 @@ class ProductController extends Controller
     public function store(PersistProductRequest $request)
     {
         $product = $this->productRepository->create($request->all());
+        $this->persistUploadedImages($request, $product);
         return $this->redirectToShowProduct($product->sku);
     }
 
@@ -111,6 +122,7 @@ class ProductController extends Controller
     public function update(PersistProductRequest $request, string $sku)
     {
         $product = $this->productRepository->update($sku, $request->all());
+        $this->persistUploadedImages($request, $product);
         return $this->redirectToShowProduct($product->sku);
     }
 
@@ -160,6 +172,24 @@ class ProductController extends Controller
         return $this->responseFactory->redirectToRoute(
             'staff.products.show',
             ['sku' => $sku]
+        );
+    }
+
+    /**
+     * @param PersistProductRequest $request
+     * @param Product $product
+     */
+    private function persistUploadedImages(
+        PersistProductRequest $request,
+        Product $product
+    ) {
+        if (!$request->hasFile(self::IMAGE_UPLOAD_PARAMETER)) {
+            return;
+        }
+
+        $this->imageRepository->attachUploadedImagesToProduct(
+            $request->file(self::IMAGE_UPLOAD_PARAMETER),
+            $product
         );
     }
 }
