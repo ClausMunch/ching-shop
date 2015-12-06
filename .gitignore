@@ -12,3 +12,4 @@ public/img/
 .env
 _ide_helper*
 .vagrant/
+phpunit

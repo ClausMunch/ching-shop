@@ -6,3 +6,11 @@ if [ ! -d ~/.bash_it ]; then
     sed -i -e 's/bobby/nwinkler/' ~/.bashrc
     echo 'php ~/sites/ching-shop/artisan config:clear' >> ~/.bashrc
 fi
+
+function appSetup
+{
+    cd ~/sites/ching-shop
+    php artisan migrate --seed
+    gulp
+}
+appSetup
