@@ -3,7 +3,7 @@
 function installPHPUnit
 {
     if [ ! $(type -P phpunit) ]; then
-        ln -s /home/vagrant/sites/ching-shop/vendor/phpunit/phpunit/phpunit /usr/local/bin/phpunit
+        ln -s /home/vagrant/ching-shop/vendor/phpunit/phpunit/phpunit /usr/local/bin/phpunit
     fi
 }
 installPHPUnit

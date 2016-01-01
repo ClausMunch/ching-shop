@@ -2801,7 +2801,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead",
-                "reference": "66b5cac5d90575be3cf689206397e35e4d8aa718"
+                "reference": "50b1a7fbec58783e13241bc27909ab1ab146069b"
             },
             "require": {
                 "php": ">=5.5.9",
@@ -2832,7 +2832,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2015-12-16 17:09:41"
+            "time": "2015-12-21 17:29:55"
         },
         {
             "name": "mockery/mockery",

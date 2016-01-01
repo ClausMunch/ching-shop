@@ -12,8 +12,10 @@ You'll need [Vagrant](https://www.vagrantup.com/),
 ```bash
 git clone git@github.com:hughgrigg/ching-shop.git
 cd ching-shop
-vagrant up
+cp Homestead.yaml.example Homestead.yaml
 ```
+
+Change the `map` key in `Homestead.yaml` to where you have cloned the ching-shop repo.
 
 Add this line to your hosts file (e.g. `/etc/hosts`):
 
@@ -21,9 +23,10 @@ Add this line to your hosts file (e.g. `/etc/hosts`):
 192.168.10.10   www.ching-shop.dev
 ```
 
-Then ssh into the box and check everything is set up and working:
+Then set up the Vagrant box, ssh into it and check everything is set up:
 
 ```bash
+vagrant up
 vagrant ssh
 cd ~/sites/ching-shop
 phpunit
