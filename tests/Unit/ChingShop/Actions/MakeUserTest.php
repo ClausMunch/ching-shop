@@ -47,27 +47,6 @@ class MakeUserTest extends UnitTest
     }
 
     /**
-     * Should be able to make non-staff user
-     */
-    public function testCanMakeNonStaffUser()
-    {
-        $email = $this->generator()->anyEmail();
-        $password = $this->generator()->anyString();
-        $isStaff = false;
-
-        $this->mockPasswordHashing($password);
-        $this->mockValidation();
-
-        $this->role->shouldNotReceive('mustFindByName');
-        $this->role->shouldNotReceive('roles');
-
-        $user = $this->makeUser->make($email, $password, $isStaff);
-
-        $this->assertSame($email, $user->email());
-        $this->assertFalse($user->isStaff());
-    }
-
-    /**
      * Should be able to make a staff user
      */
     public function testCanMakeStaffUser()

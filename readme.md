@@ -1,6 +1,8 @@
 Ching Shop
 ==========
 
+[![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg)](https://travis-ci.org/hughgrigg/ching-shop)
+
 Source code for [ching-shop.com](https://www.ching-shop.com).
 
 ## Up and running
