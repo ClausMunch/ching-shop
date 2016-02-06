@@ -4,26 +4,27 @@ namespace Testing\Unit\ChingShop\Exceptions;
 
 use Exception;
 use Testing\Unit\UnitTest;
-use Mockery\MockInterface;
 use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\Response;
 use ChingShop\Exceptions\Handler;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class HandlerTest extends UnitTest
 {
     /** @var Handler */
     private $handler;
 
-    /** @var LoggerInterface|MockInterface */
+    /** @var LoggerInterface|MockObject */
     private $logger;
 
+    /**
+     * Initialise handler for each test
+     */
     public function setUp()
     {
         parent::setUp();
-
         $this->logger = $this->makeMock(LoggerInterface::class);
-
         $this->handler = new Handler($this->logger);
     }
 
@@ -41,11 +42,9 @@ class HandlerTest extends UnitTest
     public function testReport()
     {
         $exception = $this->makeMockException();
-
-        $this->logger->shouldReceive('error')
-            ->with($exception)
-            ->once();
-
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with($exception);
         $this->handler->report($exception);
     }
 
@@ -56,8 +55,8 @@ class HandlerTest extends UnitTest
     {
         $exception = $this->makeMockException();
 
-        /** @var Request|MockInterface $request */
-        $request = $this->makeMock(Request::class);
+        /** @var Request|MockObject $request */
+        $request = $this->mockery(Request::class);
 
         $response = $this->handler->render($request, $exception);
 
@@ -65,9 +64,9 @@ class HandlerTest extends UnitTest
     }
 
     /**
-     * @return MockInterface|Exception
+     * @return MockObject|Exception
      */
-    private function makeMockException(): MockInterface
+    private function makeMockException(): MockObject
     {
         return $this->makeMock(Exception::class);
     }

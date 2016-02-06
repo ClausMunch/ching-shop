@@ -40,6 +40,11 @@ interface Generator
     public function anyEmail(): string;
 
     /**
+     * @return string
+     */
+    public function anySlug(): string;
+
+    /**
      * @param array $options
      * @return mixed
      */

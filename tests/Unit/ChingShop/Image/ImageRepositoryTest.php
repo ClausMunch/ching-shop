@@ -13,6 +13,7 @@ use ChingShop\Catalogue\Product\Product;
 use Illuminate\Config\Repository as Config;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class ImageRepositoryTest extends UnitTest
 {
@@ -34,10 +35,10 @@ class ImageRepositoryTest extends UnitTest
     {
         parent::setUp();
 
-        $this->imageResource = $this->makeMock(Image::class);
+        $this->imageResource = $this->mockery(Image::class);
         $this->setMockModel($this->imageResource);
 
-        $this->config = $this->makeMock(Config::class);
+        $this->config = $this->mockery(Config::class);
 
         $this->imageRepository = new ImageRepository(
             $this->imageResource,
@@ -62,11 +63,13 @@ class ImageRepositoryTest extends UnitTest
 
         $fileName = $this->generator()->anyString();
         $upload = $this->makeMockUploadedFile();
-        $upload->shouldReceive('move');
-        $upload->shouldReceive('getClientOriginalName')
-            ->andReturn($fileName);
+        $upload->expects($this->once())
+            ->method('move');
+        $upload->expects($this->once())
+            ->method('getClientOriginalName')
+            ->willReturn($fileName);
 
-        $newImage = $this->makeMock(Image::class);
+        $newImage = $this->mockery(Image::class);
         $newImage->shouldReceive('getAttribute')
             ->andReturn($this->generator()->anyInteger());
         $this->imageResource->shouldReceive('create')
@@ -88,7 +91,8 @@ class ImageRepositoryTest extends UnitTest
     public function testMovesUploadedFileUsingImageResourceID()
     {
         $upload = $this->makeMockUploadedFile();
-        $upload->shouldReceive('getClientOriginalName');
+        $upload->expects($this->once())
+            ->method('getClientOriginalName');
 
         $filename = $this->generator()->anyString();
         $this->expectImageCreation($filename);
@@ -98,11 +102,11 @@ class ImageRepositoryTest extends UnitTest
             ->with('filesystems.disks.local-public.root')
             ->andReturn($storagePath);
 
-        $upload->shouldReceive('move')
-            ->once()
+        $upload->expects($this->once())
+            ->method('move')
             ->with(
                 $storagePath . '/image',
-                \Mockery::type('string')
+                $this->isType('string')
             );
 
         $this->imageRepository->storeUploadedImage($upload);
@@ -114,9 +118,11 @@ class ImageRepositoryTest extends UnitTest
     public function testAttachesUploadedImagesToProduct()
     {
         $uploadedFile = $this->makeMockUploadedFile();
-        $uploadedFile->shouldReceive('getClientOriginalName')
-            ->andReturn($this->generator()->anyString());
-        $uploadedFile->shouldReceive('move')->once();
+        $uploadedFile->expects($this->once())
+            ->method('getClientOriginalName')
+            ->willReturn($this->generator()->anyString());
+        $uploadedFile->expects($this->once())
+            ->method('move');
 
         $imageBag = $this->makeMockFileBag([$uploadedFile]);
         $product = $this->makeMockProduct();
@@ -136,9 +142,9 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
-     * @return MockInterface|UploadedFile
+     * @return MockObject|UploadedFile
      */
-    private function makeMockUploadedFile(): MockInterface
+    private function makeMockUploadedFile(): MockObject
     {
         $uploadedFile = $this->makeMock(UploadedFile::class);
         return $uploadedFile;
@@ -150,7 +156,7 @@ class ImageRepositoryTest extends UnitTest
      */
     private function makeMockFileBag(array $files = []): MockInterface
     {
-        $fileBag = $this->makeMock(FileBag::class);
+        $fileBag = $this->mockery(FileBag::class);
         $fileBag->shouldReceive('all')->andReturn($files);
         return $fileBag;
     }
@@ -160,7 +166,7 @@ class ImageRepositoryTest extends UnitTest
      */
     private function makeMockProduct(): MockInterface
     {
-        return $this->makeMock(Product::class);
+        return $this->mockery(Product::class);
     }
 
     /**
@@ -173,7 +179,7 @@ class ImageRepositoryTest extends UnitTest
             $filename = $this->generator()->anyInteger();
         }
 
-        $newImage = $this->makeMock(Image::class);
+        $newImage = $this->mockery(Image::class);
         $newImage->shouldReceive('getAttribute')
             ->with('filename')
             ->andReturn($filename);

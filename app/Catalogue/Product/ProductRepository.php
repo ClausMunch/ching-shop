@@ -37,7 +37,7 @@ class ProductRepository
     public function presentLatest($limit = 100): array
     {
         return array_map(function (Product $product): ProductPresenter {
-            return new ProductPresenter($product);
+            return $this->presentProduct($product);
         }, $this->loadLatest($limit)->all());
     }
 
@@ -87,6 +87,32 @@ class ProductRepository
         if (!$product) {
             return $this->presentEmpty();
         }
+        return $this->presentProduct($product);
+    }
+
+    /**
+     * @param int $ID
+     * @return ProductPresenter
+     */
+    public function presentByID(int $ID): ProductPresenter
+    {
+        /** @var Product $product */
+        $product = $this->productResource
+            ->where('id', $ID)
+            ->with('images')
+            ->first();
+        if (!$product) {
+            return $this->presentEmpty();
+        }
+        return $this->presentProduct($product);
+    }
+
+    /**
+     * @param $product
+     * @return ProductPresenter
+     */
+    private function presentProduct($product)
+    {
         return new ProductPresenter($product);
     }
 }

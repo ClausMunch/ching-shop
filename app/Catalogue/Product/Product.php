@@ -21,11 +21,13 @@ use ChingShop\Image\Image;
  * @property string $name
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereName($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
+ * @property string $slug
+ * @property string $description
  */
 class Product extends Model
 {
     /** @var array */
-    protected $fillable = ['name', 'sku'];
+    protected $fillable = ['name', 'sku', 'slug'];
 
     /** @var array */
     protected $guarded = ['id'];

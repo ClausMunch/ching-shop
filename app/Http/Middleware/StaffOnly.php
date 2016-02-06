@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\Response;
 
+use ChingShop\Http\View\Staff\LocationComposer;
+
 class StaffOnly
 {
     /**
@@ -29,6 +31,8 @@ class StaffOnly
         if (!$requestUser->isStaff()) {
             return $this->deny($request);
         }
+
+        view()->composer('*', LocationComposer::class);
 
         return $next($request);
     }

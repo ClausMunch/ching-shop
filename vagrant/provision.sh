@@ -7,6 +7,11 @@ if [ ! -d ~/.bash_it ]; then
     sed -i -e 's/bobby/nwinkler/' ~/.bashrc
 fi
 
+if ! grep -q 'gulp --completion' ~/.bashrc; then
+    echo $'\n# Gulp tab completion' >> ~/.bashrc
+    echo 'eval "$(gulp --completion=bash)"' >> ~/.bashrc
+fi
+
 function appSetup
 {
     cd ~/ching-shop
@@ -15,7 +20,6 @@ function appSetup
     php artisan key:generate
     php artisan migrate --seed
     npm install
-    bower install
     gulp
 }
 appSetup

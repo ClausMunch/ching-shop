@@ -67,6 +67,14 @@ class FakerGenerator implements Generator
     }
 
     /**
+     * @return string
+     */
+    public function anySlug(): string
+    {
+        return $this->faker()->slug;
+    }
+
+    /**
      * @param array $options
      * @return mixed
      */

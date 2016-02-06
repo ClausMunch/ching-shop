@@ -31,29 +31,43 @@ class PersistProductRequest extends Request
     public function rules(HttpRequest $request)
     {
         return [
-            'name'      => $this->nameRules($request),
-            'sku'       => $this->skuRules($request),
-//            'new-image.*' => 'image|max:5000',
+            'name' => $this->uniqueFieldRules(
+                'required|min:3|max:255|unique:products',
+                'name',
+                $request
+            ),
+            'sku' => $this->uniqueFieldRules(
+                'required|alpha_dash|min:3|max:255|unique:products',
+                'sku',
+                $request
+            ),
+            'slug' => $this->uniqueFieldRules(
+                'required|alpha_dash|min:5|max:128|unique:products',
+                'slug',
+                $request
+            )
+//            'new-image.*' => 'image|max:5000', todo
         ];
     }
 
-    private function nameRules(HttpRequest $request): string
-    {
-        $rules = 'required|string|min:3|max:255|unique:products';
-        if ($this->requestIsUpdate($request)) {
-            $rules = sprintf('%s,name,%s', $rules, $request->get('id'));
-        }
-        return $rules;
-    }
-
     /**
+     * @param string $rules
+     * @param string $fieldName
+     * @param HttpRequest $request
      * @return string
      */
-    private function skuRules(HttpRequest $request): string
-    {
-        $rules = 'required|alpha_dash|min:3|max:255|unique:products';
+    private function uniqueFieldRules(
+        string $rules,
+        string $fieldName,
+        HttpRequest $request
+    ): string {
         if ($this->requestIsUpdate($request)) {
-            $rules = sprintf('%s,sku,%s', $rules, $request->get('id'));
+            $rules = sprintf(
+                '%s,%s,%s',
+                $rules,
+                $fieldName,
+                $request->get('id')
+            );
         }
         return $rules;
     }

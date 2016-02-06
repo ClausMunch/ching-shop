@@ -42,10 +42,10 @@ class ProductControllerTest extends UnitTest
     {
         parent::setUp();
 
-        $this->productRepository = $this->makeMock(ProductRepository::class);
-        $this->viewFactory = $this->makeMock(ViewFactory::class);
-        $this->responseFactory = $this->makeMock(ResponseFactory::class);
-        $this->imageRepository = $this->makeMock(ImageRepository::class);
+        $this->productRepository = $this->mockery(ProductRepository::class);
+        $this->viewFactory = $this->mockery(ViewFactory::class);
+        $this->responseFactory = $this->mockery(ResponseFactory::class);
+        $this->imageRepository = $this->mockery(ImageRepository::class);
 
         $this->productController = new ProductController(
             $this->productRepository,
@@ -90,7 +90,7 @@ class ProductControllerTest extends UnitTest
      */
     public function testCreate()
     {
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->mockery(ProductPresenter::class);
         $this->productRepository->shouldReceive('presentEmpty')
             ->andReturn($product);
 
@@ -110,13 +110,13 @@ class ProductControllerTest extends UnitTest
     public function testStore()
     {
         /** @var PersistProductRequest|MockInterface $storeProductRequest */
-        $storeProductRequest = $this->makeMock(PersistProductRequest::class);
+        $storeProductRequest = $this->mockery(PersistProductRequest::class);
 
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
         $this->mockNewImageUpload($storeProductRequest);
 
-        $product = $this->makeMock(Product::class);
+        $product = $this->mockery(Product::class);
         $this->productRepository->shouldReceive('create')
             ->with($requestData)
             ->andReturn($product);
@@ -126,7 +126,7 @@ class ProductControllerTest extends UnitTest
             ->with('sku')
             ->andReturn($SKU);
 
-        $redirect = $this->makeMock(RedirectResponse::class);
+        $redirect = $this->mockery(RedirectResponse::class);
         $this->responseFactory->shouldReceive('redirectToRoute')
             ->with(
                 'staff.products.show',
@@ -145,7 +145,7 @@ class ProductControllerTest extends UnitTest
     public function testShow()
     {
         $SKU = $this->generator()->anyString();
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
         $this->productRepository->shouldReceive('presentBySKU')
             ->with($SKU)
@@ -167,7 +167,7 @@ class ProductControllerTest extends UnitTest
     public function testEdit()
     {
         $SKU = $this->generator()->anyString();
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
         $this->productRepository->shouldReceive('presentBySKU')
             ->with($SKU)
@@ -189,14 +189,14 @@ class ProductControllerTest extends UnitTest
     public function testUpdate()
     {
         /** @var PersistProductRequest|MockInterface $storeProductRequest */
-        $storeProductRequest = $this->makeMock(PersistProductRequest::class);
+        $storeProductRequest = $this->mockery(PersistProductRequest::class);
 
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
 
         $SKU = $this->generator()->anyString();
 
-        $product = $this->makeMock(Product::class);
+        $product = $this->mockery(Product::class);
         $this->productRepository->shouldReceive('update')
             ->with($SKU, $requestData)
             ->andReturn($product);
@@ -205,7 +205,7 @@ class ProductControllerTest extends UnitTest
             ->with('sku')
             ->andReturn($SKU);
 
-        $redirect = $this->makeMock(RedirectResponse::class);
+        $redirect = $this->mockery(RedirectResponse::class);
         $this->responseFactory->shouldReceive('redirectToRoute')
             ->with(
                 'staff.products.show',
@@ -227,7 +227,7 @@ class ProductControllerTest extends UnitTest
      */
     private function makeMockView(): MockInterface
     {
-        return $this->makeMock(View::class);
+        return $this->mockery(View::class);
     }
 
     /**

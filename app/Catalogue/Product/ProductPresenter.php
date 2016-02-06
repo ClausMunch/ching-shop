@@ -2,10 +2,11 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use ChingShop\Http\View\HttpCrud;
 use ChingShop\Image\Image;
+use ChingShop\Http\View\Staff\HttpCrud;
+use ChingShop\Http\View\Customer\Viewable;
 
-class ProductPresenter implements HttpCrud
+class ProductPresenter implements HttpCrud, Viewable
 {
     /** @var Product */
     private $product;
@@ -67,10 +68,61 @@ class ProductPresenter implements HttpCrud
     }
 
     /**
+     * @return string
+     */
+    public function slug(): string
+    {
+        return (string) $this->product->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function description(): string
+    {
+        return (string) $this->product->description;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection|Image[]
      */
     public function images()
     {
         return $this->product->images;
+    }
+
+    /**
+     * @return Image|null
+     */
+    public function mainImage()
+    {
+        return $this->product->images->first();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|Image[]
+     */
+    public function otherImages()
+    {
+        return $this->product->images->slice(1);
+    }
+
+    /**
+     * @return array of location key => value
+     */
+    public function locationParts(): array
+    {
+        return [
+            'ID'   => $this->ID(),
+            'slug' => $this->slug(),
+        ];
+    }
+
+    /**
+     * @return string: the routing prefix for this entity
+     */
+    public function routePrefix(): string
+    {
+        return 'product::';
     }
 }

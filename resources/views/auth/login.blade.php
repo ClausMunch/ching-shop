@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.customer.base')
 
 @section('page-title', 'Login')
 
@@ -11,7 +11,7 @@
         </div>
         <div class="panel-body">
             <form class="form-horizontal login-form"
-                  action="{{ route('auth.login.post')  }}"
+                  action="{{ route('auth::login.post')  }}"
                   method="post">
                 {!! csrf_field() !!}
                 <div class="form-group @if ($errors->has('email')) has-error @endif">

@@ -5,7 +5,10 @@ namespace Testing\Unit\ChingShop\Action;
 use ChingShop\User\User;
 use Testing\Unit\UnitTest;
 
+use Mockery;
 use Mockery\MockInterface;
+
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 use ChingShop\Actions\MakeUser;
 
@@ -16,20 +19,18 @@ use ChingShop\Validation\ValidationFailure;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-use Mockery;
-
 class MakeUserTest extends UnitTest
 {
     /** @var MakeUser */
     private $makeUser;
 
-    /** @var ValidationInterface|MockInterface */
+    /** @var ValidationInterface|MockObject */
     private $validation;
 
     /** @var Hasher|MockInterface */
     private $hasher;
 
-    /** @var Role|MockInterface */
+    /** @var Role|MockObject */
     private $role;
 
     /**
@@ -39,11 +40,15 @@ class MakeUserTest extends UnitTest
     {
         parent::setUp();
 
-        $this->hasher = $this->makeMock(Hasher::class);
+        $this->hasher = $this->mockery(Hasher::class);
         $this->validation = $this->makeMock(ValidationInterface::class);
         $this->role = $this->makeMock(Role::class);
 
-        $this->makeUser = new MakeUser($this->validation, $this->hasher, $this->role);
+        $this->makeUser = new MakeUser(
+            $this->validation,
+            $this->hasher,
+            $this->role
+        );
     }
 
     /**
@@ -110,7 +115,9 @@ class MakeUserTest extends UnitTest
     private function mockPasswordHashing($password)
     {
         $mockHash = $this->generator()->anyString();
-        $this->hasher->shouldReceive('make')->with($password)->andReturn($mockHash);
+        $this->hasher->shouldReceive('make')
+            ->with($password)
+            ->andReturn($mockHash);
         return $mockHash;
     }
 
@@ -124,10 +131,14 @@ class MakeUserTest extends UnitTest
         string $password = '',
         bool   $pass     = true
     ) {
-        $this->validation->shouldReceive('passes')->zeroOrMoreTimes()->with(
-            $email && $password ? compact('email', 'password') : Mockery::any(),
-            Mockery::any()
-        )->andReturn($pass);
+        $this->validation->expects($this->atLeastOnce())
+            ->method('passes')
+            ->with(
+                $email && $password ?
+                    compact('email', 'password') : $this->anything(),
+                $this->anything()
+            )
+            ->willReturn($pass);
     }
 
     /**
@@ -135,16 +146,16 @@ class MakeUserTest extends UnitTest
      */
     private function expectStaffRoleAssociation()
     {
-        $this->role->shouldReceive('mustFindByName')
+        $this->role->expects($this->once())
+            ->method('mustFindByName')
             ->with(Role::STAFF)
-            ->once()
-            ->andReturn($this->role);
+            ->willReturn($this->role);
         $usersRelationship = $this->makeMock(BelongsToMany::class);
-        $this->role->shouldReceive('users')
-            ->once()
-            ->andReturn($usersRelationship);
-        $usersRelationship->shouldReceive('save')
-            ->with(Mockery::type(User::class))
-            ->once();
+        $this->role->expects($this->once())
+            ->method('users')
+            ->willReturn($usersRelationship);
+        $usersRelationship->expects($this->once())
+            ->method('save')
+            ->with($this->isInstanceOf(User::class));
     }
 }

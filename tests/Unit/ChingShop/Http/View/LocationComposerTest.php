@@ -10,8 +10,9 @@ use Illuminate\Routing\Router;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Routing\UrlGenerator;
 
-use ChingShop\Http\View\HttpCrud;
-use ChingShop\Http\View\LocationComposer;
+use ChingShop\Http\View\Staff\HttpCrud;
+use ChingShop\Http\View\Staff\LocationComposer;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class LocationComposerTest extends UnitTest
 {
@@ -31,8 +32,8 @@ class LocationComposerTest extends UnitTest
     {
         parent::setUp();
 
-        $this->router = $this->makeMock(Router::class);
-        $this->urlGenerator = $this->makeMock(UrlGenerator::class);
+        $this->router = $this->mockery(Router::class);
+        $this->urlGenerator = $this->mockery(UrlGenerator::class);
 
         $this->locationComposer = new LocationComposer(
             $this->router,
@@ -56,12 +57,14 @@ class LocationComposerTest extends UnitTest
      */
     public function testCompose()
     {
-        /** @var View|MockInterface $view */
+        /** @var View|MockObject $view */
         $view = $this->makeMock(View::class);
 
-        $view->shouldReceive('with')->with([
-            'location' => $this->locationComposer
-        ]);
+        $view->expects($this->once())
+            ->method('with')
+            ->with([
+                'location' => $this->locationComposer
+            ]);
 
         $this->locationComposer->compose($view);
     }
@@ -254,6 +257,6 @@ class LocationComposerTest extends UnitTest
      */
     private function makeMockCrudResource(): MockInterface
     {
-        return $this->makeMock(HttpCrud::class);
+        return $this->mockery(HttpCrud::class);
     }
 }

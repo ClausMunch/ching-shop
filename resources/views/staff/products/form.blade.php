@@ -38,6 +38,23 @@
             </label>
         @endforeach
     </div>
+    <div class="form-group {{ $reply->putHasError('slug') }}">
+        <label for="slug">
+            URL slug
+        </label>
+        <input type="text"
+               class="form-control"
+               id="slug"
+               name="slug"
+               maxlength="128"
+               required
+               value="{{ $reply->oldInputOr('slug', $product->slug()) }}">
+        @foreach($reply->errorsFor('slug') as $error)
+            <label class="help-block" for="name">
+                {{ $error }}
+            </label>
+        @endforeach
+    </div>
 
     <hr>
     <h4>Images</h4>

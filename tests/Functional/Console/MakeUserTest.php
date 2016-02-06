@@ -8,7 +8,6 @@ use DB;
 use Hash;
 use Artisan;
 
-use ChingShop\User\UserLogic;
 use ChingShop\User\User;
 
 class MakeUserTest extends FunctionalTest

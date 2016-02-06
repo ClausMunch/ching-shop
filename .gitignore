@@ -3,7 +3,6 @@
 Homestead.yaml
 Homestead.json
 .idea/
-bower_components/
 resources/build/
 public/build/
 public/css/

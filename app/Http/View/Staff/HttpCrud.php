@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Http\View;
+namespace ChingShop\Http\View\Staff;
 
 interface HttpCrud
 {

@@ -26,9 +26,6 @@ class MakeUser
         'password' => 'required|min:8|max:127'
     ];
 
-    /** @var array of strings */
-    private $messages = [];
-
     /**
      * @param ValidationInterface $validation
      * @param Hasher $hasher
@@ -69,7 +66,7 @@ class MakeUser
     /**
      * @param $email
      * @param $password
-     * @return \Illuminate\Validation\Validator
+     * @return bool
      */
     private function validate(string $email, string $password): bool
     {

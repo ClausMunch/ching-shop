@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Http\View;
+namespace ChingShop\Http\View\Staff;
 
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\View\View;
@@ -44,7 +44,6 @@ class LocationComposer
         $view->with(['location' => $this]);
     }
 
-
     /**
      * @return string
      */
@@ -83,6 +82,7 @@ class LocationComposer
      * is part of current location
      * (useful in views)
      * @param string $location
+     * @return string
      */
     public function putActive(string $location)
     {
@@ -95,6 +95,7 @@ class LocationComposer
      * (useful in views)
      * @param string $content
      * @param string $locationName
+     * @return string
      */
     public function putIfIs(string $content, string $locationName)
     {
@@ -110,6 +111,7 @@ class LocationComposer
      * (useful in views)
      * @param string $content
      * @param string $parentName
+     * @return string
      */
     public function putIfIn(string $content, string $parentName)
     {
