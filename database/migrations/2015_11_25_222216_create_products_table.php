@@ -18,8 +18,13 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('sku')->unique();
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('ALTER TABLE `products` AUTO_INCREMENT=67825;');
+        }
     }
 
     /**

@@ -12,7 +12,7 @@ class ProductTest extends UnitTest
     private $product;
 
     /**
-     * Initialise produ
+     * Initialise product for each test
      */
     public function setUp()
     {

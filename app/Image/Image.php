@@ -21,6 +21,7 @@ use ChingShop\Catalogue\Product\Product;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
+ * @property string $url
  */
 class Image extends Model
 {
@@ -30,7 +31,7 @@ class Image extends Model
     protected $guarded = ['id'];
 
     /** @var array */
-    protected $fillable = ['filename', 'alt_text'];
+    protected $fillable = ['filename', 'alt_text', 'url'];
 
     /**
      * @return BelongsToMany
@@ -53,7 +54,7 @@ class Image extends Model
      */
     public function getFilenameAttribute(): string
     {
-        return $this->safeFilename($this->attributes['filename']);
+        return $this->safeFilename((string) $this->attributes['filename']);
     }
 
     /**
@@ -61,7 +62,32 @@ class Image extends Model
      */
     public function url(): string
     {
-        return asset('filesystem/image/' . $this->filename);
+        return $this->isInternal() ?
+            asset('filesystem/image/' . $this->filename()) : $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function filename(): string
+    {
+        return (string) $this->filename;
+    }
+
+    /**
+     * @return string
+     */
+    public function altText(): string
+    {
+        return (string) $this->alt_text;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInternal(): bool
+    {
+        return (bool) strlen($this->filename);
     }
 
     /**

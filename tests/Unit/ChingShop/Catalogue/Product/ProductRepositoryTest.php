@@ -3,6 +3,7 @@
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
 use Mockery\MockInterface;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 use Testing\Unit\UnitTest;
 use Testing\Unit\Behaviour\MocksModel;
@@ -29,7 +30,7 @@ class ProductRepositoryTest extends UnitTest
     public function setUp()
     {
         parent::setUp();
-        $this->productResource = $this->makeMock(Product::class);
+        $this->productResource = $this->mockery(Product::class);
         $this->setMockModel($this->productResource);
         $this->productRepository = new ProductRepository(
             $this->productResource
@@ -52,10 +53,7 @@ class ProductRepositoryTest extends UnitTest
      */
     public function testLoadLatest()
     {
-        $collection = $this->makeMock(Collection::class);
-        $this->productResource->shouldReceive(
-            'orderBy->take->get'
-        )->andReturn($collection);
+        $collection = $this->productResourceWillLoadCollection();
         $this->assertSame($collection, $this->productRepository->loadLatest());
     }
 
@@ -65,13 +63,12 @@ class ProductRepositoryTest extends UnitTest
      */
     public function testPresentLatest()
     {
-        $collection = $this->makeMock(Collection::class);
-        $this->productResource->shouldReceive(
-            'orderBy->take->get'
-        )->andReturn($collection);
+        $collection = $this->productResourceWillLoadCollection();
 
         $mockProduct = $this->makeMock(Product::class);
-        $collection->shouldReceive('all')->andReturn([$mockProduct]);
+        $collection->shouldReceive('all')
+            ->atLeast()->once()
+            ->andReturn([$mockProduct]);
 
         $presentation = $this->productRepository->presentLatest();
         $this->assertInternalType('array', $presentation);
@@ -107,8 +104,10 @@ class ProductRepositoryTest extends UnitTest
         $newProduct = $this->makeMock(Product::class);
         $this->productResource->shouldReceive('create')
             ->with(compact('name', 'sku'))
+            ->atLeast()->once()
             ->andReturn($newProduct);
-        $newProduct->shouldReceive('save');
+        $newProduct->expects($this->atLeastOnce())
+            ->method('save');
 
         $this->productRepository->create(compact('name', 'sku'));
     }
@@ -123,10 +122,13 @@ class ProductRepositoryTest extends UnitTest
 
         $product = $this->makeMock(Product::class);
         $this->productResource->shouldReceive('where->firstOrFail')
+            ->atLeast()->once()
             ->andReturn($product);
-        $product->shouldReceive('fill')
+        $product->expects($this->atLeastOnce())
+            ->method('fill')
             ->with(compact('name', 'sku'));
-        $product->shouldReceive('save');
+        $product->expects($this->atLeastOnce())
+            ->method('save');
 
         $this->productRepository->update($sku, compact('name', 'sku'));
     }
@@ -140,6 +142,7 @@ class ProductRepositoryTest extends UnitTest
 
         $product = $this->makeMock(Product::class);
         $this->productResource->shouldReceive('where->with->first')
+            ->atLeast()->once()
             ->andReturn($product);
 
         $presenter = $this->productRepository->presentBySKU($sku);
@@ -149,17 +152,35 @@ class ProductRepositoryTest extends UnitTest
 
     /**
      * @param ProductPresenter $presenter
-     * @param MockInterface $mockProduct
+     * @param MockObject $mockProduct
      */
     private function assertPresenterIsPresenting(
         ProductPresenter $presenter,
-        MockInterface $mockProduct
+        MockObject $mockProduct
     ) {
         $mockProductName = $this->generator()->anyString();
-        $mockProduct->shouldReceive('getAttribute')
+        $mockProduct->expects($this->atLeastOnce())
+            ->method('__get')
             ->with('name')
-            ->andReturn($mockProductName);
+            ->willReturn($mockProductName);
 
-        $this->assertSame($mockProductName, $presenter->name());
+        $this->assertSame(
+            $mockProductName,
+            $presenter->name(),
+            'Product presenter is not giving the name of the underlying product'
+        );
+    }
+
+    /**
+     * @return Collection|MockInterface
+     */
+    private function productResourceWillLoadCollection()
+    {
+        /** @var Collection $collection */
+        $collection = $this->mockery(Collection::class);
+        $this->productResource->shouldReceive(
+            'orderBy->take->get'
+        )->once()->andReturn($collection);
+        return $collection;
     }
 }

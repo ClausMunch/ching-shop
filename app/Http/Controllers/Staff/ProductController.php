@@ -115,7 +115,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PersistProductRequest  $request
      * @param  string  $sku
      * @return \Illuminate\Http\Response
      */

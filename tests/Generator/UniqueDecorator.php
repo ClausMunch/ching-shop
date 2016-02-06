@@ -91,6 +91,17 @@ class UniqueDecorator implements Generator
     }
 
     /**
+     * @return string
+     * @throws GenerationException
+     */
+    public function anySlug(): string
+    {
+        return $this->ensureUnusedValue(function() {
+            return $this->generator->anySlug();
+        });
+    }
+
+    /**
      * @param array $options
      * @return mixed
      */

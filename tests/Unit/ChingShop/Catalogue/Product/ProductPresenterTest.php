@@ -7,7 +7,7 @@ use Mockery\MockInterface;
 use Testing\Unit\UnitTest;
 use Testing\Unit\Behaviour\MocksModel;
 
-use ChingShop\Http\View\HttpCrud;
+use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 
@@ -26,7 +26,7 @@ class ProductPresenterTest extends UnitTest
      */
     public function setUp()
     {
-        $this->product = $this->makeMock(Product::class);
+        $this->product = $this->mockery(Product::class);
         $this->setMockModel($this->product);
         $this->productPresenter = new ProductPresenter($this->product);
     }
@@ -47,6 +47,16 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
+     * Should simply give underlying product SKU
+     */
+    public function testPassesProductSKU()
+    {
+        $sku = $this->generator()->anyString();
+        $this->mockModelAttribute('sku', $sku);
+        $this->assertSame($sku, $this->productPresenter->SKU());
+    }
+
+    /**
      * Should limit product name length to < 100 characters
      */
     public function testLimitsNameLength()
@@ -55,19 +65,9 @@ class ProductPresenterTest extends UnitTest
         $this->mockModelAttribute('name', $productName);
 
         $this->assertSame(
-            mb_strimwidth ($productName, 0, 100) . '...',
+            mb_strimwidth($productName, 0, 100) . '...',
             $this->productPresenter->name()
         );
-    }
-
-    /**
-     * Should simply give underlying product SKU
-     */
-    public function testPassesProductSKU()
-    {
-        $sku = $this->generator()->anyString();
-        $this->mockModelAttribute('sku', $sku);
-        $this->assertSame($sku, $this->productPresenter->SKU());
     }
 
     /**

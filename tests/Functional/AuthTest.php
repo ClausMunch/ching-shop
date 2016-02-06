@@ -11,7 +11,7 @@ class AuthTest extends FunctionalTest
      */
     public function testGetLogin()
     {
-        $this->visit(route('auth.login'))
+        $this->visit(route('auth::login'))
             ->see('Login');
     }
 
@@ -20,7 +20,7 @@ class AuthTest extends FunctionalTest
      */
     public function testEmptyLoginFeedback()
     {
-        $this->visit(route('auth.login'))
+        $this->visit(route('auth::login'))
             ->type('', 'email')
             ->type('', 'password')
             ->press('Log in')
@@ -37,7 +37,8 @@ class AuthTest extends FunctionalTest
         $password = str_random(16);
         $user = $this->makeUser()->make($email, $password, true);
 
-        $this->visit(route('auth.login'))
+        $this->visit(route('staff.dashboard'))
+            ->seePageIs(route('auth::login'))
             ->type($email, 'email')
             ->type($password, 'password')
             ->press('Log in')

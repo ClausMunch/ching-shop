@@ -16,11 +16,11 @@ class KernelTest extends UnitTest
     public function testCanInstantiate()
     {
         /** @var Application|MockInterface $application */
-        $application = $this->makeMock(Application::class);
+        $application = $this->mockery(Application::class);
         $application->shouldReceive('booted')->zeroOrMoreTimes();
 
         /** @var Dispatcher|MockInterface $dispatcher */
-        $dispatcher = $this->makeMock(Dispatcher::class);
+        $dispatcher = $this->mockery(Dispatcher::class);
 
         $kernel = new Kernel($application, $dispatcher);
         $this->assertInstanceOf(Kernel::class, $kernel);

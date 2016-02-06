@@ -12,6 +12,7 @@ use Mockery\MockInterface;
 use Illuminate\Support\MessageBag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Session\Store as SessionStore;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class ReplyComposerTest extends UnitTest
 {
@@ -31,9 +32,9 @@ class ReplyComposerTest extends UnitTest
     {
         parent::setUp();
 
-        $this->sessionStore = $this->makeMock(SessionStore::class);
+        $this->sessionStore = $this->mockery(SessionStore::class);
 
-        $this->errors = $this->makeMock(MessageBag::class);
+        $this->errors = $this->mockery(MessageBag::class);
         $this->sessionStore->shouldReceive('get')
             ->with('errors', Mockery::type(MessageBag::class))
             ->andReturn($this->errors);
@@ -54,13 +55,13 @@ class ReplyComposerTest extends UnitTest
      */
     public function testCompose()
     {
-        /** @var View|MockInterface $view */
+        /** @var View|MockObject $view */
         $view = $this->makeMock(View::class);
-
-        $view->shouldReceive('with')->with([
-            'reply' => $this->replyComposer
-        ]);
-
+        $view->expects($this->once())
+            ->method('with')
+            ->with([
+                'reply' => $this->replyComposer
+            ]);
         $this->replyComposer->compose($view);
     }
 

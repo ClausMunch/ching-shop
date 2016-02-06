@@ -23,7 +23,7 @@ class AuthenticateTest extends MiddlewareTest
     public function setUp()
     {
         parent::setUp();
-        $this->guard = $this->makeMock(Guard::class);
+        $this->guard = $this->mockery(Guard::class);
         $this->authenticate = new Authenticate($this->guard);
     }
 
@@ -86,7 +86,7 @@ class AuthenticateTest extends MiddlewareTest
 
         $this->assertInstanceOf(RedirectResponse::class, $redirect);
         $this->assertSame(Response::HTTP_FOUND, $redirect->getStatusCode());
-        $this->assertSame(route('auth.login'), $redirect->getTargetUrl());
+        $this->assertSame(route('auth::login'), $redirect->getTargetUrl());
     }
 
     /**

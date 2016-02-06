@@ -6,19 +6,16 @@ use Illuminate\Support\ServiceProvider;
 
 use Laracasts\Generators\GeneratorsServiceProvider;
 
-use ChingShop\Http\View\LocationComposer;
 use ChingShop\Http\View\ReplyComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
      * @return void
      */
     public function boot()
     {
-        view()->composer('*', LocationComposer::class);
         view()->composer('*', ReplyComposer::class);
     }
 

@@ -2,29 +2,36 @@
 'use strict';
 
 var elixir = require('laravel-elixir');
-var gulp = require('gulp');
-var shell = require('gulp-shell');
+var gulp   = require('gulp');
+var shell  = require('gulp-shell');
 
 elixir(function(mix) {
-    mix.sass('ching-shop.scss');
+    mix.sass('staff.scss');
+    mix.sass('customer.scss');
 });
 
 elixir(function(mix) {
     mix.styles([
-        'ching-shop.css'
-    ], 'public/css/ching-shop.css', 'public/css');
+        'staff.css'
+    ], 'public/css/staff.css', 'public/css');
+    mix.styles([
+        'customer.css'
+    ], 'public/css/customer.css', 'public/css');
 });
 
 elixir(function(mix) {
     mix.browserify('main.js');
     mix.browserify('staff.js');
+    mix.browserify('customer.js');
 });
 
 elixir(function(mix) {
     mix.version([
-        'css/ching-shop.css',
+        'css/staff.css',
+        'css/customer.css',
         'js/main.js',
-        'js/staff.js'
+        'js/staff.js',
+        'js/customer.js'
     ]);
 });
 
@@ -34,7 +41,7 @@ elixir(function(mix) {
 
 elixir(function(mix) {
     mix.copy(
-        'resources/assets/bower_components/bootstrap-sass/assets/fonts',
+        './node_modules/bootstrap-sass/assets/fonts',
         'public/build/fonts/'
     );
 });

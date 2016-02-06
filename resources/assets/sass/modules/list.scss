@@ -1,0 +1,18 @@
+%plain-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+%inline-list {
+  @extend %plain-list;
+
+  > li {
+    display: inline-block;
+  }
+}
+
+%list-link {
+  display: block;
+  padding: .5em 1em;
+}

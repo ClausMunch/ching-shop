@@ -32,7 +32,7 @@ class DashboardTest extends FunctionalTest
     public function testAuthRequired()
     {
         $this->visit(route('staff.dashboard'))
-            ->seePageIs(route('auth.login'));
+            ->seePageIs(route('auth::login'));
     }
 
     /**

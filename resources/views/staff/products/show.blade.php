@@ -10,13 +10,14 @@
 
 @section('content')
 
-    @foreach($product->images() as $image)
-        <div>
+    <section>
+        <h3>Images</h3>
+        @foreach($product->images() as $image)
             <img src="{{ $image->url() }}"
                  alt="{{ $image->alt_text }}"
-                 class="img-responsive" />
-        </div>
-    @endforeach
+                 class="img-responsive img-rounded staff-product-image" />
+        @endforeach
+    </section>
 
 @endsection
 

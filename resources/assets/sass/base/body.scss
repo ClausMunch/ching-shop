@@ -1,4 +1,13 @@
+body {
+  padding-bottom: 3em;
+}
+
 ::selection {
   background: $brand-primary;
   color: #fff;
+}
+
+.body-customer {
+  background: $floral-white url('/img/logo-bg.svg') no-repeat;
+  background-size: cover;
 }

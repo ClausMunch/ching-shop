@@ -1,0 +1,84 @@
+.top-band {
+  background: $text-color;
+  color: invert($text-color);
+  padding-top: .5em;
+
+  @include breakpoint(sm-up) {
+    padding: 0;
+  }
+}
+
+.top-links {
+  @extend %inline-list;
+
+  text-align: center;
+}
+
+.top-link {
+  @extend %list-link;
+
+  color: invert($text-color);
+  font-family: $font-brand;
+  font-size: 4.5vw;
+  text-decoration: none;
+
+  @include breakpoint(sm) {
+    font-size: 2.3vw;
+  }
+
+  @include breakpoint(md) {
+    font-size: 2vw;
+  }
+
+  @include breakpoint(lg) {
+    font-size: 1.7vw;
+  }
+
+  &:hover {
+    background: lighten($text-color, 10%);
+    color: lighten(invert($text-color), 50%);
+  }
+}
+
+.top-logo-link {
+  color: invert($text-color);
+  display: block;
+  font-family: $font-brand;
+  font-size: 1.7em;
+  font-weight: bolder;
+  text-align: center;
+
+  @include breakpoint(sm-up) {
+    display: inline;
+    float: left;
+  }
+
+  &:hover {
+    color: lighten(invert($text-color), 25%);
+    text-decoration: none;
+  }
+}
+
+.top-logo {
+  display: block;
+  height: 3.5em;
+  margin: 0 auto .3em;
+  width: auto;
+
+  @include breakpoint(sm-up) {
+    display: inline;
+    margin: .3em;
+  }
+
+  @include breakpoint(sm) {
+    height: 4vw;
+  }
+
+  @include breakpoint(md) {
+    height: 3.6vw;
+  }
+
+  @include breakpoint(lg) {
+    height: 3.3vw;
+  }
+}

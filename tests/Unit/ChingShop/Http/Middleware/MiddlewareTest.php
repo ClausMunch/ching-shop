@@ -18,7 +18,7 @@ abstract class MiddlewareTest extends UnitTest
     public function setUp()
     {
         parent::setUp();
-        $this->request = $this->makeMock(Request::class);
+        $this->request = $this->mockery(Request::class);
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class MiddlewareTest extends UnitTest
      */
     protected function mockRequestUser(): MockInterface
     {
-        $user = $this->makeMock(User::class);
+        $user = $this->mockery(User::class);
         $this->request
             ->shouldReceive('user')
             ->zeroOrMoreTimes()

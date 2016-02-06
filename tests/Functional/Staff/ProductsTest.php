@@ -55,11 +55,13 @@ class ProductsTest extends FunctionalTest
     {
         $productName = 'Foobar Product';
         $productSKU  = 'NICE_SKU';
+        $productSlug = 'nice-slug';
 
         $this->actingAs($this->user)
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
             ->type($productSKU, 'sku')
+            ->type($productSlug, 'slug')
             ->press('Save')
             ->seePageIs(route('staff.products.show', ['SKU' => $productSKU]))
             ->see($productName)
@@ -85,10 +87,12 @@ class ProductsTest extends FunctionalTest
     public function testOldInputIsPreserved()
     {
         $productName = $this->generator()->anyString();
+        $productSlug = $this->generator()->anySlug();
 
         $this->actingAs($this->user)
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
+            ->type($productSlug, 'slug')
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
             ->see($productName);
@@ -100,17 +104,21 @@ class ProductsTest extends FunctionalTest
     public function testCantCreateSameSKUTwice()
     {
         $productSKU = 'NICE_SKU';
+        $productSlug = $this->generator()->anySlug();
 
         $this->actingAs($this->user)
             ->visit(route('staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
-            ->press('Save');
+            ->type($productSlug, 'slug')
+            ->press('Save')
+            ->seePageIs(route('staff.products.show', ['sku' => $productSKU]));
 
         $this->actingAs($this->user)
             ->visit(route('staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
+            ->type($productSlug, 'slug')
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
             ->see('The sku has already been taken');

@@ -23,7 +23,7 @@ class PersistProductRequestTest extends UnitTest
         parent::setUp();
 
         $this->persistProductRequest = new PersistProductRequest;
-        $this->httpRequest = $this->makeMock(HttpRequest::class);
+        $this->httpRequest = $this->mockery(HttpRequest::class);
     }
 
     /**

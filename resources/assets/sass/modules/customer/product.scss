@@ -1,0 +1,55 @@
+.product-title {
+  font-size: 8vw;
+  margin: 1em 0 .6em;
+
+  @include breakpoint(sm-up) {
+    font-size: 5vw;
+  }
+
+  @include breakpoint(md-up) {
+    font-size: 3.6vw;
+  }
+}
+
+.product-thumbnails {
+  align-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: $gutter;
+}
+
+.product-thumbnail {
+  cursor: pointer;
+  margin-top: $gutter;
+  text-align: center;
+
+  &[data-selected] {
+    > .img-thumbnail {
+      background-color: $colour-primary;
+    }
+  }
+
+  > .img-thumbnail {
+    margin: auto;
+    max-height: 128px;
+    max-width: 128px;
+  }
+}
+
+.buy-button {
+  margin: $gutter auto;
+
+  @include breakpoint(md-up) {
+    margin-top: 0;
+  }
+}
+
+.product-details {
+  font-size: larger;
+}
+
+.product-section {
+  margin: 1.7em auto;
+}

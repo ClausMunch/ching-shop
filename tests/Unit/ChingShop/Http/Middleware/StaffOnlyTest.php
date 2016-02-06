@@ -19,7 +19,7 @@ class StaffOnlyTest extends MiddlewareTest
     {
         parent::setUp();
         $this->staffOnly = new StaffOnly;
-        $this->request = $this->makeMock(Request::class);
+        $this->request = $this->mockery(Request::class);
     }
 
     /**
@@ -68,7 +68,7 @@ class StaffOnlyTest extends MiddlewareTest
 
         $this->assertInstanceOf(RedirectResponse::class, $redirect);
         $this->assertSame(Response::HTTP_FOUND, $redirect->getStatusCode());
-        $this->assertSame(route('auth.login'), $redirect->getTargetUrl());
+        $this->assertSame(route('auth::login'), $redirect->getTargetUrl());
     }
 
     /**
