@@ -4,4 +4,3 @@ install:
 script: phpunit --testsuite unit
 php:
   - '7.0'
-  - nightly
