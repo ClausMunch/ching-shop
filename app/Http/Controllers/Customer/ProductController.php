@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Catalogue\Product\ProductRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
@@ -44,7 +45,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->presentByID($ID);
         if (!$product->ID()) {
-            return $this->responseFactory->make('not found', 404); // todo
+            throw new NotFoundHttpException;
         }
         if (!$product->slug() === $slug) {
             return $this->responseFactory->redirectToRoute(

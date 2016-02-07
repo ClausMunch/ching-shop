@@ -12,7 +12,9 @@
     @yield('top')
 
     <div class="container">
-        @yield('body')
+        <div class="page">
+            @yield('body')
+        </div>
     </div>
 
 <script async defer src="{{ elixir('js/main.js') }}"></script>
@@ -21,5 +23,9 @@
       property='stylesheet'
       rel='stylesheet'
       type='text/css'>
+<link rel="icon"
+      type="image/png"
+      property="icon"
+      href="/img/favicon.png" />
 </body>
 </html>
