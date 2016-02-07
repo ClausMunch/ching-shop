@@ -66,9 +66,7 @@ class ProductRepositoryTest extends UnitTest
         $collection = $this->productResourceWillLoadCollection();
 
         $mockProduct = $this->makeMock(Product::class);
-        $collection->shouldReceive('all')
-            ->atLeast()->once()
-            ->andReturn([$mockProduct]);
+        $collection->add($mockProduct);
 
         $presentation = $this->productRepository->presentLatest();
         $this->assertInternalType('array', $presentation);
@@ -172,12 +170,12 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * @return Collection|MockInterface
+     * @return Collection
      */
     private function productResourceWillLoadCollection()
     {
         /** @var Collection $collection */
-        $collection = $this->mockery(Collection::class);
+        $collection = new Collection();
         $this->productResource->shouldReceive(
             'orderBy->take->get'
         )->once()->andReturn($collection);

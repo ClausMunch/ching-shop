@@ -17,13 +17,13 @@
                     <a class="top-link" href="/">Home</a>
                 </li>
                 <li>
-                    <a class="top-link" href="/">Cards</a>
+                    <a class="top-link" href="/cards">Cards</a>
                 </li>
                 <li>
-                    <a class="top-link" href="/">About</a>
+                    <a class="top-link" href="/about">About</a>
                 </li>
                 <li>
-                    <a class="top-link" href="/">Contact</a>
+                    <a class="top-link" href="/contact">Contact</a>
                 </li>
             </ul>
         </nav>

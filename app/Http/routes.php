@@ -64,4 +64,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/home', 'Customer\RootController@getIndex');
 
+    Route::get('{path}', [
+        'uses' => 'Customer\StaticController@pageAction',
+        'as'   => 'customer.static'
+    ]);
+
 });
