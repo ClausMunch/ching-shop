@@ -57,16 +57,28 @@ Route::group(['middleware' => ['web']], function () {
         }
     );
 
+    Route::group(
+        [
+            'namespace'  => 'Customer',
+            'middleware' => 'customer',
+        ],
+        function () {
+            Route::get('cards', [
+                'as'   => 'customer.cards',
+                'uses' => 'CategoriesController@viewAction'
+            ]);
+            Route::get('{path}', [
+                'uses' => 'StaticController@pageAction',
+                'as'   => 'customer.static'
+            ]);
+        }
+    );
+
     Route::get('/', [
         'uses'       => 'Customer\RootController@getIndex',
         'middleware' => 'customer'
     ]);
 
-    Route::get('/home', 'Customer\RootController@getIndex');
-
-    Route::get('{path}', [
-        'uses' => 'Customer\StaticController@pageAction',
-        'as'   => 'customer.static'
-    ]);
+    Route::get('home', 'Customer\RootController@getIndex');
 
 });
