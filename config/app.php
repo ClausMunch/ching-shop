@@ -139,6 +139,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
 

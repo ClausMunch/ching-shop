@@ -20,7 +20,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            Middleware\EB_SSL_Trust::class,
+            \Fideloper\Proxy\TrustProxies::class,
             Middleware\ForceSecure::class,
             Middleware\EncryptCookies::class,
 
@@ -33,7 +33,7 @@ class Kernel extends HttpKernel
             \GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware::class,
         ],
         'api' => [
-            Middleware\EB_SSL_Trust::class,
+            \Fideloper\Proxy\TrustProxies::class,
             Middleware\ForceSecure::class,
             'throttle:60,1',
             'auth:api',
