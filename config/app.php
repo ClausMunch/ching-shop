@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'url' => 'http://www.ching-shop.dev',
+    'url' => env('APP_URL', 'https://www.ching-shop.dev'),
 
     /*
     |--------------------------------------------------------------------------
