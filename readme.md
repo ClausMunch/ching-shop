@@ -31,8 +31,13 @@ Then set up the Vagrant box, ssh into it and check everything is set up:
 vagrant up
 vagrant ssh
 cd ~/sites/ching-shop
+gulp
 phpunit
 ```
 
 You should now be able to access the development site at
-http://www.ching-shop.dev
+https://www.ching-shop.dev
+
+You may want to trust the local certificate, for example with
+[these instructions](https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate/18602774#18602774)
+for Chrome.

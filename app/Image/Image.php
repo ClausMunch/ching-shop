@@ -63,7 +63,7 @@ class Image extends Model
     public function url(): string
     {
         return $this->isInternal() ?
-            asset('filesystem/image/' . $this->filename()) : $this->url;
+            secure_asset('filesystem/image/' . $this->filename()) : $this->url;
     }
 
     /**

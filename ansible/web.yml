@@ -51,6 +51,7 @@
         repo=https://github.com/hughgrigg/ching-shop.git
         version=master
         update=yes
+        force=yes
 
     - name: install composer
       shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
