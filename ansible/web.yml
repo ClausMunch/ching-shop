@@ -1,0 +1,202 @@
+---
+- hosts: web
+  become: true
+
+  tasks:
+
+    - name: add PHP 7 repository
+      apt_repository: repo='ppa:ondrej/php' state=present
+      register: ppastable
+
+    - name: install packages
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - git
+        - mcrypt
+        - nginx
+        - php7.0
+        - php7.0-cli
+        - php7.0-curl
+        - php7.0-fpm
+        - php7.0-intl
+        - php7.0-json
+        - php7.0-mcrypt
+        - php7.0-mysql
+        - php7.0-sqlite3
+        - sqlite3
+        - mysql-server
+        - mysql-client
+        - python-mysqldb
+        - makepasswd
+        - redis-server
+        - nodejs
+        - npm
+
+    - name: symlink node
+      file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
+
+    - name: ensure php7.0-fpm cgi.fix_pathinfo=0
+      lineinfile: dest=/etc/php/7.0/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
+      notify:
+        - restart php7.0-fpm
+        - restart nginx
+
+    - name: create /var/www/ directory
+      file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
+
+    - name: clone git repository
+      become_user: www-data
+      git: >
+        dest=/var/www/ching-shop
+        repo=https://github.com/hughgrigg/ching-shop.git
+        version=master
+        update=yes
+
+    - name: install composer
+      shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      args:
+        creates: /usr/local/bin/composer
+
+    - name: install project with composer
+      become_user: www-data
+      composer: command=install working_dir=/var/www/ching-shop
+
+    - name: configure nginx
+      template: src=nginx.conf dest=/etc/nginx/sites-available/www.ching-shop.com.conf
+      notify:
+        - restart php7.0-fpm
+        - restart nginx
+
+    - name: enable nginx site
+      file: src=/etc/nginx/sites-available/www.ching-shop.com.conf dest=/etc/nginx/sites-enabled/www.ching-shop.com.conf state=link
+      notify:
+        - restart php7.0-fpm
+        - restart redis
+        - restart nginx
+
+    - name: Copy public key into /var/www
+      authorized_key: user=www-data key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+    - name: Set www-data user shell
+      user: name=www-data shell=/bin/bash
+
+    - name: Enable UFW
+      ufw: direction=incoming policy=deny state=enabled
+
+    - name: UFW limit SSH
+      ufw: rule=limit port=ssh
+
+    - name: UFW open HTTP
+      ufw: rule=allow port=http
+
+    - name: Create MySQL DB
+      mysql_db: name=ching_shop state=present
+
+    - name: Generate DB password
+      shell: makepasswd --chars=32
+      args:
+        creates: /var/www/ching-shop/.dbpw
+      register: dbpwd
+
+    - name: generate encryption key
+      shell: makepasswd --chars=32
+      args:
+        creates: /var/www/ching-shop/.enckey
+      register: enckey
+
+    - name: create .env
+      template: src=.env.template dest=/var/www/ching-shop/.env force=no
+
+    - name: Create MySQL User
+      mysql_user: name=ching_shop password={{ dbpwd.stdout }} priv=ching_shop.*:ALL state=present
+      when: dbpwd.changed
+
+    - name: set APP_DEBUG=false
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_DEBUG=' line=APP_DEBUG=true
+
+    - name: set APP_ENV=production
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_ENV=' line=APP_ENV=production
+
+    - name: set encryption key
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_KEY=' line=APP_KEY={{ enckey.stdout }}
+      when: enckey.changed
+
+    - name: set DB_DATABASE
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_DATABASE=' line=DB_DATABASE=ching_shop
+
+    - name: set DB_USERNAME
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_USERNAME=' line=DB_USERNAME=ching_shop
+
+    - name: set DB_PASSWORD
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_PASSWORD=' line=DB_PASSWORD={{ dbpwd.stdout }}
+      when: dbpwd.changed
+
+    - name: Save dbpw file
+      become_user: www-data
+      lineinfile: dest=/var/www/ching-shop/.dbpw line="{{ dbpwd.stdout }}" create=yes state=present
+      when: dbpwd.changed
+
+    - name: Save enckey file
+      become_user: www-data
+      lineinfile: dest=/var/www/ching-shop/.enckey line="{{ enckey.stdout }}" create=yes state=present
+      when: enckey.changed
+
+    - name: Run artisan migrate
+      become_user: www-data
+      shell: php /var/www/ching-shop/artisan migrate --force
+      when: dbpwd.changed
+
+    - name: Laravel Scheduler
+      cron: >
+        job="run-one php /var/www/ching-shop/artisan schedule:run 1>> /dev/null 2>&1"
+        state=present
+        user=www-data
+        name="php artisan schedule:run"
+
+    - name: Laravel Queue Worker
+      cron: >
+        job="run-one php /var/www/ching-shop/artisan queue:work --daemon --sleep=30 --delay=60 --tries=3 1>> /dev/null 2>&1"
+        state=present
+        user=www-data
+        name="Laravel Queue Worker"
+
+    - name: refresh Laravel
+      shell: "cd /var/www/ching-shop && php artisan {{ item }}"
+      with_items:
+        - "clear-compiled"
+        - "config:clear"
+        - "config:cache"
+        - "view:clear"
+        - "route:clear"
+        - "route:cache"
+        - "optimize"
+
+    - name: make sure latest npm is installed
+      npm: name=npm global=yes
+
+    - name: create /var/www/ directory
+      file: dest=/var/www/ching-shop/node_modules state=directory owner=www-data group=www-data mode=0700
+
+    - npm: path=/var/www/ching-shop production=yes state=present
+      become_user: www-data
+
+    - name: run gulp tasks
+      become_user: www-data
+      shell: "cd /var/www/ching-shop && ./node_modules/.bin/gulp {{ item }} --production"
+      with_items:
+        - "copy"
+        - "sass"
+        - "styles"
+        - "browserify"
+        - "version"
+
+  handlers:
+
+    - name: restart php7.0-fpm
+      service: name=php7.0-fpm state=restarted
+
+    - name: restart nginx
+      service: name=nginx state=restarted
+
+    - name: restart redis
+      service: name=redis-server state=restarted

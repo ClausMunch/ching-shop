@@ -21,7 +21,7 @@ sites:
       to: "/home/vagrant/ching-shop/public"
 
 databases:
-    - homestead
+    - ching_shop
 
 # blackfire:
 #     - id: foo
