@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereUpdatedAt($value)
+ * @property string $deleted_at
  */
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,

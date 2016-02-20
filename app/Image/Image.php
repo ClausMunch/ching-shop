@@ -23,6 +23,7 @@ use ChingShop\Catalogue\Product\Product;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  * @property string $url
+ * @property string $deleted_at
  */
 class Image extends Model
 {

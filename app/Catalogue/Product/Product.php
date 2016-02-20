@@ -24,6 +24,7 @@ use ChingShop\Image\Image;
  * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
  * @property string $slug
  * @property string $description
+ * @property string $deleted_at
  */
 class Product extends Model
 {
