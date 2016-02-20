@@ -121,16 +121,16 @@ class ProductControllerTest extends UnitTest
             ->with($requestData)
             ->andReturn($product);
 
-        $SKU = $this->generator()->anyString();
+        $sku = $this->generator()->anyString();
         $product->shouldReceive('getAttribute')
             ->with('sku')
-            ->andReturn($SKU);
+            ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
         $this->responseFactory->shouldReceive('redirectToRoute')
             ->with(
                 'staff.products.show',
-                ['sku' => $SKU]
+                ['sku' => $sku]
             )
             ->andReturn($redirect);
 
@@ -144,11 +144,11 @@ class ProductControllerTest extends UnitTest
      */
     public function testShow()
     {
-        $SKU = $this->generator()->anyString();
+        $sku = $this->generator()->anyString();
         $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
         $this->productRepository->shouldReceive('presentBySKU')
-            ->with($SKU)
+            ->with($sku)
             ->andReturn($product);
 
         $view = $this->expectViewToBeMadeWith(
@@ -156,7 +156,7 @@ class ProductControllerTest extends UnitTest
             compact('product')
         );
 
-        $response = $this->productController->show($SKU);
+        $response = $this->productController->show($sku);
 
         $this->assertSame($view, $response);
     }
@@ -166,11 +166,11 @@ class ProductControllerTest extends UnitTest
      */
     public function testEdit()
     {
-        $SKU = $this->generator()->anyString();
+        $sku = $this->generator()->anyString();
         $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
         $this->productRepository->shouldReceive('presentBySKU')
-            ->with($SKU)
+            ->with($sku)
             ->andReturn($product);
 
         $view = $this->expectViewToBeMadeWith(
@@ -178,7 +178,7 @@ class ProductControllerTest extends UnitTest
             compact('product')
         );
 
-        $response = $this->productController->edit($SKU);
+        $response = $this->productController->edit($sku);
 
         $this->assertSame($view, $response);
     }
@@ -194,29 +194,29 @@ class ProductControllerTest extends UnitTest
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
 
-        $SKU = $this->generator()->anyString();
+        $sku = $this->generator()->anyString();
 
         $product = $this->mockery(Product::class);
         $this->productRepository->shouldReceive('update')
-            ->with($SKU, $requestData)
+            ->with($sku, $requestData)
             ->andReturn($product);
 
         $product->shouldReceive('getAttribute')
             ->with('sku')
-            ->andReturn($SKU);
+            ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
         $this->responseFactory->shouldReceive('redirectToRoute')
             ->with(
                 'staff.products.show',
-                ['sku' => $SKU]
+                ['sku' => $sku]
             )
             ->andReturn($redirect);
 
         $this->mockNewImageUpload($storeProductRequest);
 
         $response = $this->productController->update(
-            $storeProductRequest, $SKU
+            $storeProductRequest, $sku
         );
 
         $this->assertSame($redirect, $response);

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
         if (DB::getDriverName() !== 'sqlite') {
             DB::statement('ALTER TABLE `products` AUTO_INCREMENT=67825;');

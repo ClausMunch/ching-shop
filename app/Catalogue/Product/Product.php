@@ -3,6 +3,7 @@
 namespace ChingShop\Catalogue\Product;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use ChingShop\Image\Image;
@@ -26,6 +27,8 @@ use ChingShop\Image\Image;
  */
 class Product extends Model
 {
+    use SoftDeletes;
+
     /** @var array */
     protected $fillable = ['name', 'sku', 'slug'];
 

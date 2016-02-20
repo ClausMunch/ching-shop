@@ -18,6 +18,7 @@ class LocationComposer
     const ROUTE_UPDATE = 'update';
     const ROUTE_STORE = 'store';
     const ROUTE_SHOW = 'show';
+    const ROUTE_DELETE = 'destroy';
 
     /** @var Router */
     private $router;
@@ -157,6 +158,18 @@ class LocationComposer
         }
         return $this->urlGenerator->route(
             $crud->crudRoutePrefix() . self::ROUTE_STORE
+        );
+    }
+
+    /**
+     * @param HttpCrud $crud
+     * @return string
+     */
+    public function deleteActionFor(HttpCrud $crud): string
+    {
+        return $this->urlGenerator->route(
+            $crud->crudRoutePrefix() . self::ROUTE_DELETE,
+            $crud->crudID()
         );
     }
 

@@ -1,38 +1,19 @@
 <?php
 
-namespace Testing\Functional\Staff;
+namespace Testing\Functional\Staff\Products;
 
-use Testing\Functional\FunctionalTest;
+use Testing\Functional\Staff\StaffUser;
 
-use ChingShop\User\User;
-use ChingShop\Actions\MakeUser;
-
-class ProductsTest extends FunctionalTest
+class ProductCreationTest extends ProductTest
 {
-    /** @var User */
-    private $user;
-
-    /** @var MakeUser */
-    private $makeUser;
-
-    /**
-     * Set up user for dashboard testing
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $email = str_random() . '@ching-shop.com';
-        $password = str_random(16);
-        $this->user = $this->makeUser()->make($email, $password, true);
-    }
+    use StaffUser;
 
     /**
      * Should be able to load the products index page
      */
     public function testIndex()
     {
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.index'))
             ->seePageIs(route('staff.products.index'));
     }
@@ -42,7 +23,7 @@ class ProductsTest extends FunctionalTest
      */
     public function testCreate()
     {
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->seePageIs(route('staff.products.create'))
             ->see('Create a new product');
@@ -57,7 +38,7 @@ class ProductsTest extends FunctionalTest
         $productSKU  = 'NICE_SKU';
         $productSlug = 'nice-slug';
 
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
             ->type($productSKU, 'sku')
@@ -73,7 +54,7 @@ class ProductsTest extends FunctionalTest
      */
     public function testRequiredFieldErrorMessages()
     {
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
@@ -89,7 +70,7 @@ class ProductsTest extends FunctionalTest
         $productName = $this->generator()->anyString();
         $productSlug = $this->generator()->anySlug();
 
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
             ->type($productSlug, 'slug')
@@ -106,7 +87,7 @@ class ProductsTest extends FunctionalTest
         $productSKU = 'NICE_SKU';
         $productSlug = $this->generator()->anySlug();
 
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
@@ -114,7 +95,7 @@ class ProductsTest extends FunctionalTest
             ->press('Save')
             ->seePageIs(route('staff.products.show', ['sku' => $productSKU]));
 
-        $this->actingAs($this->user)
+        $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
@@ -122,16 +103,5 @@ class ProductsTest extends FunctionalTest
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
             ->see('The sku has already been taken');
-    }
-
-    /**
-     * @return MakeUser
-     */
-    private function makeUser(): MakeUser
-    {
-        if (!isset($this->makeUser)) {
-            $this->makeUser = app(MakeUser::class);
-        }
-        return $this->makeUser;
     }
 }

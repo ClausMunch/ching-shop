@@ -20,6 +20,7 @@ class CreateImagesTable extends Migration
             $table->string('url')->unique()->nullable();
             $table->string('alt_text')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

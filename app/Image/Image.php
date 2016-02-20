@@ -3,6 +3,7 @@
 namespace ChingShop\Image;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use ChingShop\Catalogue\Product\Product;
@@ -25,6 +26,8 @@ use ChingShop\Catalogue\Product\Product;
  */
 class Image extends Model
 {
+    use SoftDeletes;
+
     const FILENAME_UNSAFE_PATTERN = '([^a-zA-Z0-9-\.]|\.{2,})';
 
     /** @var array */
