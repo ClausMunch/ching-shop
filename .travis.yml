@@ -1,6 +1,6 @@
 language: php
 install:
-  - composer install
+  - composer install --dev --no-interaction
 script:
   - mkdir -p build/logs
   - phpunit --testsuite unit --coverage-clover build/logs/clover.xml
