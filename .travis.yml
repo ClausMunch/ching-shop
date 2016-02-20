@@ -1,6 +1,8 @@
 language: php
+sudo: false
 install:
-  - composer install --dev --no-interaction
+  - composer install --no-interaction --no-scripts
+  - composer require satooshi/php-coveralls:dev-master
 script:
   - mkdir -p build/logs
   - phpunit --testsuite unit --coverage-clover build/logs/clover.xml

@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereUpdatedAt($value)
+ * @property string $deleted_at
  */
 class Role extends Model
 {
