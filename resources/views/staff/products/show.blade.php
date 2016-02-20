@@ -26,4 +26,16 @@
        href="{{ route('staff.products.edit', $product->SKU()) }}">
         Edit
     </a>
+
+    <div class="pull-right">
+        <form method="post"
+              id="delete-product-form"
+              action="{{ $location->deleteActionFor($product) }}">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger">
+                Delete
+            </button>
+        </form>
+    </div>
 @endsection

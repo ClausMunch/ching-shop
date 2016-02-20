@@ -108,6 +108,32 @@ class ProductRepository
     }
 
     /**
+     * @param string $sku
+     * @return Product
+     */
+    public function mustLoadBySKU(string $sku): Product
+    {
+        return $this->productResource
+            ->where('sku', $sku)
+            ->limit(1)
+            ->first();
+    }
+
+    /**
+     * @param string $sku
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteBySku(string $sku)
+    {
+        return $this->productResource
+            ->where('sku', $sku)
+            ->limit(1)
+            ->first()
+            ->delete();
+    }
+
+    /**
      * @param $product
      * @return ProductPresenter
      */

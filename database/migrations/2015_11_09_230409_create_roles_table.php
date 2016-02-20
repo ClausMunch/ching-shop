@@ -21,6 +21,7 @@ class CreateRolesTable extends Migration
             $table->timestamps();
 
             $table->index('name');
+            $table->softDeletes();
         });
     }
 
