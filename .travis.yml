@@ -1,6 +1,8 @@
 language: php
 install:
   - composer install
-script: phpunit --testsuite unit
+script: phpunit --testsuite unit --coverage-clover build/logs/clover.xml
 php:
   - '7.0'
+after_success:
+  - travis_retry php vendor/bin/coveralls
