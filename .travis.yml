@@ -1,7 +1,9 @@
 language: php
 install:
   - composer install
-script: phpunit --testsuite unit --coverage-clover build/logs/clover.xml
+script:
+  - mkdir -p build/logs
+  - phpunit --testsuite unit --coverage-clover build/logs/clover.xml
 php:
   - '7.0'
 after_success:
