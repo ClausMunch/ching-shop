@@ -2,11 +2,10 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
+use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-
-use ChingShop\Http\Controllers\Controller;
-use ChingShop\Catalogue\Product\ProductRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
@@ -22,9 +21,10 @@ class ProductController extends Controller
 
     /**
      * ProductController constructor.
+     *
      * @param ProductRepository $productRepository
-     * @param ViewFactory $viewFactory
-     * @param ResponseFactory $responseFactory
+     * @param ViewFactory       $viewFactory
+     * @param ResponseFactory   $responseFactory
      */
     public function __construct(
         ProductRepository $productRepository,
@@ -37,26 +37,28 @@ class ProductController extends Controller
     }
 
     /**
-     * @param int $ID
+     * @param int    $ID
      * @param string $slug
+     *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function viewAction(int $ID, string $slug)
     {
         $product = $this->productRepository->presentByID($ID);
         if (!$product->ID()) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
         if (!$product->slug() === $slug) {
             return $this->responseFactory->redirectToRoute(
                 'product::view',
                 [
                     'id'   => $product->ID(),
-                    'slug' => $product->slug()
+                    'slug' => $product->slug(),
                 ],
                 301
             );
         }
+
         return $this->viewFactory->make(
             'customer.product.view',
             compact('product')

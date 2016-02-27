@@ -3,20 +3,18 @@
 namespace ChingShop\User;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
- * Class UserResource
+ * Class UserResource.
  *
- * @package ChingShop\User
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\ChingShop\User\Role[] $roles
+ *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereEmail($value)
@@ -31,9 +30,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereUpdatedAt($value)
+ *
  * @property string $deleted_at
  */
-class User extends Model implements AuthenticatableContract,
+class User extends Model implements
+AuthenticatableContract,
                                     AuthorizableContract,
                                     CanResetPasswordContract
 {

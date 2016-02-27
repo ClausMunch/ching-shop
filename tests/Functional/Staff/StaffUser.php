@@ -2,8 +2,8 @@
 
 namespace Testing\Functional\Staff;
 
-use ChingShop\User\User;
 use ChingShop\Actions\MakeUser;
+use ChingShop\User\User;
 
 trait StaffUser
 {
@@ -21,6 +21,7 @@ trait StaffUser
         if (!isset($this->staffUser)) {
             $this->staffUser = $this->makeStaffUser();
         }
+
         return $this->staffUser;
     }
 
@@ -29,8 +30,9 @@ trait StaffUser
      */
     private function makeStaffUser()
     {
-        $email = str_random() . '@ching-shop.com';
+        $email = str_random().'@ching-shop.com';
         $password = str_random(16);
+
         return $this->makeUser()->make($email, $password, true);
     }
 
@@ -42,6 +44,7 @@ trait StaffUser
         if (!isset($this->makeUser)) {
             $this->makeUser = app(MakeUser::class);
         }
+
         return $this->makeUser;
     }
 }

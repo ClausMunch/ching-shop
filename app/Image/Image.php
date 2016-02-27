@@ -2,25 +2,26 @@
 
 namespace ChingShop\Image;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 use ChingShop\Catalogue\Product\Product;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * ChingShop\Image\Image
+ * ChingShop\Image\Image.
  *
- * @property integer $id
+ * @property int $id
  * @property string $filename
  * @property string $alt_text
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereAltText($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  * @property string $url
  * @property string $deleted_at
@@ -67,7 +68,7 @@ class Image extends Model
     public function url(): string
     {
         return $this->isInternal() ?
-            secure_asset('filesystem/image/' . $this->filename()) : $this->url;
+            secure_asset('filesystem/image/'.$this->filename()) : $this->url;
     }
 
     /**
@@ -96,6 +97,7 @@ class Image extends Model
 
     /**
      * @param string $filename
+     *
      * @return string
      */
     private function safeFilename(string $filename)
@@ -106,6 +108,7 @@ class Image extends Model
             '-',
             $transliterated
         );
+
         return $sanitised;
     }
 }

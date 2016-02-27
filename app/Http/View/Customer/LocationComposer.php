@@ -2,11 +2,10 @@
 
 namespace ChingShop\Http\View\Customer;
 
-use Illuminate\Routing\Router;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\Routing\UrlGenerator;
-
 use ChingShop\Catalogue\Product\ProductPresenter;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Router;
 
 class LocationComposer
 {
@@ -19,7 +18,8 @@ class LocationComposer
     private $urlGenerator;
 
     /**
-     * Bind a Location object to the view
+     * Bind a Location object to the view.
+     *
      * @param View $view
      */
     public function compose(View $view)
@@ -28,7 +28,7 @@ class LocationComposer
     }
 
     /**
-     * @param Router $router
+     * @param Router       $router
      * @param UrlGenerator $urlGenerator
      */
     public function __construct(Router $router, UrlGenerator $urlGenerator)
@@ -39,23 +39,25 @@ class LocationComposer
 
     /**
      * @param Viewable $viewable
+     *
      * @return string
      */
     public function viewHrefFor(Viewable $viewable): string
     {
         return $this->urlGenerator->route(
-            $viewable->routePrefix() . self::ROUTE_VIEW,
+            $viewable->routePrefix().self::ROUTE_VIEW,
             $viewable->locationParts()
         );
     }
 
     /**
      * @param ProductPresenter $product
+     *
      * @return string
      */
     public function productEnquiryMail(ProductPresenter $product): string
     {
         return 'mailto:ching@ching-shop.com?subject='
-            . "I would like to buy '{$product->name()}' ({$product->SKU()})";
+            ."I would like to buy '{$product->name()}' ({$product->SKU()})";
     }
 }

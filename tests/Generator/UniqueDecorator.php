@@ -4,8 +4,7 @@ namespace Testing\Generator;
 
 /**
  * Class UniqueDecorator
- * Ensures unique values from a test data generator
- * @package Testing\Generator
+ * Ensures unique values from a test data generator.
  */
 class UniqueDecorator implements Generator
 {
@@ -27,7 +26,7 @@ class UniqueDecorator implements Generator
     }
 
     /**
-     * Reset used values
+     * Reset used values.
      */
     public function reset()
     {
@@ -36,35 +35,39 @@ class UniqueDecorator implements Generator
     }
 
     /**
-     * @return bool
      * @throws GenerationException
+     *
+     * @return bool
      */
     public function anyBoolean(): bool
     {
-        return $this->ensureUnusedValue(function() {
+        return $this->ensureUnusedValue(function () {
             return $this->generator->anyBoolean();
         });
     }
 
     /**
-     * @return string
      * @throws GenerationException
+     *
+     * @return string
      */
     public function anyString(): string
     {
-        return $this->ensureUnusedValue(function() {
+        return $this->ensureUnusedValue(function () {
             return $this->generator->anyString();
         });
     }
 
     /**
      * @param string $unwanted
-     * @return string
+     *
      * @throws GenerationException
+     *
+     * @return string
      */
     public function anyStringOtherThan(string $unwanted): string
     {
-        return $this->ensureUnusedValue(function() use ($unwanted) {
+        return $this->ensureUnusedValue(function () use ($unwanted) {
             return $this->generator->anyStringOtherThan($unwanted);
         });
     }
@@ -74,48 +77,53 @@ class UniqueDecorator implements Generator
      */
     public function anyInteger(): int
     {
-        return $this->ensureUnusedValue(function() {
+        return $this->ensureUnusedValue(function () {
             return $this->generator->anyInteger();
         });
     }
 
     /**
-     * @return string
      * @throws GenerationException
+     *
+     * @return string
      */
     public function anyEmail(): string
     {
-        return $this->ensureUnusedValue(function() {
+        return $this->ensureUnusedValue(function () {
             return $this->generator->anyEmail();
         });
     }
 
     /**
-     * @return string
      * @throws GenerationException
+     *
+     * @return string
      */
     public function anySlug(): string
     {
-        return $this->ensureUnusedValue(function() {
+        return $this->ensureUnusedValue(function () {
             return $this->generator->anySlug();
         });
     }
 
     /**
      * @param array $options
+     *
      * @return mixed
      */
     public function anyOneOf(array $options)
     {
-        return $this->ensureUnusedValue(function() use ($options) {
+        return $this->ensureUnusedValue(function () use ($options) {
             return $this->generator->anyOneOf($options);
         });
     }
 
     /**
      * @param callable $generate
-     * @return mixed
+     *
      * @throws GenerationException
+     *
+     * @return mixed
      */
     private function ensureUnusedValue(callable $generate): mixed
     {

@@ -2,9 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use Testing\Unit\UnitTest;
-
 use ChingShop\Catalogue\Product\Product;
+use Testing\Unit\UnitTest;
 
 class ProductTest extends UnitTest
 {
@@ -12,16 +11,16 @@ class ProductTest extends UnitTest
     private $product;
 
     /**
-     * Initialise product for each test
+     * Initialise product for each test.
      */
     public function setUp()
     {
         parent::setUp();
-        $this->product = new Product;
+        $this->product = new Product();
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testCanInstantiate()
     {
@@ -29,7 +28,7 @@ class ProductTest extends UnitTest
     }
 
     /**
-     * isStored should return false when there is no id
+     * isStored should return false when there is no id.
      */
     public function testIsStoredIsFalseWhenNoId()
     {
@@ -38,7 +37,7 @@ class ProductTest extends UnitTest
     }
 
     /**
-     * isStored should return true when id is set
+     * isStored should return true when id is set.
      */
     public function testIsStoredIsTrueWhenIdIsPresent()
     {

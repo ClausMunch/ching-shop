@@ -2,17 +2,16 @@
 
 namespace Testing\Functional;
 
-use Testing\TestCase;
-use Testing\Generator\GeneratesValues;
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Testing\Generator\GeneratesValues;
+use Testing\TestCase;
 
 abstract class FunctionalTest extends TestCase
 {
     use GeneratesValues, DatabaseTransactions;
 
     /**
-     * Close Mockery
+     * Close Mockery.
      */
     public function tearDown()
     {

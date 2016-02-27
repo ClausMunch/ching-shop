@@ -2,9 +2,9 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use ChingShop\Image\Image;
-use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Http\View\Customer\Viewable;
+use ChingShop\Http\View\Staff\HttpCrud;
+use ChingShop\Image\Image;
 
 class ProductPresenter implements HttpCrud, Viewable
 {

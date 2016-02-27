@@ -13,13 +13,14 @@ trait GeneratesValues
     protected function generator(): Generator
     {
         if (!isset($this->generator)) {
-            $this->generator = new FakerGenerator;
+            $this->generator = new FakerGenerator();
         }
+
         return $this->generator;
     }
 
     /**
-     * Ensure unique values from generator
+     * Ensure unique values from generator.
      */
     protected function useUniqueValues()
     {

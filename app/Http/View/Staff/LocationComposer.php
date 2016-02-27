@@ -2,15 +2,14 @@
 
 namespace ChingShop\Http\View\Staff;
 
-use Illuminate\Routing\Router;
-use Illuminate\Contracts\View\View;
-use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Router;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class LocationComposer
- * Location logic for views
- * @package ChingShop\Http\View
+ * Location logic for views.
  */
 class LocationComposer
 {
@@ -27,7 +26,7 @@ class LocationComposer
     private $urlGenerator;
 
     /**
-     * @param Router $router
+     * @param Router       $router
      * @param UrlGenerator $urlGenerator
      */
     public function __construct(Router $router, UrlGenerator $urlGenerator)
@@ -37,7 +36,8 @@ class LocationComposer
     }
 
     /**
-     * Bind a Location object to the view
+     * Bind a Location object to the view.
+     *
      * @param View $view
      */
     public function compose(View $view)
@@ -55,6 +55,7 @@ class LocationComposer
 
     /**
      * @param string $name
+     *
      * @return bool
      */
     public function is(string $name): bool
@@ -64,25 +65,29 @@ class LocationComposer
 
     /**
      * @param string $parentName
+     *
      * @return bool
      */
     public function isIn(string $parentName): bool
     {
         $parentParts = explode('.', $parentName);
         $currentParts = $this->parts();
-        foreach($parentParts as $i => $parentPart) {
+        foreach ($parentParts as $i => $parentPart) {
             if (empty($currentParts[$i]) || $currentParts[$i] !== $parentPart) {
                 return false;
             }
         }
+
         return true;
     }
 
     /**
      * Returns 'active' if given location
      * is part of current location
-     * (useful in views)
+     * (useful in views).
+     *
      * @param string $location
+     *
      * @return string
      */
     public function putActive(string $location)
@@ -93,9 +98,11 @@ class LocationComposer
     /**
      * Return the given string if current location
      * exactly matches given location
-     * (useful in views)
+     * (useful in views).
+     *
      * @param string $content
      * @param string $locationName
+     *
      * @return string
      */
     public function putIfIs(string $content, string $locationName)
@@ -103,15 +110,18 @@ class LocationComposer
         if ($this->is($locationName)) {
             return $content;
         }
+
         return '';
     }
 
     /**
      * Return the given string if given location
      * is part of current location
-     * (useful in views)
+     * (useful in views).
+     *
      * @param string $content
      * @param string $parentName
+     *
      * @return string
      */
     public function putIfIn(string $content, string $parentName)
@@ -119,23 +129,26 @@ class LocationComposer
         if ($this->isIn($parentName)) {
             return $content;
         }
+
         return '';
     }
 
     /**
      * @param HttpCrud $crud
+     *
      * @return string
      */
     public function showHrefFor(HttpCrud $crud): string
     {
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix() . self::ROUTE_SHOW,
+            $crud->crudRoutePrefix().self::ROUTE_SHOW,
             $crud->crudID()
         );
     }
 
     /**
      * @param HttpCrud $crud
+     *
      * @return string
      */
     public function persistMethodFor(HttpCrud $crud): string
@@ -146,29 +159,32 @@ class LocationComposer
 
     /**
      * @param HttpCrud $crud
+     *
      * @return string
      */
     public function persistActionFor(HttpCrud $crud): string
     {
         if ($crud->isStored()) {
             return $this->urlGenerator->route(
-                $crud->crudRoutePrefix() . self::ROUTE_UPDATE,
+                $crud->crudRoutePrefix().self::ROUTE_UPDATE,
                 $crud->crudID()
             );
         }
+
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix() . self::ROUTE_STORE
+            $crud->crudRoutePrefix().self::ROUTE_STORE
         );
     }
 
     /**
      * @param HttpCrud $crud
+     *
      * @return string
      */
     public function deleteActionFor(HttpCrud $crud): string
     {
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix() . self::ROUTE_DELETE,
+            $crud->crudRoutePrefix().self::ROUTE_DELETE,
             $crud->crudID()
         );
     }

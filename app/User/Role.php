@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * ChingShop\User\Role
+ * ChingShop\User\Role.
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $display_name
  * @property string $description
@@ -16,12 +16,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('auth.model')[] $users
  * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.permission')[] $perms
+ *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDisplayName($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereUpdatedAt($value)
+ *
  * @property string $deleted_at
  */
 class Role extends Model
@@ -40,8 +42,10 @@ class Role extends Model
 
     /**
      * @param string $roleName
-     * @return Role
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return Role
      */
     public function mustFindByName(string $roleName): Role
     {

@@ -2,9 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use ChingShop\Http\Middleware\StaffOnly;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class StaffOnlyTest extends MiddlewareTest
@@ -13,17 +13,17 @@ class StaffOnlyTest extends MiddlewareTest
     private $staffOnly;
 
     /**
-     * Initialise staff only middleware for each test
+     * Initialise staff only middleware for each test.
      */
     public function setUp()
     {
         parent::setUp();
-        $this->staffOnly = new StaffOnly;
+        $this->staffOnly = new StaffOnly();
         $this->request = $this->mockery(Request::class);
     }
 
     /**
-     * Sanity check that staff only middleware can be initialised
+     * Sanity check that staff only middleware can be initialised.
      */
     public function testCanInitialise()
     {
@@ -31,12 +31,12 @@ class StaffOnlyTest extends MiddlewareTest
     }
 
     /**
-     * Should pass on a request from a staff user
+     * Should pass on a request from a staff user.
      */
     public function testPassesOnRequestFromStaffUser()
     {
         $passedOn = false;
-        $next = function(Request $passedRequest) use (&$passedOn) {
+        $next = function (Request $passedRequest) use (&$passedOn) {
             $this->assertSame($passedRequest, $this->request);
             $passedOn = true;
         };
@@ -52,11 +52,11 @@ class StaffOnlyTest extends MiddlewareTest
     }
 
     /**
-     * Should redirect a request from a non-staff user to the login page
+     * Should redirect a request from a non-staff user to the login page.
      */
     public function testRedirectsNonAjaxNonStaffUserRequestToLogin()
     {
-        $next = function() {};
+        $next = function () {};
 
         $user = $this->mockRequestUser();
         $user->shouldReceive('isStaff')->andReturn(false);
@@ -72,11 +72,11 @@ class StaffOnlyTest extends MiddlewareTest
     }
 
     /**
-     * Should give 401 for an AJAX request without a user
+     * Should give 401 for an AJAX request without a user.
      */
     public function testGives401ForAjaxRequestWithoutUser()
     {
-        $next = function() {};
+        $next = function () {};
 
         $this->requestIsAjax(true);
 
@@ -92,11 +92,11 @@ class StaffOnlyTest extends MiddlewareTest
     }
 
     /**
-     * Should give 401 for a request from a non-staff user
+     * Should give 401 for a request from a non-staff user.
      */
     public function testGives401ForAjaxRequestFromNonStaffUser()
     {
-        $next = function() {};
+        $next = function () {};
 
         $this->requestIsAjax(true);
 

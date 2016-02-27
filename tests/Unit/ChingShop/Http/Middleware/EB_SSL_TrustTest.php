@@ -2,9 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Illuminate\Http\Request;
-
 use ChingShop\Http\Middleware\EB_SSL_Trust;
+use Illuminate\Http\Request;
 
 class EB_SSL_TrustTest extends MiddlewareTest
 {
@@ -12,16 +11,16 @@ class EB_SSL_TrustTest extends MiddlewareTest
     private $ebSslTrust;
 
     /**
-     * Create EB_SSL_Trust for each test
+     * Create EB_SSL_Trust for each test.
      */
     public function setUp()
     {
         parent::setUp();
-        $this->ebSslTrust = new EB_SSL_Trust;
+        $this->ebSslTrust = new EB_SSL_Trust();
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -29,12 +28,12 @@ class EB_SSL_TrustTest extends MiddlewareTest
     }
 
     /**
-     * Should accept the client IP as a trusted proxy
+     * Should accept the client IP as a trusted proxy.
      */
     public function testSetsClientIPAsTrustedProxy()
     {
         $passedOn = false;
-        $next = function(Request $passedRequest) use (&$passedOn) {
+        $next = function (Request $passedRequest) use (&$passedOn) {
             $this->assertSame($passedRequest, $this->request);
             $passedOn = true;
         };

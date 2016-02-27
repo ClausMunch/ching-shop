@@ -2,13 +2,10 @@
 
 namespace Testing\Unit\ChingShop\Http\Requests;
 
-use Testing\Unit\UnitTest;
-
-use Mockery\MockInterface;
-
 use ChingShop\Http\Requests\PersistProductRequest;
-
 use Illuminate\Http\Request as HttpRequest;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 
 class PersistProductRequestTest extends UnitTest
 {
@@ -22,12 +19,12 @@ class PersistProductRequestTest extends UnitTest
     {
         parent::setUp();
 
-        $this->persistProductRequest = new PersistProductRequest;
+        $this->persistProductRequest = new PersistProductRequest();
         $this->httpRequest = $this->mockery(HttpRequest::class);
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -38,7 +35,7 @@ class PersistProductRequestTest extends UnitTest
     }
 
     /**
-     * Authorisation is equivalent to whether the user is staff
+     * Authorisation is equivalent to whether the user is staff.
      */
     public function testAuthorize()
     {
@@ -55,7 +52,7 @@ class PersistProductRequestTest extends UnitTest
 
     /**
      * If the request is to create a new product
-     * the rules should contain a plain unique constraint
+     * the rules should contain a plain unique constraint.
      */
     public function testRulesAreUniqueForCreateRequest()
     {
@@ -65,7 +62,7 @@ class PersistProductRequestTest extends UnitTest
 
         $rules = $this->persistProductRequest->rules($this->httpRequest);
 
-        foreach($rules as $ruleSet) {
+        foreach ($rules as $ruleSet) {
             $this->assertContains('unique:products', explode('|', $ruleSet));
         }
     }
@@ -73,14 +70,14 @@ class PersistProductRequestTest extends UnitTest
     /**
      * If the request is to update an existing product
      * the rules should contain a unique constraint excluding
-     * the existing product
+     * the existing product.
      */
     public function testRulesExcludeExistingForUpdateRequest()
     {
         $this->httpRequest->shouldReceive('method')->andReturn(
             $this->generator()->anyOneOf([
                 HttpRequest::METHOD_PUT,
-                HttpRequest::METHOD_PATCH
+                HttpRequest::METHOD_PATCH,
             ])
         );
 
@@ -91,7 +88,7 @@ class PersistProductRequestTest extends UnitTest
 
         $rules = $this->persistProductRequest->rules($this->httpRequest);
 
-        foreach(['name', 'sku'] as $ruleSetKey) {
+        foreach (['name', 'sku'] as $ruleSetKey) {
             $this->assertContains(
                 "unique:products,{$ruleSetKey},{$ID}",
                 explode('|', $rules[$ruleSetKey])

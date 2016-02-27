@@ -2,16 +2,15 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use Testing\Functional\Staff\StaffUser;
-
 use ChingShop\Catalogue\Product\Product;
+use Testing\Functional\Staff\StaffUser;
 
 class ProductDeletionTest extends ProductTest
 {
     use StaffUser;
 
     /**
-     * Should see the delete button on the show product view
+     * Should see the delete button on the show product view.
      */
     public function testCanSeeDeleteButtonOnProductView()
     {
@@ -31,7 +30,7 @@ class ProductDeletionTest extends ProductTest
     }
 
     /**
-     * Pressing the delete button should delete the product
+     * Pressing the delete button should delete the product.
      */
     public function testDeleteButtonDeletesProduct()
     {

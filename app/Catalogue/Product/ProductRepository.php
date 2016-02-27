@@ -20,6 +20,7 @@ class ProductRepository
 
     /**
      * @param int $limit
+     *
      * @return Collection
      */
     public function loadLatest($limit = 100): Collection
@@ -32,13 +33,17 @@ class ProductRepository
 
     /**
      * @param int $limit
+     *
      * @return array
      */
     public function presentLatest($limit = 100): array
     {
-        return array_map(function (Product $product): ProductPresenter {
-            return $this->presentProduct($product);
-        }, $this->loadLatest($limit)->all());
+        return array_map(
+
+function (Product $product): ProductPresenter
+{
+    return $this->presentProduct($product);
+}, $this->loadLatest($limit)->all());
     }
 
     /**
@@ -46,23 +51,26 @@ class ProductRepository
      */
     public function presentEmpty(): ProductPresenter
     {
-        return new ProductPresenter(new Product);
+        return new ProductPresenter(new Product());
     }
 
     /**
      * @param array $productData
+     *
      * @return Product
      */
     public function create(array $productData): Product
     {
         $newProduct = $this->productResource->create($productData);
         $newProduct->save();
+
         return $newProduct;
     }
 
     /**
      * @param string $sku
-     * @param array $newData
+     * @param array  $newData
+     *
      * @return Product
      */
     public function update(string $sku, array $newData): Product
@@ -70,11 +78,13 @@ class ProductRepository
         $product = $this->productResource->where('sku', $sku)->firstOrFail();
         $product->fill($newData);
         $product->save();
+
         return $product;
     }
 
     /**
      * @param string $sku
+     *
      * @return ProductPresenter
      */
     public function presentBySKU(string $sku): ProductPresenter
@@ -87,11 +97,13 @@ class ProductRepository
         if (!$product) {
             return $this->presentEmpty();
         }
+
         return $this->presentProduct($product);
     }
 
     /**
      * @param int $ID
+     *
      * @return ProductPresenter
      */
     public function presentByID(int $ID): ProductPresenter
@@ -104,11 +116,13 @@ class ProductRepository
         if (!$product) {
             return $this->presentEmpty();
         }
+
         return $this->presentProduct($product);
     }
 
     /**
      * @param string $sku
+     *
      * @return Product
      */
     public function mustLoadBySKU(string $sku): Product
@@ -121,8 +135,10 @@ class ProductRepository
 
     /**
      * @param string $sku
-     * @return bool|null
+     *
      * @throws \Exception
+     *
+     * @return bool|null
      */
     public function deleteBySku(string $sku)
     {
@@ -135,6 +151,7 @@ class ProductRepository
 
     /**
      * @param $product
+     *
      * @return ProductPresenter
      */
     private function presentProduct($product)

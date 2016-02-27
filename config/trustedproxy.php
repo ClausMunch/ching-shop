@@ -39,5 +39,5 @@ return [
         \Illuminate\Http\Request::HEADER_CLIENT_HOST  => 'cloudfront-forwarded-Host',
         \Illuminate\Http\Request::HEADER_CLIENT_PROTO => 'cloudfront-forwarded-proto',
         \Illuminate\Http\Request::HEADER_CLIENT_PORT  => 'cloudfront-forwarded-Port',
-    ]
+    ],
 ];

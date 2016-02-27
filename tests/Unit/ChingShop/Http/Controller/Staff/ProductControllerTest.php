@@ -3,20 +3,17 @@
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
 use ChingShop\Catalogue\Product\Product;
-use Testing\Unit\UnitTest;
-
-use Mockery\MockInterface;
-
-use ChingShop\Image\ImageRepository;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
-use ChingShop\Http\Requests\PersistProductRequest;
 use ChingShop\Http\Controllers\Staff\ProductController;
-
+use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Image\ImageRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Contracts\Routing\ResponseFactory;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 
 class ProductControllerTest extends UnitTest
 {
@@ -36,7 +33,7 @@ class ProductControllerTest extends UnitTest
     private $imageRepository;
 
     /**
-     * Initialise product controller with mock dependencies
+     * Initialise product controller with mock dependencies.
      */
     public function setUp()
     {
@@ -56,7 +53,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -67,7 +64,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Should return latest products bound to index view
+     * Should return latest products bound to index view.
      */
     public function testIndex()
     {
@@ -86,7 +83,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Should render the product creation form bound with an empty product
+     * Should render the product creation form bound with an empty product.
      */
     public function testCreate()
     {
@@ -105,7 +102,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Store a new product and redirect to view of that product
+     * Store a new product and redirect to view of that product.
      */
     public function testStore()
     {
@@ -140,7 +137,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Should load the product view bound with the product
+     * Should load the product view bound with the product.
      */
     public function testShow()
     {
@@ -162,7 +159,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Should render the product creation form bound with the product
+     * Should render the product creation form bound with the product.
      */
     public function testEdit()
     {
@@ -184,7 +181,7 @@ class ProductControllerTest extends UnitTest
     }
 
     /**
-     * Update product and redirect to view of that product
+     * Update product and redirect to view of that product.
      */
     public function testUpdate()
     {
@@ -232,7 +229,8 @@ class ProductControllerTest extends UnitTest
 
     /**
      * @param string $viewName
-     * @param array $bindData
+     * @param array  $bindData
+     *
      * @return View|MockInterface
      */
     private function expectViewToBeMadeWith(
@@ -243,6 +241,7 @@ class ProductControllerTest extends UnitTest
         $this->viewFactory->shouldReceive('make')
             ->with($viewName, $bindData)
             ->andReturn($view);
+
         return $view;
     }
 

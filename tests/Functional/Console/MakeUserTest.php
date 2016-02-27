@@ -2,32 +2,30 @@
 
 namespace Testing\Functional\Console;
 
-use Testing\Functional\FunctionalTest;
-
+use Artisan;
+use ChingShop\User\User;
 use DB;
 use Hash;
-use Artisan;
-
-use ChingShop\User\User;
+use Testing\Functional\FunctionalTest;
 
 class MakeUserTest extends FunctionalTest
 {
     /**
-     * Should use email address passed in wih --email option
+     * Should use email address passed in wih --email option.
      */
     public function testMakesWithGivenEmail()
     {
         $email = $this->generator()->anyEmail();
 
         Artisan::call('make:user', [
-            '--email' => $email
+            '--email' => $email,
         ]);
 
         $this->seeInDatabase('users', ['email' => $email]);
     }
 
     /**
-     * Should generate a random email if none given
+     * Should generate a random email if none given.
      */
     public function testGeneratesEmailIfNoneGiven()
     {
@@ -45,14 +43,14 @@ class MakeUserTest extends FunctionalTest
     }
 
     /**
-     * Should ask for a password and use it
+     * Should ask for a password and use it.
      */
     public function testGeneratesPassword()
     {
         $password = $this->generator()->anyString();
 
         Artisan::call('make:user', [
-            '--password' => $password
+            '--password' => $password,
         ]);
 
         $userResource = $this->fetchLatestUser();
@@ -61,7 +59,7 @@ class MakeUserTest extends FunctionalTest
     }
 
     /**
-     * If the --staff flag is set, should give the new user the Staff role
+     * If the --staff flag is set, should give the new user the Staff role.
      */
     public function testMakesStaffUserIfStaffFlagGiven()
     {
@@ -82,6 +80,7 @@ class MakeUserTest extends FunctionalTest
         $latestUserResource = User::with('roles')
             ->orderBy('updated_at', 'desc')
             ->first();
-        return $latestUserResource ? $latestUserResource : new User;
+
+        return $latestUserResource ? $latestUserResource : new User();
     }
 }

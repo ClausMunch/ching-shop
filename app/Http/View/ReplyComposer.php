@@ -28,7 +28,8 @@ class ReplyComposer
     }
 
     /**
-     * Bind a Location object to the view
+     * Bind a Location object to the view.
+     *
      * @param View $view
      */
     public function compose(View $view)
@@ -38,6 +39,7 @@ class ReplyComposer
 
     /**
      * @param string $fieldName
+     *
      * @return string
      */
     public function putHasError(string $fieldName): string
@@ -45,11 +47,13 @@ class ReplyComposer
         if ($this->errors()->has($fieldName)) {
             return self::ERROR_CLASS;
         }
+
         return '';
     }
 
     /**
      * @param string $fieldName
+     *
      * @return array
      */
     public function errorsFor(string $fieldName): array
@@ -60,11 +64,13 @@ class ReplyComposer
     /**
      * @param string $fieldName
      * @param string $fallback
+     *
      * @return string
      */
     public function oldInputOr(string $fieldName, string $fallback): string
     {
         $old = $this->oldInput()->get($fieldName);
+
         return isset($old[0]) ? (string) $old[0] : $fallback;
     }
 
@@ -78,6 +84,7 @@ class ReplyComposer
                 'errors', new MessageBag([])
             );
         }
+
         return $this->errors;
     }
 
@@ -91,6 +98,7 @@ class ReplyComposer
                 $this->sessionStore->getOldInput()
             );
         }
+
         return $this->oldInput;
     }
 }

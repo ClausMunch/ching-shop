@@ -2,17 +2,14 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use Mockery\MockInterface;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
-use Testing\Unit\UnitTest;
-use Testing\Unit\Behaviour\MocksModel;
-
-use Illuminate\Database\Eloquent\Collection;
-
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Mockery\MockInterface;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\Behaviour\MocksModel;
+use Testing\Unit\UnitTest;
 
 class ProductRepositoryTest extends UnitTest
 {
@@ -25,7 +22,7 @@ class ProductRepositoryTest extends UnitTest
     private $productResource;
 
     /**
-     * Initialise product repository with mock product resource model
+     * Initialise product repository with mock product resource model.
      */
     public function setUp()
     {
@@ -38,7 +35,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testCanInstantiate()
     {
@@ -49,7 +46,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Sanity check loading latest product resource models
+     * Sanity check loading latest product resource models.
      */
     public function testLoadLatest()
     {
@@ -59,7 +56,7 @@ class ProductRepositoryTest extends UnitTest
 
     /**
      * Should be able to wrap latest product collection
-     * in product presenters
+     * in product presenters.
      */
     public function testPresentLatest()
     {
@@ -80,7 +77,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to get empty / null product presenter
+     * Should be able to get empty / null product presenter.
      */
     public function testPresentEmpty()
     {
@@ -92,7 +89,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to create with given data
+     * Should be able to create with given data.
      */
     public function testCreate()
     {
@@ -111,7 +108,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to update product data
+     * Should be able to update product data.
      */
     public function testUpdate()
     {
@@ -132,7 +129,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to get a presenter-decorated product by SKU
+     * Should be able to get a presenter-decorated product by SKU.
      */
     public function testPresentBySKU()
     {
@@ -150,7 +147,7 @@ class ProductRepositoryTest extends UnitTest
 
     /**
      * @param ProductPresenter $presenter
-     * @param MockObject $mockProduct
+     * @param MockObject       $mockProduct
      */
     private function assertPresenterIsPresenting(
         ProductPresenter $presenter,
@@ -179,6 +176,7 @@ class ProductRepositoryTest extends UnitTest
         $this->productResource->shouldReceive(
             'orderBy->take->get'
         )->once()->andReturn($collection);
+
         return $collection;
     }
 }

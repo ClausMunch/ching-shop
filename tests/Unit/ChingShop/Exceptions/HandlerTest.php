@@ -2,13 +2,13 @@
 
 namespace Testing\Unit\ChingShop\Exceptions;
 
-use Exception;
-use Testing\Unit\UnitTest;
-use Illuminate\Http\Request;
-use Psr\Log\LoggerInterface;
-use Illuminate\Http\Response;
 use ChingShop\Exceptions\Handler;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Psr\Log\LoggerInterface;
+use Testing\Unit\UnitTest;
 
 class HandlerTest extends UnitTest
 {
@@ -19,7 +19,7 @@ class HandlerTest extends UnitTest
     private $logger;
 
     /**
-     * Initialise handler for each test
+     * Initialise handler for each test.
      */
     public function setUp()
     {
@@ -29,7 +29,7 @@ class HandlerTest extends UnitTest
     }
 
     /**
-     * Sanity check that exception handler can be instantiated
+     * Sanity check that exception handler can be instantiated.
      */
     public function testCanInstantiate()
     {
@@ -37,7 +37,7 @@ class HandlerTest extends UnitTest
     }
 
     /**
-     * Should be able to report exception
+     * Should be able to report exception.
      */
     public function testReport()
     {
@@ -49,7 +49,7 @@ class HandlerTest extends UnitTest
     }
 
     /**
-     * Should be able to render an exception into an HTTP response
+     * Should be able to render an exception into an HTTP response.
      */
     public function testRender()
     {

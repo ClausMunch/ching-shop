@@ -7,7 +7,7 @@ use Testing\Functional\FunctionalTest;
 class CategoriesTest extends FunctionalTest
 {
     /**
-     * Should be able to visit the cards list
+     * Should be able to visit the cards list.
      */
     public function testCardsPage()
     {

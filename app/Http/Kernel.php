@@ -8,6 +8,7 @@ class Kernel extends HttpKernel
 {
     /**
      * The application's global HTTP middleware stack.
+     *
      * @var array
      */
     protected $middleware = [
@@ -16,6 +17,7 @@ class Kernel extends HttpKernel
 
     /**
      * The application's route middleware groups.
+     *
      * @var array
      */
     protected $middlewareGroups = [
@@ -42,6 +44,7 @@ class Kernel extends HttpKernel
 
     /**
      * The application's route middleware.
+     *
      * @var array
      */
     protected $routeMiddleware = [

@@ -4,7 +4,8 @@ if (!function_exists('array_partition')) {
 
     /**
      * @param array $whole
-     * @param int $pieces
+     * @param int   $pieces
+     *
      * @return array[]
      */
     function array_partition(array $whole, int $pieces): array
@@ -15,7 +16,7 @@ if (!function_exists('array_partition')) {
             $partIndex = $i % $pieces;
             $parts[$partIndex][] = $whole[$i];
         }
+
         return $parts;
     }
-
 }

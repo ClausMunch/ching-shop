@@ -17,7 +17,7 @@ class StaticViewsTest extends FunctionalTest
     }
 
     /**
-     * Should be able to visit About page
+     * Should be able to visit About page.
      */
     public function testAboutPage()
     {
@@ -28,7 +28,7 @@ class StaticViewsTest extends FunctionalTest
     }
 
     /**
-     * Should be able to visit Contact page
+     * Should be able to visit Contact page.
      */
     public function testContactPage()
     {
@@ -39,7 +39,7 @@ class StaticViewsTest extends FunctionalTest
     }
 
     /**
-     * Should get 404 for unknown path
+     * Should get 404 for unknown path.
      */
     public function test404()
     {

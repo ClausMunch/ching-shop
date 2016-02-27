@@ -2,22 +2,21 @@
 
 namespace ChingShop\Http\Middleware;
 
-use ChingShop\User\User;
-
-use Closure;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Symfony\Component\HttpFoundation\Response;
-
 use ChingShop\Http\View\Staff\LocationComposer;
+use ChingShop\User\User;
+use Closure;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class StaffOnly
 {
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
-     * @param  \Closure  $next
+     * @param Request  $request
+     * @param \Closure $next
+     *
      * @return Response
      */
     public function handle(Request $request, Closure $next)
@@ -39,6 +38,7 @@ class StaffOnly
 
     /**
      * @param Request $request
+     *
      * @return Response|ResponseFactory
      */
     private function deny(Request $request)

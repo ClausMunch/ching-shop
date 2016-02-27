@@ -2,18 +2,16 @@
 
 namespace Testing\Unit\ChingShop\Image;
 
-use Testing\Unit\UnitTest;
-use Mockery\MockInterface;
-use Testing\Unit\Behaviour\MocksModel;
-
+use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
-use ChingShop\Catalogue\Product\Product;
-
 use Illuminate\Config\Repository as Config;
-use Symfony\Component\HttpFoundation\FileBag;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
+use Testing\Unit\Behaviour\MocksModel;
+use Testing\Unit\UnitTest;
 
 class ImageRepositoryTest extends UnitTest
 {
@@ -29,7 +27,7 @@ class ImageRepositoryTest extends UnitTest
     private $config;
 
     /**
-     * Initialise image repository with mock dependencies
+     * Initialise image repository with mock dependencies.
      */
     public function setUp()
     {
@@ -47,7 +45,7 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -55,7 +53,7 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
-     * Should use image resource to persist uploaded image
+     * Should use image resource to persist uploaded image.
      */
     public function testMakesImageResource()
     {
@@ -75,7 +73,7 @@ class ImageRepositoryTest extends UnitTest
         $this->imageResource->shouldReceive('create')
             ->once()
             ->with([
-                'filename' => $fileName
+                'filename' => $fileName,
             ])
             ->andReturn($newImage);
 
@@ -86,7 +84,7 @@ class ImageRepositoryTest extends UnitTest
 
     /**
      * Should move uploaded file to image directory
-     * with resource id as filename
+     * with resource id as filename.
      */
     public function testMovesUploadedFileUsingImageResourceID()
     {
@@ -105,7 +103,7 @@ class ImageRepositoryTest extends UnitTest
         $upload->expects($this->once())
             ->method('move')
             ->with(
-                $storagePath . '/image',
+                $storagePath.'/image',
                 $this->isType('string')
             );
 
@@ -113,7 +111,7 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to link uploaded images to a product
+     * Should be able to link uploaded images to a product.
      */
     public function testAttachesUploadedImagesToProduct()
     {
@@ -147,17 +145,20 @@ class ImageRepositoryTest extends UnitTest
     private function makeMockUploadedFile(): MockObject
     {
         $uploadedFile = $this->makeMock(UploadedFile::class);
+
         return $uploadedFile;
     }
 
     /**
      * @param UploadedFile[] $files
+     *
      * @return MockInterface|FileBag
      */
     private function makeMockFileBag(array $files = []): MockInterface
     {
         $fileBag = $this->mockery(FileBag::class);
         $fileBag->shouldReceive('all')->andReturn($files);
+
         return $fileBag;
     }
 
@@ -171,6 +172,7 @@ class ImageRepositoryTest extends UnitTest
 
     /**
      * @param string $filename
+     *
      * @return MockInterface
      */
     private function expectImageCreation(string $filename = null): MockInterface
