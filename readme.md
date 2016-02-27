@@ -2,6 +2,7 @@ Ching Shop
 ==========
 
 [![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg)](https://travis-ci.org/hughgrigg/ching-shop)
+[![StyleCI](https://styleci.io/repos/44910529/shield)](https://styleci.io/repos/44910529)
 
 Source code for [ching-shop.com](https://www.ching-shop.com).
 
