@@ -8,11 +8,11 @@ class FakerGenerator implements Generator
     private $faker;
 
     /**
-     * (No action required to reset faker generator)
+     * (No action required to reset faker generator).
      */
     public function reset()
     {
-         mt_srand();
+        mt_srand();
     }
 
     /**
@@ -38,16 +38,18 @@ class FakerGenerator implements Generator
                 'HTML-ENTITIES'
             );
         }
+
         return $string;
     }
 
     /**
      * @param string $unwanted
+     *
      * @return string
      */
     public function anyStringOtherThan(string $unwanted): string
     {
-        return strrev($unwanted) . $this->faker()->shuffleString($unwanted);
+        return strrev($unwanted).$this->faker()->shuffleString($unwanted);
     }
 
     /**
@@ -76,6 +78,7 @@ class FakerGenerator implements Generator
 
     /**
      * @param array $options
+     *
      * @return mixed
      */
     public function anyOneOf(array $options)
@@ -91,6 +94,7 @@ class FakerGenerator implements Generator
         if (!isset($this->faker)) {
             $this->faker = \Faker\Factory::create();
         }
+
         return $this->faker;
     }
 }

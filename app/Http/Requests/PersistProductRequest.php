@@ -8,13 +8,14 @@ class PersistProductRequest extends Request
 {
     const UPDATE_METHODS = [
         HttpRequest::METHOD_PUT,
-        HttpRequest::METHOD_PATCH
+        HttpRequest::METHOD_PATCH,
     ];
 
     /**
      * Determine if the user is authorized to make this request.
      *
      * @param HttpRequest $request
+     *
      * @return bool|bool
      */
     public function authorize(HttpRequest $request): bool
@@ -26,6 +27,7 @@ class PersistProductRequest extends Request
      * Get the validation rules that apply to the request.
      *
      * @param HttpRequest $request
+     *
      * @return array
      */
     public function rules(HttpRequest $request)
@@ -45,15 +47,16 @@ class PersistProductRequest extends Request
                 'required|alpha_dash|min:5|max:128|unique:products',
                 'slug',
                 $request
-            )
+            ),
 //            'new-image.*' => 'image|max:5000', todo
         ];
     }
 
     /**
-     * @param string $rules
-     * @param string $fieldName
+     * @param string      $rules
+     * @param string      $fieldName
      * @param HttpRequest $request
+     *
      * @return string
      */
     private function uniqueFieldRules(
@@ -69,11 +72,13 @@ class PersistProductRequest extends Request
                 $request->get('id')
             );
         }
+
         return $rules;
     }
 
     /**
      * @param HttpRequest $request
+     *
      * @return bool
      */
     private function requestIsUpdate(HttpRequest $request): bool

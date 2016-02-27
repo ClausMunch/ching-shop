@@ -2,9 +2,8 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use Testing\Functional\FunctionalTest;
-
 use ChingShop\Catalogue\Product\Product;
+use Testing\Functional\FunctionalTest;
 
 abstract class ProductTest extends FunctionalTest
 {

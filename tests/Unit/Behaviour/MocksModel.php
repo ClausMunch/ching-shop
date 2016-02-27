@@ -4,8 +4,8 @@ namespace Testing\Unit\Behaviour;
 
 use Illuminate\Database\Eloquent\Model;
 use Mockery\MockInterface;
-use PHPUnit_Framework_TestCase as TestCase;
 use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;
+use PHPUnit_Framework_TestCase as TestCase;
 
 trait MocksModel
 {
@@ -22,7 +22,7 @@ trait MocksModel
 
     /**
      * @param string $attributeName
-     * @param mixed $value
+     * @param mixed  $value
      */
     protected function mockModelAttribute(string $attributeName, $value)
     {
@@ -34,7 +34,7 @@ trait MocksModel
 
     /**
      * @param string $methodName
-     * @param mixed $value
+     * @param mixed  $value
      */
     protected function mockModelMethod(string $methodName, $value = null)
     {
@@ -45,6 +45,7 @@ trait MocksModel
 
     /**
      * @param TestCase $testCase
+     *
      * @return Model|MockInterface
      */
     private function mockModel(TestCase $testCase = null): MockInterface
@@ -55,6 +56,7 @@ trait MocksModel
                 Model::class
             );
         }
+
         return $this->mockModel;
     }
 }

@@ -9,7 +9,7 @@ class DashboardTest extends FunctionalTest
     use StaffUser;
 
     /**
-     * Should not be able to access dashboard pages without auth
+     * Should not be able to access dashboard pages without auth.
      */
     public function testAuthRequired()
     {
@@ -18,7 +18,7 @@ class DashboardTest extends FunctionalTest
     }
 
     /**
-     * Should be able to hit the index page
+     * Should be able to hit the index page.
      */
     public function testIndex()
     {

@@ -2,17 +2,14 @@
 
 namespace Testing\Unit\ChingShop\Http\View;
 
-use Testing\Unit\UnitTest;
-
 use ChingShop\Http\View\ReplyComposer;
-
-use Mockery;
-use Mockery\MockInterface;
-
-use Illuminate\Support\MessageBag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Session\Store as SessionStore;
+use Illuminate\Support\MessageBag;
+use Mockery;
+use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\UnitTest;
 
 class ReplyComposerTest extends UnitTest
 {
@@ -26,7 +23,7 @@ class ReplyComposerTest extends UnitTest
     private $errors;
 
     /**
-     * Initialise reply composer with mock session store
+     * Initialise reply composer with mock session store.
      */
     public function setUp()
     {
@@ -43,7 +40,7 @@ class ReplyComposerTest extends UnitTest
     }
 
     /**
-     * Sanity check instantiation
+     * Sanity check instantiation.
      */
     public function testConstruct()
     {
@@ -51,7 +48,7 @@ class ReplyComposerTest extends UnitTest
     }
 
     /**
-     * Should bind the composer into the view
+     * Should bind the composer into the view.
      */
     public function testCompose()
     {
@@ -60,13 +57,13 @@ class ReplyComposerTest extends UnitTest
         $view->expects($this->once())
             ->method('with')
             ->with([
-                'reply' => $this->replyComposer
+                'reply' => $this->replyComposer,
             ]);
         $this->replyComposer->compose($view);
     }
 
     /**
-     * Should give 'has-error' if the given field-name has errors
+     * Should give 'has-error' if the given field-name has errors.
      */
     public function testPutHasError()
     {
@@ -83,13 +80,13 @@ class ReplyComposerTest extends UnitTest
     }
 
     /**
-     * Should use the error message bag to give errors for a field
+     * Should use the error message bag to give errors for a field.
      */
     public function testErrorsFor()
     {
         $errors = [
             $this->generator()->anyString(),
-            $this->generator()->anyString()
+            $this->generator()->anyString(),
         ];
         $fieldName = $this->generator()->anyString();
 
@@ -104,7 +101,7 @@ class ReplyComposerTest extends UnitTest
     }
 
     /**
-     * Should give old input when present
+     * Should give old input when present.
      */
     public function testOldInputOrWithOldInput()
     {
@@ -113,7 +110,7 @@ class ReplyComposerTest extends UnitTest
 
         $this->sessionStore->shouldReceive('getOldInput')
             ->andReturn([
-                $fieldName => [$oldInputValue]
+                $fieldName => [$oldInputValue],
             ]);
 
         $this->assertSame(
@@ -126,7 +123,7 @@ class ReplyComposerTest extends UnitTest
     }
 
     /**
-     * Should give the fallback string when old input is not present
+     * Should give the fallback string when old input is not present.
      */
     public function testOldInputOrWithoutOldInput()
     {

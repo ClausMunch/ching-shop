@@ -2,12 +2,11 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
-use Illuminate\Http\Response;
-use Illuminate\Contracts\View\View;
+use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-
-use ChingShop\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StaticController extends Controller
@@ -20,7 +19,8 @@ class StaticController extends Controller
 
     /**
      * ProductController constructor.
-     * @param ViewFactory $viewFactory
+     *
+     * @param ViewFactory     $viewFactory
      * @param ResponseFactory $responseFactory
      */
     public function __construct(
@@ -33,6 +33,7 @@ class StaticController extends Controller
 
     /**
      * @param string $path
+     *
      * @return View|Response
      */
     public function pageAction(string $path)
@@ -43,11 +44,12 @@ class StaticController extends Controller
             return $this->makeStaticView($slug);
         }
 
-        throw new NotFoundHttpException;
+        throw new NotFoundHttpException();
     }
 
     /**
      * @param string $name
+     *
      * @return bool
      */
     private function staticViewExists(string $name): bool
@@ -57,6 +59,7 @@ class StaticController extends Controller
 
     /**
      * @param string $name
+     *
      * @return \Illuminate\Contracts\View\View
      */
     private function makeStaticView(string $name): View
@@ -66,6 +69,7 @@ class StaticController extends Controller
 
     /**
      * @param string $name
+     *
      * @return string
      */
     private function staticViewName(string $name): string

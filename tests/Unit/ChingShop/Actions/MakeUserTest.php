@@ -2,22 +2,17 @@
 
 namespace Testing\Unit\ChingShop\Action;
 
-use ChingShop\User\User;
-use Testing\Unit\UnitTest;
-
-use Mockery;
-use Mockery\MockInterface;
-
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
 use ChingShop\Actions\MakeUser;
-
 use ChingShop\User\Role;
-use ChingShop\Validation\ValidationInterface;
+use ChingShop\User\User;
 use ChingShop\Validation\ValidationFailure;
-
+use ChingShop\Validation\ValidationInterface;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Mockery;
+use Mockery\MockInterface;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\UnitTest;
 
 class MakeUserTest extends UnitTest
 {
@@ -34,7 +29,7 @@ class MakeUserTest extends UnitTest
     private $role;
 
     /**
-     * Set up MakeUser action with mock validator
+     * Set up MakeUser action with mock validator.
      */
     public function setUp()
     {
@@ -52,7 +47,7 @@ class MakeUserTest extends UnitTest
     }
 
     /**
-     * Should be able to make a staff user
+     * Should be able to make a staff user.
      */
     public function testCanMakeStaffUser()
     {
@@ -69,7 +64,7 @@ class MakeUserTest extends UnitTest
     }
 
     /**
-     * User password should be hashed
+     * User password should be hashed.
      */
     public function testHashesPassword()
     {
@@ -86,7 +81,7 @@ class MakeUserTest extends UnitTest
     }
 
     /**
-     * Should reject if validator fails to validate
+     * Should reject if validator fails to validate.
      */
     public function testRejectsInvalidParams()
     {
@@ -110,6 +105,7 @@ class MakeUserTest extends UnitTest
 
     /**
      * @param $password
+     *
      * @return string|\Testing\Generator\string
      */
     private function mockPasswordHashing($password)
@@ -118,18 +114,19 @@ class MakeUserTest extends UnitTest
         $this->hasher->shouldReceive('make')
             ->with($password)
             ->andReturn($mockHash);
+
         return $mockHash;
     }
 
     /**
      * @param string $email
      * @param string $password
-     * @param bool $pass
+     * @param bool   $pass
      */
     private function mockValidation(
-        string $email    = '',
+        string $email = '',
         string $password = '',
-        bool   $pass     = true
+        bool   $pass = true
     ) {
         $this->validation->expects($this->atLeastOnce())
             ->method('passes')
@@ -142,7 +139,7 @@ class MakeUserTest extends UnitTest
     }
 
     /**
-     * Expect a user to be added to the staff role
+     * Expect a user to be added to the staff role.
      */
     private function expectStaffRoleAssociation()
     {

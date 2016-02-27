@@ -2,12 +2,11 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
+use ChingShop\Http\Middleware\ForceSecure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
-use ChingShop\Http\Middleware\ForceSecure;
+use Symfony\Component\HttpFoundation\HeaderBag;
 
 class ForceSecureTest extends MiddlewareTest
 {
@@ -18,7 +17,7 @@ class ForceSecureTest extends MiddlewareTest
     private $redirector;
 
     /**
-     * Create ForceSecure middleware with dependencies for each test
+     * Create ForceSecure middleware with dependencies for each test.
      */
     public function setUp()
     {
@@ -28,7 +27,7 @@ class ForceSecureTest extends MiddlewareTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -36,12 +35,12 @@ class ForceSecureTest extends MiddlewareTest
     }
 
     /**
-     * Should redirect a non-secure request to a secure route
+     * Should redirect a non-secure request to a secure route.
      */
     public function testRedirectsNonSecureRequestToSecure()
     {
         $passedOn = false;
-        $next = function(Request $passedRequest) use (&$passedOn) {
+        $next = function (Request $passedRequest) use (&$passedOn) {
             $this->assertSame($passedRequest, $this->request);
             $passedOn = true;
         };
@@ -69,12 +68,12 @@ class ForceSecureTest extends MiddlewareTest
     }
 
     /**
-     * Should do nothing with a secure request
+     * Should do nothing with a secure request.
      */
     public function testPassesSecureRequestToNextHandler()
     {
         $passedOn = false;
-        $next = function(Request $passedRequest) use (&$passedOn) {
+        $next = function (Request $passedRequest) use (&$passedOn) {
             $this->assertSame($passedRequest, $this->request);
             $passedOn = true;
         };

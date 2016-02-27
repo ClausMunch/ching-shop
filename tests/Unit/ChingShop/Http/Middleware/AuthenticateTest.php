@@ -2,11 +2,11 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Mockery\MockInterface;
-use Illuminate\Http\Request;
+use ChingShop\Http\Middleware\Authenticate;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
-use ChingShop\Http\Middleware\Authenticate;
+use Illuminate\Http\Request;
+use Mockery\MockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateTest extends MiddlewareTest
@@ -18,7 +18,7 @@ class AuthenticateTest extends MiddlewareTest
     private $guard;
 
     /**
-     * Initialise Authenticate middleware for each test
+     * Initialise Authenticate middleware for each test.
      */
     public function setUp()
     {
@@ -28,7 +28,7 @@ class AuthenticateTest extends MiddlewareTest
     }
 
     /**
-     * Sanity check that authenticate middleware can be instantiated
+     * Sanity check that authenticate middleware can be instantiated.
      */
     public function testCanInstantiate()
     {
@@ -36,12 +36,12 @@ class AuthenticateTest extends MiddlewareTest
     }
 
     /**
-     * Should pass an authenticated request to the next middleware
+     * Should pass an authenticated request to the next middleware.
      */
     public function testPassesOnAuthenticatedResponse()
     {
         $passedOn = false;
-        $next = function(Request $passedRequest) use (&$passedOn) {
+        $next = function (Request $passedRequest) use (&$passedOn) {
             $this->assertSame($passedRequest, $this->request);
             $passedOn = true;
         };
@@ -55,11 +55,11 @@ class AuthenticateTest extends MiddlewareTest
     }
 
     /**
-     * Should give a 401 for an unauthenticated AJAX request
+     * Should give a 401 for an unauthenticated AJAX request.
      */
     public function testGives401ForUnauthenticatedAjax()
     {
-        $next = function() {};
+        $next = function () {};
 
         $this->requestIsAuthenticated(false);
         $this->requestIsAjax(true);
@@ -72,11 +72,11 @@ class AuthenticateTest extends MiddlewareTest
     }
 
     /**
-     * Should redirect to login page for unauthenticated general request
+     * Should redirect to login page for unauthenticated general request.
      */
     public function testRedirectsToLoginForUnauthenticatedRequest()
     {
-        $next = function() {};
+        $next = function () {};
 
         $this->requestIsAuthenticated(false);
         $this->requestIsAjax(false);

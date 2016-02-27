@@ -2,11 +2,10 @@
 
 namespace ChingShop\Actions;
 
-use ChingShop\User\User;
 use ChingShop\User\Role;
-
-use ChingShop\Validation\ValidationInterface;
+use ChingShop\User\User;
 use ChingShop\Validation\ValidationFailure;
+use ChingShop\Validation\ValidationInterface;
 use Illuminate\Contracts\Hashing\Hasher;
 
 class MakeUser
@@ -23,13 +22,13 @@ class MakeUser
     /** @var array */
     private $validationRules = [
         'email'    => 'required|email',
-        'password' => 'required|min:8|max:127'
+        'password' => 'required|min:8|max:127',
     ];
 
     /**
      * @param ValidationInterface $validation
-     * @param Hasher $hasher
-     * @param Role $roleResource
+     * @param Hasher              $hasher
+     * @param Role                $roleResource
      */
     public function __construct(ValidationInterface $validation, Hasher $hasher, Role $roleResource)
     {
@@ -41,9 +40,11 @@ class MakeUser
     /**
      * @param string $email
      * @param string $password
-     * @param bool $isStaff
-     * @return User
+     * @param bool   $isStaff
+     *
      * @throws ValidationFailure
+     *
+     * @return User
      */
     public function make(string $email, string $password, bool $isStaff): User
     {
@@ -51,7 +52,7 @@ class MakeUser
             throw new ValidationFailure();
         }
 
-        $user = new User;
+        $user = new User();
         $user->email = $email;
         $user->password = $this->hasher->make($password);
 
@@ -66,6 +67,7 @@ class MakeUser
     /**
      * @param $email
      * @param $password
+     *
      * @return bool
      */
     private function validate(string $email, string $password): bool

@@ -2,16 +2,16 @@
 
 namespace Testing\Unit\ChingShop\Http;
 
-use Testing\Unit\UnitTest;
 use ChingShop\Http\Kernel;
-use Mockery\MockInterface;
-use Illuminate\Routing\Router;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Routing\Router;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 
 class KernelTest extends UnitTest
 {
     /**
-     * Sanity test for instantiating HTTP Kernel
+     * Sanity test for instantiating HTTP Kernel.
      */
     public function testCanInstantiate()
     {

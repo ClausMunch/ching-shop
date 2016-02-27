@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 /**
- * Class ForceSecure
- * @package ChingShop\Http\Middleware
- * Redirect non-secure requests to secure version
+ * Class ForceSecure.
  */
 class ForceSecure
 {
@@ -27,8 +25,9 @@ class ForceSecure
     /**
      * Handle an incoming request.
      *
-     * @param  Request  $request
-     * @param  Closure  $next
+     * @param Request $request
+     * @param Closure $next
+     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
@@ -41,6 +40,7 @@ class ForceSecure
                 true
             );
         }
+
         return $next($request);
     }
 }

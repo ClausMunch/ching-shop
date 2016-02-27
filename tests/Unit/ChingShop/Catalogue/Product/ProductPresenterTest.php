@@ -2,14 +2,12 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use Mockery\MockInterface;
-
-use Testing\Unit\UnitTest;
-use Testing\Unit\Behaviour\MocksModel;
-
-use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
+use ChingShop\Http\View\Staff\HttpCrud;
+use Mockery\MockInterface;
+use Testing\Unit\Behaviour\MocksModel;
+use Testing\Unit\UnitTest;
 
 class ProductPresenterTest extends UnitTest
 {
@@ -22,7 +20,7 @@ class ProductPresenterTest extends UnitTest
     private $product;
 
     /**
-     * Initialise product presenter with mock product
+     * Initialise product presenter with mock product.
      */
     public function setUp()
     {
@@ -32,7 +30,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testCanInstantiate()
     {
@@ -47,7 +45,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should simply give underlying product SKU
+     * Should simply give underlying product SKU.
      */
     public function testPassesProductSKU()
     {
@@ -57,7 +55,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should limit product name length to < 100 characters
+     * Should limit product name length to < 100 characters.
      */
     public function testLimitsNameLength()
     {
@@ -65,13 +63,13 @@ class ProductPresenterTest extends UnitTest
         $this->mockModelAttribute('name', $productName);
 
         $this->assertSame(
-            mb_strimwidth($productName, 0, 100) . '...',
+            mb_strimwidth($productName, 0, 100).'...',
             $this->productPresenter->name()
         );
     }
 
     /**
-     * Should simply give underlying product SKU
+     * Should simply give underlying product SKU.
      */
     public function testPassesID()
     {
@@ -81,7 +79,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should simply give underlying product isStored
+     * Should simply give underlying product isStored.
      */
     public function testPassesIsStored()
     {
@@ -91,7 +89,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should have CRUD route prefix
+     * Should have CRUD route prefix.
      */
     public function testCrudRoutePrefix()
     {
@@ -102,7 +100,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should use SKU for CRUD ID
+     * Should use SKU for CRUD ID.
      */
     public function testCrudIDIsSKU()
     {

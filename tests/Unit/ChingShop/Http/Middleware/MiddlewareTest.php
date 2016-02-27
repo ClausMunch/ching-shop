@@ -2,11 +2,10 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Testing\Unit\UnitTest;
-use Mockery\MockInterface;
-use Illuminate\Http\Request;
-
 use ChingShop\User\User;
+use Illuminate\Http\Request;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 
 abstract class MiddlewareTest extends UnitTest
 {
@@ -14,7 +13,7 @@ abstract class MiddlewareTest extends UnitTest
     protected $request;
 
     /**
-     * Initialise Authenticate middleware for each test
+     * Initialise Authenticate middleware for each test.
      */
     public function setUp()
     {
@@ -42,6 +41,7 @@ abstract class MiddlewareTest extends UnitTest
             ->shouldReceive('user')
             ->zeroOrMoreTimes()
             ->andReturn($user);
+
         return $user;
     }
 }

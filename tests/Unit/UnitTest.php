@@ -2,20 +2,18 @@
 
 namespace Testing\Unit;
 
-use Testing\TestCase;
-
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
 use Testing\Generator\GeneratesValues;
+use Testing\TestCase;
 
 abstract class UnitTest extends TestCase
 {
     use GeneratesValues;
 
     /**
-     * Close Mockery
+     * Close Mockery.
      */
     public function tearDown()
     {
@@ -26,6 +24,7 @@ abstract class UnitTest extends TestCase
 
     /**
      * @param string $className
+     *
      * @return MockInterface
      */
     protected function mockery(string $className): MockInterface
@@ -35,6 +34,7 @@ abstract class UnitTest extends TestCase
 
     /**
      * @param string $className
+     *
      * @return MockObject
      */
     protected function makeMock(string $className): MockObject
@@ -47,10 +47,11 @@ abstract class UnitTest extends TestCase
     /**
      * Allow a mock object to present a "fluent interface" of chained method
      * calls that returns a given value at the end
-     * Works with magic method calls and real method calls
+     * Works with magic method calls and real method calls.
+     *
      * @param MockObject $mockObj
-     * @param string $finalMethod
-     * @param mixed $returnValue
+     * @param string     $finalMethod
+     * @param mixed      $returnValue
      */
     protected function mockDemeterChain(
         MockObject $mockObj,
@@ -62,6 +63,7 @@ abstract class UnitTest extends TestCase
             ->method($this->callback(
                 function (string $methodName) use (&$lastCall) {
                     $lastCall = $methodName;
+
                     return true;
                 }
             ))
@@ -77,6 +79,7 @@ abstract class UnitTest extends TestCase
                     if ($lastCall === '__call') {
                         return $arg === $finalMethod ? $returnValue : $mockObj;
                     }
+
                     return $lastCall === $finalMethod ? $returnValue : $mockObj;
                 }
             );

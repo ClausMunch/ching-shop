@@ -24,11 +24,13 @@ class IlluminateValidation implements ValidationInterface
     /**
      * @param array $testData
      * @param array $rules
+     *
      * @return bool
      */
     public function passes(array $testData, array $rules): bool
     {
         $this->validation = $this->factory->make($testData, $rules);
+
         return $this->validation->passes();
     }
 
@@ -40,6 +42,7 @@ class IlluminateValidation implements ValidationInterface
         if (!isset($this->validation)) {
             return [];
         }
+
         return $this->validation->messages();
     }
 }

@@ -4,8 +4,6 @@ namespace ChingShop\Http\Controllers\Staff;
 
 use ChingShop\Http\Controllers\Controller;
 
-use ChingShop\Http\Requests;
-
 class DashboardController extends Controller
 {
     /**
@@ -17,7 +15,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Display PHP info output
+     * Display PHP info output.
      */
     public function getPhpInfo()
     {

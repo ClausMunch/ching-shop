@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
-
 use ChingShop\User\Role;
 use ChingShop\User\User;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRoleUserTable extends Migration
 {
@@ -46,8 +45,8 @@ class CreateRoleUserTable extends Migration
     public function down()
     {
         Schema::table($this->tableName, function (Blueprint $table) {
-            $table->dropForeign($this->tableName . '_role_id_foreign');
-            $table->dropForeign($this->tableName . '_user_id_foreign');
+            $table->dropForeign($this->tableName.'_role_id_foreign');
+            $table->dropForeign($this->tableName.'_user_id_foreign');
         });
         Schema::drop($this->tableName);
     }

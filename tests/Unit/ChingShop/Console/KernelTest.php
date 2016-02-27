@@ -2,16 +2,16 @@
 
 namespace Testing\Unit\ChingShop\Console;
 
-use Testing\Unit\UnitTest;
-use Mockery\MockInterface;
 use ChingShop\Console\Kernel;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 
 class KernelTest extends UnitTest
 {
     /**
-     * Sanity check that console kernel can be instantiated
+     * Sanity check that console kernel can be instantiated.
      */
     public function testCanInstantiate()
     {

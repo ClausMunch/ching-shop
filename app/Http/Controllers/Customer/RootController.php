@@ -2,11 +2,10 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
+use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-
-use ChingShop\Http\Controllers\Controller;
-use ChingShop\Catalogue\Product\ProductRepository;
 
 class RootController extends Controller
 {
@@ -21,9 +20,10 @@ class RootController extends Controller
 
     /**
      * ProductController constructor.
+     *
      * @param ProductRepository $productRepository
-     * @param ViewFactory $viewFactory
-     * @param ResponseFactory $responseFactory
+     * @param ViewFactory       $viewFactory
+     * @param ResponseFactory   $responseFactory
      */
     public function __construct(
         ProductRepository $productRepository,
@@ -44,6 +44,7 @@ class RootController extends Controller
             $this->productRepository->presentLatest(8),
             4
         );
+
         return $this->viewFactory->make('welcome', compact('productColumns'));
     }
 }

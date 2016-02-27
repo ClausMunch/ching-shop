@@ -2,17 +2,14 @@
 
 namespace Testing\Unit\ChingShop\Http\View;
 
-use Testing\Unit\UnitTest;
-
-use Mockery\MockInterface;
-
-use Illuminate\Routing\Router;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\Routing\UrlGenerator;
-
 use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Http\View\Staff\LocationComposer;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Router;
+use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\UnitTest;
 
 class LocationComposerTest extends UnitTest
 {
@@ -26,7 +23,7 @@ class LocationComposerTest extends UnitTest
     private $urlGenerator;
 
     /**
-     * Initialise location composer with mock dependencies
+     * Initialise location composer with mock dependencies.
      */
     public function setUp()
     {
@@ -42,7 +39,7 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Sanity check can instantiate
+     * Sanity check can instantiate.
      */
     public function testConstruct()
     {
@@ -53,7 +50,7 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Should bind the composer into the view
+     * Should bind the composer into the view.
      */
     public function testCompose()
     {
@@ -63,14 +60,14 @@ class LocationComposerTest extends UnitTest
         $view->expects($this->once())
             ->method('with')
             ->with([
-                'location' => $this->locationComposer
+                'location' => $this->locationComposer,
             ]);
 
         $this->locationComposer->compose($view);
     }
 
     /**
-     * Should get the location name from the router
+     * Should get the location name from the router.
      */
     public function testName()
     {
@@ -82,7 +79,7 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Should return true if name is exact match
+     * Should return true if name is exact match.
      */
     public function testIs()
     {
@@ -94,13 +91,13 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Should return true if name is included in current route name
+     * Should return true if name is included in current route name.
      */
     public function testIsIn()
     {
         $routeParts = [
             $this->generator()->anyString(),
-            $this->generator()->anyString()
+            $this->generator()->anyString(),
         ];
 
         $this->router->shouldReceive('currentRouteName')
@@ -111,13 +108,13 @@ class LocationComposerTest extends UnitTest
 
     /**
      * Should give 'active' if the given location
-     * is in the current location
+     * is in the current location.
      */
     public function testPutActive()
     {
         $routeParts = [
             $this->generator()->anyString(),
-            $this->generator()->anyString()
+            $this->generator()->anyString(),
         ];
 
         $this->router->shouldReceive('currentRouteName')
@@ -131,7 +128,7 @@ class LocationComposerTest extends UnitTest
 
     /**
      * Should give the given string
-     * if given location is in the current location
+     * if given location is in the current location.
      */
     public function testPutIfIs()
     {
@@ -157,7 +154,7 @@ class LocationComposerTest extends UnitTest
 
     /**
      * Should use the URL generate to generate a Show action HREF
-     * for a crud resource
+     * for a crud resource.
      */
     public function testShowHrefFor()
     {
@@ -170,7 +167,7 @@ class LocationComposerTest extends UnitTest
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
             ->with(
-                $crudRoutePrefix . 'show',
+                $crudRoutePrefix.'show',
                 $crudID
             )
             ->andReturn($URL);
@@ -183,7 +180,7 @@ class LocationComposerTest extends UnitTest
 
     /**
      * Should give 'PUT' for an existing crud resource
-     * and 'POST' for a new one
+     * and 'POST' for a new one.
      */
     public function testPersistMethodFor()
     {
@@ -205,7 +202,7 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Should use the store route with no ID for a new resource
+     * Should use the store route with no ID for a new resource.
      */
     public function testPersistActionForNewResource()
     {
@@ -216,7 +213,7 @@ class LocationComposerTest extends UnitTest
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
-            ->with($crudRoutePrefix . 'store')
+            ->with($crudRoutePrefix.'store')
             ->andReturn($URL);
 
         $this->assertSame(
@@ -226,7 +223,7 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * Should use the update route with an ID for an existing resource
+     * Should use the update route with an ID for an existing resource.
      */
     public function testPersistActionForExistingResource()
     {
@@ -241,7 +238,7 @@ class LocationComposerTest extends UnitTest
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
             ->with(
-                $crudRoutePrefix . 'update',
+                $crudRoutePrefix.'update',
             $crudID
             )
             ->andReturn($URL);

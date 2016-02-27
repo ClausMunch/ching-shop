@@ -25,6 +25,7 @@ interface Generator
 
     /**
      * @param string $unwanted
+     *
      * @return string
      */
     public function anyStringOtherThan(string $unwanted): string;
@@ -46,6 +47,7 @@ interface Generator
 
     /**
      * @param array $options
+     *
      * @return mixed
      */
     public function anyOneOf(array $options);

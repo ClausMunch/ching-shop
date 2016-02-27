@@ -50,7 +50,7 @@ return [
 
         'local-public' => [
             'driver' => 'local',
-            'root'   => public_path('filesystem')
+            'root'   => public_path('filesystem'),
         ],
 
         'ftp' => [

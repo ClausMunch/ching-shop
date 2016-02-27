@@ -1,7 +1,7 @@
 <?php
 
-use ChingShop\Image\Image;
 use ChingShop\Catalogue\Product\Product;
+use ChingShop\Image\Image;
 
 class ProductsTableSeeder extends Seed
 {
@@ -20,15 +20,15 @@ class ProductsTableSeeder extends Seed
     }
 
     /**
-     * Create a fake product
+     * Create a fake product.
      */
     private function seedProduct()
     {
         $product = Product::create([
-            'name' => ucfirst($this->faker()->words(5, true)),
-            'sku'  => mb_strtoupper($this->faker()->lexify('?????')),
-            'slug' => $this->faker()->slug(),
-            'description' => $this->faker()->paragraph
+            'name'        => ucfirst($this->faker()->words(5, true)),
+            'sku'         => mb_strtoupper($this->faker()->lexify('?????')),
+            'slug'        => $this->faker()->slug(),
+            'description' => $this->faker()->paragraph,
         ]);
 
         $imagesIDs = [];
@@ -49,7 +49,7 @@ class ProductsTableSeeder extends Seed
                 'url'      => sprintf(
                     '%s/%s/%s',
                     self::IMAGE_URL,
-                    $this->faker()->numberBetween(0,10),
+                    $this->faker()->numberBetween(0, 10),
                     $this->faker()->unique()->word
                 ),
                 'alt_text' => $this->faker()->words(3, true),

@@ -2,16 +2,15 @@
 
 namespace ChingShop\Providers;
 
-use Illuminate\Support\ServiceProvider;
-
-use Laracasts\Generators\GeneratorsServiceProvider;
-
 use ChingShop\Http\View\ReplyComposer;
+use Illuminate\Support\ServiceProvider;
+use Laracasts\Generators\GeneratorsServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
+     *
      * @return void
      */
     public function boot()

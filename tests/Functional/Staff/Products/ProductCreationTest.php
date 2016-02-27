@@ -9,7 +9,7 @@ class ProductCreationTest extends ProductTest
     use StaffUser;
 
     /**
-     * Should be able to load the products index page
+     * Should be able to load the products index page.
      */
     public function testIndex()
     {
@@ -19,7 +19,7 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should be able to load the create product form
+     * Should be able to load the create product form.
      */
     public function testCreate()
     {
@@ -30,12 +30,12 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should be able to store a product
+     * Should be able to store a product.
      */
     public function testStoreProduct()
     {
         $productName = 'Foobar Product';
-        $productSKU  = 'NICE_SKU';
+        $productSKU = 'NICE_SKU';
         $productSlug = 'nice-slug';
 
         $this->actingAs($this->staffUser())
@@ -50,7 +50,7 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should give error messages if name or SKU are missing
+     * Should give error messages if name or SKU are missing.
      */
     public function testRequiredFieldErrorMessages()
     {
@@ -63,7 +63,7 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should preserve previous input if returning to form
+     * Should preserve previous input if returning to form.
      */
     public function testOldInputIsPreserved()
     {
@@ -80,7 +80,7 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should not be able to make a product with an existing SKU
+     * Should not be able to make a product with an existing SKU.
      */
     public function testCantCreateSameSKUTwice()
     {

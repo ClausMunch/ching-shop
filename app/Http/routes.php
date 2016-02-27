@@ -12,7 +12,7 @@ Route::group(['middleware' => ['web']], function () {
         function () {
             Route::get('{id}/{slug}', [
                 'as'   => 'view',
-                'uses' => 'ProductController@viewAction'
+                'uses' => 'ProductController@viewAction',
             ]);
         }
     );
@@ -45,12 +45,12 @@ Route::group(['middleware' => ['web']], function () {
             'middleware' => [
                 'auth',
                 'staff',
-            ]
+            ],
         ],
         function () {
             Route::get('dashboard', [
                 'uses' => 'Staff\DashboardController@getIndex',
-                'as'   => 'staff.dashboard'
+                'as'   => 'staff.dashboard',
             ]);
             Route::resource('products', 'Staff\ProductController');
             Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
@@ -65,18 +65,18 @@ Route::group(['middleware' => ['web']], function () {
         function () {
             Route::get('cards', [
                 'as'   => 'customer.cards',
-                'uses' => 'CategoriesController@viewAction'
+                'uses' => 'CategoriesController@viewAction',
             ]);
             Route::get('{path}', [
                 'uses' => 'StaticController@pageAction',
-                'as'   => 'customer.static'
+                'as'   => 'customer.static',
             ]);
         }
     );
 
     Route::get('/', [
         'uses'       => 'Customer\RootController@getIndex',
-        'middleware' => 'customer'
+        'middleware' => 'customer',
     ]);
 
     Route::get('home', 'Customer\RootController@getIndex');
