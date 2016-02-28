@@ -2,15 +2,13 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use Illuminate\Support\Collection;
-use Mockery\MockInterface;
-
-use Testing\Unit\UnitTest;
-use Testing\Unit\Behaviour\MocksModel;
-
-use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
+use ChingShop\Http\View\Staff\HttpCrud;
+use Illuminate\Support\Collection;
+use Mockery\MockInterface;
+use Testing\Unit\Behaviour\MocksModel;
+use Testing\Unit\UnitTest;
 
 class ProductPresenterTest extends UnitTest
 {
@@ -82,7 +80,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should give the underlying product slug
+     * Should give the underlying product slug.
      */
     public function testPassesSlug()
     {
@@ -92,7 +90,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should give the underlying product description
+     * Should give the underlying product description.
      */
     public function testPassesDescription()
     {
@@ -102,7 +100,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should give the underlying product images
+     * Should give the underlying product images.
      */
     public function testPassesImages()
     {
@@ -112,7 +110,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * mainImage() should give the product's first image
+     * mainImage() should give the product's first image.
      */
     public function testMainImageIsFirstImage()
     {
@@ -122,7 +120,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * otherImages() should give all but the first image
+     * otherImages() should give all but the first image.
      */
     public function testOtherImagesIsAllButFirstImage()
     {
@@ -135,7 +133,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Location parts should be the product's ID and slug
+     * Location parts should be the product's ID and slug.
      */
     public function testGivesProductIdAndSlugForLocationParts()
     {
@@ -154,7 +152,7 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should have a route prefix
+     * Should have a route prefix.
      */
     public function testRoutePrefix()
     {

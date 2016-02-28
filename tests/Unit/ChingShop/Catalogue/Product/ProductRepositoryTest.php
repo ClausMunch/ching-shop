@@ -146,7 +146,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should give an empty presentation if the SKU does not exist
+     * Should give an empty presentation if the SKU does not exist.
      */
     public function testPresentsEmptyIfSKUNotFound()
     {
@@ -162,7 +162,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to get a presenter-decorated product by ID
+     * Should be able to get a presenter-decorated product by ID.
      */
     public function testPresentByID()
     {
@@ -179,7 +179,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should give an empty presentation if the ID does not exist
+     * Should give an empty presentation if the ID does not exist.
      */
     public function testPresentsEmptyIfIDNotFound()
     {
@@ -195,7 +195,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should load the product for the given SKU
+     * Should load the product for the given SKU.
      */
     public function testMustLoadBySKU()
     {
@@ -211,7 +211,7 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Should delete the product with the given SKU
+     * Should delete the product with the given SKU.
      */
     public function testDeleteBySku()
     {

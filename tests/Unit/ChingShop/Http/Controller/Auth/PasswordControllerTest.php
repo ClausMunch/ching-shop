@@ -2,8 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Auth;
 
-use Testing\Unit\UnitTest;
 use ChingShop\Http\Controllers\Auth\PasswordController;
+use Testing\Unit\UnitTest;
 
 class PasswordControllerTest extends UnitTest
 {
@@ -11,15 +11,15 @@ class PasswordControllerTest extends UnitTest
     private $passwordController;
 
     /**
-     * Set up password controller for each test
+     * Set up password controller for each test.
      */
     public function setUp()
     {
-        $this->passwordController = new PasswordController;
+        $this->passwordController = new PasswordController();
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {

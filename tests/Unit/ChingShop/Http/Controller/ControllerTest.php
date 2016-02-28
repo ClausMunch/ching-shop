@@ -2,11 +2,10 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller;
 
-use Illuminate\Contracts\Routing\ResponseFactory;
 use ChingShop\Catalogue\Product\ProductRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
 use Testing\Unit\UnitTest;
 
 abstract class ControllerTest extends UnitTest
@@ -21,7 +20,7 @@ abstract class ControllerTest extends UnitTest
     private $productRepository;
 
     /**
-     * Unset view factory after each test
+     * Unset view factory after each test.
      */
     public function tearDown()
     {
@@ -38,6 +37,7 @@ abstract class ControllerTest extends UnitTest
         if (empty($this->viewFactory)) {
             $this->viewFactory = $this->makeMock(ViewFactory::class);
         }
+
         return $this->viewFactory;
     }
 
@@ -49,6 +49,7 @@ abstract class ControllerTest extends UnitTest
         if (empty($this->responseFactory)) {
             $this->responseFactory = $this->makeMock(ResponseFactory::class);
         }
+
         return $this->responseFactory;
     }
 
@@ -62,6 +63,7 @@ abstract class ControllerTest extends UnitTest
                 ProductRepository::class
             );
         }
+
         return $this->productRepository;
     }
 }
