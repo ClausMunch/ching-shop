@@ -2,8 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
-use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 use ChingShop\Http\Controllers\Customer\CategoriesController;
+use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class CategoriesControllerTest extends ControllerTest
 {
@@ -11,7 +11,7 @@ class CategoriesControllerTest extends ControllerTest
     private $categoriesController;
 
     /**
-     * Set up categories controller for each test
+     * Set up categories controller for each test.
      */
     public function setUp()
     {
@@ -23,7 +23,7 @@ class CategoriesControllerTest extends ControllerTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -34,7 +34,7 @@ class CategoriesControllerTest extends ControllerTest
     }
 
     /**
-     * Should retrieve products and pass to view factory
+     * Should retrieve products and pass to view factory.
      */
     public function testViewAction()
     {
@@ -50,7 +50,7 @@ class CategoriesControllerTest extends ControllerTest
             ->with(
                 'customer.product.category',
                 [
-                    'products' => $products
+                    'products' => $products,
                 ]
             )
             ->willReturn($view);

@@ -2,11 +2,10 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
+use ChingShop\Catalogue\Product\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
 use Testing\Unit\UnitTest;
-use ChingShop\Catalogue\Product\Product;
 
 class ProductTest extends UnitTest
 {
@@ -31,7 +30,7 @@ class ProductTest extends UnitTest
     }
 
     /**
-     * Should have a belongs-to-many relationship with Images
+     * Should have a belongs-to-many relationship with Images.
      */
     public function testImages()
     {
@@ -41,7 +40,7 @@ class ProductTest extends UnitTest
     }
 
     /**
-     * Should be able to attach images
+     * Should be able to attach images.
      */
     public function testAttachImages()
     {
@@ -51,7 +50,7 @@ class ProductTest extends UnitTest
 
         $imageIDs = [
             $this->generator()->anyInteger(),
-            $this->generator()->anyInteger()
+            $this->generator()->anyInteger(),
         ];
 
         $relationship->expects($this->once())

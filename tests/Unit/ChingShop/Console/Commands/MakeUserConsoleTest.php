@@ -2,19 +2,17 @@
 
 namespace Testing\Unit\ChingShop\Console\Commands;
 
+use ChingShop\Console\Commands\MakeUser;
+use ChingShop\User\Role;
+use ChingShop\User\User;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Hashing\Hasher;
-use Symfony\Component\Console\Tester\CommandTester;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
-use ChingShop\User\User;
-use ChingShop\User\Role;
+use Symfony\Component\Console\Tester\CommandTester;
 use Testing\Unit\UnitTest;
-use ChingShop\Console\Commands\MakeUser;
 
 /**
- * Class MakeUserTest
- * @package Testing\Unit\ChingShop\Console\Commands
+ * Class MakeUserTest.
  */
 class MakeUserConsoleTest extends UnitTest
 {
@@ -34,12 +32,12 @@ class MakeUserConsoleTest extends UnitTest
     private $roleResource;
 
     /**
-     * Create MakeUser instance for each test
+     * Create MakeUser instance for each test.
      */
     public function setUp()
     {
-        $this->makeUser = new MakeUser;
-        $this->container = new Container;
+        $this->makeUser = new MakeUser();
+        $this->container = new Container();
         Container::setInstance($this->container);
         $this->makeUser->setLaravel($this->container);
 
@@ -60,7 +58,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -68,7 +66,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Should make a user with the given email
+     * Should make a user with the given email.
      */
     public function testUsesGivenEmail()
     {
@@ -88,7 +86,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Should generate an email address if none given
+     * Should generate an email address if none given.
      */
     public function testGeneratesEmailAddressIfNoneGiven()
     {
@@ -99,7 +97,7 @@ class MakeUserConsoleTest extends UnitTest
                     'email',
                     $this->matchesRegularExpression(
                         '/[a-zA-Z0-9]+@ching-shop.com/'
-                    )
+                    ),
                 ],
                 $this->anything() // password
             );
@@ -109,7 +107,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Should make a user with the given password
+     * Should make a user with the given password.
      */
     public function testUsesGivenPassword()
     {
@@ -134,7 +132,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Should generate a password if none given
+     * Should generate a password if none given.
      */
     public function testGeneratesPasswordIfNoneGiven()
     {
@@ -155,7 +153,7 @@ class MakeUserConsoleTest extends UnitTest
     }
 
     /**
-     * Should create a staff user if the --staff option is given
+     * Should create a staff user if the --staff option is given.
      */
     public function testCreatesStaffUserWithFlag()
     {
@@ -169,12 +167,12 @@ class MakeUserConsoleTest extends UnitTest
 
         $tester = new CommandTester($this->makeUser);
         $tester->execute([
-            '--staff' => true
+            '--staff' => true,
         ]);
     }
 
     /**
-     * Should create a non-staff user if the --staff option is not given
+     * Should create a non-staff user if the --staff option is not given.
      */
     public function testDoesNotCreateStaffUserWithoutFlag()
     {

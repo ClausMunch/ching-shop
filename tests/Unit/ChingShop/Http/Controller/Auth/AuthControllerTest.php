@@ -2,8 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Auth;
 
-use Testing\Unit\UnitTest;
 use ChingShop\Http\Controllers\Auth\AuthController;
+use Testing\Unit\UnitTest;
 
 class AuthControllerTest extends UnitTest
 {
@@ -11,15 +11,15 @@ class AuthControllerTest extends UnitTest
     private $authController;
 
     /**
-     * Set up auth controller for each test
+     * Set up auth controller for each test.
      */
     public function setUp()
     {
-        $this->authController = new AuthController;
+        $this->authController = new AuthController();
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {

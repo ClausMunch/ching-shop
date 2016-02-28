@@ -2,10 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Http\Controllers\Customer\ProductController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ProductControllerTest extends ControllerTest
@@ -14,7 +13,7 @@ class ProductControllerTest extends ControllerTest
     private $productController;
 
     /**
-     * Set up product controller with mock dependencies for each test
+     * Set up product controller with mock dependencies for each test.
      */
     public function setUp()
     {
@@ -26,7 +25,7 @@ class ProductControllerTest extends ControllerTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -37,7 +36,7 @@ class ProductControllerTest extends ControllerTest
     }
 
     /**
-     * Should retrieve the product and pass to view factory
+     * Should retrieve the product and pass to view factory.
      */
     public function testViewAction()
     {
@@ -63,7 +62,7 @@ class ProductControllerTest extends ControllerTest
             ->with(
                 'customer.product.view',
                 [
-                    'product' => $product
+                    'product' => $product,
                 ]
             )
             ->willReturn($view);
@@ -74,7 +73,7 @@ class ProductControllerTest extends ControllerTest
     }
 
     /**
-     * Should throw an exception if no product exists with the given id
+     * Should throw an exception if no product exists with the given id.
      */
     public function testThrowsExceptionIfProductDoesNotExist()
     {
@@ -96,7 +95,7 @@ class ProductControllerTest extends ControllerTest
     }
 
     /**
-     * Should redirect to the correct url if the id and sku don't match
+     * Should redirect to the correct url if the id and sku don't match.
      */
     public function testRedirectsOnIdSkuMisMatch()
     {
@@ -123,7 +122,7 @@ class ProductControllerTest extends ControllerTest
                 'product::view',
                 [
                     'id'   => $id,
-                    'slug' => $correctSlug
+                    'slug' => $correctSlug,
                 ],
                 301
             )
