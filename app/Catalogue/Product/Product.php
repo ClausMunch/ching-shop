@@ -39,6 +39,9 @@ class Product extends Model
     /** @var array */
     protected $guarded = ['id'];
 
+    /** @var BelongsToMany */
+    private $imagesRelationship;
+
     /**
      * @return bool
      */
@@ -52,7 +55,8 @@ class Product extends Model
      */
     public function images(): BelongsToMany
     {
-        return $this->belongsToMany(Image::class);
+        return isset($this->imagesRelationship) ?
+            $this->imagesRelationship : $this->belongsToMany(Image::class);
     }
 
     /**
@@ -61,5 +65,13 @@ class Product extends Model
     public function attachImages(array $imageIDs)
     {
         $this->images()->attach($imageIDs);
+    }
+
+    /**
+     * @param BelongsToMany $relationship
+     */
+    public function setImagesRelationship(BelongsToMany $relationship)
+    {
+        $this->imagesRelationship = $relationship;
     }
 }

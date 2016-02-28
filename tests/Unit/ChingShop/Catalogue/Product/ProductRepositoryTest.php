@@ -146,6 +146,86 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
+     * Should give an empty presentation if the SKU does not exist
+     */
+    public function testPresentsEmptyIfSKUNotFound()
+    {
+        $this->productResource->shouldReceive('where->with->first')
+            ->atLeast()->once()
+            ->andReturn(null);
+
+        $presenter = $this->productRepository->presentBySKU('foobar');
+
+        $this->assertEmpty($presenter->ID());
+        $this->assertEmpty($presenter->SKU());
+        $this->assertEmpty($presenter->slug());
+    }
+
+    /**
+     * Should be able to get a presenter-decorated product by ID
+     */
+    public function testPresentByID()
+    {
+        $id = $this->generator()->anyInteger();
+
+        $product = $this->makeMock(Product::class);
+        $this->productResource->shouldReceive('where->with->first')
+            ->atLeast()->once()
+            ->andReturn($product);
+
+        $presenter = $this->productRepository->presentByID($id);
+
+        $this->assertPresenterIsPresenting($presenter, $product);
+    }
+
+    /**
+     * Should give an empty presentation if the ID does not exist
+     */
+    public function testPresentsEmptyIfIDNotFound()
+    {
+        $this->productResource->shouldReceive('where->with->first')
+            ->atLeast()->once()
+            ->andReturn(null);
+
+        $presenter = $this->productRepository->presentByID(0);
+
+        $this->assertEmpty($presenter->ID());
+        $this->assertEmpty($presenter->SKU());
+        $this->assertEmpty($presenter->slug());
+    }
+
+    /**
+     * Should load the product for the given SKU
+     */
+    public function testMustLoadBySKU()
+    {
+        $sku = $this->generator()->anyString();
+        $product = $this->makeMock(Product::class);
+        $this->productResource->shouldReceive('where->limit->first')
+            ->atLeast()->once()
+            ->andReturn($product);
+
+        $loaded = $this->productRepository->mustLoadBySKU($sku);
+
+        $this->assertSame($product, $loaded);
+    }
+
+    /**
+     * Should delete the product with the given SKU
+     */
+    public function testDeleteBySku()
+    {
+        $sku = $this->generator()->anyString();
+        $this->productResource->shouldReceive('where->limit->first->delete')
+            ->atLeast()->once()
+            ->andReturn(true);
+
+        $deleted = $this->productRepository->deleteBySku($sku);
+
+        $this->assertTrue($deleted);
+    }
+
+    /**
      * @param ProductPresenter $presenter
      * @param MockObject       $mockProduct
      */

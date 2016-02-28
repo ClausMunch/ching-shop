@@ -2,12 +2,15 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
+use Illuminate\Support\Collection;
+use Mockery\MockInterface;
+
+use Testing\Unit\UnitTest;
+use Testing\Unit\Behaviour\MocksModel;
+
+use ChingShop\Http\View\Staff\HttpCrud;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Http\View\Staff\HttpCrud;
-use Mockery\MockInterface;
-use Testing\Unit\Behaviour\MocksModel;
-use Testing\Unit\UnitTest;
 
 class ProductPresenterTest extends UnitTest
 {
@@ -76,6 +79,89 @@ class ProductPresenterTest extends UnitTest
         $id = $this->generator()->anyInteger();
         $this->mockModelAttribute('id', $id);
         $this->assertSame($id, $this->productPresenter->ID());
+    }
+
+    /**
+     * Should give the underlying product slug
+     */
+    public function testPassesSlug()
+    {
+        $slug = $this->generator()->anySlug();
+        $this->mockModelAttribute('slug', $slug);
+        $this->assertSame($slug, $this->productPresenter->slug());
+    }
+
+    /**
+     * Should give the underlying product description
+     */
+    public function testPassesDescription()
+    {
+        $description = $this->generator()->anyString();
+        $this->mockModelAttribute('description', $description);
+        $this->assertSame($description, $this->productPresenter->description());
+    }
+
+    /**
+     * Should give the underlying product images
+     */
+    public function testPassesImages()
+    {
+        $images = ['foo image'];
+        $this->mockModelAttribute('images', $images);
+        $this->assertSame($images, $this->productPresenter->images());
+    }
+
+    /**
+     * mainImage() should give the product's first image
+     */
+    public function testMainImageIsFirstImage()
+    {
+        $images = new Collection(['foo image', 'bar image']);
+        $this->mockModelAttribute('images', $images);
+        $this->assertSame($images[0], $this->productPresenter->mainImage());
+    }
+
+    /**
+     * otherImages() should give all but the first image
+     */
+    public function testOtherImagesIsAllButFirstImage()
+    {
+        $images = new Collection(['foo', 'bar', 'another']);
+        $this->mockModelAttribute('images', $images);
+        $this->assertEquals(
+            ['bar', 'another'],
+            array_values($this->productPresenter->otherImages()->all())
+        );
+    }
+
+    /**
+     * Location parts should be the product's ID and slug
+     */
+    public function testGivesProductIdAndSlugForLocationParts()
+    {
+        $id = $this->generator()->anyInteger();
+        $this->mockModelAttribute('id', $id);
+        $slug = $this->generator()->anySlug();
+        $this->mockModelAttribute('slug', $slug);
+
+        $this->assertEquals(
+            [
+                'ID'   => $id,
+                'slug' => $slug,
+            ],
+            $this->productPresenter->locationParts()
+        );
+    }
+
+    /**
+     * Should have a route prefix
+     */
+    public function testRoutePrefix()
+    {
+        $this->assertEquals(
+            'product::',
+            $this->productPresenter->routePrefix()
+        );
     }
 
     /**
