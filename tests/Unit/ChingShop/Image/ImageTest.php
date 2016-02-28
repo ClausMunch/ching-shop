@@ -2,8 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Image;
 
-use Testing\Unit\UnitTest;
 use ChingShop\Image\Image;
+use Testing\Unit\UnitTest;
 
 class ImageTest extends UnitTest
 {
@@ -11,15 +11,15 @@ class ImageTest extends UnitTest
     private $image;
 
     /**
-     * Set up image for each test
+     * Set up image for each test.
      */
     public function setUp()
     {
-        $this->image = new Image;
+        $this->image = new Image();
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -27,7 +27,7 @@ class ImageTest extends UnitTest
     }
 
     /**
-     * Is internal should be true if the image has a filename
+     * Is internal should be true if the image has a filename.
      */
     public function testIsInternal()
     {
