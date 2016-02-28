@@ -2,10 +2,10 @@
 
 namespace Testing\Unit\ChingShop\Console;
 
+use Mockery\MockInterface;
 use ChingShop\Console\Kernel;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
-use Mockery\MockInterface;
 use Testing\Unit\UnitTest;
 
 class KernelTest extends UnitTest

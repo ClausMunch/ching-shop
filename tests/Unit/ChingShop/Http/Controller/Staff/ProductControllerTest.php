@@ -2,32 +2,22 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
+use Mockery\MockInterface;
+
+use ChingShop\Image\ImageRepository;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Catalogue\Product\ProductRepository;
-use ChingShop\Http\Controllers\Staff\ProductController;
 use ChingShop\Http\Requests\PersistProductRequest;
-use ChingShop\Image\ImageRepository;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use ChingShop\Http\Controllers\Staff\ProductController;
+use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
+
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Mockery\MockInterface;
-use Testing\Unit\UnitTest;
 
-class ProductControllerTest extends UnitTest
+class ProductControllerTest extends ControllerTest
 {
     /** @var ProductController */
     private $productController;
-
-    /** @var ProductRepository|MockInterface */
-    private $productRepository;
-
-    /** @var ViewFactory|MockInterface */
-    private $viewFactory;
-
-    /** @var ResponseFactory|MockInterface */
-    private $responseFactory;
 
     /** @var ImageRepository|MockInterface */
     private $imageRepository;
@@ -39,15 +29,12 @@ class ProductControllerTest extends UnitTest
     {
         parent::setUp();
 
-        $this->productRepository = $this->mockery(ProductRepository::class);
-        $this->viewFactory = $this->mockery(ViewFactory::class);
-        $this->responseFactory = $this->mockery(ResponseFactory::class);
         $this->imageRepository = $this->mockery(ImageRepository::class);
 
         $this->productController = new ProductController(
-            $this->productRepository,
-            $this->viewFactory,
-            $this->responseFactory,
+            $this->productRepository(),
+            $this->viewFactory(),
+            $this->responseFactory(),
             $this->imageRepository
         );
     }
@@ -69,8 +56,9 @@ class ProductControllerTest extends UnitTest
     public function testIndex()
     {
         $products = [];
-        $this->productRepository->shouldReceive('presentLatest')
-            ->andReturn($products);
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('presentLatest')
+            ->willReturn($products);
 
         $view = $this->expectViewToBeMadeWith(
             'staff.products.index',
@@ -88,8 +76,9 @@ class ProductControllerTest extends UnitTest
     public function testCreate()
     {
         $product = $this->mockery(ProductPresenter::class);
-        $this->productRepository->shouldReceive('presentEmpty')
-            ->andReturn($product);
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('presentEmpty')
+            ->willReturn($product);
 
         $view = $this->expectViewToBeMadeWith(
             'staff.products.create',
@@ -114,9 +103,10 @@ class ProductControllerTest extends UnitTest
         $this->mockNewImageUpload($storeProductRequest);
 
         $product = $this->mockery(Product::class);
-        $this->productRepository->shouldReceive('create')
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('create')
             ->with($requestData)
-            ->andReturn($product);
+            ->willReturn($product);
 
         $sku = $this->generator()->anyString();
         $product->shouldReceive('getAttribute')
@@ -124,12 +114,13 @@ class ProductControllerTest extends UnitTest
             ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
-        $this->responseFactory->shouldReceive('redirectToRoute')
+        $this->responseFactory()->expects($this->atLeastOnce())
+            ->method('redirectToRoute')
             ->with(
                 'staff.products.show',
                 ['sku' => $sku]
             )
-            ->andReturn($redirect);
+            ->willReturn($redirect);
 
         $response = $this->productController->store($storeProductRequest);
 
@@ -144,9 +135,10 @@ class ProductControllerTest extends UnitTest
         $sku = $this->generator()->anyString();
         $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
-        $this->productRepository->shouldReceive('presentBySKU')
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('presentBySKU')
             ->with($sku)
-            ->andReturn($product);
+            ->willReturn($product);
 
         $view = $this->expectViewToBeMadeWith(
             'staff.products.show',
@@ -166,9 +158,10 @@ class ProductControllerTest extends UnitTest
         $sku = $this->generator()->anyString();
         $product = $this->mockery(ProductPresenter::class);
         $product->shouldReceive('isStored')->andReturn(true);
-        $this->productRepository->shouldReceive('presentBySKU')
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('presentBySKU')
             ->with($sku)
-            ->andReturn($product);
+            ->willReturn($product);
 
         $view = $this->expectViewToBeMadeWith(
             'staff.products.edit',
@@ -194,21 +187,23 @@ class ProductControllerTest extends UnitTest
         $sku = $this->generator()->anyString();
 
         $product = $this->mockery(Product::class);
-        $this->productRepository->shouldReceive('update')
+        $this->productRepository()->expects($this->atLeastOnce())
+            ->method('update')
             ->with($sku, $requestData)
-            ->andReturn($product);
+            ->willReturn($product);
 
         $product->shouldReceive('getAttribute')
             ->with('sku')
             ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
-        $this->responseFactory->shouldReceive('redirectToRoute')
+        $this->responseFactory()->expects($this->atLeastOnce())
+            ->method('redirectToRoute')
             ->with(
                 'staff.products.show',
                 ['sku' => $sku]
             )
-            ->andReturn($redirect);
+            ->willReturn($redirect);
 
         $this->mockNewImageUpload($storeProductRequest);
 
@@ -238,10 +233,10 @@ class ProductControllerTest extends UnitTest
         array $bindData
     ): MockInterface {
         $view = $this->makeMockView();
-        $this->viewFactory->shouldReceive('make')
+        $this->viewFactory()->expects($this->atLeastOnce())
+            ->method('make')
             ->with($viewName, $bindData)
-            ->andReturn($view);
-
+            ->willReturn($view);
         return $view;
     }
 

@@ -48,7 +48,7 @@ class ProductController extends Controller
         if (!$product->ID()) {
             throw new NotFoundHttpException();
         }
-        if (!$product->slug() === $slug) {
+        if ($product->slug() !== $slug) {
             return $this->responseFactory->redirectToRoute(
                 'product::view',
                 [

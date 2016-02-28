@@ -24,14 +24,6 @@ class MakeUser extends Command
     protected $description = 'Make a new user.';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
@@ -51,13 +43,13 @@ class MakeUser extends Command
             $this->warn("Setting randomly generated password `{$password}`");
         }
 
-        $user = new User();
+        $user = $this->userResource();
         $user->setAttribute('email', $email);
         $user->setAttribute('password', bcrypt($password));
         $user->save();
 
         if ($this->option('staff')) {
-            $staffRole = (new Role())->mustFindByName(Role::STAFF);
+            $staffRole = $this->roleResource()->mustFindByName(Role::STAFF);
             $user->roles()->sync([$staffRole->id]);
             $this->warn('Granted staff role to new user');
         }
@@ -73,5 +65,21 @@ class MakeUser extends Command
     private function generateEmailAddress()
     {
         return strtolower(str_random(16)).'@ching-shop.com';
+    }
+
+    /**
+     * @return User
+     */
+    private function userResource(): User
+    {
+        return app(User::class);
+    }
+
+    /**
+     * @return Role
+     */
+    private function roleResource(): Role
+    {
+        return app(Role::class);
     }
 }

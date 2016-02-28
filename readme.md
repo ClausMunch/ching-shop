@@ -3,6 +3,7 @@ Ching Shop
 
 [![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg)](https://travis-ci.org/hughgrigg/ching-shop)
 [![StyleCI](https://styleci.io/repos/44910529/shield)](https://styleci.io/repos/44910529)
+[![Coverage Status](https://coveralls.io/repos/github/hughgrigg/ching-shop/badge.svg?branch=master)](https://coveralls.io/github/hughgrigg/ching-shop?branch=master)
 
 Source code for [ching-shop.com](https://www.ching-shop.com).
 
