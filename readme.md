@@ -45,3 +45,9 @@ https://www.ching-shop.dev
 You may want to trust the local certificate, for example with
 [these instructions](https://stackoverflow.com/questions/7580508/getting-chrome-to-accept-self-signed-localhost-certificate/18602774#18602774)
 for Chrome.
+
+## Unit test coverage
+
+```bash
+phpunit --testsuite unit --coverage-html
+```
