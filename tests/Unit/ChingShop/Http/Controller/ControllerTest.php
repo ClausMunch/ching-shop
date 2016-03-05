@@ -2,11 +2,13 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller;
 
-use ChingShop\Catalogue\Product\ProductRepository;
+use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+
 use Testing\Unit\UnitTest;
+use ChingShop\Catalogue\Product\ProductRepository;
 
 abstract class ControllerTest extends UnitTest
 {
@@ -65,5 +67,13 @@ abstract class ControllerTest extends UnitTest
         }
 
         return $this->productRepository;
+    }
+
+    /**
+     * @return View|MockObject
+     */
+    protected function makeMockView()
+    {
+        return $this->makeMock(View::class);
     }
 }
