@@ -24,7 +24,7 @@ class StaticControllerTest extends ControllerTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
@@ -35,7 +35,7 @@ class StaticControllerTest extends ControllerTest
     }
 
     /**
-     * Should be able to get a static page
+     * Should be able to get a static page.
      */
     public function testPageAction()
     {

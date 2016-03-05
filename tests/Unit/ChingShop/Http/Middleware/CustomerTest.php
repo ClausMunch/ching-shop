@@ -2,9 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Illuminate\Http\Request;
-
 use ChingShop\Http\Middleware\Customer;
+use Illuminate\Http\Request;
 
 class CustomerTest extends MiddlewareTest
 {
@@ -18,7 +17,7 @@ class CustomerTest extends MiddlewareTest
     {
         parent::setUp();
 
-        $this->customerMiddleware = new Customer;
+        $this->customerMiddleware = new Customer();
     }
 
     /**

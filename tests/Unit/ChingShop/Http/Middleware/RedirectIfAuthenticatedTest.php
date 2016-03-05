@@ -2,12 +2,11 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use Illuminate\Http\Request;
+use ChingShop\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
-use ChingShop\Http\Middleware\RedirectIfAuthenticated;
 
 class RedirectIfAuthenticatedTest extends MiddlewareTest
 {

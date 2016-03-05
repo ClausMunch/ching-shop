@@ -2,15 +2,14 @@
 
 namespace Testing\Unit\ChingShop\Http\Customer\View;
 
-use Illuminate\Routing\Router;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\Routing\UrlGenerator;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
-
-use Testing\Unit\UnitTest;
-use ChingShop\Http\View\Customer\Viewable;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Http\View\Customer\LocationComposer;
+use ChingShop\Http\View\Customer\Viewable;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Contracts\View\View;
+use Illuminate\Routing\Router;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\UnitTest;
 
 class LocationComposerTest extends UnitTest
 {
