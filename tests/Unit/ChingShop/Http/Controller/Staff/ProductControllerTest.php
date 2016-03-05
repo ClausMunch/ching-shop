@@ -2,14 +2,15 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Http\Controllers\Staff\ProductController;
-use ChingShop\Http\Requests\PersistProductRequest;
-use ChingShop\Image\ImageRepository;
+use Mockery\MockInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Mockery\MockInterface;
+
+use ChingShop\Image\ImageRepository;
+use ChingShop\Catalogue\Product\Product;
+use ChingShop\Catalogue\Product\ProductPresenter;
+use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Http\Controllers\Staff\ProductController;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ProductControllerTest extends ControllerTest
@@ -215,7 +216,7 @@ class ProductControllerTest extends ControllerTest
     /**
      * @return View|MockInterface
      */
-    private function makeMockView(): MockInterface
+    private function makeMockeryView(): MockInterface
     {
         return $this->mockery(View::class);
     }
@@ -230,7 +231,7 @@ class ProductControllerTest extends ControllerTest
         string $viewName,
         array $bindData
     ): MockInterface {
-        $view = $this->makeMockView();
+        $view = $this->makeMockeryView();
         $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
             ->with($viewName, $bindData)

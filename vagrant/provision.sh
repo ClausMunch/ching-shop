@@ -12,6 +12,10 @@ if ! grep -q 'gulp --completion' ~/.bashrc; then
     echo 'eval "$(gulp --completion=bash)"' >> ~/.bashrc
 fi
 
+if ! grep -q 'EDITOR' ~/.bashrc; then
+    echo "export EDITOR=vim" >> ~/.bashrc
+fi
+
 function appSetup
 {
     cd ~/ching-shop

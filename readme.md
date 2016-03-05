@@ -49,5 +49,5 @@ for Chrome.
 ## Unit test coverage
 
 ```bash
-phpunit --testsuite unit --coverage-html
+phpunit --testsuite unit --coverage-html build
 ```
