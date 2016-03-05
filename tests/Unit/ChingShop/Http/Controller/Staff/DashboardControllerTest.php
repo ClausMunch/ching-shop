@@ -2,9 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use Illuminate\View\View;
-
 use ChingShop\Http\Controllers\Staff\DashboardController;
+use Illuminate\View\View;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class DashboardControllerTest extends ControllerTest
@@ -19,7 +18,7 @@ class DashboardControllerTest extends ControllerTest
     {
         parent::setUp();
 
-        $this->dashboardController = new DashboardController;
+        $this->dashboardController = new DashboardController();
     }
 
     /**
