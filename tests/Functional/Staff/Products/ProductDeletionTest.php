@@ -2,8 +2,9 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use ChingShop\Catalogue\Product\Product;
 use Testing\Functional\Staff\StaffUser;
+use ChingShop\Catalogue\Product\Product;
+use Symfony\Component\DomCrawler\Field\FileFormField;
 
 class ProductDeletionTest extends ProductTest
 {
@@ -48,5 +49,26 @@ class ProductDeletionTest extends ProductTest
 
         $this->assertEquals($product->id, $deletedProduct->id);
         $this->assertTrue($deletedProduct->trashed());
+    }
+
+    /**
+     * Should be able to detach an image from a product.
+     */
+    public function testDetachProductImage()
+    {
+        $product = $this->makeProduct();
+        $image = $this->attachImageToProduct($product);
+        $showRoute = route('staff.products.show', ['SKU' => $product->sku]);
+
+        $this->actingAs($this->staffUser())
+            ->visit($showRoute)
+            ->seePageIs($showRoute)
+            ->see($image->url)
+            ->see($image->alt_text);
+
+        $this->press('Remove')
+            ->seePageIs($showRoute)
+            ->dontSee($image->url)
+            ->dontSee($image->alt_text);
     }
 }

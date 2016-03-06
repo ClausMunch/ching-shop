@@ -2,14 +2,15 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
+use Mockery\MockInterface;
+use ChingShop\Image\Image;
+use Illuminate\Contracts\View\View;
+use ChingShop\Image\ImageRepository;
+use Illuminate\Http\RedirectResponse;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Http\Controllers\Staff\ProductController;
 use ChingShop\Http\Requests\PersistProductRequest;
-use ChingShop\Image\ImageRepository;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Mockery\MockInterface;
+use ChingShop\Http\Controllers\Staff\ProductController;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ProductControllerTest extends ControllerTest
@@ -210,6 +211,52 @@ class ProductControllerTest extends ControllerTest
         );
 
         $this->assertSame($redirect, $response);
+    }
+
+    /**
+     * Should be able to make an image detachment request.
+     */
+    public function testDetachProductImage()
+    {
+        $productId = $this->generator()->anyInteger();
+        $imageId = $this->generator()->anyInteger();
+
+        $product = $this->mockery(Product::class);
+        $this->productRepository()->expects($this->once())
+            ->method('mustLoadById')
+            ->with($productId)
+            ->willReturn($product);
+
+        $image = $this->makeMock(Image::class);
+        $this->imageRepository->shouldReceive('mustLoadById')
+            ->once()
+            ->with($imageId)
+            ->andReturn($image);
+
+        $this->imageRepository->shouldReceive('detachImageFromProduct')
+            ->once()
+            ->with($image, $product);
+
+        $sku = $this->generator()->anyString();
+        $product->shouldReceive('getAttribute')
+            ->with('sku')
+            ->andReturn($sku);
+
+        $redirect = $this->mockery(RedirectResponse::class);
+        $this->responseFactory()->expects($this->atLeastOnce())
+            ->method('redirectToRoute')
+            ->with(
+                'staff.products.show',
+                ['sku' => $sku]
+            )
+            ->willReturn($redirect);
+
+        $response = $this->productController->detachProductImage(
+            $productId,
+            $imageId
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class, $response);
     }
 
     /**

@@ -150,6 +150,21 @@ class ProductController extends Controller
     }
 
     /**
+     * @param int $productId
+     * @param int $imageId
+     * @return RedirectResponse
+     */
+    public function detachProductImage(int $productId, int $imageId)
+    {
+        $product = $this->productRepository->mustLoadById($productId);
+        $image = $this->imageRepository->mustLoadById($imageId);
+
+        $this->imageRepository->detachImageFromProduct($image, $product);
+
+        return $this->redirectToShowProduct($product->sku);
+    }
+
+    /**
      * @param $name
      * @param array $bindData
      *

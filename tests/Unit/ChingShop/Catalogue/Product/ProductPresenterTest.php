@@ -4,7 +4,7 @@ namespace Testing\Unit\ChingShop\Catalogue\Product;
 
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Http\View\Staff\HttpCrud;
+use ChingShop\Http\View\Staff\HttpCrudInterface;
 use Illuminate\Support\Collection;
 use Mockery\MockInterface;
 use Testing\Unit\Behaviour\MocksModel;
@@ -40,7 +40,7 @@ class ProductPresenterTest extends UnitTest
             $this->productPresenter
         );
         $this->assertInstanceOf(
-            HttpCrud::class,
+            HttpCrudInterface::class,
             $this->productPresenter
         );
     }
@@ -76,7 +76,7 @@ class ProductPresenterTest extends UnitTest
     {
         $id = $this->generator()->anyInteger();
         $this->mockModelAttribute('id', $id);
-        $this->assertSame($id, $this->productPresenter->ID());
+        $this->assertSame($id, $this->productPresenter->id());
     }
 
     /**
@@ -152,17 +152,6 @@ class ProductPresenterTest extends UnitTest
     }
 
     /**
-     * Should have a route prefix.
-     */
-    public function testRoutePrefix()
-    {
-        $this->assertEquals(
-            'product::',
-            $this->productPresenter->routePrefix()
-        );
-    }
-
-    /**
      * Should simply give underlying product isStored.
      */
     public function testPassesIsStored()
@@ -179,7 +168,7 @@ class ProductPresenterTest extends UnitTest
     {
         $this->assertInternalType(
             'string',
-            $this->productPresenter->crudRoutePrefix()
+            $this->productPresenter->routePath()
         );
     }
 

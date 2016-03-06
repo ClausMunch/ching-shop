@@ -1,15 +1,15 @@
 <?php
 
-namespace Testing\Unit\ChingShop\Http\View;
+namespace Testing\Unit\ChingShop\Http\View\Staff;
 
-use ChingShop\Http\View\Staff\HttpCrud;
-use ChingShop\Http\View\Staff\LocationComposer;
-use Illuminate\Contracts\Routing\UrlGenerator;
-use Illuminate\Contracts\View\View;
-use Illuminate\Routing\Router;
-use Mockery\MockInterface;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;
+use Mockery\MockInterface;
+use Illuminate\Routing\Router;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use ChingShop\Http\View\Staff\LocationComposer;
+use ChingShop\Http\View\Staff\HttpCrudInterface;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class LocationComposerTest extends UnitTest
 {
@@ -159,17 +159,15 @@ class LocationComposerTest extends UnitTest
     public function testShowHrefFor()
     {
         $crud = $this->makeMockCrudResource();
-        $crudRoutePrefix = $this->generator()->anyString();
-        $crud->shouldReceive('crudRoutePrefix')->andReturn($crudRoutePrefix);
+        $routePath = $this->generator()->anyString();
+        $crud->shouldReceive('routePath')->andReturn($routePath);
+
         $crudID = $this->generator()->anyInteger();
-        $crud->shouldReceive('crudID')->andReturn($crudID);
+        $crud->shouldReceive('crudID')->once()->andReturn($crudID);
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
-            ->with(
-                $crudRoutePrefix.'show',
-                $crudID
-            )
+            ->with("{$routePath}.show", $crudID)
             ->andReturn($URL);
 
         $this->assertSame(
@@ -208,12 +206,12 @@ class LocationComposerTest extends UnitTest
     {
         $newCrud = $this->makeMockCrudResource();
         $newCrud->shouldReceive('isStored')->andReturn(false);
-        $crudRoutePrefix = $this->generator()->anyString();
-        $newCrud->shouldReceive('crudRoutePrefix')->andReturn($crudRoutePrefix);
+        $routePath = $this->generator()->anyString();
+        $newCrud->shouldReceive('routePath')->andReturn($routePath);
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
-            ->with($crudRoutePrefix.'store')
+            ->with("{$routePath}.store")
             ->andReturn($URL);
 
         $this->assertSame(
@@ -229,18 +227,15 @@ class LocationComposerTest extends UnitTest
     {
         $existingCrud = $this->makeMockCrudResource();
         $existingCrud->shouldReceive('isStored')->andReturn(true);
-        $crudRoutePrefix = $this->generator()->anyString();
-        $existingCrud->shouldReceive('crudRoutePrefix')
-            ->andReturn($crudRoutePrefix);
+        $routePath = $this->generator()->anyString();
+        $existingCrud->shouldReceive('routePath')
+            ->andReturn($routePath);
         $crudID = $this->generator()->anyInteger();
         $existingCrud->shouldReceive('crudID')->andReturn($crudID);
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
-            ->with(
-                $crudRoutePrefix.'update',
-            $crudID
-            )
+            ->with("{$routePath}.update", $crudID)
             ->andReturn($URL);
 
         $this->assertSame(
@@ -250,10 +245,10 @@ class LocationComposerTest extends UnitTest
     }
 
     /**
-     * @return HttpCrud|MockInterface
+     * @return HttpCrudInterface|MockInterface
      */
     private function makeMockCrudResource(): MockInterface
     {
-        return $this->mockery(HttpCrud::class);
+        return $this->mockery(HttpCrudInterface::class);
     }
 }

@@ -21,6 +21,9 @@
                     <th>
                         Name
                     </th>
+                    <th>
+                        Images
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +36,16 @@
                         </td>
                         <td>
                             {{ $product->name() }}
+                        </td>
+                        <td class="product-index-images">
+                            @foreach($product->images() as $image)
+                                <img src="{{ $image->url() }}"
+                                     alt="{{ $image->alt_text }}"
+                                     class="img-responsive
+                                        img-rounded
+                                        staff-product-image
+                                     " />
+                            @endforeach
                         </td>
                     </tr>
                 @endforeach

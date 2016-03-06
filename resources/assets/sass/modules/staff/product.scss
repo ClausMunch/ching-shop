@@ -1,6 +1,27 @@
+.form-full-inline {
+  display: inline-block;
+}
+
+.staff-product-form {
+  background: $well-bg;
+  border-radius: $border-radius-large;
+  margin-right: 1.7em;
+
+  > .staff-product-image {
+    margin-right: .3em;
+  }
+}
+
 .staff-product-image {
   display: inline-block;
   height: auto;
   margin: 1em;
-  width: 256px;
+  width: 128px;
+}
+
+.product-index-images {
+  > .staff-product-image {
+    margin: .25em;
+    width: 64px;
+  }
 }
