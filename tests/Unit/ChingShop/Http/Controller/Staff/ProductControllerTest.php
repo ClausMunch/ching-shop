@@ -2,15 +2,15 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use Mockery\MockInterface;
-use ChingShop\Image\Image;
-use Illuminate\Contracts\View\View;
-use ChingShop\Image\ImageRepository;
-use Illuminate\Http\RedirectResponse;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Http\Requests\PersistProductRequest;
 use ChingShop\Http\Controllers\Staff\ProductController;
+use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Image\Image;
+use ChingShop\Image\ImageRepository;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Mockery\MockInterface;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ProductControllerTest extends ControllerTest

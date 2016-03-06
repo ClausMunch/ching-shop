@@ -2,14 +2,14 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use OutOfBoundsException;
-use ChingShop\Image\Image;
 use BadMethodCallException;
-use Illuminate\Database\Eloquent\Model;
 use ChingShop\Http\View\Customer\Viewable;
-use ChingShop\Http\View\Staff\RelaterInterface;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
+use ChingShop\Http\View\Staff\RelaterInterface;
+use ChingShop\Image\Image;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use OutOfBoundsException;
 
 class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
 {
@@ -138,8 +138,10 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
 
     /**
      * @param Model $related
-     * @return Relation
+     *
      * @throws OutOfBoundsException
+     *
+     * @return Relation
      */
     public function relationTo(Model $related): Relation
     {
@@ -151,11 +153,13 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
                 Product::class
             ));
         }
+
         return $this->product->{$this->relations[get_class($related)]}();
     }
 
     /**
      * @param Model $related
+     *
      * @return string
      */
     public function relationKeyTo(Model $related): string
@@ -167,6 +171,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
                 get_class($related)
             ));
         }
+
         return $this->relations[get_class($related)];
     }
 }

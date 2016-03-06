@@ -3,10 +3,10 @@
 namespace ChingShop\Image;
 
 use ChingShop\Catalogue\Product\Product;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Config\Repository as Config;
-use Symfony\Component\HttpFoundation\FileBag;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
 
 class ImageRepository
 {
@@ -32,6 +32,7 @@ class ImageRepository
 
     /**
      * @param int $imageId
+     *
      * @return Image
      */
     public function mustLoadById(int $imageId): Image
@@ -74,8 +75,9 @@ class ImageRepository
     }
 
     /**
-     * @param Image $image
+     * @param Image   $image
      * @param Product $product
+     *
      * @return int
      */
     public function detachImageFromProduct(Image $image, Product $product)

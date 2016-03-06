@@ -2,17 +2,17 @@
 
 namespace Testing\Unit\ChingShop\Image;
 
-use Mockery\MockInterface;
-use Testing\Unit\UnitTest;
+use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
-use Testing\Unit\Behaviour\MocksModel;
-use ChingShop\Catalogue\Product\Product;
 use Illuminate\Config\Repository as Config;
-use Symfony\Component\HttpFoundation\FileBag;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\FileBag;
+use Testing\Unit\Behaviour\MocksModel;
+use Testing\Unit\UnitTest;
 
 class ImageRepositoryTest extends UnitTest
 {

@@ -2,11 +2,11 @@
 
 namespace Testing\Unit\ChingShop\Validation;
 
-use Testing\Unit\UnitTest;
+use ChingShop\Validation\IlluminateValidation;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator;
-use ChingShop\Validation\IlluminateValidation;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\Unit\UnitTest;
 
 class IlluminateValidationTest extends UnitTest
 {
@@ -29,7 +29,7 @@ class IlluminateValidationTest extends UnitTest
     }
 
     /**
-     * Sanity check for instantiation
+     * Sanity check for instantiation.
      */
     public function testConstruct()
     {
