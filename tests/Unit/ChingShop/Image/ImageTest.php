@@ -31,7 +31,35 @@ class ImageTest extends UnitTest
      */
     public function testIsInternal()
     {
-        $this->image->filename = 'foo file';
+        $this->image->filename = $this->generator()->anySlug();
         $this->assertTrue($this->image->isInternal());
+    }
+
+    /**
+     * Should be able to get the URL for an external image.
+     */
+    public function testUrlForExternalImage()
+    {
+        $this->image->filename = '';
+        $this->image->url = $this->generator()->anySlug();
+        $this->assertSame($this->image->url, $this->image->url());
+    }
+
+    /**
+     * Sanity check filename method.
+     */
+    public function testFilename()
+    {
+        $this->image->filename = $this->generator()->anySlug();
+        $this->assertSame($this->image->filename, $this->image->filename());
+    }
+
+    /**
+     * Sanity check alt text method.
+     */
+    public function testAltText()
+    {
+        $this->image->alt_text = $this->generator()->anyString();
+        $this->assertSame($this->image->alt_text, $this->image->altText());
     }
 }

@@ -2,16 +2,17 @@
 
 namespace Testing\Unit\ChingShop\Image;
 
-use ChingShop\Catalogue\Product\Product;
+use Mockery\MockInterface;
+use Testing\Unit\UnitTest;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
-use Illuminate\Config\Repository as Config;
-use Mockery\MockInterface;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 use Testing\Unit\Behaviour\MocksModel;
-use Testing\Unit\UnitTest;
+use ChingShop\Catalogue\Product\Product;
+use Illuminate\Config\Repository as Config;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 class ImageRepositoryTest extends UnitTest
 {
@@ -50,6 +51,22 @@ class ImageRepositoryTest extends UnitTest
     public function testConstruct()
     {
         $this->assertInstanceOf(ImageRepository::class, $this->imageRepository);
+    }
+
+    /**
+     * Should be able to load an image by ID.
+     */
+    public function testMustLoadById()
+    {
+        $id = $this->generator()->anyInteger();
+        $image = $this->makeMock(Image::class);
+        $this->imageResource->shouldReceive('where->limit->first')
+            ->atLeast()->once()
+            ->andReturn($image);
+
+        $loaded = $this->imageRepository->mustLoadById($id);
+
+        $this->assertSame($image, $loaded);
     }
 
     /**
@@ -137,6 +154,33 @@ class ImageRepositoryTest extends UnitTest
             $imageBag,
             $product
         );
+    }
+
+    /**
+     * Should be able to detach and image from a product.
+     */
+    public function testDetachImageFromProduct()
+    {
+        $image = $this->imageResource;
+        $product = $this->makeMockProduct();
+
+        $image->shouldReceive('getAttribute')
+            ->atLeast()
+            ->once()
+            ->andReturn($this->generator()->anyInteger());
+
+        /** @var BelongsToMany|MockObject $imagesRelation */
+        $imagesRelation = $this->makeMock(BelongsToMany::class);
+
+        $product->shouldReceive('images')
+            ->once()
+            ->andReturn($imagesRelation);
+
+        $imagesRelation->expects($this->once())
+            ->method('detach')
+            ->with($image->id);
+
+        $this->imageRepository->detachImageFromProduct($image, $product);
     }
 
     /**

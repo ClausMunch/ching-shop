@@ -2,7 +2,7 @@
 
 namespace ChingShop\Http\View\Staff;
 
-interface HttpCrud
+interface HttpCrudInterface
 {
     /**
      * Whether this resource has already been persisted.
@@ -16,7 +16,7 @@ interface HttpCrud
      *
      * @return string
      */
-    public function crudRoutePrefix(): string;
+    public function routePath(): string;
 
     /**
      * Identifier used when persisting this resource.

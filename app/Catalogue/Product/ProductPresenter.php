@@ -2,14 +2,24 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use ChingShop\Http\View\Customer\Viewable;
-use ChingShop\Http\View\Staff\HttpCrud;
+use OutOfBoundsException;
 use ChingShop\Image\Image;
+use BadMethodCallException;
+use Illuminate\Database\Eloquent\Model;
+use ChingShop\Http\View\Customer\Viewable;
+use ChingShop\Http\View\Staff\RelaterInterface;
+use ChingShop\Http\View\Staff\HttpCrudInterface;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
-class ProductPresenter implements HttpCrud, Viewable
+class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
 {
     /** @var Product */
     private $product;
+
+    /** @var array */
+    private $relations = [
+        Image::class => 'images',
+    ];
 
     /**
      * @param Product $product
@@ -46,17 +56,25 @@ class ProductPresenter implements HttpCrud, Viewable
     /**
      * @return int
      */
-    public function ID(): int
+    public function id(): int
     {
         return (int) $this->product->id;
     }
 
     /**
+     * @return string: the routing prefix for this entity
+     */
+    public function routePrefix(): string
+    {
+        return 'product::';
+    }
+
+    /**
      * @return string
      */
-    public function crudRoutePrefix(): string
+    public function routePath(): string
     {
-        return 'staff.products.';
+        return 'staff.products';
     }
 
     /**
@@ -113,16 +131,42 @@ class ProductPresenter implements HttpCrud, Viewable
     public function locationParts(): array
     {
         return [
-            'ID'   => $this->ID(),
+            'ID'   => $this->id(),
             'slug' => $this->slug(),
         ];
     }
 
     /**
-     * @return string: the routing prefix for this entity
+     * @param Model $related
+     * @return Relation
+     * @throws OutOfBoundsException
      */
-    public function routePrefix(): string
+    public function relationTo(Model $related): Relation
     {
-        return 'product::';
+        $relationMethod = $this->relationKeyTo($related);
+        if (!method_exists($this->product, $relationMethod)) {
+            throw new BadMethodCallException(sprintf(
+                'No relation method for %s exists on %s',
+                get_class($related),
+                Product::class
+            ));
+        }
+        return $this->product->{$this->relations[get_class($related)]}();
+    }
+
+    /**
+     * @param Model $related
+     * @return string
+     */
+    public function relationKeyTo(Model $related): string
+    {
+        if (empty($this->relations[get_class($related)])) {
+            throw new OutOfBoundsException(sprintf(
+                'Unknown relation from %s to %s',
+                Product::class,
+                get_class($related)
+            ));
+        }
+        return $this->relations[get_class($related)];
     }
 }

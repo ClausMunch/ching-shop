@@ -53,6 +53,10 @@ Route::group(['middleware' => ['web']], function () {
                 'as'   => 'staff.dashboard',
             ]);
             Route::resource('products', 'Staff\ProductController');
+            Route::delete('product/{productId}/image/{imageId}', [
+                'uses' => 'Staff\ProductController@detachProductImage',
+                'as'   => 'staff.products.detach.images',
+            ]);
             Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
         }
     );

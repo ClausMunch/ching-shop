@@ -50,6 +50,26 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
+     * Should be able to go to a show product page.
+     */
+    public function testShowProduct()
+    {
+        $product = $this->makeProduct();
+        $showRoute = route('staff.products.show', [
+            'sku' => $product->sku
+        ]);
+
+        $this->actingAs($this->staffUser())
+            ->visit($showRoute)
+            ->seePageIs($showRoute)
+            ->see($product->sku)
+            ->see($product->name);
+
+        $response = $this->call('GET', $showRoute);
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    /**
      * Should give error messages if name or SKU are missing.
      */
     public function testRequiredFieldErrorMessages()

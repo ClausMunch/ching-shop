@@ -2,10 +2,11 @@
 
 namespace ChingShop\Http\View\Staff;
 
-use Illuminate\Contracts\Routing\UrlGenerator;
-use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Contracts\Routing\UrlGenerator;
 
 /**
  * Class LocationComposer
@@ -18,6 +19,7 @@ class LocationComposer
     const ROUTE_STORE = 'store';
     const ROUTE_SHOW = 'show';
     const ROUTE_DELETE = 'destroy';
+    const ROUTE_DETACH = 'detach';
 
     /** @var Router */
     private $router;
@@ -134,58 +136,80 @@ class LocationComposer
     }
 
     /**
-     * @param HttpCrud $crud
+     * @param HttpCrudInterface $crud
      *
      * @return string
      */
-    public function showHrefFor(HttpCrud $crud): string
+    public function showHrefFor(HttpCrudInterface $crud): string
     {
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix().self::ROUTE_SHOW,
+            implode('.', [$crud->routePath(), self::ROUTE_SHOW]),
             $crud->crudID()
         );
     }
 
     /**
-     * @param HttpCrud $crud
+     * @param HttpCrudInterface $crud
      *
      * @return string
      */
-    public function persistMethodFor(HttpCrud $crud): string
+    public function persistMethodFor(HttpCrudInterface $crud): string
     {
         return $crud->isStored() ?
             Request::METHOD_PUT : Request::METHOD_POST;
     }
 
     /**
-     * @param HttpCrud $crud
+     * @param HttpCrudInterface $crud
      *
      * @return string
      */
-    public function persistActionFor(HttpCrud $crud): string
+    public function persistActionFor(HttpCrudInterface $crud): string
     {
         if ($crud->isStored()) {
             return $this->urlGenerator->route(
-                $crud->crudRoutePrefix().self::ROUTE_UPDATE,
+                implode('.', [$crud->routePath(), self::ROUTE_UPDATE]),
                 $crud->crudID()
             );
         }
 
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix().self::ROUTE_STORE
+            implode('.', [$crud->routePath(), self::ROUTE_STORE])
         );
     }
 
     /**
-     * @param HttpCrud $crud
+     * @param HttpCrudInterface $crud
      *
      * @return string
      */
-    public function deleteActionFor(HttpCrud $crud): string
+    public function deleteActionFor(HttpCrudInterface $crud): string
     {
         return $this->urlGenerator->route(
-            $crud->crudRoutePrefix().self::ROUTE_DELETE,
+            implode('.', [$crud->routePath(), self::ROUTE_DELETE]),
             $crud->crudID()
+        );
+    }
+
+    /**
+     * @param RelaterInterface $relater
+     * @param Model $related
+     * @return string
+     */
+    public function detachActionFor(
+        RelaterInterface $relater,
+        Model $related
+    ): string {
+        return $this->urlGenerator->route(
+            implode('.', [
+                $relater->routePath(),
+                self::ROUTE_DETACH,
+                $relater->relationKeyTo($related)
+            ]),
+            [
+                'productId' => $relater->id(),
+                'imageId'   => $related->getAttribute('id')
+            ]
         );
     }
 

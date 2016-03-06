@@ -84,7 +84,7 @@ class ProductRepositoryTest extends UnitTest
         $emptyPresenter = $this->productRepository->presentEmpty();
         $this->assertSame('', $emptyPresenter->name());
         $this->assertSame('', $emptyPresenter->SKU());
-        $this->assertSame(0, $emptyPresenter->ID());
+        $this->assertSame(0, $emptyPresenter->id());
         $this->assertSame(false, $emptyPresenter->isStored());
     }
 
@@ -156,7 +156,7 @@ class ProductRepositoryTest extends UnitTest
 
         $presenter = $this->productRepository->presentBySKU('foobar');
 
-        $this->assertEmpty($presenter->ID());
+        $this->assertEmpty($presenter->id());
         $this->assertEmpty($presenter->SKU());
         $this->assertEmpty($presenter->slug());
     }
@@ -189,7 +189,7 @@ class ProductRepositoryTest extends UnitTest
 
         $presenter = $this->productRepository->presentByID(0);
 
-        $this->assertEmpty($presenter->ID());
+        $this->assertEmpty($presenter->id());
         $this->assertEmpty($presenter->SKU());
         $this->assertEmpty($presenter->slug());
     }
@@ -206,6 +206,22 @@ class ProductRepositoryTest extends UnitTest
             ->andReturn($product);
 
         $loaded = $this->productRepository->mustLoadBySKU($sku);
+
+        $this->assertSame($product, $loaded);
+    }
+
+    /**
+     * Should load the product for the given ID.
+     */
+    public function testMustLoadById()
+    {
+        $id = $this->generator()->anyInteger();
+        $product = $this->makeMock(Product::class);
+        $this->productResource->shouldReceive('where->limit->first')
+            ->atLeast()->once()
+            ->andReturn($product);
+
+        $loaded = $this->productRepository->mustLoadById($id);
 
         $this->assertSame($product, $loaded);
     }

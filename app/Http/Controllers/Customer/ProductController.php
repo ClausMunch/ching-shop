@@ -45,14 +45,14 @@ class ProductController extends Controller
     public function viewAction(int $ID, string $slug)
     {
         $product = $this->productRepository->presentByID($ID);
-        if (!$product->ID()) {
+        if (!$product->id()) {
             throw new NotFoundHttpException();
         }
         if ($product->slug() !== $slug) {
             return $this->responseFactory->redirectToRoute(
                 'product::view',
                 [
-                    'id'   => $product->ID(),
+                    'id'   => $product->id(),
                     'slug' => $product->slug(),
                 ],
                 301
