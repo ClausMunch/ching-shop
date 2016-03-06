@@ -9,12 +9,14 @@ interface RelaterInterface
 {
     /**
      * @param Model $related
+     *
      * @return Relation
      */
     public function relationTo(Model $related): Relation;
 
     /**
      * @param Model $related
+     *
      * @return string
      */
     public function relationKeyTo(Model $related): string;

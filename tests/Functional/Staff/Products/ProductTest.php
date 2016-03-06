@@ -2,9 +2,9 @@
 
 namespace Testing\Functional\Staff\Products;
 
+use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
 use Testing\Functional\FunctionalTest;
-use ChingShop\Catalogue\Product\Product;
 
 abstract class ProductTest extends FunctionalTest
 {
@@ -22,6 +22,7 @@ abstract class ProductTest extends FunctionalTest
 
     /**
      * @param Product $product
+     *
      * @return Image
      */
     protected function attachImageToProduct(Product $product): Image
@@ -31,6 +32,7 @@ abstract class ProductTest extends FunctionalTest
             'url'      => $this->generator()->anySlug(),
         ]);
         $product->images()->attach($image->id);
+
         return $image;
     }
 }

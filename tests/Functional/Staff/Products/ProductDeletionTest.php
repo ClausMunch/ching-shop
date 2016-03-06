@@ -2,9 +2,8 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use Testing\Functional\Staff\StaffUser;
 use ChingShop\Catalogue\Product\Product;
-use Symfony\Component\DomCrawler\Field\FileFormField;
+use Testing\Functional\Staff\StaffUser;
 
 class ProductDeletionTest extends ProductTest
 {

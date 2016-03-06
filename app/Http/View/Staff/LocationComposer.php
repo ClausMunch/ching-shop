@@ -2,11 +2,11 @@
 
 namespace ChingShop\Http\View\Staff;
 
-use Illuminate\Routing\Router;
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
-use Illuminate\Contracts\Routing\UrlGenerator;
 
 /**
  * Class LocationComposer
@@ -193,7 +193,8 @@ class LocationComposer
 
     /**
      * @param RelaterInterface $relater
-     * @param Model $related
+     * @param Model            $related
+     *
      * @return string
      */
     public function detachActionFor(
@@ -204,11 +205,11 @@ class LocationComposer
             implode('.', [
                 $relater->routePath(),
                 self::ROUTE_DETACH,
-                $relater->relationKeyTo($related)
+                $relater->relationKeyTo($related),
             ]),
             [
                 'productId' => $relater->id(),
-                'imageId'   => $related->getAttribute('id')
+                'imageId'   => $related->getAttribute('id'),
             ]
         );
     }

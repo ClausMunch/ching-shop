@@ -15,7 +15,7 @@ class UserTest extends UnitTest
      */
     public function setUp()
     {
-        $this->user = new User;
+        $this->user = new User();
     }
 
     /**
