@@ -23,6 +23,9 @@
         - php7.0-mcrypt
         - php7.0-mysql
         - php7.0-sqlite3
+        - php7.0-xml
+        - php7.0-mbstring
+        - php7.0-zip
         - sqlite3
         - mysql-server
         - mysql-client
@@ -180,6 +183,9 @@
 
     - npm: path=/var/www/ching-shop production=yes state=present
       become_user: www-data
+
+    - name: rebuild node-sass
+      shell: "npm rebuild node-sass"
 
     - name: run gulp tasks
       become_user: www-data
