@@ -83,7 +83,7 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
-     * Should show an error message if the slug is too short
+     * Should show an error message if the slug is too short.
      */
     public function testSlugFieldLengthErrorMessage()
     {

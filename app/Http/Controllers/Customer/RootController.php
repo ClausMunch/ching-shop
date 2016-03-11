@@ -2,10 +2,10 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
-use ChingShop\Support\Arr;
-use ChingShop\Http\Controllers\Controller;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Http\Controllers\Controller;
+use ChingShop\Support\Arr;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class RootController extends Controller
