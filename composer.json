@@ -32,10 +32,7 @@
         "psr-4": {
             "ChingShop\\": "app/",
             "Testing\\": "tests/"
-        },
-        "files": [
-            "app/functions.php"
-        ]
+        }
     },
     "autoload-dev": {
         "classmap": [

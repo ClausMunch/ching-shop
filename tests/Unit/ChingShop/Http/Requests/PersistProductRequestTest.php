@@ -62,9 +62,7 @@ class PersistProductRequestTest extends UnitTest
 
         $rules = $this->persistProductRequest->rules($this->httpRequest);
 
-        foreach ($rules as $ruleSet) {
-            $this->assertContains('unique:products', explode('|', $ruleSet));
-        }
+        $this->assertContains('unique:products', explode('|', $rules['name']));
     }
 
     /**

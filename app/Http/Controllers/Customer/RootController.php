@@ -2,9 +2,10 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
-use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Support\Arr;
 use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use ChingShop\Catalogue\Product\ProductRepository;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class RootController extends Controller
@@ -40,7 +41,7 @@ class RootController extends Controller
      */
     public function getIndex()
     {
-        $productColumns = \array_partition(
+        $productColumns = Arr::partition(
             $this->productRepository->presentLatest(8),
             4
         );

@@ -22,7 +22,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\ChingShop\User\Role[] $roles
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereName($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereEmail($value)
@@ -30,9 +29,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereUpdatedAt($value)
- *
  * @property string $deleted_at
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereDeletedAt($value)
  * @mixin \Eloquent
  */

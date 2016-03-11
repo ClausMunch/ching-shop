@@ -13,6 +13,7 @@
                class="form-control"
                id="name"
                name="name"
+               minlength="10"
                maxlength="255"
                required
                value="{{ $reply->oldInputOr('name', $product->name()) }}">
@@ -47,6 +48,7 @@
                class="form-control"
                id="slug"
                name="slug"
+               minlength="5"
                maxlength="128"
                required
                value="{{ $reply->oldInputOr('slug', $product->slug()) }}">
@@ -62,6 +64,11 @@
             Upload @if ($product->isStored()) new @endif images
         </label>
         <input type="file" name="new-image[]" id="new-image" multiple>
+        @foreach($reply->errorsFor('new-image.0') as $error)
+            <label class="help-block" for="new-image[]">
+                {{ $error }}
+            </label>
+        @endforeach
     </div>
 
     <hr>

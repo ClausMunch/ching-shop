@@ -6,6 +6,9 @@ use Illuminate\Http\Request as HttpRequest;
 
 class PersistProductRequest extends Request
 {
+    /** @var array */
+    protected $dontFlash = ['new-image.*'];
+
     const UPDATE_METHODS = [
         HttpRequest::METHOD_PUT,
         HttpRequest::METHOD_PATCH,
@@ -48,7 +51,7 @@ class PersistProductRequest extends Request
                 'slug',
                 $request
             ),
-//            'new-image.*' => 'image|max:5000', todo
+            'new-image.*' => 'image|max:5000',
         ];
     }
 
