@@ -51,7 +51,7 @@ class ImageRepository
     public function storeUploadedImage(UploadedFile $upload): Image
     {
         $newImage = $this->imageResource->create([
-            'filename' => uniqid() . $upload->getClientOriginalName(),
+            'filename' => uniqid().$upload->getClientOriginalName(),
         ]);
         $upload->move(
             $this->config->get('filesystems.disks.local-public.root')

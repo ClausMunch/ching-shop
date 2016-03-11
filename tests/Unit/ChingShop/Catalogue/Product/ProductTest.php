@@ -79,7 +79,7 @@ class ProductTest extends UnitTest
     }
 
     /**
-     * Should capitalise a given SKU
+     * Should capitalise a given SKU.
      */
     public function testCapitalisesSku()
     {
