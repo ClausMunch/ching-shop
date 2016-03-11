@@ -89,9 +89,6 @@ class ImageRepositoryTest extends UnitTest
             ->andReturn($this->generator()->anyInteger());
         $this->imageResource->shouldReceive('create')
             ->once()
-            ->with([
-                'filename' => $fileName,
-            ])
             ->andReturn($newImage);
 
         $image = $this->imageRepository->storeUploadedImage($upload);

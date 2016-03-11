@@ -77,4 +77,13 @@ class ProductTest extends UnitTest
         $this->product->id = abs($this->generator()->anyInteger()) + 1;
         $this->assertTrue($this->product->isStored());
     }
+
+    /**
+     * Should capitalise a given SKU
+     */
+    public function testCapitalisesSku()
+    {
+        $this->product->sku = 'foobar';
+        $this->assertEquals('FOOBAR', $this->product->sku);
+    }
 }

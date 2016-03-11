@@ -83,6 +83,21 @@ class ProductCreationTest extends ProductTest
     }
 
     /**
+     * Should show an error message if the slug is too short
+     */
+    public function testSlugFieldLengthErrorMessage()
+    {
+        $this->actingAs($this->staffUser())
+            ->visit(route('staff.products.create'))
+            ->type($this->generator()->anyString(), 'name')
+            ->type($this->generator()->anySlug(), 'sku')
+            ->type('1234', 'slug')
+            ->press('Save')
+            ->seePageIs(route('staff.products.create'))
+            ->see('The slug must be at least 5 characters.');
+    }
+
+    /**
      * Should preserve previous input if returning to form.
      */
     public function testOldInputIsPreserved()

@@ -15,17 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $alt_text
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereAltText($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  * @property string $url
  * @property string $deleted_at
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUrl($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereDeletedAt($value)
  * @mixin \Eloquent

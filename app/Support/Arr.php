@@ -1,14 +1,17 @@
 <?php
 
-if (!function_exists('array_partition')) {
+namespace ChingShop\Support;
+use Illuminate\Support\Arr as IlluminateArr;
 
+class Arr extends IlluminateArr
+{
     /**
      * @param array $whole
      * @param int   $pieces
      *
      * @return array[]
      */
-    function array_partition(array $whole, int $pieces): array
+    public static function partition(array $whole, int $pieces): array
     {
         $wholeCount = count($whole);
         $parts = [];
