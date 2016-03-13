@@ -39,7 +39,7 @@ class Product extends Model
     use SoftDeletes;
 
     /** @var array */
-    protected $fillable = ['name', 'sku', 'slug'];
+    protected $fillable = ['name', 'sku', 'slug', 'description'];
 
     /** @var array */
     protected $guarded = ['id'];

@@ -51,6 +51,7 @@ class PersistProductRequest extends Request
                 'slug',
                 $request
             ),
+            'description' => 'required|min:16|max:512',
             'new-image.*' => 'image|max:5000',
         ];
     }

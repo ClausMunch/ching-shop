@@ -74,6 +74,7 @@
             <h1 class="panel-title">
                 @yield('header')
             </h1>
+            @yield('heading')
         </div>
 
         <div class="panel-body">

@@ -37,10 +37,12 @@ class ProductCreationTest extends ProductTest
         $productName = 'Foobar Product';
         $productSKU = 'NICE_SKU';
         $productSlug = 'nice-slug';
+        $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
+            ->type($productDescription, 'description')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
             ->press('Save')
@@ -79,6 +81,7 @@ class ProductCreationTest extends ProductTest
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
             ->see('The name field is required')
+            ->see('The description field is required')
             ->see('The sku field is required');
     }
 
@@ -104,14 +107,18 @@ class ProductCreationTest extends ProductTest
     {
         $productName = $this->generator()->anyString();
         $productSlug = $this->generator()->anySlug();
+        $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($productName, 'name')
             ->type($productSlug, 'slug')
+            ->type($productDescription, 'description')
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
-            ->see($productName);
+            ->see($productName)
+            ->see($productSlug)
+            ->see($productDescription);
     }
 
     /**
@@ -121,12 +128,14 @@ class ProductCreationTest extends ProductTest
     {
         $productSKU = 'NICE_SKU';
         $productSlug = $this->generator()->anySlug();
+        $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
             ->visit(route('staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
+            ->type($productDescription, 'description')
             ->press('Save')
             ->seePageIs(route('staff.products.show', ['sku' => $productSKU]));
 
@@ -135,6 +144,7 @@ class ProductCreationTest extends ProductTest
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
+            ->type($productDescription, 'description')
             ->press('Save')
             ->seePageIs(route('staff.products.create'))
             ->see('The sku has already been taken');
