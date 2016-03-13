@@ -38,9 +38,12 @@ class ProductRepository
      */
     public function presentLatest($limit = 100): array
     {
-        return array_map(function (Product $product): ProductPresenter {
-            return $this->presentProduct($product);
-        }, $this->loadLatest($limit)->all());
+        return array_map(
+
+function (Product $product): ProductPresenter
+{
+    return $this->presentProduct($product);
+}, $this->loadLatest($limit)->all());
     }
 
     /**

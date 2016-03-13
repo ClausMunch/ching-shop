@@ -2,10 +2,10 @@
 
 namespace ChingShop\Http\View\Staff;
 
+use ChingShop\Http\View\Customer\LocationComposer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Request;
-use ChingShop\Http\View\Customer\LocationComposer;
 
 /**
  * Class LocationComposer
