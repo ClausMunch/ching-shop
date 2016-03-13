@@ -3,7 +3,7 @@
 namespace Testing\Unit\ChingShop\Http\View\Staff;
 
 use ChingShop\Http\View\Staff\HttpCrudInterface;
-use ChingShop\Http\View\Staff\LocationComposer;
+use ChingShop\Http\View\Staff\StaffLocationComposer;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
@@ -13,7 +13,7 @@ use Testing\Unit\UnitTest;
 
 class LocationComposerTest extends UnitTest
 {
-    /** @var LocationComposer */
+    /** @var StaffLocationComposer */
     private $locationComposer;
 
     /** @var Router|MockInterface */
@@ -32,7 +32,7 @@ class LocationComposerTest extends UnitTest
         $this->router = $this->mockery(Router::class);
         $this->urlGenerator = $this->mockery(UrlGenerator::class);
 
-        $this->locationComposer = new LocationComposer(
+        $this->locationComposer = new StaffLocationComposer(
             $this->router,
             $this->urlGenerator
         );
@@ -44,7 +44,7 @@ class LocationComposerTest extends UnitTest
     public function testConstruct()
     {
         $this->assertInstanceOf(
-            LocationComposer::class,
+            StaffLocationComposer::class,
             $this->locationComposer
         );
     }

@@ -2,17 +2,16 @@
 
 namespace ChingShop\Http\View\Staff;
 
-use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
+use ChingShop\Http\View\Customer\LocationComposer;
 
 /**
  * Class LocationComposer
  * Location logic for views.
  */
-class LocationComposer
+class StaffLocationComposer extends LocationComposer
 {
     const ACTIVE_CLASS = 'active';
     const ROUTE_UPDATE = 'update';
@@ -20,22 +19,6 @@ class LocationComposer
     const ROUTE_SHOW = 'show';
     const ROUTE_DELETE = 'destroy';
     const ROUTE_DETACH = 'detach';
-
-    /** @var Router */
-    private $router;
-
-    /** @var UrlGenerator */
-    private $urlGenerator;
-
-    /**
-     * @param Router       $router
-     * @param UrlGenerator $urlGenerator
-     */
-    public function __construct(Router $router, UrlGenerator $urlGenerator)
-    {
-        $this->router = $router;
-        $this->urlGenerator = $urlGenerator;
-    }
 
     /**
      * Bind a Location object to the view.

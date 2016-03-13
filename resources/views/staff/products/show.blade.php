@@ -5,10 +5,18 @@
 @endsection
 
 @section('header')
-    Product {{ $product->name() }} <small>({{ $product->SKU() }})</small>
+    <small>Product</small>
+    {{ $product->name() }}
+    <small>({{ $product->SKU() }})</small>
 @endsection
 
 @section('content')
+
+    <section>
+        <p>
+            &ldquo;{{ $product->description() }}&rdquo;
+        </p>
+    </section>
 
     <section>
         <h3>Images</h3>
@@ -41,6 +49,10 @@
 @endsection
 
 @section('footer')
+
+    <a class="btn btn-link" href="{{ $location->viewHrefFor($product) }}">
+        View on site
+    </a>
 
     <a class="btn btn-default"
        href="{{ route('staff.products.edit', $product->SKU()) }}">

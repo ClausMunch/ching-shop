@@ -12,10 +12,10 @@ class LocationComposer
     const ROUTE_VIEW = 'view';
 
     /** @var Router */
-    private $router;
+    protected $router;
 
     /** @var UrlGenerator */
-    private $urlGenerator;
+    protected $urlGenerator;
 
     /**
      * Bind a Location object to the view.

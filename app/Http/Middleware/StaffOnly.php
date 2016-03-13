@@ -2,7 +2,7 @@
 
 namespace ChingShop\Http\Middleware;
 
-use ChingShop\Http\View\Staff\LocationComposer;
+use ChingShop\Http\View\Staff\StaffLocationComposer;
 use ChingShop\User\User;
 use Closure;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -31,7 +31,7 @@ class StaffOnly
             return $this->deny($request);
         }
 
-        view()->composer('*', LocationComposer::class);
+        view()->composer('*', StaffLocationComposer::class);
 
         return $next($request);
     }

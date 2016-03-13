@@ -23,6 +23,23 @@
             </label>
         @endforeach
     </div>
+    <div class="form-group {{ $reply->putHasError('description') }}">
+        <label for="description">
+            Product description
+        </label>
+        <textarea type="text"
+               class="form-control"
+               id="description"
+               name="description"
+               minlength="16"
+               maxlength="512"
+               required>{{ $reply->oldInputOr('description', $product->description()) }}</textarea>
+        @foreach($reply->errorsFor('description') as $error)
+            <label class="help-block" for="description">
+                {{ $error }}
+            </label>
+        @endforeach
+    </div>
     <div class="form-group {{ $reply->putHasError('sku') }}">
         <label for="sku">
             Product SKU
