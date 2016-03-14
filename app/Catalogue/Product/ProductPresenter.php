@@ -2,7 +2,6 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use BadMethodCallException;
 use ChingShop\Http\View\Customer\Viewable;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Http\View\Staff\RelaterInterface;
@@ -115,7 +114,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
     public function mainImage()
     {
         return $this->product->images->first() ?
-            $this->product->images->first() : new Image;
+            $this->product->images->first() : new Image();
     }
 
     /**

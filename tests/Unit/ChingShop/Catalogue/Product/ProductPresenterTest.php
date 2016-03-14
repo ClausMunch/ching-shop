@@ -197,7 +197,7 @@ class ProductPresenterTest extends UnitTest
 
         $this->assertEquals(
             $imagesRelation,
-            $this->productPresenter->relationTo(new Image)
+            $this->productPresenter->relationTo(new Image())
         );
     }
 
