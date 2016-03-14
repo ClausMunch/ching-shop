@@ -37,7 +37,7 @@ class PriceController extends Controller
     }
 
     /**
-     * @param string $sku
+     * @param string          $sku
      * @param SetPriceRequest $setPriceRequest
      */
     public function setProductPrice(
@@ -49,6 +49,7 @@ class PriceController extends Controller
             $setPriceRequest->get('units'),
             $setPriceRequest->get('subunits')
         );
+
         return $this->responseFactory->redirectToRoute(
             'staff.products.show',
             ['sku' => $sku]

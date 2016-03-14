@@ -8,16 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * ChingShop\Catalogue\Price\Price
+ * ChingShop\Catalogue\Price\Price.
  *
  * @mixin \Eloquent
- * @property integer $id
- * @property integer $units
- * @property integer $subunits
+ *
+ * @property int $id
+ * @property int $units
+ * @property int $subunits
  * @property string $currency
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
+ *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereUnits($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereSubunits($value)
@@ -25,8 +27,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereDeletedAt($value)
- * @property integer $product_id
+ *
+ * @property int $product_id
  * @property-read \ChingShop\Catalogue\Product\Product $product
+ *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereProductId($value)
  */
 class Price extends Model

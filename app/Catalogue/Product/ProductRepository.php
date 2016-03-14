@@ -2,7 +2,6 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use ChingShop\Catalogue\Price\Price;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -41,8 +40,7 @@ class ProductRepository
     {
         return array_map(
 
-function (Product $product): ProductPresenter
-{
+function (Product $product): ProductPresenter {
     return $this->presentProduct($product);
 }, $this->loadLatest($limit)->all());
     }
@@ -165,8 +163,9 @@ function (Product $product): ProductPresenter
 
     /**
      * @param string $sku
-     * @param int $units
-     * @param int $subunits
+     * @param int    $units
+     * @param int    $subunits
+     *
      * @return bool
      */
     public function setPriceBySku(string $sku, int $units, int $subunits)

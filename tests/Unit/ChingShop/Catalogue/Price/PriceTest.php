@@ -15,7 +15,7 @@ class PriceTest extends UnitTest
      */
     public function setUp()
     {
-        $this->price = new Price;
+        $this->price = new Price();
     }
 
     /**
