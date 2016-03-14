@@ -114,7 +114,8 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function mainImage()
     {
-        return $this->product->images->first();
+        return $this->product->images->first() ?
+            $this->product->images->first() : new Image;
     }
 
     /**
@@ -145,16 +146,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function relationTo(Model $related): Relation
     {
-        $relationMethod = $this->relationKeyTo($related);
-        if (!method_exists($this->product, $relationMethod)) {
-            throw new BadMethodCallException(sprintf(
-                'No relation method for %s exists on %s',
-                get_class($related),
-                Product::class
-            ));
-        }
-
-        return $this->product->{$this->relations[get_class($related)]}();
+        return $this->product->{$this->relationKeyTo($related)}();
     }
 
     /**
@@ -164,14 +156,33 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function relationKeyTo(Model $related): string
     {
-        if (empty($this->relations[get_class($related)])) {
-            throw new OutOfBoundsException(sprintf(
-                'Unknown relation from %s to %s',
-                Product::class,
-                get_class($related)
-            ));
-        }
-
         return $this->relations[get_class($related)];
+    }
+
+    /**
+     * @return string
+     */
+    public function price(): string
+    {
+        return $this->product->prices->first() ?
+            $this->product->prices->first()->formatted() : '';
+    }
+
+    /**
+     * @return int
+     */
+    public function priceUnits(): int
+    {
+        return $this->product->prices->first() ?
+            $this->product->prices->first()->units : 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function priceSubUnits(): int
+    {
+        return $this->product->prices->first() ?
+            $this->product->prices->first()->subUnitsFormatted() : 0;
     }
 }

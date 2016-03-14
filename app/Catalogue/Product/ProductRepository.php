@@ -2,6 +2,7 @@
 
 namespace ChingShop\Catalogue\Product;
 
+use ChingShop\Catalogue\Price\Price;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -92,7 +93,7 @@ function (Product $product): ProductPresenter
         /** @var Product $product */
         $product = $this->productResource
             ->where('sku', $sku)
-            ->with('images')
+            ->with(['images', 'prices'])
             ->first();
         if (!$product) {
             return $this->presentEmpty();
@@ -111,7 +112,7 @@ function (Product $product): ProductPresenter
         /** @var Product $product */
         $product = $this->productResource
             ->where('id', $ID)
-            ->with('images')
+            ->with(['images', 'prices'])
             ->first();
         if (!$product) {
             return $this->presentEmpty();
@@ -160,6 +161,29 @@ function (Product $product): ProductPresenter
             ->limit(1)
             ->first()
             ->delete();
+    }
+
+    /**
+     * @param string $sku
+     * @param int $units
+     * @param int $subunits
+     * @return bool
+     */
+    public function setPriceBySku(string $sku, int $units, int $subunits)
+    {
+        /** @var Product $product */
+        $product = $this->productResource
+            ->where('sku', $sku)
+            ->with('prices')
+            ->limit(1)
+            ->first();
+
+        $price = $product->prices()->firstOrNew([]);
+        $price->setAttribute('units', $units);
+        $price->setAttribute('subunits', $subunits);
+        $price->setAttribute('currency', 'GBP');
+
+        return $price->save();
     }
 
     /**

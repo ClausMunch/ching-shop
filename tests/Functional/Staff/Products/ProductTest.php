@@ -28,7 +28,7 @@ abstract class ProductTest extends FunctionalTest
     protected function attachImageToProduct(Product $product): Image
     {
         $image = Image::create([
-            'alt_text' => $this->generator()->anyString(),
+            'alt_text' => uniqid(),
             'url'      => $this->generator()->anySlug(),
         ]);
         $product->images()->attach($image->id);

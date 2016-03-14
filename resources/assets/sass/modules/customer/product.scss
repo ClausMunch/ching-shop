@@ -38,6 +38,10 @@
   }
 }
 
+.photo {
+  box-shadow: .1em .1em .1em transparentize($text-color, .2);
+}
+
 .buy-button {
   margin: $gutter auto;
 

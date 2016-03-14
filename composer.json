@@ -11,19 +11,19 @@
         "graham-campbell/htmlmin": ">=4.1",
         "doctrine/dbal": ">=2.5",
         "predis/predis": ">=1.0",
-        "barryvdh/laravel-ide-helper": ">=2.1",
         "fideloper/proxy": ">=3.1",
-        "satooshi/php-coveralls": "dev-master"
+        "satooshi/php-coveralls": ">=1.0.1"
     },
     "require-dev": {
         "fzaninotto/faker": ">=1.4",
         "phpunit/phpunit": ">=5.0",
         "laravel/homestead": ">=3.0.1",
         "laracasts/generators": ">=1.1",
+        "barryvdh/laravel-ide-helper": ">=2.1",
         "symfony/dom-crawler": ">=3.0",
         "symfony/css-selector": ">=3.0",
-        "mockery/mockery": "dev-master",
-        "hamcrest/hamcrest-php": "dev-master"
+        "mockery/mockery": ">=0.9.4",
+        "hamcrest/hamcrest-php": ">=2.0.0"
     },
     "autoload": {
         "classmap": [

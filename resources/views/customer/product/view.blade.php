@@ -13,7 +13,7 @@
         <div class="col-md-8">
 
             @if ($product->mainImage())
-            <img class="img-responsive"
+            <img class="img-responsive photo"
                  id="product-main-image"
                  src="{{ $product->mainImage()->url() }}"
                  alt="{{ $product->mainImage()->altText() }}">
@@ -39,7 +39,7 @@
 
             <a class="btn btn-success btn-lg btn-block buy-button"
                href="{{ $location->productEnquiryMail($product) }}">
-                Buy this
+                Buy this: {{ $product->price() }}
             </a>
 
             <p>{{ $product->description() }}</p>

@@ -2,10 +2,12 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
+use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\Behaviour\MocksModel;
@@ -239,6 +241,41 @@ class ProductRepositoryTest extends UnitTest
         $deleted = $this->productRepository->deleteBySku($sku);
 
         $this->assertTrue($deleted);
+    }
+
+    /**
+     * Should be able to set the price by SKU.
+     */
+    public function testSetPriceBySku()
+    {
+        $product = $this->makeMock(Product::class);
+        $this->productResource->shouldReceive('where->with->limit->first')
+            ->atLeast()->once()
+            ->andReturn($product);
+
+        $prices = $this->makeMock(HasMany::class);
+        $price = $this->makeMock(Price::class);
+
+        $product->expects($this->once())
+            ->method('prices')
+            ->willReturn($prices);
+        $prices->expects($this->once())
+            ->method('firstOrNew')
+            ->willReturn($price);
+
+        $units = 5;
+        $subunits = 99;
+        $price->expects($this->atLeastOnce())
+            ->method('setAttribute')
+            ->withConsecutive(
+                ['units', $units],
+                ['subunits', $subunits],
+                ['currency', 'GBP']
+            );
+        $price->expects($this->once())
+            ->method('save');
+
+        $this->productRepository->setPriceBySku('foo sku', $units, $subunits);
     }
 
     /**

@@ -15,17 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $alt_text
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereFilename($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereAltText($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  * @property string $url
  * @property string $deleted_at
- *
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUrl($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereDeletedAt($value)
  * @mixin \Eloquent
@@ -63,7 +60,8 @@ class Image extends Model
      */
     public function getFilenameAttribute(): string
     {
-        return $this->safeFilename((string) $this->attributes['filename']);
+        return isset($this->attributes['filename']) ?
+            $this->safeFilename((string) $this->attributes['filename']) : '';
     }
 
     /**
@@ -71,8 +69,10 @@ class Image extends Model
      */
     public function url(): string
     {
-        return $this->isInternal() ?
-            secure_asset('filesystem/image/'.$this->filename()) : $this->url;
+        if ($this->isInternal()) {
+            return secure_asset('filesystem/image/'.$this->filename());
+        }
+        return isset($this->url) ? (string) $this->url : '';
     }
 
     /**
