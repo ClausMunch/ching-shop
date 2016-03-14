@@ -63,7 +63,8 @@ class Image extends Model
      */
     public function getFilenameAttribute(): string
     {
-        return $this->safeFilename((string) $this->attributes['filename']);
+        return isset($this->attributes['filename']) ?
+            $this->safeFilename((string) $this->attributes['filename']) : '';
     }
 
     /**
@@ -71,8 +72,11 @@ class Image extends Model
      */
     public function url(): string
     {
-        return $this->isInternal() ?
-            secure_asset('filesystem/image/'.$this->filename()) : $this->url;
+        if ($this->isInternal()) {
+            return secure_asset('filesystem/image/'.$this->filename());
+        }
+
+        return isset($this->url) ? (string) $this->url : '';
     }
 
     /**

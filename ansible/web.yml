@@ -167,6 +167,7 @@
     - name: refresh Laravel
       shell: "cd /var/www/ching-shop && php artisan {{ item }}"
       with_items:
+        - "migrate"
         - "clear-compiled"
         - "config:clear"
         - "config:cache"

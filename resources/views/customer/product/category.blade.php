@@ -12,7 +12,7 @@
         <section class="product-section">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="img-responsive"
+                    <img class="img-responsive photo"
                          alt="{{ $product->mainImage()->altText() }}"
                          src="{{ $product->mainImage()->url() }}">
                 </div>

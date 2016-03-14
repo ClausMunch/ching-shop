@@ -2,9 +2,12 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
+use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
+use ChingShop\Image\Image;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Mockery\MockInterface;
 use Testing\Unit\Behaviour\MocksModel;
@@ -180,5 +183,75 @@ class ProductPresenterTest extends UnitTest
         $sku = $this->generator()->anyString();
         $this->mockModelAttribute('sku', $sku);
         $this->assertSame($sku, $this->productPresenter->crudID());
+    }
+
+    /**
+     * Should be able to get the relation to another class.
+     */
+    public function testRelationTo()
+    {
+        $imagesRelation = $this->makeMock(BelongsToMany::class);
+        $this->product->shouldReceive('images')
+            ->once()
+            ->andReturn($imagesRelation);
+
+        $this->assertEquals(
+            $imagesRelation,
+            $this->productPresenter->relationTo(new Image())
+        );
+    }
+
+    /**
+     * Should be able to get the product price.
+     */
+    public function testPrice()
+    {
+        $this->mockProductPrice(5, 99);
+        $this->assertEquals('£5.99', $this->productPresenter->price());
+    }
+
+    /**
+     * Should be able to get the price units part.
+     */
+    public function testPriceUnits()
+    {
+        $this->mockProductPrice(5, 99);
+        $this->assertEquals('5', $this->productPresenter->priceUnits());
+    }
+
+    /**
+     * Should be able to get the price subunits part.
+     */
+    public function testPriceSubUnits()
+    {
+        $this->mockProductPrice(5, 5);
+        $this->assertEquals('05', $this->productPresenter->priceSubUnits());
+    }
+
+    /**
+     * Should be able to get the route prefix.
+     */
+    public function testRoutePrefix()
+    {
+        $this->assertEquals(
+            'product::',
+            $this->productPresenter->routePrefix()
+        );
+    }
+
+    /**
+     * @param $units
+     * @param $subUnits
+     */
+    private function mockProductPrice(int $units, int $subUnits)
+    {
+        $price = new Price([
+            'units'    => $units,
+            'subunits' => $subUnits,
+        ]);
+        $prices = new Collection([$price]);
+        $this->product->shouldReceive('getAttribute')
+            ->with('prices')
+            ->andReturn($prices);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace ChingShop\Catalogue\Product;
 
+use ChingShop\Catalogue\Price\Price;
 use ChingShop\Image\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -33,6 +35,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereDeletedAt($value)
  * @mixin \Eloquent
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ChingShop\Catalogue\Price\Price[] $prices
  */
 class Product extends Model
 {
@@ -62,6 +66,14 @@ class Product extends Model
     {
         return isset($this->imagesRelationship) ?
             $this->imagesRelationship : $this->belongsToMany(Image::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function prices(): HasMany
+    {
+        return $this->hasMany(Price::class);
     }
 
     /**

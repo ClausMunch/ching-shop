@@ -1,5 +1,6 @@
 <?php
 
+use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
 
@@ -36,6 +37,13 @@ class ProductsTableSeeder extends Seed
             $imagesIDs[] = $image->id;
         }
         $product->attachImages($imagesIDs);
+
+        $price = new Price([
+            'units'    => mt_rand(1, 100),
+            'subunits' => mt_rand(0, 99),
+            'currency' => 'GBP',
+        ]);
+        $product->prices()->save($price);
     }
 
     /**

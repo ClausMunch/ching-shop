@@ -19,6 +19,11 @@
     </section>
 
     <section>
+        <h3>Price</h3>
+        @include('staff.products.price')
+    </section>
+
+    <section>
         <h3>Images</h3>
         @foreach($product->images() as $image)
 

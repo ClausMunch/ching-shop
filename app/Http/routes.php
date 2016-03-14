@@ -57,6 +57,10 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'Staff\ProductController@detachProductImage',
                 'as'   => 'staff.products.detach.images',
             ]);
+            Route::post('products/{sku}/price', [
+                'uses' => 'Staff\PriceController@setProductPrice',
+                'as'   => 'staff.products.price',
+            ]);
             Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
         }
     );
