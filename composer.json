@@ -23,7 +23,8 @@
         "symfony/dom-crawler": ">=3.0",
         "symfony/css-selector": ">=3.0",
         "mockery/mockery": ">=0.9.4",
-        "hamcrest/hamcrest-php": ">=2.0.0"
+        "hamcrest/hamcrest-php": ">=2.0.0",
+        "guzzle/guzzle": ">=3.9.3"
     },
     "autoload": {
         "classmap": [
