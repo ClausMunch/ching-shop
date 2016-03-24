@@ -4,7 +4,6 @@ namespace Testing\Unit\ChingShop\Exceptions;
 
 use ChingShop\Exceptions\Handler;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
