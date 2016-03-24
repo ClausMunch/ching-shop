@@ -19,6 +19,9 @@
         </testsuite>
         <testsuite name="unit">
             <directory>./tests/Unit/</directory>
+            <php>
+                <env name="QUEUE_DRIVER" value="sync"/>
+            </php>
         </testsuite>
     </testsuites>
     <filter>
@@ -32,5 +35,6 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="FILESYSTEM" value="local" />
     </php>
 </phpunit>

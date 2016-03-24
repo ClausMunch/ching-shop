@@ -52,6 +52,18 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'Staff\DashboardController@getIndex',
                 'as'   => 'staff.dashboard',
             ]);
+            Route::get('products/images', [
+                'uses' => 'Staff\ImageController@index',
+                'as'   => 'staff.products.images.index',
+            ]);
+            Route::post('products/images/transfer-local', [
+                'uses' => 'Staff\ImageController@transferLocalImages',
+                'as'   => 'staff.products.images.transfer-local',
+            ]);
+            Route::delete('products/images/{id}', [
+                'uses' => 'Staff\ImageController@destroy',
+                'as'   => 'staff.products.images.destroy',
+            ]);
             Route::resource('products', 'Staff\ProductController');
             Route::delete('product/{productId}/image/{imageId}', [
                 'uses' => 'Staff\ProductController@detachProductImage',

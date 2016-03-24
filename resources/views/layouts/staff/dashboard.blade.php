@@ -56,6 +56,13 @@
                                 Create new
                             </a>
                         </li>
+                        <li class="{{ $location->putActive(
+                                'staff.products.images.index'
+                            ) }}">
+                            <a href="{{ route('staff.products.images.index') }}">
+                                Images
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

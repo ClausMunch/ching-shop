@@ -33,5 +33,11 @@ class AppServiceProvider extends ServiceProvider
             \ChingShop\Validation\ValidationInterface::class,
             \ChingShop\Validation\IlluminateValidation::class
         );
+
+        if ($this->app->environment() == 'local' && \App::runningInConsole()) {
+            $this->app->register(
+                \Pvm\ArtisanBeans\ArtisanBeansServiceProvider::class
+            );
+        }
     }
 }

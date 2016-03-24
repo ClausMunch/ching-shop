@@ -41,7 +41,7 @@ class HandlerTest extends UnitTest
      */
     public function testReport()
     {
-        $exception = $this->makeMockException();
+        $exception = new Exception();
         $this->logger->expects($this->once())
             ->method('error')
             ->with($exception);
@@ -53,7 +53,7 @@ class HandlerTest extends UnitTest
      */
     public function testRender()
     {
-        $exception = $this->makeMockException();
+        $exception = new Exception();
 
         /** @var Request|MockObject $request */
         $request = $this->mockery(Request::class);
@@ -61,13 +61,5 @@ class HandlerTest extends UnitTest
         $response = $this->handler->render($request, $exception);
 
         $this->assertInstanceOf(Response::class, $response);
-    }
-
-    /**
-     * @return MockObject|Exception
-     */
-    private function makeMockException(): MockObject
-    {
-        return $this->makeMock(Exception::class);
     }
 }

@@ -15,6 +15,7 @@ class PriceTest extends UnitTest
      */
     public function setUp()
     {
+        parent::setUp();
         $this->price = new Price();
     }
 

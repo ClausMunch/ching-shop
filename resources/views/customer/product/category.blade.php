@@ -14,7 +14,8 @@
                 <div class="col-md-4">
                     <img class="img-responsive photo"
                          alt="{{ $product->mainImage()->altText() }}"
-                         src="{{ $product->mainImage()->url() }}">
+                         src="{{ $product->mainImage()->url('medium') }}"
+                         srcset="{{ $product->mainImage()->srcSet() }}">
                 </div>
                 <div class="col-md-8">
                     <h2>

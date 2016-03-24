@@ -40,7 +40,7 @@ class ProductControllerTest extends ControllerTest
      */
     public function testViewAction()
     {
-        $id = $this->generator()->anyInteger();
+        $id = abs($this->generator()->anyInteger()) + 1;
         $slug = $this->generator()->anySlug();
 
         $product = $this->makeMock(ProductPresenter::class);

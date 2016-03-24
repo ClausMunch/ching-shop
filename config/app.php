@@ -98,7 +98,7 @@ return [
     |
     */
 
-    'log' => 'single',
+    'log' => 'daily',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,7 @@ return [
         ChingShop\Providers\AuthServiceProvider::class,
         ChingShop\Providers\EventServiceProvider::class,
         ChingShop\Providers\RouteServiceProvider::class,
+        ChingShop\Providers\ImageServiceProvider::class,
 
     ],
 

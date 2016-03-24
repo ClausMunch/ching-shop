@@ -26,6 +26,7 @@
         - php7.0-xml
         - php7.0-mbstring
         - php7.0-zip
+        - php-imagick
         - sqlite3
         - mysql-server
         - mysql-client
@@ -34,6 +35,8 @@
         - redis-server
         - nodejs
         - npm
+        - imagemagick
+        - supervisor
 
     - name: symlink node
       file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
@@ -47,6 +50,9 @@
     - name: create /var/www/ directory
       file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
 
+    - name: create /var/log/ching-shop directory
+      file: dest=/var/log/ching-shop state=directory owner=www-data group=www-data mode=0700
+
     - name: clone git repository
       become_user: www-data
       git: >
@@ -55,6 +61,8 @@
         version=master
         update=yes
         force=yes
+      notify:
+        - restart workers
 
     - name: install composer
       shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -78,6 +86,11 @@
         - restart redis
         - restart nginx
 
+    - name: configure supervisor
+      template: src=supervisor.conf dest=/etc/supervisor/conf.d/ching-shop-worker.conf
+      notify:
+        - restart workers
+
     - name: Copy public key into /var/www
       authorized_key: user=www-data key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
@@ -96,59 +109,22 @@
     - name: Create MySQL DB
       mysql_db: name=ching_shop state=present
 
-    - name: Generate DB password
-      shell: makepasswd --chars=32
-      args:
-        creates: /var/www/ching-shop/.dbpw
-      register: dbpwd
-
-    - name: generate encryption key
-      shell: makepasswd --chars=32
-      args:
-        creates: /var/www/ching-shop/.enckey
-      register: enckey
+    - include_vars: keys.yml
 
     - name: create .env
-      template: src=.env.template dest=/var/www/ching-shop/.env force=no
+      template: src=.env.template dest=/var/www/ching-shop/.env force=yes
 
     - name: Create MySQL User
-      mysql_user: name=ching_shop password={{ dbpwd.stdout }} priv=ching_shop.*:ALL state=present
-      when: dbpwd.changed
-
-    - name: set APP_DEBUG=false
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_DEBUG=' line=APP_DEBUG=true
-
-    - name: set APP_ENV=production
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_ENV=' line=APP_ENV=production
+      mysql_user: name=ching_shop password={{ db_password }} priv=ching_shop.*:ALL state=present
 
     - name: set encryption key
       lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_KEY=' line=APP_KEY={{ enckey.stdout }}
       when: enckey.changed
 
-    - name: set DB_DATABASE
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_DATABASE=' line=DB_DATABASE=ching_shop
-
-    - name: set DB_USERNAME
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_USERNAME=' line=DB_USERNAME=ching_shop
-
-    - name: set DB_PASSWORD
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^DB_PASSWORD=' line=DB_PASSWORD={{ dbpwd.stdout }}
-      when: dbpwd.changed
-
-    - name: Save dbpw file
-      become_user: www-data
-      lineinfile: dest=/var/www/ching-shop/.dbpw line="{{ dbpwd.stdout }}" create=yes state=present
-      when: dbpwd.changed
-
     - name: Save enckey file
       become_user: www-data
       lineinfile: dest=/var/www/ching-shop/.enckey line="{{ enckey.stdout }}" create=yes state=present
       when: enckey.changed
-
-    - name: Run artisan migrate
-      become_user: www-data
-      shell: php /var/www/ching-shop/artisan migrate --force
-      when: dbpwd.changed
 
     - name: Laravel Scheduler
       cron: >
@@ -156,13 +132,6 @@
         state=present
         user=www-data
         name="php artisan schedule:run"
-
-    - name: Laravel Queue Worker
-      cron: >
-        job="run-one php /var/www/ching-shop/artisan queue:work --daemon --sleep=30 --delay=60 --tries=3 1>> /dev/null 2>&1"
-        state=present
-        user=www-data
-        name="Laravel Queue Worker"
 
     - name: refresh Laravel
       shell: "cd /var/www/ching-shop && php artisan {{ item }}"
@@ -208,3 +177,6 @@
 
     - name: restart redis
       service: name=redis-server state=restarted
+
+    - name: restart workers
+      supervisorctl: name=`ching-shop-worker:*` state=restarted config=/etc/supervisor/conf.d/supervisor.conf

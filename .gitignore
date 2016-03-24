@@ -16,3 +16,6 @@ _ide_helper*
 phpunit
 composer.phar
 build/
+keys.*
+*.sqlite-journal
+test_db.sqlite

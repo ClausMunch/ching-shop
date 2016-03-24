@@ -33,6 +33,7 @@
         this.setAttribute('data-selected', 'true');
         thisImage = this.querySelector('.img-thumbnail');
         mainImage.src = thisImage.src;
+        mainImage.srcset = thisImage.srcset;
         mainImage.alt = thisImage.alt;
     }
 
