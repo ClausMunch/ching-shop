@@ -28,6 +28,7 @@ class ProductPresenterTest extends UnitTest
      */
     public function setUp()
     {
+        parent::setUp();
         $this->product = $this->mockery(Product::class);
         $this->setMockModel($this->product);
         $this->productPresenter = new ProductPresenter($this->product);

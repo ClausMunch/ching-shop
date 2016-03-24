@@ -4,6 +4,7 @@ namespace Testing\Unit\ChingShop\Exceptions;
 
 use ChingShop\Exceptions\Handler;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -41,7 +42,7 @@ class HandlerTest extends UnitTest
      */
     public function testReport()
     {
-        $exception = $this->makeMockException();
+        $exception = new Exception;
         $this->logger->expects($this->once())
             ->method('error')
             ->with($exception);
@@ -53,7 +54,7 @@ class HandlerTest extends UnitTest
      */
     public function testRender()
     {
-        $exception = $this->makeMockException();
+        $exception = new Exception;
 
         /** @var Request|MockObject $request */
         $request = $this->mockery(Request::class);
@@ -64,10 +65,17 @@ class HandlerTest extends UnitTest
     }
 
     /**
-     * @return MockObject|Exception
+     * Should be able to render a ModelNotFound exception into an HTTP response.
      */
-    private function makeMockException(): MockObject
+    public function testRenderModelNotFoundException()
     {
-        return $this->makeMock(Exception::class);
+        $exception = new ModelNotFoundException;
+
+        /** @var Request|MockObject $request */
+        $request = $this->mockery(Request::class);
+
+        $response = $this->handler->render($request, $exception);
+
+        $this->assertInstanceOf(Response::class, $response);
     }
 }

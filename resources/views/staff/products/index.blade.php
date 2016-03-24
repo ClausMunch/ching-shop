@@ -39,7 +39,8 @@
                         </td>
                         <td class="product-index-images">
                             @foreach($product->images() as $image)
-                                <img src="{{ $image->url() }}"
+                                <img src="{{ $image->url('thumbnail') }}"
+                                     srcset="{{ $image->srcSet() }}"
                                      alt="{{ $image->alt_text }}"
                                      class="img-responsive
                                         img-rounded

@@ -3,10 +3,13 @@
 namespace Testing\Unit\ChingShop\Image;
 
 use ChingShop\Catalogue\Product\Product;
+use ChingShop\Events\NewImageEvent;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Config\Repository as Config;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Events\Dispatcher;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -27,6 +30,9 @@ class ImageRepositoryTest extends UnitTest
     /** @var Config|MockInterface */
     private $config;
 
+    /** @var Dispatcher|MockObject */
+    private $dispatcher;
+
     /**
      * Initialise image repository with mock dependencies.
      */
@@ -38,10 +44,12 @@ class ImageRepositoryTest extends UnitTest
         $this->setMockModel($this->imageResource);
 
         $this->config = $this->mockery(Config::class);
+        $this->dispatcher = $this->makeMock(Dispatcher::class);
 
         $this->imageRepository = new ImageRepository(
             $this->imageResource,
-            $this->config
+            $this->config,
+            $this->dispatcher
         );
     }
 
@@ -87,6 +95,7 @@ class ImageRepositoryTest extends UnitTest
         $newImage = $this->mockery(Image::class);
         $newImage->shouldReceive('getAttribute')
             ->andReturn($this->generator()->anyInteger());
+        $newImage->shouldReceive('filename')->andReturn($fileName);
         $this->imageResource->shouldReceive('create')
             ->once()
             ->andReturn($newImage);
@@ -109,15 +118,10 @@ class ImageRepositoryTest extends UnitTest
         $filename = $this->generator()->anyString();
         $this->expectImageCreation($filename);
 
-        $storagePath = $this->generator()->anyString();
-        $this->config->shouldReceive('get')
-            ->with('filesystems.disks.local-public.root')
-            ->andReturn($storagePath);
-
         $upload->expects($this->once())
             ->method('move')
             ->with(
-                $storagePath.'/image',
+                storage_path('image'),
                 $this->isType('string')
             );
 
@@ -181,6 +185,63 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
+     * Should be able to load the latest image resources.
+     */
+    public function testLoadLatest()
+    {
+        $collection = new Collection([$this->makeMock(Image::class)]);
+        $this->imageResource->shouldReceive('orderBy->limit->get')
+            ->atLeast()
+            ->once()
+            ->andReturn($collection);
+
+        $loaded = $this->imageRepository->loadLatest();
+
+        $this->assertSame($collection, $loaded);
+    }
+
+    /**
+     * Should be able to delete an image by ID.
+     */
+    public function testDeleteById()
+    {
+        $this->imageResource->shouldReceive('where->limit->delete')
+            ->atLeast()
+            ->once()
+            ->andReturn(true);
+
+        $deleted = $this->imageRepository->deleteById(
+            $this->generator()->anyInteger()
+        );
+
+        $this->assertTrue($deleted);
+    }
+
+    /**
+     * Should be able to trigger events to transfer local images.
+     */
+    public function testTransferLocalImages()
+    {
+        $image = $this->makeMock(Image::class);
+
+        $this->imageResource->shouldReceive('orWhere->get')
+            ->atLeast()
+            ->once()
+            ->andReturn(new Collection([$image]));
+
+        $this->dispatcher->expects($this->once())
+            ->method('fire')
+            ->with($this->callback(
+                function (NewImageEvent $event) use ($image) {
+                    $this->assertSame($image, $event->image());
+                    return true;
+                }
+            ));
+
+        $this->imageRepository->transferLocalImages();
+    }
+
+    /**
      * @return MockObject|UploadedFile
      */
     private function makeMockUploadedFile(): MockObject
@@ -226,6 +287,7 @@ class ImageRepositoryTest extends UnitTest
         $newImage->shouldReceive('getAttribute')
             ->with('filename')
             ->andReturn($filename);
+        $newImage->shouldReceive('filename')->andReturn($filename);
         $newImage->shouldReceive('getAttribute')
             ->with('id')
             ->andReturn($this->generator()->anyInteger());

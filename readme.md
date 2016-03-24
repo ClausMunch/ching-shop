@@ -18,6 +18,7 @@ You'll need [Vagrant](https://www.vagrantup.com/),
 ```bash
 git clone git@github.com:hughgrigg/ching-shop.git
 cd ching-shop
+git clone git@github.com:laravel/homestead.git ./vendor/laravel/homestead
 cp Homestead.yaml.example Homestead.yaml
 ```
 

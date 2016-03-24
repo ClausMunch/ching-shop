@@ -3,31 +3,40 @@
 namespace ChingShop\Image;
 
 use ChingShop\Catalogue\Product\Product;
+use ChingShop\Events\NewImageEvent;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Events\Dispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
 class ImageRepository
 {
-    const IMAGE_DIR = 'image';
-
     /** @var Image|Builder */
     private $imageResource;
 
     /** @var Config */
     private $config;
 
+    /** @var Dispatcher */
+    private $dispatcher;
+
     /**
      * ImageRepository constructor.
      *
-     * @param Image  $imageResource
-     * @param Config $config
+     * @param Image      $imageResource
+     * @param Config     $config
+     * @param Dispatcher $dispatcher
      */
-    public function __construct(Image $imageResource, Config $config)
-    {
+    public function __construct(
+        Image $imageResource,
+        Config $config,
+        Dispatcher $dispatcher
+    ) {
         $this->imageResource = $imageResource;
         $this->config = $config;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -53,12 +62,9 @@ class ImageRepository
         $newImage = $this->imageResource->create([
             'filename' => uniqid().$upload->getClientOriginalName(),
         ]);
-        $upload->move(
-            $this->config->get('filesystems.disks.local-public.root')
-                .'/'
-                .self::IMAGE_DIR,
-            $newImage->filename
-        );
+        $upload->move(storage_path('image'), $newImage->filename());
+
+        $this->dispatcher->fire(new NewImageEvent($newImage));
 
         return $newImage;
     }
@@ -83,5 +89,48 @@ class ImageRepository
     public function detachImageFromProduct(Image $image, Product $product)
     {
         return $product->images()->detach($image->id);
+    }
+
+    /**
+     * @param int $limit
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function loadLatest(int $limit = 1000)
+    {
+        return $this->imageResource
+            ->orderBy('updated_at', 'desc')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteById(int $id): bool
+    {
+        return (bool) $this->imageResource
+            ->where('id', '=', $id)
+            ->limit(1)
+            ->delete();
+    }
+
+    /**
+     * Transfer local images to cloud storage.
+     */
+    public function transferLocalImages()
+    {
+        $this->imageResource
+            ->orWhere(function (Builder $query) {
+                $query->where('filename', '!=', '');
+                $query->whereNotNull('filename');
+            })
+            ->get()
+            ->each(function (Image $image) {
+                $this->dispatcher->fire(new NewImageEvent($image));
+            });
     }
 }

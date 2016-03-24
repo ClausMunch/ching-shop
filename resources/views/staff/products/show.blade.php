@@ -32,7 +32,8 @@
                   method="post"
                   action="{{ $location->detachActionFor($product, $image) }}">
 
-                <img src="{{ $image->url() }}"
+                <img src="{{ $image->url('small') }}"
+                     srcset="{{ $image->srcSet() }}"
                      alt="{{ $image->alt_text }}"
                      class="img-responsive img-rounded staff-product-image" />
 

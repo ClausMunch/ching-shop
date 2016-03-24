@@ -22,6 +22,7 @@
                         @if (count($product->images()))
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 <img src="{{ $product->images()[0]->url() }}"
+                                     srcset="{{ $product->mainImage()->srcSet() }}"
                                      class="img-responsive img-rounded photo">
                             </a>
                         @endif

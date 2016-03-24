@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: ChingShop
-        psr4_prefix: ChingShop
-        src_path: ChingShop

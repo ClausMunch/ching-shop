@@ -15,7 +15,8 @@
             @if ($product->mainImage())
             <img class="img-responsive photo"
                  id="product-main-image"
-                 src="{{ $product->mainImage()->url() }}"
+                 src="{{ $product->mainImage()->url('large') }}"
+                 srcset="{{ $product->mainImage()->srcSet() }}"
                  alt="{{ $product->mainImage()->altText() }}">
             @endif
 
@@ -26,7 +27,8 @@
                         href="{{ $image->url() }}"
                         title="{{ $image->altText() }}">
                         <img class="img-thumbnail img-responsive"
-                             src="{{ $image->url() }}"
+                             src="{{ $image->url('large') }}"
+                             srcset="{{ $image->srcSet() }}"
                              alt="{{ $image->altText() }}"
                              width="128" height="97">
                     </a>

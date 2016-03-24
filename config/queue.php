@@ -51,9 +51,9 @@ return [
 
         'sqs' => [
             'driver' => 'sqs',
-            'key'    => 'your-public-key',
-            'secret' => 'your-secret-key',
-            'queue'  => 'your-queue-url',
+            'key'    => env('SQS_PUBLIC_KEY'),
+            'secret' => env('SQS_PRIVATE_KEY'),
+            'queue'  => 'ching-shop',
             'region' => 'us-east-1',
         ],
 

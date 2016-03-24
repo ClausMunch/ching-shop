@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEM', 'local-public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,13 +44,15 @@ return [
     'disks' => [
 
         'local' => [
-            'driver' => 'local',
-            'root'   => storage_path('app/filesystem'),
+            'driver'   => 'local',
+            'root'     => storage_path('app/filesystem'),
+            'endpoint' => '',
         ],
 
         'local-public' => [
-            'driver' => 'local',
-            'root'   => public_path('filesystem'),
+            'driver'   => 'local',
+            'root'     => public_path('filesystem'),
+            'endpoint' => 'filesystem',
         ],
 
         'ftp' => [
@@ -68,11 +70,12 @@ return [
         ],
 
         's3' => [
-            'driver' => 's3',
-            'key'    => env('S3_KEY', 'your-key'),
-            'secret' => env('S3_SECRET', 'your-secret'),
-            'region' => env('S3_REGION', 'eu-west-1'),
-            'bucket' => env('S3_BUCKET', 'ching-shop-static'),
+            'driver'   => 's3',
+            'key'      => env('S3_KEY', 'your-key'),
+            'secret'   => env('S3_SECRET', 'your-secret'),
+            'region'   => env('S3_REGION', 'eu-west-1'),
+            'bucket'   => env('S3_BUCKET', 'ching-shop-static'),
+            'endpoint' => env('S3_ENDPOINT', 'https://static.ching-shop.com/'),
         ],
 
         'rackspace' => [

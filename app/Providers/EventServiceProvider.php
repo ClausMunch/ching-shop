@@ -2,6 +2,10 @@
 
 namespace ChingShop\Providers;
 
+use ChingShop\Events\NewImageEvent;
+use ChingShop\Events\CleanMissingImagesCommandEvent;
+use ChingShop\Events\CleanOrphanImagesCommandEvent;
+use ChingShop\Listeners\NewImageListener;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,8 +17,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'ChingShop\Events\SomeEvent' => [
-            'ChingShop\Listeners\EventListener',
+        NewImageEvent::class => [
+            NewImageListener::class,
         ],
     ];
 

@@ -29,7 +29,7 @@ class FakerGenerator implements Generator
     public function anyString(): string
     {
         $string = '';
-        $length = mt_rand(1, Generator::SANE_ITERATION_LIMIT);
+        $length = mt_rand(12, Generator::SANE_ITERATION_LIMIT);
         for ($i = 0; $i < $length; $i++) {
             $chr = mt_rand(0x0000, Generator::UTF8_MAX);
             $string .= mb_convert_encoding(

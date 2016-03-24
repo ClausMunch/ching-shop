@@ -4,23 +4,16 @@ namespace Testing\Unit\ChingShop\Http\Requests;
 
 use ChingShop\Http\Requests\PersistProductRequest;
 use Illuminate\Http\Request as HttpRequest;
-use Mockery\MockInterface;
-use Testing\Unit\UnitTest;
 
-class PersistProductRequestTest extends UnitTest
+class PersistProductRequestTest extends RequestTest
 {
     /** @var PersistProductRequest */
     private $persistProductRequest;
 
-    /** @var HttpRequest|MockInterface */
-    private $httpRequest;
-
     public function setUp()
     {
         parent::setUp();
-
         $this->persistProductRequest = new PersistProductRequest();
-        $this->httpRequest = $this->mockery(HttpRequest::class);
     }
 
     /**
@@ -39,15 +32,7 @@ class PersistProductRequestTest extends UnitTest
      */
     public function testAuthorize()
     {
-        $userIsStaff = $this->generator()->anyBoolean();
-        $this->httpRequest->shouldReceive('user->isStaff')
-            ->andReturn($userIsStaff);
-
-        $authorised = $this->persistProductRequest->authorize(
-            $this->httpRequest
-        );
-
-        $this->assertSame($userIsStaff, $authorised);
+        $this->assertRequestAuthorisesOnStaff($this->persistProductRequest);
     }
 
     /**

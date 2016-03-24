@@ -137,6 +137,7 @@ class ProductCreationTest extends ProductTest
             ->type($productSlug, 'slug')
             ->type($productDescription, 'description')
             ->press('Save')
+            ->dontSee('already been taken')
             ->seePageIs(route('staff.products.show', ['sku' => $productSKU]));
 
         $this->actingAs($this->staffUser())
