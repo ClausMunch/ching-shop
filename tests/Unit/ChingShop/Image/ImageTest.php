@@ -86,7 +86,7 @@ class ImageTest extends UnitTest
     public function testUrlWithSize()
     {
         $image = new Image([
-            'url' => 'https://www.ching-shop.dev/image/foo.jpg'
+            'url' => 'https://www.ching-shop.dev/image/foo.jpg',
         ]);
 
         $this->assertEquals(
@@ -101,7 +101,7 @@ class ImageTest extends UnitTest
     public function testSrcSet()
     {
         $image = new Image([
-            'url' => 'https://www.ching-shop.dev/image/foo.jpg'
+            'url' => 'https://www.ching-shop.dev/image/foo.jpg',
         ]);
 
         $this->assertRegExp(
@@ -116,7 +116,7 @@ class ImageTest extends UnitTest
     public function testLocationGlyph()
     {
         $image = new Image([
-            'url' => 'https://www.ching-shop.dev/image/foo.jpg'
+            'url' => 'https://www.ching-shop.dev/image/foo.jpg',
         ]);
         $this->assertInternalType('string', $image->locationGlyph());
     }

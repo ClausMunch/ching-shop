@@ -11,13 +11,13 @@ class ImageSizeSetTest extends TestWithImagick
     private $imageSizeSet;
 
     /**
-     * Set up image size set for each test;
+     * Set up image size set for each test;.
      */
     public function setUp()
     {
         parent::setUp();
 
-        $this->imageSizeSet = new ImageSizeSet;
+        $this->imageSizeSet = new ImageSizeSet();
     }
 
     /**

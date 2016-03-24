@@ -5,7 +5,6 @@ namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 use ChingShop\Http\Controllers\Staff\ImageController;
 use ChingShop\Image\ImageRepository;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Illuminate\Http\RedirectResponse;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ImageControllerTest extends ControllerTest

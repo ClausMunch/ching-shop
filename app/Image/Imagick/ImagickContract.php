@@ -8,7 +8,6 @@ use ImagickPixel;
 /**
  * Interface ImagickContract
  * Allows mocking Imagick in tests.
- * @package ChingShop\Image\Imagick
  */
 interface ImagickContract
 {
@@ -96,17 +95,17 @@ interface ImagickContract
 
     /**
      * @param ImagickContract|Imagick $composite_object
-     * @param int $composite
-     * @param int $x
-     * @param int $y
-     * @param int $channel
+     * @param int                     $composite
+     * @param int                     $x
+     * @param int                     $y
+     * @param int                     $channel
      *
      * @return mixed
      */
     public function compositeImage(
         $composite_object,
         $composite,
-        $x ,
+        $x,
         $y,
         $channel = Imagick::CHANNEL_ALL
     );

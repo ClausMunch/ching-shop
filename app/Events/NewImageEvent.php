@@ -14,6 +14,7 @@ class NewImageEvent extends Event
 
     /**
      * Create a new event instance.
+     *
      * @param Image $image
      */
     public function __construct(Image $image)

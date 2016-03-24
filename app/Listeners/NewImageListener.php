@@ -6,17 +6,16 @@ use ChingShop\Events\NewImageEvent;
 use ChingShop\Image\Image;
 use ChingShop\Image\Imagick\ImagePreProcessor;
 use ChingShop\Image\Imagick\ImagickContract;
-use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Filesystem\FilesystemAdapter;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Config\Repository as Config;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Filesystem\FilesystemAdapter;
 use SplFileObject;
 use SplTempFileObject;
 
 /**
  * Class NewImageListener
  * Optimise images and upload to S3.
- * @package ChingShop\Listeners
  */
 class NewImageListener implements ShouldQueue
 {
@@ -57,6 +56,7 @@ class NewImageListener implements ShouldQueue
         if (!$this->storageImageFile($event->image())->isFile()) {
             $event->image()->setAttribute('filename', '');
             $event->image()->save();
+
             return;
         }
 
@@ -108,6 +108,7 @@ class NewImageListener implements ShouldQueue
 
     /**
      * @param Image $imageResource
+     *
      * @return SplFileObject
      */
     private function storageImageFile(Image $imageResource): SplFileObject
@@ -115,7 +116,7 @@ class NewImageListener implements ShouldQueue
         try {
             return new SplFileObject($imageResource->storageLocation());
         } catch (\RuntimeException $e) {
-            return new SplTempFileObject;
+            return new SplTempFileObject();
         }
     }
 

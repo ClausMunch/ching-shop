@@ -42,7 +42,7 @@ class HandlerTest extends UnitTest
      */
     public function testReport()
     {
-        $exception = new Exception;
+        $exception = new Exception();
         $this->logger->expects($this->once())
             ->method('error')
             ->with($exception);
@@ -54,7 +54,7 @@ class HandlerTest extends UnitTest
      */
     public function testRender()
     {
-        $exception = new Exception;
+        $exception = new Exception();
 
         /** @var Request|MockObject $request */
         $request = $this->mockery(Request::class);
@@ -69,7 +69,7 @@ class HandlerTest extends UnitTest
      */
     public function testRenderModelNotFoundException()
     {
-        $exception = new ModelNotFoundException;
+        $exception = new ModelNotFoundException();
 
         /** @var Request|MockObject $request */
         $request = $this->mockery(Request::class);
