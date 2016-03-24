@@ -63,19 +63,4 @@ class HandlerTest extends UnitTest
 
         $this->assertInstanceOf(Response::class, $response);
     }
-
-    /**
-     * Should be able to render a ModelNotFound exception into an HTTP response.
-     */
-    public function testRenderModelNotFoundException()
-    {
-        $exception = new ModelNotFoundException();
-
-        /** @var Request|MockObject $request */
-        $request = $this->mockery(Request::class);
-
-        $response = $this->handler->render($request, $exception);
-
-        $this->assertInstanceOf(Response::class, $response);
-    }
 }
