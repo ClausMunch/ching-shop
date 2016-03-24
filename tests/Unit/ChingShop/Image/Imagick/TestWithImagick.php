@@ -22,6 +22,7 @@ abstract class TestWithImagick extends UnitTest
                 ->method('getImage')
                 ->willReturn($this->imagick);
         }
+
         return $this->imagick;
     }
 

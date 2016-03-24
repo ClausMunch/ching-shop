@@ -33,6 +33,7 @@ class ImagePreProcessor
 
     /**
      * @param Image $image
+     *
      * @return ImagickCollection
      */
     public function preProcess(Image $image): ImagickCollection
@@ -44,6 +45,7 @@ class ImagePreProcessor
         foreach ($this->transformers as $transformer) {
             $transformer->applyTo($collection);
         }
+
         return $collection;
     }
 }

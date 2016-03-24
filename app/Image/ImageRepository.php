@@ -6,7 +6,6 @@ use ChingShop\Catalogue\Product\Product;
 use ChingShop\Events\NewImageEvent;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -107,8 +106,9 @@ class ImageRepository
     /**
      * @param int $id
      *
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function deleteById(int $id): bool
     {

@@ -55,6 +55,7 @@ class WaterMarkTest extends TestWithImagick
 
     /**
      * (Make it clearer what the imagick field is in this test).
+     *
      * @return ImagickContract|\PHPUnit_Framework_MockObject_MockObject
      */
     private function waterMark()

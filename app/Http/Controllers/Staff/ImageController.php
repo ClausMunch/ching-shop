@@ -3,7 +3,6 @@
 namespace ChingShop\Http\Controllers\Staff;
 
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Http\Requests;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
@@ -42,6 +41,7 @@ class ImageController extends Controller
     public function index()
     {
         $images = $this->imageRepository->loadLatest(500);
+
         return $this->viewFactory->make(
             'staff.images.index',
             compact('images')
@@ -56,6 +56,7 @@ class ImageController extends Controller
     public function destroy(int $id)
     {
         $this->imageRepository->deleteById($id);
+
         return $this->redirectToImagesIndex();
     }
 
@@ -65,6 +66,7 @@ class ImageController extends Controller
     public function transferLocalImages()
     {
         $this->imageRepository->transferLocalImages();
+
         return $this->redirectToImagesIndex();
     }
 

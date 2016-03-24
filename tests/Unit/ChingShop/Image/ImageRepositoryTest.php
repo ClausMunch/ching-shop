@@ -234,6 +234,7 @@ class ImageRepositoryTest extends UnitTest
             ->with($this->callback(
                 function (NewImageEvent $event) use ($image) {
                     $this->assertSame($image, $event->image());
+
                     return true;
                 }
             ));

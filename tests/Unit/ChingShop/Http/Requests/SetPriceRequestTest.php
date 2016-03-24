@@ -15,7 +15,7 @@ class SetPriceRequestTest extends RequestTest
     public function setUp()
     {
         parent::setUp();
-        $this->setPriceRequest = new SetPriceRequest;
+        $this->setPriceRequest = new SetPriceRequest();
     }
 
     /**

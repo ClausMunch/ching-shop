@@ -17,7 +17,7 @@ class OptimiseImageTest extends TestWithImagick
     public function setUp()
     {
         parent::setUp();
-        $this->optimiseImage = new OptimiseImage;
+        $this->optimiseImage = new OptimiseImage();
     }
 
     /**

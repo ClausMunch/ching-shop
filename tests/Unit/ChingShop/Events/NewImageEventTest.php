@@ -13,7 +13,7 @@ class NewImageEventTest extends UnitTest
      */
     public function testConstruct()
     {
-        $event = new NewImageEvent(new Image);
+        $event = new NewImageEvent(new Image());
         $this->assertInstanceOf(NewImageEvent::class, $event);
     }
 
@@ -22,7 +22,7 @@ class NewImageEventTest extends UnitTest
      */
     public function testImage()
     {
-        $image = new Image;
+        $image = new Image();
         $event = new NewImageEvent($image);
         $this->assertSame($image->id, $event->image()->id);
     }

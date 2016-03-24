@@ -29,7 +29,7 @@ class WaterMark implements ImageTransformer
      */
     public function applyTo(ImagickCollection $images)
     {
-        foreach($images as $image) {
+        foreach ($images as $image) {
             $this->addWaterMarkToImage($image);
         }
     }
@@ -67,6 +67,7 @@ class WaterMark implements ImageTransformer
             );
             $this->waterMark->readImage(resource_path(self::LOCATION));
         }
+
         return $this->waterMark;
     }
 }
