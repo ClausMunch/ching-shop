@@ -195,7 +195,7 @@
     - name: make sure latest npm is installed
       npm: name=npm global=yes
 
-    - name: create /var/www/ directory
+    - name: create /var/www/node_modules directory
       file: dest=/var/www/ching-shop/node_modules
             state=directory
             owner=www-data
@@ -230,4 +230,4 @@
       service: name=redis-server state=restarted
 
     - name: restart workers
-      supervisorctl: name=`ching-shop-worker:*` state=restarted config=/etc/supervisor/conf.d/supervisor.conf
+      supervisorctl: name=`ching-shop-worker:*` state=restarted config=/etc/supervisor/conf.d/ching-shop-worker.conf

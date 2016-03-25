@@ -94,16 +94,16 @@ interface ImagickContract
     public function count();
 
     /**
-     * @param ImagickContract|Imagick $composite_object
-     * @param int                     $composite
-     * @param int                     $x
-     * @param int                     $y
-     * @param int                     $channel
+     * @param Imagick $composite_object
+     * @param int     $composite
+     * @param int     $x
+     * @param int     $y
+     * @param int     $channel
      *
      * @return mixed
      */
     public function compositeImage(
-        $composite_object,
+        Imagick $composite_object,
         $composite,
         $x,
         $y,
