@@ -23,7 +23,7 @@ class WaterMarkTest extends TestWithImagick
     {
         parent::setUp();
 
-        $this->waterMarkImage = new ImagickAdapter;
+        $this->waterMarkImage = new ImagickAdapter();
         $this->waterMark = new WaterMark($this->waterMarkImage);
     }
 
