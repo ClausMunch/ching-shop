@@ -3,7 +3,6 @@
 namespace ChingShop\Image\Imagick;
 
 use ChingShop\Image\Image;
-use Imagick;
 
 class ImagePreProcessor
 {
