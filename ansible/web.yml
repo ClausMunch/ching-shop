@@ -38,6 +38,7 @@
         - imagemagick
         - supervisor
         - python-mysqldb
+        - htop
 
     - name: symlink node
       file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
@@ -83,20 +84,24 @@
       composer: command=install working_dir=/var/www/ching-shop
 
     - name: configure nginx
-      template: src=nginx.conf dest=/etc/nginx/sites-available/www.ching-shop.com.conf
+      template: src=nginx.conf
+                dest=/etc/nginx/sites-available/www.ching-shop.com.conf
       notify:
         - restart php7.0-fpm
         - restart nginx
 
     - name: enable nginx site
-      file: src=/etc/nginx/sites-available/www.ching-shop.com.conf dest=/etc/nginx/sites-enabled/www.ching-shop.com.conf state=link
+      file: src=/etc/nginx/sites-available/www.ching-shop.com.conf
+            dest=/etc/nginx/sites-enabled/www.ching-shop.com.conf
+            state=link
       notify:
         - restart php7.0-fpm
         - restart redis
         - restart nginx
 
     - name: configure supervisor
-      template: src=supervisor.conf dest=/etc/supervisor/conf.d/ching-shop-worker.conf
+      template: src=ching-shop-worker.conf
+                dest=/etc/supervisor/conf.d/ching-shop-worker.conf
       notify:
         - restart workers
 
@@ -119,7 +124,9 @@
     - include_vars: keys.yml
 
     - name: create .env
-      template: src=.env.template dest=/var/www/ching-shop/.env force=yes
+      template: src=.env.template
+                dest=/var/www/ching-shop/.env
+                force=yes
 
     - name: Set MySQL root password
       mysql_user: user=root
@@ -230,4 +237,9 @@
       service: name=redis-server state=restarted
 
     - name: restart workers
-      supervisorctl: name=`ching-shop-worker:*` state=restarted config=/etc/supervisor/conf.d/ching-shop-worker.conf
+      supervisorctl: name=`ching-shop-worker:*`
+                     state=present
+                     config=/etc/supervisor/conf.d/ching-shop-worker.conf
+      supervisorctl: name=`ching-shop-worker:*`
+                     state=restarted
+                     config=/etc/supervisor/conf.d/ching-shop-worker.conf
