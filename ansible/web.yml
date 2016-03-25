@@ -118,13 +118,7 @@
       mysql_user: name=ching_shop password={{ db_password }} priv=ching_shop.*:ALL state=present
 
     - name: set encryption key
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_KEY=' line=APP_KEY={{ enckey.stdout }}
-      when: enckey.changed
-
-    - name: Save enckey file
-      become_user: www-data
-      lineinfile: dest=/var/www/ching-shop/.enckey line="{{ enckey.stdout }}" create=yes state=present
-      when: enckey.changed
+      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_KEY=' line=APP_KEY={{ app_key }}
 
     - name: Laravel Scheduler
       cron: >
