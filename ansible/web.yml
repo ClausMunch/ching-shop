@@ -37,6 +37,7 @@
         - npm
         - imagemagick
         - supervisor
+        - python-mysqldb
 
     - name: symlink node
       file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
@@ -48,10 +49,18 @@
         - restart nginx
 
     - name: create /var/www/ directory
-      file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
+      file: dest=/var/www/
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
 
     - name: create /var/log/ching-shop directory
-      file: dest=/var/log/ching-shop state=directory owner=www-data group=www-data mode=0700
+      file: dest=/var/log/ching-shop
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
 
     - name: clone git repository
       become_user: www-data
@@ -92,7 +101,8 @@
         - restart workers
 
     - name: Copy public key into /var/www
-      authorized_key: user=www-data key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      authorized_key: user=www-data
+                      key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
     - name: Set www-data user shell
       user: name=www-data shell=/bin/bash
@@ -106,19 +116,62 @@
     - name: UFW open HTTP
       ufw: rule=allow port=http
 
-    - name: Create MySQL DB
-      mysql_db: name=ching_shop state=present
-
     - include_vars: keys.yml
 
     - name: create .env
       template: src=.env.template dest=/var/www/ching-shop/.env force=yes
 
-    - name: Create MySQL User
-      mysql_user: name=ching_shop password={{ db_password }} priv=ching_shop.*:ALL state=present
+    - name: Set MySQL root password
+      mysql_user: user=root
+                  password="{{ db_root_password }}"
+                  host=localhost
+                  login_password="{{ db_root_password }}"
 
-    - name: set encryption key
-      lineinfile: dest=/var/www/ching-shop/.env regexp='^APP_KEY=' line=APP_KEY={{ app_key }}
+    - name: Create MySQL DB
+      mysql_db: name=ching_shop
+                state=present
+                login_password="{{ db_root_password }}"
+
+    - name: MySQL user
+      mysql_user: name=ching_shop
+                  password={{ db_password }}
+                  priv=ching_shop.*:ALL
+                  state=present
+                  login_password="{{ db_root_password }}"
+
+    - name: Delete anonymous MySQL user
+      mysql_user: user=""
+                  state="absent"
+                  login_password="{{ db_root_password }}"
+
+    - name: Secure the MySQL root user for IPV6 localhost (::1)
+      mysql_user: user="root"
+                  password="{{ db_root_password }}"
+                  host="::1"
+                  login_password="{{ db_root_password }}"
+
+    - name: Secure the MySQL root user for IPV4 localhost (127.0.0.1)
+      mysql_user: user="root"
+                  password="{{ db_root_password }}"
+                  host="127.0.0.1"
+                  login_password="{{ db_root_password }}"
+
+    - name: Secure the MySQL root user for localhost domain (localhost)
+      mysql_user: user="root"
+                  password="{{ db_root_password }}"
+                  host="localhost"
+                  login_password="{{ db_root_password }}"
+
+    - name: Secure the MySQL root user for server_hostname domain
+      mysql_user: user="root"
+                  password="{{ db_root_password }}"
+                  host="{{ ansible_fqdn }}"
+                  login_password="{{ db_root_password }}"
+
+    - name: Remove MySQL test database
+      mysql_db: db=test
+                state=absent
+                login_password="{{ db_root_password }}"
 
     - name: Laravel Scheduler
       cron: >
@@ -143,7 +196,11 @@
       npm: name=npm global=yes
 
     - name: create /var/www/ directory
-      file: dest=/var/www/ching-shop/node_modules state=directory owner=www-data group=www-data mode=0700
+      file: dest=/var/www/ching-shop/node_modules
+            state=directory
+            owner=www-data
+            group=www-data
+            mode=0700
 
     - npm: path=/var/www/ching-shop production=yes state=present
       become_user: www-data

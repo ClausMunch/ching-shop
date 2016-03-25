@@ -71,10 +71,10 @@ return [
 
         's3' => [
             'driver'   => 's3',
-            'key'      => env('S3_KEY', 'your-key'),
-            'secret'   => env('S3_SECRET', 'your-secret'),
-            'region'   => env('S3_REGION', 'eu-west-1'),
-            'bucket'   => env('S3_BUCKET', 'ching-shop-static'),
+            'key'      => env('AWS_KEY'),
+            'secret'   => env('AWS_SECRET'),
+            'region'   => env('S3_REGION', 'us-east-1'),
+            'bucket'   => env('S3_BUCKET', 'static.ching-shop.com'),
             'endpoint' => env('S3_ENDPOINT', 'https://static.ching-shop.com/'),
         ],
 

@@ -51,9 +51,9 @@ return [
 
         'sqs' => [
             'driver' => 'sqs',
-            'key'    => env('SQS_PUBLIC_KEY'),
-            'secret' => env('SQS_PRIVATE_KEY'),
-            'queue'  => 'ching-shop',
+            'key'    => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'queue'  => 'ching-shop-app',
             'region' => 'us-east-1',
         ],
 
