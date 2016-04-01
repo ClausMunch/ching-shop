@@ -2,6 +2,7 @@ language: php
 sudo: false
 install:
   - printf "\n" | pecl install imagick
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --no-interaction --no-scripts
   - composer require satooshi/php-coveralls:dev-master
 script:
