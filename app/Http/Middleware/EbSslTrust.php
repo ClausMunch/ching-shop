@@ -6,9 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 
 /**
- * Class EB_SSL_Trust.
+ * Class EbSslTrust.
  */
-class EB_SSL_Trust
+class EbSslTrust
 {
     /**
      * Handle an incoming request.

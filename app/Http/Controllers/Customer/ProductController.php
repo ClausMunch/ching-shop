@@ -44,7 +44,7 @@ class ProductController extends Controller
      */
     public function viewAction(int $ID, string $slug)
     {
-        $product = $this->productRepository->presentByID($ID);
+        $product = $this->productRepository->presentById($ID);
         if (!$product->id()) {
             throw new NotFoundHttpException();
         }

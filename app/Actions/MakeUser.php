@@ -30,8 +30,11 @@ class MakeUser
      * @param Hasher              $hasher
      * @param Role                $roleResource
      */
-    public function __construct(ValidationInterface $validation, Hasher $hasher, Role $roleResource)
-    {
+    public function __construct(
+        ValidationInterface $validation,
+        Hasher $hasher,
+        Role $roleResource
+    ) {
         $this->validation = $validation;
         $this->hasher = $hasher;
         $this->roleResource = $roleResource;
@@ -73,7 +76,10 @@ class MakeUser
     private function validate(string $email, string $password): bool
     {
         return $this->validation->passes(
-            compact('email', 'password'),
+            [
+                'email'    => $email,
+                'password' => $password,
+            ],
             $this->validationRules
         );
     }

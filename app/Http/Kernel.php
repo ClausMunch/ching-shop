@@ -2,6 +2,7 @@
 
 namespace ChingShop\Http;
 
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -49,7 +50,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth'       => Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.basic' => AuthenticateWithBasicAuth::class,
         'guest'      => Middleware\RedirectIfAuthenticated::class,
         'staff'      => Middleware\StaffOnly::class,
         'customer'   => Middleware\Customer::class,

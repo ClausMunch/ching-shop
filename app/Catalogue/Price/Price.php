@@ -6,6 +6,7 @@ use ChingShop\Catalogue\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 /**
  * ChingShop\Catalogue\Price\Price.
@@ -20,18 +21,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereUnits($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereSubunits($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereCurrency($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereDeletedAt($value)
+ * @method static Builder|Price whereId($value)
+ * @method static Builder|Price whereUnits($value)
+ * @method static Builder|Price whereSubunits($value)
+ * @method static Builder|Price whereCurrency($value)
+ * @method static Builder|Price whereCreatedAt($value)
+ * @method static Builder|Price whereUpdatedAt($value)
+ * @method static Builder|Price whereDeletedAt($value)
  *
  * @property int $product_id
  * @property-read \ChingShop\Catalogue\Product\Product $product
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Price\Price whereProductId($value)
+ * @method static Builder|Price whereProductId($value)
  */
 class Price extends Model
 {

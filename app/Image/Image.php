@@ -7,6 +7,7 @@ use ChingShop\Http\View\Staff\HttpCrudInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 /**
  * ChingShop\Image\Image.
@@ -17,18 +18,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereFilename($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereAltText($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUpdatedAt($value)
+ * @method static Builder|Image whereId($value)
+ * @method static Builder|Image whereFilename($value)
+ * @method static Builder|Image whereAltText($value)
+ * @method static Builder|Image whereCreatedAt($value)
+ * @method static Builder|Image whereUpdatedAt($value)
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  * @property string $url
  * @property string $deleted_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereUrl($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Image\Image whereDeletedAt($value)
+ * @method static Builder|Image whereUrl($value)
+ * @method static Builder|Image whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Image extends Model implements HttpCrudInterface
@@ -74,8 +75,11 @@ class Image extends Model implements HttpCrudInterface
      */
     public function getFilenameAttribute(): string
     {
-        return isset($this->attributes['filename']) ?
-            $this->safeFilename((string) $this->attributes['filename']) : '';
+        if (empty($this->attributes['filename'])) {
+            return '';
+        }
+
+        return $this->safeFilename((string) $this->attributes['filename']);
     }
 
     /**
@@ -109,9 +113,16 @@ class Image extends Model implements HttpCrudInterface
      */
     public function srcSet(): string
     {
-        return implode(',', array_map(function ($size, $width) {
-            return "{$this->url($size)} {$width}w";
-        }, array_keys(self::SIZES), array_values(self::SIZES)));
+        return implode(
+            ',',
+            array_map(
+                function ($size, $width) {
+                    return "{$this->url($size)} {$width}w";
+                },
+                array_keys(self::SIZES),
+                array_values(self::SIZES)
+            )
+        );
     }
 
     /**
@@ -196,7 +207,7 @@ class Image extends Model implements HttpCrudInterface
      *
      * @return string
      */
-    public function crudID(): string
+    public function crudId(): string
     {
         return (string) $this->id;
     }

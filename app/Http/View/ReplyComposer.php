@@ -81,7 +81,8 @@ class ReplyComposer
     {
         if (!isset($this->errors)) {
             $this->errors = $this->sessionStore->get(
-                'errors', new MessageBag([])
+                'errors',
+                new MessageBag([])
             );
         }
 

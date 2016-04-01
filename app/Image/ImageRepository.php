@@ -45,10 +45,7 @@ class ImageRepository
      */
     public function mustLoadById(int $imageId): Image
     {
-        return $this->imageResource
-            ->where('id', $imageId)
-            ->limit(1)
-            ->first();
+        return $this->imageResource->where('id', $imageId)->limit(1)->first();
     }
 
     /**
@@ -58,9 +55,11 @@ class ImageRepository
      */
     public function storeUploadedImage(UploadedFile $upload): Image
     {
-        $newImage = $this->imageResource->create([
+        $newImage = $this->imageResource->create(
+            [
             'filename' => uniqid().$upload->getClientOriginalName(),
-        ]);
+            ]
+        );
         $upload->move(storage_path('image'), $newImage->filename());
 
         $this->dispatcher->fire(new NewImageEvent($newImage));
@@ -74,9 +73,14 @@ class ImageRepository
      */
     public function attachUploadedImagesToProduct($images, Product $product)
     {
-        $product->attachImages(array_map(function (UploadedFile $image) {
-            return $this->storeUploadedImage($image)->id;
-        }, $images instanceof FileBag ? $images->all() : (array) $images));
+        $product->attachImages(
+            array_map(
+                function (UploadedFile $image) {
+                    return $this->storeUploadedImage($image)->id;
+                },
+                $images instanceof FileBag ? $images->all() : (array) $images
+            )
+        );
     }
 
     /**
@@ -123,14 +127,15 @@ class ImageRepository
      */
     public function transferLocalImages()
     {
-        $this->imageResource
-            ->orWhere(function (Builder $query) {
-                $query->where('filename', '!=', '');
-                $query->whereNotNull('filename');
-            })
-            ->get()
-            ->each(function (Image $image) {
-                $this->dispatcher->fire(new NewImageEvent($image));
-            });
+        $this->imageResource->orWhere(
+            function (Builder $query) {
+                    $query->where('filename', '!=', '');
+                    $query->whereNotNull('filename');
+            }
+        )->get()->each(
+            function (Image $image) {
+                    $this->dispatcher->fire(new NewImageEvent($image));
+            }
+        );
     }
 }

@@ -1,13 +1,13 @@
 @extends('layouts.staff.dashboard')
 
 @section('page-title')
-    {{ $product->SKU() }} / {{ $product->name() }}
+    {{ $product->sku() }} / {{ $product->name() }}
 @endsection
 
 @section('header')
     <small>Product</small>
     {{ $product->name() }}
-    <small>({{ $product->SKU() }})</small>
+    <small>({{ $product->sku() }})</small>
 @endsection
 
 @section('content')
@@ -61,7 +61,7 @@
     </a>
 
     <a class="btn btn-default"
-       href="{{ route('staff.products.edit', $product->SKU()) }}">
+       href="{{ route('staff.products.edit', $product->sku()) }}">
         Edit
     </a>
 

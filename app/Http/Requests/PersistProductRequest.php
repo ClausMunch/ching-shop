@@ -67,7 +67,7 @@ class PersistProductRequest extends Request
         string $rules,
         string $fieldName,
         HttpRequest $request
-    ): string {
+    ) {
         if ($this->requestIsUpdate($request)) {
             $rules = sprintf(
                 '%s,%s,%s',

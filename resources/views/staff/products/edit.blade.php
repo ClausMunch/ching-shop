@@ -1,11 +1,11 @@
 @extends('layouts.staff.dashboard')
 
 @section('page-title')
-    Edit {{ $product->SKU() }}
+    Edit {{ $product->sku() }}
 @endsection
 
 @section('header')
-    Edit product {{ $product->SKU() }}
+    Edit product {{ $product->sku() }}
 @endsection
 
 @section('content')

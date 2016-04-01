@@ -39,6 +39,8 @@ class PriceController extends Controller
     /**
      * @param string          $sku
      * @param SetPriceRequest $setPriceRequest
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function setProductPrice(
         string $sku,

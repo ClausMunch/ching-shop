@@ -2,8 +2,10 @@
 
 namespace ChingShop\User;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Query\Builder;
 
 /**
  * ChingShop\User\Role.
@@ -14,19 +16,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('auth.model')[] $users
- * @property-read \Illuminate\Database\Eloquent\Collection|\Config::get('entrust.permission')[] $perms
+ * @property-read Collection|\Config::get('auth.model')[] $users
+ * @property-read Collection|\Config::get('entrust.permission')[] $perms
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDisplayName($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDescription($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereUpdatedAt($value)
+ * @method static Builder|Role whereId($value)
+ * @method static Builder|Role whereName($value)
+ * @method static Builder|Role whereDisplayName($value)
+ * @method static Builder|Role whereDescription($value)
+ * @method static Builder|Role whereCreatedAt($value)
+ * @method static Builder|Role whereUpdatedAt($value)
  *
  * @property string $deleted_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\Role whereDeletedAt($value)
+ * @method static Builder|Role whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class Role extends Model

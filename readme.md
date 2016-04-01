@@ -55,6 +55,12 @@ phpunit --testsuite functional
 phpunit --testsuite unit --coverage-html build
 ```
 
+## Static analysis
+
+```bash
+phpcs app
+```
+
 ## Deployment
  
 ```bash

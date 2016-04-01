@@ -156,6 +156,6 @@ class ImageTest extends UnitTest
     {
         $image = new Image();
         $image->id = 123;
-        $this->assertEquals($image->id, $image->crudID());
+        $this->assertEquals($image->id, $image->crudId());
     }
 }

@@ -50,7 +50,7 @@
                name="sku"
                maxlength="255"
                required
-               value="{{ $reply->oldInputOr('sku', $product->SKU()) }}">
+               value="{{ $reply->oldInputOr('sku', $product->sku()) }}">
         @foreach($reply->errorsFor('sku') as $error)
             <label class="help-block" for="name">
                 {{ $error }}

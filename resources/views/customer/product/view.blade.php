@@ -1,7 +1,7 @@
 @extends('customer.front')
 
 @section('page-title')
-    {{ $product->name() }} ({{ $product->SKU() }})
+    {{ $product->name() }} ({{ $product->sku() }})
 @endsection
 
 @section('body')
@@ -49,7 +49,7 @@
             <table class="table product-details">
                 <tr>
                     <td>Reference</td>
-                    <td>{{ $product->SKU() }}</td>
+                    <td>{{ $product->sku() }}</td>
                 </tr>
                 <tr>
                     <td>Name</td>

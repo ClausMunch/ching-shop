@@ -48,11 +48,13 @@ class WaterMark implements ImageTransformer
             $this->waterMark()->getImage(),
             Imagick::COMPOSITE_DEFAULT,
             $margin,
-            array_sum([
+            array_sum(
+                [
                 $image->getImageHeight(),
                 -$this->waterMark()->getImageHeight(),
                 -$margin,
-            ])
+                ]
+            )
         );
     }
 
