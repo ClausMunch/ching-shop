@@ -6,6 +6,8 @@ install:
   - composer require satooshi/php-coveralls:dev-master
 script:
   - mkdir -p build/logs
+  - phpcs --standard=./tests/analysis/phpcs.xml app
+  - phpmd --strict app text ./tests/analysis/phpmd.xml
   - phpunit --testsuite unit --coverage-clover build/logs/clover.xml
 php:
   - '7.0'
