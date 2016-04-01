@@ -30,8 +30,10 @@
         "hamcrest/hamcrest-php": "^2.0.0",
         "guzzle/guzzle": "^3.9.3",
         "johnkary/phpunit-speedtrap": "^1.0.1",
-        "pda/pheanstalk": "^3.0"
+        "pda/pheanstalk": "^3.0",
+        "phpmd/phpmd" : "@stable"
     },
+
     "autoload": {
         "classmap": [
             "database"

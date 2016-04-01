@@ -104,7 +104,7 @@ class Image extends Model implements HttpCrudInterface
             $path['dirname'],
             $path['filename'],
             $size,
-            $path['extension'] ?? ''
+            isset($path['extension']) ? $path['extension'] : ''
         );
     }
 

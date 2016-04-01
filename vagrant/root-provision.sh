@@ -9,6 +9,7 @@ apt-get dist-upgrade -y
 apt-get install htop imagemagick -y
 apt-get install php-imagick php7.0-mbstring -y
 composer global require "squizlabs/php_codesniffer=^2.5"
+composer global require "phpmd/phpmd=@stable"
 
 function installPHPUnit
 {

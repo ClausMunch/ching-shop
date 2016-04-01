@@ -96,7 +96,7 @@ class ReplyComposer
     {
         if (!isset($this->oldInput)) {
             $this->oldInput = new MessageBag(
-                $this->sessionStore->getOldInput() ?? []
+                (array) $this->sessionStore->getOldInput()
             );
         }
 
