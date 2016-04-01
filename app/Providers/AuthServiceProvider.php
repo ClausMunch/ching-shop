@@ -7,9 +7,7 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as Provider;
 
 /**
- * Class AuthServiceProvider
- *
- * @package ChingShop\Providers
+ * Class AuthServiceProvider.
  */
 class AuthServiceProvider extends Provider
 {
