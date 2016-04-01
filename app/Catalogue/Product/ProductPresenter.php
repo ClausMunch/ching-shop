@@ -39,7 +39,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
     /**
      * @return string
      */
-    public function SKU(): string
+    public function sku(): string
     {
         return (string) $this->product->sku;
     }
@@ -79,9 +79,9 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
     /**
      * @return string
      */
-    public function crudID(): string
+    public function crudId(): string
     {
-        return $this->SKU();
+        return $this->sku();
     }
 
     /**
@@ -113,8 +113,9 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function mainImage()
     {
-        return $this->product->images->first() ?
-            $this->product->images->first() : new Image();
+        $firstImage = $this->product->images->first();
+
+        return $firstImage ? $firstImage : new Image();
     }
 
     /**
@@ -163,8 +164,9 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function price(): string
     {
-        return $this->product->prices->first() ?
-            $this->product->prices->first()->formatted() : '';
+        $firstPrice = $this->product->prices->first();
+
+        return $firstPrice ? $firstPrice->formatted() : '';
     }
 
     /**
@@ -172,8 +174,9 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function priceUnits(): int
     {
-        return $this->product->prices->first() ?
-            $this->product->prices->first()->units : 0;
+        $firstPrice = $this->product->prices->first();
+
+        return $firstPrice ? $firstPrice->units : 0;
     }
 
     /**
@@ -181,7 +184,8 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function priceSubUnits(): int
     {
-        return $this->product->prices->first() ?
-            $this->product->prices->first()->subUnitsFormatted() : 0;
+        $firstPrice = $this->product->prices->first();
+
+        return $firstPrice ? $firstPrice->subUnitsFormatted() : 0;
     }
 }

@@ -125,9 +125,16 @@ class NewImageListener implements ShouldQueue
      */
     private function filesystemEndpoint(): string
     {
-        return rtrim(secure_url($this->config->get(sprintf(
-            'filesystems.disks.%s.public',
-            $this->config->get('filesystems.default')
-        ))), '/');
+        return rtrim(
+            secure_url(
+                $this->config->get(
+                    sprintf(
+                        'filesystems.disks.%s.public',
+                        $this->config->get('filesystems.default')
+                    )
+                )
+            ),
+            '/'
+        );
     }
 }

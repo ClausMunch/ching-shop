@@ -81,7 +81,8 @@ class ReplyComposer
     {
         if (!isset($this->errors)) {
             $this->errors = $this->sessionStore->get(
-                'errors', new MessageBag([])
+                'errors',
+                new MessageBag([])
             );
         }
 
@@ -95,7 +96,7 @@ class ReplyComposer
     {
         if (!isset($this->oldInput)) {
             $this->oldInput = new MessageBag(
-                $this->sessionStore->getOldInput() ?? []
+                (array) $this->sessionStore->getOldInput()
             );
         }
 

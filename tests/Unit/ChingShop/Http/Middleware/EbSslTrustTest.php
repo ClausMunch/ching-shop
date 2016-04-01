@@ -2,21 +2,21 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use ChingShop\Http\Middleware\EB_SSL_Trust;
+use ChingShop\Http\Middleware\EbSslTrust;
 use Illuminate\Http\Request;
 
-class EB_SSL_TrustTest extends MiddlewareTest
+class EbSslTrustTest extends MiddlewareTest
 {
-    /** @var EB_SSL_Trust */
+    /** @var EbSslTrust */
     private $ebSslTrust;
 
     /**
-     * Create EB_SSL_Trust for each test.
+     * Create EbSslTrust for each test.
      */
     public function setUp()
     {
         parent::setUp();
-        $this->ebSslTrust = new EB_SSL_Trust();
+        $this->ebSslTrust = new EbSslTrust();
     }
 
     /**
@@ -24,7 +24,7 @@ class EB_SSL_TrustTest extends MiddlewareTest
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf(EB_SSL_Trust::class, $this->ebSslTrust);
+        $this->assertInstanceOf(EbSslTrust::class, $this->ebSslTrust);
     }
 
     /**

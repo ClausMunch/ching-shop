@@ -28,19 +28,25 @@ class ImageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(ImagickContract::class, function () {
-            return new ImagickAdapter(new Imagick());
-        });
-
-        $this->app->bind(ImagePreProcessor::class, function (Application $app) {
-            $processor = new ImagePreProcessor(
-                $app->make(ImagickContract::class)
-            );
-            foreach ($this->transformerClasses as $transformerClass) {
-                $processor->addTransformer($app->make($transformerClass));
+        $this->app->bind(
+            ImagickContract::class,
+            function () {
+                return new ImagickAdapter(new Imagick());
             }
+        );
 
-            return $processor;
-        });
+        $this->app->bind(
+            ImagePreProcessor::class,
+            function (Application $app) {
+                $processor = new ImagePreProcessor(
+                    $app->make(ImagickContract::class)
+                );
+                foreach ($this->transformerClasses as $transformerClass) {
+                    $processor->addTransformer($app->make($transformerClass));
+                }
+
+                return $processor;
+            }
+        );
     }
 }

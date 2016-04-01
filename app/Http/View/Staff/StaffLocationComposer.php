@@ -127,7 +127,7 @@ class StaffLocationComposer extends LocationComposer
     {
         return $this->urlGenerator->route(
             implode('.', [$crud->routePath(), self::ROUTE_SHOW]),
-            $crud->crudID()
+            $crud->crudId()
         );
     }
 
@@ -138,8 +138,7 @@ class StaffLocationComposer extends LocationComposer
      */
     public function persistMethodFor(HttpCrudInterface $crud): string
     {
-        return $crud->isStored() ?
-            Request::METHOD_PUT : Request::METHOD_POST;
+        return $crud->isStored() ? Request::METHOD_PUT : Request::METHOD_POST;
     }
 
     /**
@@ -152,7 +151,7 @@ class StaffLocationComposer extends LocationComposer
         if ($crud->isStored()) {
             return $this->urlGenerator->route(
                 implode('.', [$crud->routePath(), self::ROUTE_UPDATE]),
-                $crud->crudID()
+                $crud->crudId()
             );
         }
 
@@ -170,7 +169,7 @@ class StaffLocationComposer extends LocationComposer
     {
         return $this->urlGenerator->route(
             implode('.', [$crud->routePath(), self::ROUTE_DELETE]),
-            $crud->crudID()
+            $crud->crudId()
         );
     }
 
@@ -180,16 +179,17 @@ class StaffLocationComposer extends LocationComposer
      *
      * @return string
      */
-    public function detachActionFor(
-        RelaterInterface $relater,
-        Model $related
-    ): string {
+    public function detachActionFor(RelaterInterface $relater, Model $related)
+    {
         return $this->urlGenerator->route(
-            implode('.', [
-                $relater->routePath(),
-                self::ROUTE_DETACH,
-                $relater->relationKeyTo($related),
-            ]),
+            implode(
+                '.',
+                [
+                    $relater->routePath(),
+                    self::ROUTE_DETACH,
+                    $relater->relationKeyTo($related),
+                ]
+            ),
             [
                 'productId' => $relater->id(),
                 'imageId'   => $related->getAttribute('id'),

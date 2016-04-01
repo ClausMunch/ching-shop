@@ -39,10 +39,11 @@ class ProductRepository
     public function presentLatest($limit = 100): array
     {
         return array_map(
-
-function (Product $product): ProductPresenter {
-    return $this->presentProduct($product);
-}, $this->loadLatest($limit)->all());
+            function (Product $product) : ProductPresenter {
+                return $this->presentProduct($product);
+            },
+            $this->loadLatest($limit)->all()
+        );
     }
 
     /**
@@ -86,13 +87,14 @@ function (Product $product): ProductPresenter {
      *
      * @return ProductPresenter
      */
-    public function presentBySKU(string $sku): ProductPresenter
+    public function presentBySku(string $sku): ProductPresenter
     {
         /** @var Product $product */
         $product = $this->productResource
             ->where('sku', $sku)
             ->with(['images', 'prices'])
             ->first();
+
         if (!$product) {
             return $this->presentEmpty();
         }
@@ -101,17 +103,18 @@ function (Product $product): ProductPresenter {
     }
 
     /**
-     * @param int $ID
+     * @param int $id
      *
      * @return ProductPresenter
      */
-    public function presentByID(int $ID): ProductPresenter
+    public function presentById(int $id): ProductPresenter
     {
         /** @var Product $product */
         $product = $this->productResource
-            ->where('id', $ID)
+            ->where('id', $id)
             ->with(['images', 'prices'])
             ->first();
+
         if (!$product) {
             return $this->presentEmpty();
         }
@@ -126,10 +129,7 @@ function (Product $product): ProductPresenter {
      */
     public function mustLoadById(int $id): Product
     {
-        return $this->productResource
-            ->where('id', $id)
-            ->limit(1)
-            ->first();
+        return $this->productResource->where('id', $id)->limit(1)->first();
     }
 
     /**
@@ -137,12 +137,9 @@ function (Product $product): ProductPresenter {
      *
      * @return Product
      */
-    public function mustLoadBySKU(string $sku): Product
+    public function mustLoadBySku(string $sku): Product
     {
-        return $this->productResource
-            ->where('sku', $sku)
-            ->limit(1)
-            ->first();
+        return $this->productResource->where('sku', $sku)->limit(1)->first();
     }
 
     /**

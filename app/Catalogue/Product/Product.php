@@ -4,39 +4,41 @@ namespace ChingShop\Catalogue\Product;
 
 use ChingShop\Catalogue\Price\Price;
 use ChingShop\Image\Image;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 
 /**
  * ChingShop\Catalogue\Product\Product.
  *
  * @property int $id
  * @property string $sku
- * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $created_atProductRepository
  * @property \Carbon\Carbon $updated_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereSku($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereUpdatedAt($value)
+ * @method static Builder|Product whereId($value)
+ * @method static Builder|Product whereSku($value)
+ * @method static Builder|Product whereCreatedAt($value)
+ * @method static Builder|Product whereUpdatedAt($value)
  *
  * @property string $name
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereName($value)
+ * @method static Builder|Product whereName($value)
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
  * @property string $slug
  * @property string $description
  * @property string $deleted_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereSlug($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereDescription($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\Catalogue\Product\Product whereDeletedAt($value)
+ * @method static Builder|Product whereSlug($value)
+ * @method static Builder|Product whereDescription($value)
+ * @method static Builder|Product whereDeletedAt($value)
  * @mixin \Eloquent
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\ChingShop\Catalogue\Price\Price[] $prices
+ * @property-read Collection|\ChingShop\Catalogue\Price\Price[] $prices
  */
 class Product extends Model
 {
@@ -64,8 +66,11 @@ class Product extends Model
      */
     public function images(): BelongsToMany
     {
-        return isset($this->imagesRelationship) ?
-            $this->imagesRelationship : $this->belongsToMany(Image::class);
+        if (isset($this->imagesRelationship)) {
+            return $this->imagesRelationship;
+        }
+
+        return $this->belongsToMany(Image::class);
     }
 
     /**

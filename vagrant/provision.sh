@@ -36,5 +36,7 @@ function appSetup
     php artisan migrate --seed
     npm install
     gulp
+    phpcs --config-set colors 1
+    phpcs --config-set severity 1
 }
 appSetup

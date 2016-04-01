@@ -163,7 +163,7 @@ class LocationComposerTest extends UnitTest
         $crud->shouldReceive('routePath')->andReturn($routePath);
 
         $crudID = $this->generator()->anyInteger();
-        $crud->shouldReceive('crudID')->once()->andReturn($crudID);
+        $crud->shouldReceive('crudId')->once()->andReturn($crudID);
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')
@@ -231,7 +231,7 @@ class LocationComposerTest extends UnitTest
         $existingCrud->shouldReceive('routePath')
             ->andReturn($routePath);
         $crudID = $this->generator()->anyInteger();
-        $existingCrud->shouldReceive('crudID')->andReturn($crudID);
+        $existingCrud->shouldReceive('crudId')->andReturn($crudID);
 
         $URL = $this->generator()->anyString();
         $this->urlGenerator->shouldReceive('route')

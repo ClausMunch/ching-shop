@@ -58,6 +58,6 @@ class LocationComposer
     public function productEnquiryMail(ProductPresenter $product): string
     {
         return 'mailto:ching@ching-shop.com?subject='
-            ."I would like to buy '{$product->name()}' ({$product->SKU()})";
+            ."I would like to buy '{$product->name()}' ({$product->sku()})";
     }
 }

@@ -16,8 +16,8 @@
         "satooshi/php-coveralls": "^1.0.1",
         "aws/aws-sdk-php": "^3.0",
         "pmatseykanets/artisan-beans": "^0.1.4",
-        "barryvdh/laravel-ide-helper": "^2.1",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "squizlabs/php_codesniffer": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
@@ -30,8 +30,10 @@
         "hamcrest/hamcrest-php": "^2.0.0",
         "guzzle/guzzle": "^3.9.3",
         "johnkary/phpunit-speedtrap": "^1.0.1",
-        "pda/pheanstalk": "^3.0"
+        "pda/pheanstalk": "^3.0",
+        "phpmd/phpmd" : "@stable"
     },
+
     "autoload": {
         "classmap": [
             "database"

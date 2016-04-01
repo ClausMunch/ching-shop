@@ -100,7 +100,7 @@ class ProductController extends Controller
      */
     public function show(string $sku)
     {
-        $product = $this->mustPresentProductBySKU($sku);
+        $product = $this->mustPresentProductBySku($sku);
 
         return $this->buildView('show', compact('product'));
     }
@@ -114,7 +114,7 @@ class ProductController extends Controller
      */
     public function edit(string $sku)
     {
-        $product = $this->mustPresentProductBySKU($sku);
+        $product = $this->mustPresentProductBySku($sku);
 
         return $this->buildView('edit', compact('product'));
     }
@@ -144,7 +144,7 @@ class ProductController extends Controller
      */
     public function destroy(string $sku)
     {
-        $this->productRepository->deleteBySKU($sku);
+        $this->productRepository->deleteBySku($sku);
 
         return $this->responseFactory->redirectToRoute('staff.products.index');
     }
@@ -184,9 +184,9 @@ class ProductController extends Controller
      *
      * @return ProductPresenter
      */
-    private function mustPresentProductBySKU(string $sku): ProductPresenter
+    private function mustPresentProductBySku(string $sku): ProductPresenter
     {
-        $product = $this->productRepository->presentBySKU($sku);
+        $product = $this->productRepository->presentBySku($sku);
         if (!$product->isStored()) {
             throw new NotFoundHttpException();
         }

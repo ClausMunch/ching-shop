@@ -85,7 +85,7 @@ class ProductRepositoryTest extends UnitTest
     {
         $emptyPresenter = $this->productRepository->presentEmpty();
         $this->assertSame('', $emptyPresenter->name());
-        $this->assertSame('', $emptyPresenter->SKU());
+        $this->assertSame('', $emptyPresenter->sku());
         $this->assertSame(0, $emptyPresenter->id());
         $this->assertSame(false, $emptyPresenter->isStored());
     }
@@ -142,7 +142,7 @@ class ProductRepositoryTest extends UnitTest
             ->atLeast()->once()
             ->andReturn($product);
 
-        $presenter = $this->productRepository->presentBySKU($sku);
+        $presenter = $this->productRepository->presentBySku($sku);
 
         $this->assertPresenterIsPresenting($presenter, $product);
     }
@@ -156,10 +156,10 @@ class ProductRepositoryTest extends UnitTest
             ->atLeast()->once()
             ->andReturn(null);
 
-        $presenter = $this->productRepository->presentBySKU('foobar');
+        $presenter = $this->productRepository->presentBySku('foobar');
 
         $this->assertEmpty($presenter->id());
-        $this->assertEmpty($presenter->SKU());
+        $this->assertEmpty($presenter->sku());
         $this->assertEmpty($presenter->slug());
     }
 
@@ -175,7 +175,7 @@ class ProductRepositoryTest extends UnitTest
             ->atLeast()->once()
             ->andReturn($product);
 
-        $presenter = $this->productRepository->presentByID($id);
+        $presenter = $this->productRepository->presentById($id);
 
         $this->assertPresenterIsPresenting($presenter, $product);
     }
@@ -189,10 +189,10 @@ class ProductRepositoryTest extends UnitTest
             ->atLeast()->once()
             ->andReturn(null);
 
-        $presenter = $this->productRepository->presentByID(0);
+        $presenter = $this->productRepository->presentById(0);
 
         $this->assertEmpty($presenter->id());
-        $this->assertEmpty($presenter->SKU());
+        $this->assertEmpty($presenter->sku());
         $this->assertEmpty($presenter->slug());
     }
 
@@ -207,7 +207,7 @@ class ProductRepositoryTest extends UnitTest
             ->atLeast()->once()
             ->andReturn($product);
 
-        $loaded = $this->productRepository->mustLoadBySKU($sku);
+        $loaded = $this->productRepository->mustLoadBySku($sku);
 
         $this->assertSame($product, $loaded);
     }

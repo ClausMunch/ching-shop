@@ -4,9 +4,12 @@ namespace ChingShop\Providers;
 
 use ChingShop\User\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as Provider;
 
-class AuthServiceProvider extends ServiceProvider
+/**
+ * Class AuthServiceProvider.
+ */
+class AuthServiceProvider extends Provider
 {
     /**
      * The policy mappings for the application.
@@ -28,8 +31,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        $gate->define('administer', function (User $user) {
-            return $user->roles->contains('name', 'admin');
-        });
+        $gate->define(
+            'administer',
+            function (User $user) {
+                return $user->roles->contains('name', 'admin');
+            }
+        );
     }
 }

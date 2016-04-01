@@ -23,5 +23,5 @@ interface HttpCrudInterface
      *
      * @return string
      */
-    public function crudID(): string;
+    public function crudId(): string;
 }

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
@@ -21,25 +22,25 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\ChingShop\User\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|Role[] $roles
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereUpdatedAt($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereUpdatedAt($value)
  *
  * @property string $deleted_at
  *
- * @method static \Illuminate\Database\Query\Builder|\ChingShop\User\User whereDeletedAt($value)
+ * @method static Builder|User whereDeletedAt($value)
  * @mixin \Eloquent
  */
 class User extends Model implements
-AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 

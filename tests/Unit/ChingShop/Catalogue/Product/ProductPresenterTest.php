@@ -56,7 +56,7 @@ class ProductPresenterTest extends UnitTest
     {
         $sku = $this->generator()->anyString();
         $this->mockModelAttribute('sku', $sku);
-        $this->assertSame($sku, $this->productPresenter->SKU());
+        $this->assertSame($sku, $this->productPresenter->sku());
     }
 
     /**
@@ -183,7 +183,7 @@ class ProductPresenterTest extends UnitTest
     {
         $sku = $this->generator()->anyString();
         $this->mockModelAttribute('sku', $sku);
-        $this->assertSame($sku, $this->productPresenter->crudID());
+        $this->assertSame($sku, $this->productPresenter->crudId());
     }
 
     /**
