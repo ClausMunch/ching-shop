@@ -8,9 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class CacheServiceProvider
- *
- * @package ChingShop\Providers
+ * Class CacheServiceProvider.
  */
 class CacheServiceProvider extends ServiceProvider
 {
