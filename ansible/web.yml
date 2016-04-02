@@ -16,6 +16,7 @@
         - nginx
         - php7.0
         - php7.0-cli
+        - php7.0-dev
         - php7.0-curl
         - php7.0-fpm
         - php7.0-intl
@@ -40,9 +41,19 @@
         - python-mysqldb
         - htop
 
+    - name: ensure github.com is a known host
+      lineinfile:
+        dest: /root/.ssh/known_hosts
+        create: yes
+        state: present
+        line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+        regexp: "^github\\.com"
+
     - name: install phpredis
       script: phpredis.sh
               creates=/etc/php/7.0/fpm/conf.d/20-redis.ini
+      notify:
+        - restart php7.0-fpm
 
     - name: symlink node
       file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
@@ -241,9 +252,6 @@
       service: name=redis-server state=restarted
 
     - name: restart workers
-      supervisorctl: name=`ching-shop-worker:*`
-                     state=present
-                     config=/etc/supervisor/conf.d/ching-shop-worker.conf
       supervisorctl: name=`ching-shop-worker:*`
                      state=restarted
                      config=/etc/supervisor/conf.d/ching-shop-worker.conf

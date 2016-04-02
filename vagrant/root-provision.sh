@@ -64,7 +64,7 @@ function installPHPRedis
         cd phpredis
         git checkout php7
         phpize
-        ./configure --enable-redis-igbinary
+        ./configure
         make && make install
         make test
         echo "extension=redis.so" > /etc/php/7.0/fpm/conf.d/20-redis.ini
