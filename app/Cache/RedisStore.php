@@ -5,9 +5,7 @@ namespace ChingShop\Cache;
 use Illuminate\Cache\RedisStore as IlluminateRedisStore;
 
 /**
- * Class RedisStore
- *
- * @package ChingShop\Cache
+ * Class RedisStore.
  */
 class RedisStore extends IlluminateRedisStore
 {
@@ -21,7 +19,7 @@ class RedisStore extends IlluminateRedisStore
         $value = parent::get($key);
 
         if ($value === false) {
-            return null;
+            return;
         }
 
         return $value;

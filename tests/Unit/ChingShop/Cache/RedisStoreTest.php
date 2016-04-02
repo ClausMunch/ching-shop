@@ -9,9 +9,7 @@ use Testing\Unit\UnitTest;
 use Vetruvet\PhpRedis\Database;
 
 /**
- * Class RedisStoreTest
- *
- * @package Testing\Unit\ChingShop\Cache
+ * Class RedisStoreTest.
  */
 class RedisStoreTest extends UnitTest
 {
