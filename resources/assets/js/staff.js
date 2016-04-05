@@ -1,5 +1,9 @@
 (function() {
-    'use strict';
+    "use strict";
 
-    require('./staff/product-form.js');
+    require("./main.js");
+
+    require("../../../node_modules/jquery-ui/sortable.js");
+
+    require("./staff/product.js");
 }());

@@ -105,6 +105,10 @@ Route::group(
                     ]
                 );
                 Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
+                Route::put(
+                    'products/{id}/image-order',
+                    'Staff\ProductController@putImageOrder'
+                );
             }
         );
 

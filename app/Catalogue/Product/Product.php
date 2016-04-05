@@ -70,7 +70,9 @@ class Product extends Model
             return $this->imagesRelationship;
         }
 
-        return $this->belongsToMany(Image::class);
+        return $this->belongsToMany(Image::class)
+            ->withPivot('position')
+            ->orderBy('pivot_position', 'asc');
     }
 
     /**
