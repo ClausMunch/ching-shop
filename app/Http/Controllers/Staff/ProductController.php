@@ -185,6 +185,7 @@ class ProductController extends Controller
         if ($updated) {
             return $this->responseFactory->json($imageOrder, 200);
         }
+
         return $this->responseFactory->json('failed to update', 500);
     }
 
