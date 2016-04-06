@@ -96,6 +96,8 @@
 
     @yield('post-content')
 
-    <script async defer src="{{ elixir('js/staff.js') }}"></script>
+@endsection
 
+@section('scripts')
+    <script async defer src="{{ elixir('js/staff.js') }}"></script>
 @endsection
