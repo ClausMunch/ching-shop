@@ -12,6 +12,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
@@ -163,6 +164,29 @@ class ProductController extends Controller
         $this->imageRepository->detachImageFromProduct($image, $product);
 
         return $this->redirectToShowProduct($product->sku);
+    }
+
+    /**
+     * @param int     $productId
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function putImageOrder(int $productId, Request $request)
+    {
+        $imageOrder = $request->get('imageOrder');
+        if (!$imageOrder) {
+            return $this->responseFactory->json('no image order', 400);
+        }
+        $updated = $this->productRepository->updateImageOrder(
+            $productId,
+            $imageOrder
+        );
+        if ($updated) {
+            return $this->responseFactory->json($imageOrder, 200);
+        }
+
+        return $this->responseFactory->json('failed to update', 500);
     }
 
     /**

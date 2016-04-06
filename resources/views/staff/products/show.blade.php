@@ -25,31 +25,7 @@
 
     <section>
         <h3>Images</h3>
-        @foreach($product->images() as $image)
-
-            <form class="form-inline form-full-inline staff-product-form"
-                  id="detach-image-{{ $image->id }}-form"
-                  method="post"
-                  action="{{ $location->detachActionFor($product, $image) }}">
-
-                <img src="{{ $image->url('small') }}"
-                     srcset="{{ $image->srcSet() }}"
-                     alt="{{ $image->alt_text }}"
-                     class="img-responsive img-rounded staff-product-image" />
-
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-
-                <button type="submit"
-                        form="detach-image-{{ $image->id }}-form"
-                        class="btn btn-link">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true">
-                    </span><span class="sr-only">Remove</span>
-                </button>
-
-            </form>
-
-        @endforeach
+        @include('staff.products.images')
     </section>
 
 @endsection

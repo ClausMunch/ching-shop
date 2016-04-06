@@ -6,7 +6,9 @@ use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Image\Image;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -276,6 +278,45 @@ class ProductRepositoryTest extends UnitTest
             ->method('save');
 
         $this->productRepository->setPriceBySku('foo sku', $units, $subunits);
+    }
+
+    /**
+     * Should be able to update the order of images.
+     */
+    public function testUpdateImageOrder()
+    {
+        $this->productResource->shouldReceive('where->with->limit->first')
+            ->atLeast()
+            ->once()
+            ->andReturn($this->productResource);
+
+        $image = $this->makeMock(Image::class);
+        $image->expects($this->atLeastOnce())
+            ->method('__get')
+            ->with('id')
+            ->willReturn(123);
+        $secondImage = $this->makeMock(Image::class);
+        $secondImage->expects($this->atLeastOnce())
+            ->method('__get')
+            ->with('id')
+            ->willReturn(456);
+
+        $this->productResource->shouldReceive('getAttribute')
+            ->with('images')
+            ->atLeast()
+            ->once()
+            ->andReturn(new Collection([$image, $secondImage]));
+
+        $imageRelation = $this->makeMock(BelongsToMany::class);
+        $this->productResource->shouldReceive('images')
+            ->atLeast()
+            ->once()
+            ->andReturn($imageRelation);
+
+        $imageRelation->expects($this->atLeastOnce())
+            ->method('updateExistingPivot');
+
+        $this->productRepository->updateImageOrder(789, [123 => 1]);
     }
 
     /**

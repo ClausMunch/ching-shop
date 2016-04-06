@@ -1,3 +1,5 @@
+require("./main.js");
+
 (function() {
 
     var mainImage = document.getElementById('product-main-image');

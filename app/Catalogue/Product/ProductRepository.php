@@ -183,6 +183,34 @@ class ProductRepository
     }
 
     /**
+     * @param int   $productId
+     * @param array $imageOrder
+     *
+     * @return bool
+     */
+    public function updateImageOrder(int $productId, array $imageOrder): bool
+    {
+        /** @var Product $product */
+        $product = $this->productResource
+            ->where('id', '=', $productId)
+            ->with('images')
+            ->limit(1)
+            ->first();
+
+        foreach ($product->images as $image) {
+            if (!array_key_exists($image->id, $imageOrder)) {
+                continue;
+            }
+            $product->images()->updateExistingPivot(
+                $image->id,
+                ['position' => $imageOrder[$image->id]]
+            );
+        }
+
+        return true;
+    }
+
+    /**
      * @param $product
      *
      * @return ProductPresenter

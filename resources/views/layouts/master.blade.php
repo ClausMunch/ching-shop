@@ -17,7 +17,6 @@
         </div>
     </div>
 
-<script async defer src="{{ elixir('js/main.js') }}"></script>
 @yield('scripts')
 <link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab|Roboto+Condensed:700'
       property='stylesheet'
