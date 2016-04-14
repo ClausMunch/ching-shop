@@ -17,9 +17,17 @@
 }
 
 .product-images-sortable {
+  clear: both;
+  display: block;
   list-style-type: none;
   margin: 0;
   padding: 0;
+
+  &:after {
+    clear: both;
+    content: ' ';
+    display: block;
+  }
 }
 
 .product-image-sortable {

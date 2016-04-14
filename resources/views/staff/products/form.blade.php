@@ -76,18 +76,6 @@
         @endforeach
     </div>
 
-    <div id="images">
-        <label for="new-image[]">
-            Upload @if ($product->isStored()) new @endif images
-        </label>
-        <input type="file" name="new-image[]" id="new-image" multiple>
-        @foreach($reply->errorsFor('new-image.0') as $error)
-            <label class="help-block" for="new-image[]">
-                {{ $error }}
-            </label>
-        @endforeach
-    </div>
-
     <hr>
 
     <button type="submit" class="btn btn-success">Save</button>

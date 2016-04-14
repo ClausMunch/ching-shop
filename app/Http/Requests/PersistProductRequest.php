@@ -4,7 +4,7 @@ namespace ChingShop\Http\Requests;
 
 use Illuminate\Http\Request as HttpRequest;
 
-class PersistProductRequest extends Request
+class PersistProductRequest extends StaffRequest
 {
     /** @var array */
     protected $dontFlash = ['new-image.*'];
@@ -15,25 +15,13 @@ class PersistProductRequest extends Request
     ];
 
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @param HttpRequest $request
-     *
-     * @return bool|bool
-     */
-    public function authorize(HttpRequest $request): bool
-    {
-        return $request->user()->isStaff();
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @param HttpRequest $request
      *
      * @return array
      */
-    public function rules(HttpRequest $request)
+    public function rules(HttpRequest $request): array
     {
         return [
             'name' => $this->uniqueFieldRules(
@@ -52,7 +40,6 @@ class PersistProductRequest extends Request
                 $request
             ),
             'description' => 'required|min:16|max:512',
-            'new-image.*' => 'image|max:5000',
         ];
     }
 

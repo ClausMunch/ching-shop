@@ -104,6 +104,13 @@ Route::group(
                         'as'   => 'staff.products.price',
                     ]
                 );
+                Route::post(
+                    'products/{sku}/images',
+                    [
+                        'uses' => 'Staff\ProductController@postProductImages',
+                        'as'   => 'staff.products.post-images',
+                    ]
+                );
                 Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
                 Route::put(
                     'products/{id}/image-order',
