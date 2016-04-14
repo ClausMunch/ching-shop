@@ -10,6 +10,9 @@ class PersistProductRequestTest extends RequestTest
     /** @var PersistProductRequest */
     private $persistProductRequest;
 
+    /**
+     * Set up persist product request for each test.
+     */
     public function setUp()
     {
         parent::setUp();

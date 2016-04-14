@@ -6,6 +6,7 @@ use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Http\Requests\NewImagesRequest;
 use ChingShop\Http\Requests\PersistProductRequest;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -85,7 +86,6 @@ class ProductController extends Controller
     public function store(PersistProductRequest $request)
     {
         $product = $this->productRepository->create($request->all());
-        $this->persistUploadedImages($request, $product);
 
         return $this->redirectToShowProduct($product->sku);
     }
@@ -131,7 +131,6 @@ class ProductController extends Controller
     public function update(PersistProductRequest $request, string $sku)
     {
         $product = $this->productRepository->update($sku, $request->all());
-        $this->persistUploadedImages($request, $product);
 
         return $this->redirectToShowProduct($product->sku);
     }
@@ -190,6 +189,20 @@ class ProductController extends Controller
     }
 
     /**
+     * @param NewImagesRequest $request
+     * @param string           $sku
+     *
+     * @return RedirectResponse
+     */
+    public function postProductImages(NewImagesRequest $request, string $sku)
+    {
+        $product = $this->productRepository->mustLoadBySku($sku);
+        $this->persistUploadedImages($request, $product);
+
+        return $this->redirectToShowProduct($product->sku);
+    }
+
+    /**
      * @param $name
      * @param array $bindData
      *
@@ -232,13 +245,11 @@ class ProductController extends Controller
     }
 
     /**
-     * @param PersistProductRequest $request
-     * @param Product               $product
+     * @param Request $request
+     * @param Product $product
      */
-    private function persistUploadedImages(
-        PersistProductRequest $request,
-        Product $product
-    ) {
+    private function persistUploadedImages(Request $request, Product $product)
+    {
         if (!$request->hasFile(self::IMAGE_UPLOAD_PARAMETER)) {
             return;
         }

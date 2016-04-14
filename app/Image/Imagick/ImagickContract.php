@@ -82,11 +82,25 @@ interface ImagickContract
     public function setCompression($compression);
 
     /**
+     * @param int $compression
+     *
+     * @return bool
+     */
+    public function setImageCompression($compression);
+
+    /**
      * @param int $compressionQuality
      *
      * @return bool
      */
     public function setCompressionQuality($compressionQuality);
+
+    /**
+     * @param int $quality
+     *
+     * @return bool
+     */
+    public function setImageCompressionQuality($quality);
 
     /**
      * @return int
@@ -114,4 +128,36 @@ interface ImagickContract
      * @return string
      */
     public function getImageBlob();
+
+    /**
+     * @return bool
+     */
+    public function stripImage();
+
+    /**
+     * @param $string
+     *
+     * @return bool
+     */
+    public function setFormat($string);
+
+    /**
+     * @param $string
+     *
+     * @return bool
+     */
+    public function setImageFormat($string);
+
+    /**
+     * @param float $radius
+     * @param float $sigma
+     * @param int   $channel
+     *
+     * @return bool
+     */
+    public function gaussianBlurImage(
+        $radius,
+        $sigma,
+        $channel = Imagick::CHANNEL_ALL
+    );
 }

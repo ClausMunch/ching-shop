@@ -33,12 +33,13 @@ function installXdebug
     if [ -z "$(php -i | grep xdebug)" ]; then
         mkdir -p ~/installs
         cd ~/installs/
-        wget https://xdebug.org/files/xdebug-2.4.0rc4.tgz
-        tar -xvzf xdebug-2.4.0rc4.tgz
-        cd xdebug-2.4.0RC4
+        wget https://xdebug.org/files/xdebug-2.4.0.tgz
+        tar -xvzf xdebug-2.4.0.tgz
+        cd xdebug-2.4.0
         phpize
         ./configure
         make
+        mkdir -p /usr/lib/php/xdebug/
         cp modules/xdebug.so /usr/lib/php/xdebug/
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/fpm/php.ini
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/cli/php.ini
@@ -60,7 +61,7 @@ function installPHPRedis
     if [ -z "$(php -i | grep redis.ini)" ]; then
         mkdir -p ~/installs
         cd ~/installs/
-        git clone git@github.com:phpredis/phpredis.git
+        git clone https://github.com/phpredis/phpredis.git
         cd phpredis
         git checkout php7
         phpize
