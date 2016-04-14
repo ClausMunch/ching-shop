@@ -116,6 +116,7 @@ class ProductController extends Controller
     public function edit(string $sku)
     {
         $product = $this->mustPresentProductBySku($sku);
+
         return $this->buildView('edit', compact('product'));
     }
 
@@ -130,6 +131,7 @@ class ProductController extends Controller
     public function update(PersistProductRequest $request, string $sku)
     {
         $product = $this->productRepository->update($sku, $request->all());
+
         return $this->redirectToShowProduct($product->sku);
     }
 
