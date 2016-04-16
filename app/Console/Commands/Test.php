@@ -7,11 +7,7 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
- * Class Test
- *
- * @package ChingShop\Console\Commands
- *
- * Run all tests and static analyses.
+ * Class Test.
  */
 class Test extends Command
 {
@@ -72,7 +68,7 @@ class Test extends Command
             $process->setTty(true);
             $process->mustRun($this->outPutter());
             $this->info("✔\tOK:\t`{$command}`");
-        };
+        }
 
         $this->info("\n✔\t{$count} test suites and analyses passed");
     }

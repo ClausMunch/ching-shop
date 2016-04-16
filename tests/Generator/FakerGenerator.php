@@ -35,6 +35,7 @@ class FakerGenerator implements Generator
         while (mb_strlen($string) < $length) {
             $string .= $this->faker()->text($length);
         }
+
         return trim($string);
     }
 
