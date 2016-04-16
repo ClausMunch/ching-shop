@@ -76,8 +76,10 @@ class Test extends Command
     {
         if (isset($this->process)) {
             $this->process->setCommandLine($command);
+
             return $this->process;
         }
+
         return new Process($command);
     }
 

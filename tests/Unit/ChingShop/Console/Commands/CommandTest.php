@@ -19,7 +19,7 @@ abstract class CommandTest extends UnitTest
     {
         parent::setUp();
 
-        $this->container = new Container;
+        $this->container = new Container();
         Container::setInstance($this->container);
     }
 
