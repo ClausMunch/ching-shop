@@ -4,7 +4,6 @@ namespace ChingShop\Console\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Class Test.
@@ -21,6 +20,9 @@ class Test extends Command
         'phpunit --testsuite functional',
     ];
 
+    /** @var Process */
+    private $process;
+
     /**
      * The name and signature of the console command.
      *
@@ -35,21 +37,6 @@ class Test extends Command
      */
     protected $description = 'Run the full test suite.';
 
-    /** @var ProcessBuilder */
-    private $processBuilder;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param ProcessBuilder $processBuilder
-     */
-    public function __construct(ProcessBuilder $processBuilder)
-    {
-        parent::__construct();
-
-        $this->processBuilder = $processBuilder;
-    }
-
     /**
      * Execute the console command.
      *
@@ -62,8 +49,7 @@ class Test extends Command
 
         foreach ($this->testCommands as $command) {
             $this->line("Starting:\t`{$command}`...");
-            $process = new Process($command);
-            $process->setWorkingDirectory(base_path());
+            $process = $this->makeProcess($command);
             $process->enableOutput();
             $process->setTty(true);
             $process->mustRun($this->outPutter());
@@ -71,6 +57,28 @@ class Test extends Command
         }
 
         $this->info("\n✔\t{$count} test suites and analyses passed");
+    }
+
+    /**
+     * @param Process $process
+     */
+    public function setProcess(Process $process)
+    {
+        $this->process = $process;
+    }
+
+    /**
+     * @param string $command
+     *
+     * @return Process
+     */
+    private function makeProcess(string $command)
+    {
+        if (isset($this->process)) {
+            $this->process->setCommandLine($command);
+            return $this->process;
+        }
+        return new Process($command);
     }
 
     /**

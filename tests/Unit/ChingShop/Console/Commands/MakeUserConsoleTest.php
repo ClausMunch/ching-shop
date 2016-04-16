@@ -5,22 +5,16 @@ namespace Testing\Unit\ChingShop\Console\Commands;
 use ChingShop\Console\Commands\MakeUser;
 use ChingShop\User\Role;
 use ChingShop\User\User;
-use Illuminate\Container\Container;
 use Illuminate\Contracts\Hashing\Hasher;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Symfony\Component\Console\Tester\CommandTester;
-use Testing\Unit\UnitTest;
 
 /**
  * Class MakeUserTest.
  */
-class MakeUserConsoleTest extends UnitTest
+class MakeUserConsoleTest extends CommandTest
 {
     /** @var MakeUser */
     private $makeUser;
-
-    /** @var Container */
-    private $container;
 
     /** @var Hasher|MockObject */
     private $hasher;
@@ -36,9 +30,9 @@ class MakeUserConsoleTest extends UnitTest
      */
     public function setUp()
     {
+        parent::setUp();
+
         $this->makeUser = new MakeUser();
-        $this->container = new Container();
-        Container::setInstance($this->container);
         $this->makeUser->setLaravel($this->container);
 
         $this->hasher = $this->makeMock(Hasher::class);
@@ -79,7 +73,7 @@ class MakeUserConsoleTest extends UnitTest
                 $this->anything() // password
             );
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([
             '--email' => $email,
         ]);
@@ -102,7 +96,7 @@ class MakeUserConsoleTest extends UnitTest
                 $this->anything() // password
             );
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([]);
     }
 
@@ -125,7 +119,7 @@ class MakeUserConsoleTest extends UnitTest
                 ['password', $hash]
             );
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([
             '--password' => $password,
         ]);
@@ -148,7 +142,7 @@ class MakeUserConsoleTest extends UnitTest
                 ['password', $this->isType('string')]
             );
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([]);
     }
 
@@ -165,7 +159,7 @@ class MakeUserConsoleTest extends UnitTest
         $this->userResource->expects($this->atLeastOnce())
             ->method('roles');
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([
             '--staff' => true,
         ]);
@@ -182,7 +176,7 @@ class MakeUserConsoleTest extends UnitTest
         $this->userResource->expects($this->never())
             ->method('roles');
 
-        $tester = new CommandTester($this->makeUser);
+        $tester = $this->tester($this->makeUser);
         $tester->execute([]);
     }
 }
