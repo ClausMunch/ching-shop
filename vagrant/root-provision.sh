@@ -43,15 +43,20 @@ function installXdebug
         cp modules/xdebug.so /usr/lib/php/xdebug/
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/fpm/php.ini
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/cli/php.ini
-        read -r -d '' XDEBUG_INI << INI
+        export CONFIG = "
 xdebug.remote_enable=on
-xdebug.remote_log="/tmp/xdebug.log"
+xdebug.remote_log=/tmp/xdebug.log
 xdebug.remote_port=9001
 xdebug.remote_connect_back=1
-xdebug.remote_host="10.0.2.2"
-INI
-        echo ${XDEBUG_INI} > /etc/php/7.0/fpm/conf.d/20-xdebug.ini
-        echo ${XDEBUG_INI} > /etc/php/7.0/cli/conf.d/20-xdebug.ini
+xdebug.remote_host=192.168.10.1
+xdebug.idekey=PHPSTORM
+xdebug.force_error_reporting=1
+xdebug.force_display_errors=1
+"
+        for ITEM in CONFIG; do
+            echo ${ITEM} >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
+            echo ${ITEM} >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+        done
     fi
 }
 installXdebug

@@ -47,14 +47,16 @@ class UniqueDecorator implements Generator
     }
 
     /**
+     * @param int $length
+     *
      * @throws GenerationException
      *
      * @return string
      */
-    public function anyString(): string
+    public function anyString(int $length = 0): string
     {
-        return $this->ensureUnusedValue(function () {
-            return $this->generator->anyString();
+        return $this->ensureUnusedValue(function () use ($length) {
+            return $this->generator->anyString($length);
         });
     }
 
