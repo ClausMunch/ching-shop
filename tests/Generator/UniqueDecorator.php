@@ -49,8 +49,9 @@ class UniqueDecorator implements Generator
     /**
      * @param int $length
      *
-     * @return string
      * @throws GenerationException
+     *
+     * @return string
      */
     public function anyString(int $length = 0): string
     {
