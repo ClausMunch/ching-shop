@@ -348,7 +348,7 @@ class ProductRepositoryTest extends UnitTest
         /** @var Collection $collection */
         $collection = new Collection();
         $this->productResource->shouldReceive(
-            'orderBy->take->get'
+            'orderBy->has->take->get'
         )->once()->andReturn($collection);
 
         return $collection;

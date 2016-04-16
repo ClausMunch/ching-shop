@@ -27,6 +27,7 @@ class ProductRepository
     {
         return $this->productResource
             ->orderBy('updated_at', 'desc')
+            ->has('images')
             ->take($limit)
             ->get();
     }

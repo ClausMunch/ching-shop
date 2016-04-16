@@ -19,9 +19,11 @@ interface Generator
     public function anyBoolean(): bool;
 
     /**
+     * @param int $length
+     *
      * @return string
      */
-    public function anyString(): string;
+    public function anyString(int $length = 0): string;
 
     /**
      * @param string $unwanted

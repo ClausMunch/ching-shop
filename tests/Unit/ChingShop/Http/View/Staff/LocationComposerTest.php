@@ -96,8 +96,8 @@ class LocationComposerTest extends UnitTest
     public function testIsIn()
     {
         $routeParts = [
-            $this->generator()->anyString(),
-            $this->generator()->anyString(),
+            $this->anyStringWithoutDots(),
+            $this->anyStringWithoutDots(),
         ];
 
         $this->router->shouldReceive('currentRouteName')
@@ -113,8 +113,8 @@ class LocationComposerTest extends UnitTest
     public function testPutActive()
     {
         $routeParts = [
-            $this->generator()->anyString(),
-            $this->generator()->anyString(),
+            $this->anyStringWithoutDots(),
+            $this->anyStringWithoutDots(),
         ];
 
         $this->router->shouldReceive('currentRouteName')
@@ -136,7 +136,7 @@ class LocationComposerTest extends UnitTest
         $this->router->shouldReceive('currentRouteName')
             ->andReturn($currentRouteName);
 
-        $givenString = $this->generator()->anyString();
+        $givenString = $this->anyStringWithoutDots();
 
         $this->assertSame(
             $givenString,
@@ -159,7 +159,7 @@ class LocationComposerTest extends UnitTest
     public function testShowHrefFor()
     {
         $crud = $this->makeMockCrudResource();
-        $routePath = $this->generator()->anyString();
+        $routePath = $this->anyStringWithoutDots();
         $crud->shouldReceive('routePath')->andReturn($routePath);
 
         $crudID = $this->generator()->anyInteger();
@@ -250,5 +250,13 @@ class LocationComposerTest extends UnitTest
     private function makeMockCrudResource(): MockInterface
     {
         return $this->mockery(HttpCrudInterface::class);
+    }
+
+    /**
+     * @return string
+     */
+    private function anyStringWithoutDots(): string
+    {
+        return str_replace('.', '-', $this->generator()->anyString());
     }
 }

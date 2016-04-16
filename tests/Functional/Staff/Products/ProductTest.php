@@ -14,9 +14,10 @@ abstract class ProductTest extends FunctionalTest
     protected function makeProduct(): Product
     {
         return Product::create([
-            'name' => str_random(),
-            'sku'  => uniqid(),
-            'slug' => uniqid(),
+            'name'        => str_random(),
+            'sku'         => uniqid(),
+            'slug'        => uniqid(),
+            'description' => $this->generator()->anyString(30),
         ]);
     }
 

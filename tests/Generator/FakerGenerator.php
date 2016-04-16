@@ -24,22 +24,14 @@ class FakerGenerator implements Generator
     }
 
     /**
+     * @param int $length
+     *
      * @return string
      */
-    public function anyString(): string
+    public function anyString(int $length = 0): string
     {
-        $string = '';
-        $length = mt_rand(12, Generator::SANE_ITERATION_LIMIT);
-        for ($i = 0; $i < $length; $i++) {
-            $chr = mt_rand(0x0000, Generator::UTF8_MAX);
-            $string .= mb_convert_encoding(
-                "&#{$chr};",
-                'UTF-8',
-                'HTML-ENTITIES'
-            );
-        }
-
-        return $string;
+        $length = $length ?: mt_rand(12, Generator::SANE_ITERATION_LIMIT);
+        return $this->faker()->text($length);
     }
 
     /**
