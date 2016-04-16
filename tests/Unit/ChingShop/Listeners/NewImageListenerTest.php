@@ -79,10 +79,10 @@ class NewImageListenerTest extends UnitTest
      */
     public function testHandleMissingImage()
     {
-        $this->image->expects($this->once())
+        $this->image->expects($this->atLeastOnce())
             ->method('setAttribute')
             ->with('filename', '');
-        $this->image->expects($this->once())
+        $this->image->expects($this->atLeastOnce())
             ->method('save');
 
         $this->newImageListener->handle($this->event);
@@ -100,7 +100,7 @@ class NewImageListenerTest extends UnitTest
             ->willReturn($filename);
 
         $preProcessed = $this->makeMock(ImagickContract::class);
-        $this->imagePreProcessor->expects($this->once())
+        $this->imagePreProcessor->expects($this->atLeastOnce())
             ->method('preProcess')
             ->with($this->image)
             ->willReturn(new ImagickCollection([$preProcessed]));
@@ -110,11 +110,11 @@ class NewImageListenerTest extends UnitTest
             ->willReturn('foobar_endpoint');
 
         $fileContent = 'foo bar';
-        $preProcessed->expects($this->once())
+        $preProcessed->expects($this->atLeastOnce())
             ->method('getImageBlob')
             ->willReturn($fileContent);
 
-        $this->filesystem->expects($this->once())
+        $this->filesystem->expects($this->atLeastOnce())
             ->method('put')
             ->with(
                 $this->isType('string'),

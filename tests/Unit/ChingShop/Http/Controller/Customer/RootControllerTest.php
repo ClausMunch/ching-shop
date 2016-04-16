@@ -37,11 +37,11 @@ class RootControllerTest extends ControllerTest
      */
     public function testGetIndex()
     {
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('presentLatest')
             ->with($this->isType('int'));
 
-        $this->viewFactory()->expects($this->once())
+        $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
             ->with(
                 $this->isType('string'),

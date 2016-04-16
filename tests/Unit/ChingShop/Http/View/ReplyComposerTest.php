@@ -54,7 +54,7 @@ class ReplyComposerTest extends UnitTest
     {
         /** @var View|MockObject $view */
         $view = $this->makeMock(View::class);
-        $view->expects($this->once())
+        $view->expects($this->atLeastOnce())
             ->method('with')
             ->with([
                 'reply' => $this->replyComposer,

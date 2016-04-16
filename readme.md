@@ -62,6 +62,12 @@ phpcs --standard=./tests/analysis/phpcs.xml app
 phpmd --strict app text ./tests/analysis/phpmd.xml
 ```
 
+All tests and static analyses can be run with:
+
+```bash
+php artisan test
+```
+
 ## Deployment
  
 ```bash

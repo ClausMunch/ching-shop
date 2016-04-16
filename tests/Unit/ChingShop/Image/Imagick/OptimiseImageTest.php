@@ -35,7 +35,7 @@ class OptimiseImageTest extends TestWithImagick
     {
         $collection = new ImagickCollection([$this->imagick()]);
 
-        $this->imagick()->expects($this->once())
+        $this->imagick()->expects($this->atLeastOnce())
             ->method('setInterlaceScheme')
             ->with(Imagick::INTERLACE_PLANE);
 

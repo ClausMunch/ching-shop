@@ -45,7 +45,7 @@ class ImagePreProcessorTest extends TestWithImagick
 
         /** @var ImageTransformer|MockObject $transformer */
         $transformer = $this->makeMock(ImageTransformer::class);
-        $transformer->expects($this->once())
+        $transformer->expects($this->atLeastOnce())
             ->method('applyTo');
         $this->imagePreProcessor->addTransformer($transformer);
 

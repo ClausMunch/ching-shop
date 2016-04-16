@@ -51,13 +51,13 @@ class ProductControllerTest extends ControllerTest
             ->method('slug')
             ->willReturn($slug);
 
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('presentByID')
             ->with($id)
             ->willReturn($product);
 
         $view = 'foo view';
-        $this->viewFactory()->expects($this->once())
+        $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
             ->with(
                 'customer.product.view',
@@ -84,7 +84,7 @@ class ProductControllerTest extends ControllerTest
 
         $id = $this->generator()->anyInteger();
 
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('presentByID')
             ->with($id)
             ->willReturn($product);
@@ -110,13 +110,13 @@ class ProductControllerTest extends ControllerTest
             ->method('slug')
             ->willReturn($correctSlug);
 
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('presentByID')
             ->with($id)
             ->willReturn($product);
 
         $redirect = 'foo redirect';
-        $this->responseFactory()->expects($this->once())
+        $this->responseFactory()->expects($this->atLeastOnce())
             ->method('redirectToRoute')
             ->with(
                 'product::view',

@@ -9,6 +9,7 @@ script:
   - mkdir -p build/logs
   - ./vendor/bin/phpcs --standard=./tests/analysis/phpcs.xml app
   - ./vendor/bin/phpmd --strict app text ./tests/analysis/phpmd.xml
+  - phpunit --testsuite unit --repeat 3
   - phpunit --testsuite unit --coverage-clover build/logs/clover.xml
 php:
   - '7.0'

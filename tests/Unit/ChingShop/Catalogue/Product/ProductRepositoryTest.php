@@ -258,10 +258,10 @@ class ProductRepositoryTest extends UnitTest
         $prices = $this->makeMock(HasMany::class);
         $price = $this->makeMock(Price::class);
 
-        $product->expects($this->once())
+        $product->expects($this->atLeastOnce())
             ->method('prices')
             ->willReturn($prices);
-        $prices->expects($this->once())
+        $prices->expects($this->atLeastOnce())
             ->method('firstOrNew')
             ->willReturn($price);
 
@@ -274,7 +274,7 @@ class ProductRepositoryTest extends UnitTest
                 ['subunits', $subunits],
                 ['currency', 'GBP']
             );
-        $price->expects($this->once())
+        $price->expects($this->atLeastOnce())
             ->method('save');
 
         $this->productRepository->setPriceBySku('foo sku', $units, $subunits);

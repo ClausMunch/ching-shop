@@ -28,6 +28,7 @@ abstract class ControllerTest extends UnitTest
         parent::tearDown();
         unset($this->viewFactory);
         unset($this->responseFactory);
+        unset($this->productRepository);
     }
 
     /**

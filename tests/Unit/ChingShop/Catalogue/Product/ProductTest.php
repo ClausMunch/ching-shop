@@ -53,7 +53,7 @@ class ProductTest extends UnitTest
             $this->generator()->anyInteger(),
         ];
 
-        $relationship->expects($this->once())
+        $relationship->expects($this->atLeastOnce())
             ->method('attach')
             ->with($imageIDs);
 

@@ -42,7 +42,7 @@ class HandlerTest extends UnitTest
     public function testReport()
     {
         $exception = new Exception();
-        $this->logger->expects($this->once())
+        $this->logger->expects($this->atLeastOnce())
             ->method('error')
             ->with($exception);
         $this->handler->report($exception);
