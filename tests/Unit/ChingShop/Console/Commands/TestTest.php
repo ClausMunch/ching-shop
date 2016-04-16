@@ -7,9 +7,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Symfony\Component\Process\Process;
 
 /**
- * Class TestTest
- *
- * @package Testing\Unit\ChingShop\Console\Commands
+ * Class TestTest.
  */
 class TestTest extends CommandTest
 {
@@ -26,7 +24,7 @@ class TestTest extends CommandTest
     {
         parent::setUp();
 
-        $this->testCommand = new TestCommand;
+        $this->testCommand = new TestCommand();
         $this->testCommand->setLaravel($this->container);
 
         $this->process = $this->makeMock(Process::class);
