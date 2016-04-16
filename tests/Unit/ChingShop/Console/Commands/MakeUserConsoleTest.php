@@ -113,7 +113,7 @@ class MakeUserConsoleTest extends UnitTest
     {
         $password = $this->generator()->anyString();
         $hash = $this->generator()->anyString();
-        $this->hasher->expects($this->once())
+        $this->hasher->expects($this->atLeastOnce())
             ->method('make')
             ->with($password)
             ->willReturn($hash);
@@ -136,7 +136,7 @@ class MakeUserConsoleTest extends UnitTest
      */
     public function testGeneratesPasswordIfNoneGiven()
     {
-        $this->hasher->expects($this->once())
+        $this->hasher->expects($this->atLeastOnce())
             ->method('make')
             ->with($this->isType('string'))
             ->willReturn($this->generator()->anyString());
@@ -157,12 +157,12 @@ class MakeUserConsoleTest extends UnitTest
      */
     public function testCreatesStaffUserWithFlag()
     {
-        $this->roleResource->expects($this->once())
+        $this->roleResource->expects($this->atLeastOnce())
             ->method('mustFindByName')
             ->with(Role::STAFF)
             ->willReturn($this->roleResource);
 
-        $this->userResource->expects($this->once())
+        $this->userResource->expects($this->atLeastOnce())
             ->method('roles');
 
         $tester = new CommandTester($this->makeUser);

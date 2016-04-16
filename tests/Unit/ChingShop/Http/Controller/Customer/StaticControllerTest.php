@@ -39,12 +39,12 @@ class StaticControllerTest extends ControllerTest
      */
     public function testPageAction()
     {
-        $this->viewFactory()->expects($this->once())
+        $this->viewFactory()->expects($this->atLeastOnce())
             ->method('exists')
             ->with($this->isType('string'))
             ->willReturn('true');
 
-        $this->viewFactory()->expects($this->once())
+        $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
             ->with($this->isType('string'))
             ->willReturn($this->makeMockView());

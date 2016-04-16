@@ -46,7 +46,7 @@ class RedirectIfAuthenticatedTest extends MiddlewareTest
      */
     public function testRedirectsToHomeIfAuthenticated()
     {
-        $this->guard->expects($this->once())
+        $this->guard->expects($this->atLeastOnce())
             ->method('check')
             ->willReturn(true);
 

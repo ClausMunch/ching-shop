@@ -59,7 +59,7 @@ class LocationComposerTest extends UnitTest
      */
     public function testCompose()
     {
-        $this->view->expects($this->once())
+        $this->view->expects($this->atLeastOnce())
             ->method('with')
             ->with(['location' => $this->locationComposer]);
 
@@ -73,10 +73,10 @@ class LocationComposerTest extends UnitTest
     {
         /** @var Viewable|MockObject $viewable */
         $viewable = $this->makeMock(Viewable::class);
-        $viewable->expects($this->once())->method('routePrefix');
-        $viewable->expects($this->once())->method('locationParts');
+        $viewable->expects($this->atLeastOnce())->method('routePrefix');
+        $viewable->expects($this->atLeastOnce())->method('locationParts');
 
-        $this->urlGenerator->expects($this->once())
+        $this->urlGenerator->expects($this->atLeastOnce())
             ->method('route')
             ->willReturn($this->generator()->anySlug());
 
@@ -92,8 +92,8 @@ class LocationComposerTest extends UnitTest
     {
         /** @var ProductPresenter|MockObject $productPresenter */
         $productPresenter = $this->makeMock(ProductPresenter::class);
-        $productPresenter->expects($this->once())->method('name');
-        $productPresenter->expects($this->once())->method('SKU');
+        $productPresenter->expects($this->atLeastOnce())->method('name');
+        $productPresenter->expects($this->atLeastOnce())->method('SKU');
 
         $mailto = $this->locationComposer->productEnquiryMail(
             $productPresenter

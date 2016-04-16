@@ -53,7 +53,7 @@ class ForceSecureTest extends MiddlewareTest
             ->once()
             ->andReturn($requestUri);
         $this->request->headers = new HeaderBag([]);
-        $this->redirector->expects($this->once())
+        $this->redirector->expects($this->atLeastOnce())
             ->method('to')
             ->with(
                 $requestUri,

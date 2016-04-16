@@ -47,7 +47,7 @@ class WaterMarkTest extends TestWithImagick
             ->method('getImageWidth')
             ->willReturn(1024);
 
-        $image->expects($this->once())
+        $image->expects($this->atLeastOnce())
             ->method('compositeImage')
             ->with(
                 $this->isInstanceOf(Imagick::class),

@@ -164,35 +164,41 @@
     - name: Delete anonymous MySQL user
       mysql_user: user=""
                   state="absent"
+                  login_user="root"
                   login_password="{{ db_root_password }}"
 
     - name: Secure the MySQL root user for IPV6 localhost (::1)
       mysql_user: user="root"
                   password="{{ db_root_password }}"
                   host="::1"
+                  login_user="root"
                   login_password="{{ db_root_password }}"
 
     - name: Secure the MySQL root user for IPV4 localhost (127.0.0.1)
       mysql_user: user="root"
                   password="{{ db_root_password }}"
                   host="127.0.0.1"
+                  login_user="root"
                   login_password="{{ db_root_password }}"
 
     - name: Secure the MySQL root user for localhost domain (localhost)
       mysql_user: user="root"
                   password="{{ db_root_password }}"
                   host="localhost"
+                  login_user="root"
                   login_password="{{ db_root_password }}"
 
     - name: Secure the MySQL root user for server_hostname domain
       mysql_user: user="root"
                   password="{{ db_root_password }}"
                   host="{{ ansible_fqdn }}"
+                  login_user="root"
                   login_password="{{ db_root_password }}"
 
     - name: Remove MySQL test database
       mysql_db: db=test
                 state=absent
+                login_user="root"
                 login_password="{{ db_root_password }}"
 
     - name: Laravel Scheduler

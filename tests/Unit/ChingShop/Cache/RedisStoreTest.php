@@ -50,7 +50,7 @@ class RedisStoreTest extends UnitTest
     {
         $this->databaseWillReturnClient();
 
-        $this->client->expects($this->once())
+        $this->client->expects($this->atLeastOnce())
             ->method('__call')
             ->with('get')
             ->willReturn(false);
@@ -68,7 +68,7 @@ class RedisStoreTest extends UnitTest
         $this->databaseWillReturnClient();
 
         $redisValue = 'hello';
-        $this->client->expects($this->once())
+        $this->client->expects($this->atLeastOnce())
             ->method('__call')
             ->with('get')
             ->willReturn(serialize($redisValue));
@@ -83,7 +83,7 @@ class RedisStoreTest extends UnitTest
      */
     private function databaseWillReturnClient()
     {
-        $this->database->expects($this->once())
+        $this->database->expects($this->atLeastOnce())
             ->method('connection')
             ->willReturn($this->client);
     }

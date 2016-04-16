@@ -143,15 +143,15 @@ class MakeUserTest extends UnitTest
      */
     private function expectStaffRoleAssociation()
     {
-        $this->role->expects($this->once())
+        $this->role->expects($this->atLeastOnce())
             ->method('mustFindByName')
             ->with(Role::STAFF)
             ->willReturn($this->role);
         $usersRelationship = $this->makeMock(BelongsToMany::class);
-        $this->role->expects($this->once())
+        $this->role->expects($this->atLeastOnce())
             ->method('users')
             ->willReturn($usersRelationship);
-        $usersRelationship->expects($this->once())
+        $usersRelationship->expects($this->atLeastOnce())
             ->method('save')
             ->with($this->isInstanceOf(User::class));
     }

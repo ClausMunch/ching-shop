@@ -222,7 +222,7 @@ class ProductControllerTest extends ControllerTest
         $imageId = $this->generator()->anyInteger();
 
         $product = $this->mockery(Product::class);
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('mustLoadById')
             ->with($productId)
             ->willReturn($product);

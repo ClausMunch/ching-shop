@@ -40,12 +40,12 @@ class CategoriesControllerTest extends ControllerTest
     {
         $products = ['foo product'];
 
-        $this->productRepository()->expects($this->once())
+        $this->productRepository()->expects($this->atLeastOnce())
             ->method('presentLatest')
             ->willReturn($products);
 
         $view = 'foo view';
-        $this->viewFactory()->expects($this->once())
+        $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
             ->with(
                 'customer.product.category',

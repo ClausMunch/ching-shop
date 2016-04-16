@@ -64,13 +64,10 @@ class ProductPresenterTest extends UnitTest
      */
     public function testLimitsNameLength()
     {
-        $productName = str_repeat($this->generator()->anyString(), 101);
+        $productName = $this->generator()->anyString(200);
         $this->mockModelAttribute('name', $productName);
 
-        $this->assertSame(
-            mb_strimwidth($productName, 0, 100).'...',
-            $this->productPresenter->name()
-        );
+        $this->assertLessThan(104, mb_strlen($this->productPresenter->name()));
     }
 
     /**

@@ -48,11 +48,11 @@ class IlluminateValidationTest extends UnitTest
         $rules = ['foo' => 'rule'];
 
         $validation = $this->makeMock(Validator::class);
-        $validation->expects($this->once())
+        $validation->expects($this->atLeastOnce())
             ->method('passes')
             ->willReturn(true);
 
-        $this->validationFactory->expects($this->once())
+        $this->validationFactory->expects($this->atLeastOnce())
             ->method('make')
             ->with($testData, $rules)
             ->willReturn($validation);
@@ -78,14 +78,14 @@ class IlluminateValidationTest extends UnitTest
         $validation = $this->makeMock(Validator::class);
 
         $messages = ['foo message'];
-        $validation->expects($this->once())
+        $validation->expects($this->atLeastOnce())
             ->method('passes')
             ->willReturn(true);
-        $validation->expects($this->once())
+        $validation->expects($this->atLeastOnce())
             ->method('messages')
             ->willReturn($messages);
 
-        $this->validationFactory->expects($this->once())
+        $this->validationFactory->expects($this->atLeastOnce())
             ->method('make')
             ->willReturn($validation);
 

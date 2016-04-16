@@ -31,8 +31,11 @@ class FakerGenerator implements Generator
     public function anyString(int $length = 0): string
     {
         $length = $length ?: mt_rand(12, Generator::SANE_ITERATION_LIMIT);
-
-        return $this->faker()->text($length);
+        $string = '';
+        while (mb_strlen($string) < $length) {
+            $string .= $this->faker()->text($length);
+        }
+        return trim($string);
     }
 
     /**

@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \ChingShop\Console\Commands\MakeUser::class,
+        \ChingShop\Console\Commands\Test::class,
     ];
 
     /**

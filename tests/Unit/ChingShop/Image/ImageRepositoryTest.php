@@ -86,9 +86,9 @@ class ImageRepositoryTest extends UnitTest
 
         $fileName = $this->generator()->anyString();
         $upload = $this->makeMockUploadedFile();
-        $upload->expects($this->once())
+        $upload->expects($this->atLeastOnce())
             ->method('move');
-        $upload->expects($this->once())
+        $upload->expects($this->atLeastOnce())
             ->method('getClientOriginalName')
             ->willReturn($fileName);
 
@@ -112,13 +112,13 @@ class ImageRepositoryTest extends UnitTest
     public function testMovesUploadedFileUsingImageResourceID()
     {
         $upload = $this->makeMockUploadedFile();
-        $upload->expects($this->once())
+        $upload->expects($this->atLeastOnce())
             ->method('getClientOriginalName');
 
         $filename = $this->generator()->anyString();
         $this->expectImageCreation($filename);
 
-        $upload->expects($this->once())
+        $upload->expects($this->atLeastOnce())
             ->method('move')
             ->with(
                 storage_path('image'),
@@ -134,10 +134,10 @@ class ImageRepositoryTest extends UnitTest
     public function testAttachesUploadedImagesToProduct()
     {
         $uploadedFile = $this->makeMockUploadedFile();
-        $uploadedFile->expects($this->once())
+        $uploadedFile->expects($this->atLeastOnce())
             ->method('getClientOriginalName')
             ->willReturn($this->generator()->anyString());
-        $uploadedFile->expects($this->once())
+        $uploadedFile->expects($this->atLeastOnce())
             ->method('move');
 
         $imageBag = $this->makeMockFileBag([$uploadedFile]);
@@ -177,7 +177,7 @@ class ImageRepositoryTest extends UnitTest
             ->once()
             ->andReturn($imagesRelation);
 
-        $imagesRelation->expects($this->once())
+        $imagesRelation->expects($this->atLeastOnce())
             ->method('detach')
             ->with($image->id);
 
@@ -229,7 +229,7 @@ class ImageRepositoryTest extends UnitTest
             ->once()
             ->andReturn(new Collection([$image]));
 
-        $this->dispatcher->expects($this->once())
+        $this->dispatcher->expects($this->atLeastOnce())
             ->method('fire')
             ->with($this->callback(
                 function (NewImageEvent $event) use ($image) {
