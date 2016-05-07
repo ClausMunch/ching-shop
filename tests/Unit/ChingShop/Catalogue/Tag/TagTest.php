@@ -18,7 +18,7 @@ class TagTest extends UnitTest
     {
         parent::setUp();
 
-        $this->tag = new Tag;
+        $this->tag = new Tag();
     }
 
     /**

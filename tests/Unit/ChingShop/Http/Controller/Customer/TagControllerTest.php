@@ -45,7 +45,7 @@ class TagControllerTest extends ControllerTest
      */
     public function testViewAction()
     {
-        $tag = new Tag;
+        $tag = new Tag();
         $tag->id = $this->generator()->anyInteger();
         $tag->name = $this->generator()->anyString();
         $this->tagRepository->expects($this->atLeastOnce())

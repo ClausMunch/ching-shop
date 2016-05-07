@@ -27,7 +27,7 @@ class TagsTableSeeder extends Seed
     private function seedTag()
     {
         $tag = Tag::create(['name' => ucfirst($this->faker()->unique()->word)]);
-        for ($i = 0; $i < rand(1,8); $i++) {
+        for ($i = 0; $i < rand(1, 8); $i++) {
             $product = $this->products()->random();
             if ($tag->products->contains('id', $product->id)) {
                 continue;
@@ -45,6 +45,7 @@ class TagsTableSeeder extends Seed
         if (empty($this->products)) {
             $this->products = Product::all();
         }
+
         return $this->products;
     }
 }

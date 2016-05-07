@@ -147,7 +147,7 @@ class ProductControllerTest extends ControllerTest
             ->with($sku)
             ->willReturn($product);
 
-        $tags = new Collection;
+        $tags = new Collection();
         $this->tagRepository->expects($this->atLeastOnce())
             ->method('loadAll')
             ->willReturn($tags);

@@ -225,6 +225,7 @@ class Image extends Model implements HttpCrudInterface
         if (empty($url['host'])) {
             return true;
         }
-        return strpos($url['host'],'ching-shop') !== false;
+
+        return strpos($url['host'], 'ching-shop') !== false;
     }
 }
