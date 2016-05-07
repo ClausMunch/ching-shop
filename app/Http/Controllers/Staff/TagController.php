@@ -108,8 +108,9 @@ class TagController extends Controller
      * @param Request $request
      * @param string  $sku
      *
-     * @return RedirectResponse
      * @throws NotFoundException
+     *
+     * @return RedirectResponse
      */
     public function putProductTags(Request $request, string $sku)
     {

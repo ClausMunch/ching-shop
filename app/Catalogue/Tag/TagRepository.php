@@ -61,8 +61,9 @@ class TagRepository
     /**
      * @param int $tagId
      *
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     public function deleteById(int $tagId): bool
     {

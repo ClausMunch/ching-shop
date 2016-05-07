@@ -9,15 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * Class Tag
+ * Class Tag.
  *
- * @package ChingShop\Catalogue\Tag
  *
  * @mixin \Eloquent
  *
  * @property int $id
  * @property string $name
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
  */
 class Tag extends Model implements HasPresenter

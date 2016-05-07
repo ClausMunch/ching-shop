@@ -6,9 +6,9 @@ use ChingShop\Http\View\Customer\Viewable;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Http\View\Staff\RelaterInterface;
 use ChingShop\Image\Image;
-use McCool\LaravelAutoPresenter\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use McCool\LaravelAutoPresenter\BasePresenter;
 use OutOfBoundsException;
 
 class ProductPresenter extends BasePresenter implements

@@ -48,7 +48,7 @@ class TagRepositoryTest extends UnitTest
      */
     public function testLoadAll()
     {
-        $tags = new Collection;
+        $tags = new Collection();
         $this->tagModel->shouldReceive('orderBy->with->get')->andReturn($tags);
 
         $this->assertSame($tags, $this->tagRepository->loadAll());

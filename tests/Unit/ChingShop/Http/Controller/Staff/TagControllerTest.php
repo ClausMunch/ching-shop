@@ -67,7 +67,7 @@ class TagControllerTest extends ControllerTest
         $this->tagRepository->expects($this->atLeastOnce())
             ->method('create')
             ->with($newTagAttributes)
-            ->willReturn(new Tag);
+            ->willReturn(new Tag());
 
         /** @var NewTagRequest|MockObject $request */
         $request = $this->makeMock(NewTagRequest::class);
