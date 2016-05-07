@@ -30,6 +30,7 @@
         </whitelist>
     </filter>
     <listeners>
+        <listener class="Mockery\Adapter\Phpunit\TestListener" />
         <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener" />
     </listeners>
     <php>

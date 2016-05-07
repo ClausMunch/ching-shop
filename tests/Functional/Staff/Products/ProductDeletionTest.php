@@ -14,7 +14,7 @@ class ProductDeletionTest extends ProductTest
      */
     public function testCanSeeDeleteButtonOnProductView()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
 
         $this->actingAs($this->staffUser())
             ->visit(route('staff.products.show', ['SKU' => $product->sku]))
@@ -34,7 +34,7 @@ class ProductDeletionTest extends ProductTest
      */
     public function testDeleteButtonDeletesProduct()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
 
         $this->actingAs($this->staffUser())
             ->visit(route('staff.products.show', ['SKU' => $product->sku]))
@@ -55,7 +55,7 @@ class ProductDeletionTest extends ProductTest
      */
     public function testDetachProductImage()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
         $image = $this->attachImageToProduct($product);
         $showRoute = route('staff.products.show', ['SKU' => $product->sku]);
 

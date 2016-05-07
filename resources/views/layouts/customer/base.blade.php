@@ -9,6 +9,6 @@
 
 @section('body-class', 'body-customer')
 
-@section('scripts')
+@push('scripts')
     <script async defer src="{{ elixir('js/customer.js') }}"></script>
-@endsection
+@endpush

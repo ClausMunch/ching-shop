@@ -1,8 +1,9 @@
 <?php
 
-namespace Testing\Unit\ChingShop\Http\Requests;
+namespace Testing\Unit\ChingShop\Http\Requests\Staff\Catalogue;
 
-use ChingShop\Http\Requests\SetPriceRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\SetPriceRequest;
+use Testing\Unit\ChingShop\Http\Requests\RequestTest;
 
 class SetPriceRequestTest extends RequestTest
 {

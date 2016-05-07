@@ -12,7 +12,9 @@
               action="{{ $location->detachActionFor($product, $image) }}">
 
             <img src="{{ $image->url('small') }}"
-                 srcset="{{ $image->srcSet() }}"
+                 @if ($image->isSelfHosted())
+                    srcset="{{ $image->srcSet() }}"
+                 @endif
                  alt="{{ $image->alt_text }}"
                  class="img-responsive img-rounded staff-product-image" />
 

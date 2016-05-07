@@ -56,7 +56,7 @@ class ProductCreationTest extends ProductTest
      */
     public function testShowProduct()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
         $showRoute = route('staff.products.show', [
             'sku' => $product->sku,
         ]);

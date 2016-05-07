@@ -26,7 +26,8 @@ trait MocksModel
      */
     protected function mockModelAttribute(string $attributeName, $value)
     {
-        $this->mockModel()->shouldReceive('getAttribute')
+        $this->mockModel()
+            ->shouldReceive('getAttribute')
             ->with($attributeName)
             ->zeroOrMoreTimes()
             ->andReturn($value);
@@ -38,7 +39,8 @@ trait MocksModel
      */
     protected function mockModelMethod(string $methodName, $value = null)
     {
-        $this->mockModel()->shouldReceive($methodName)
+        $this->mockModel()
+            ->shouldReceive($methodName)
             ->zeroOrMoreTimes()
             ->andReturn($value);
     }

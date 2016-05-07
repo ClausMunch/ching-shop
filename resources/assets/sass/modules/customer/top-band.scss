@@ -20,6 +20,7 @@
   color: invert($text-color);
   font-family: $font-brand;
   font-size: 4.6vw;
+  padding: .6em 1em;
   text-decoration: none;
 
   @include breakpoint(sm) {
@@ -27,11 +28,12 @@
   }
 
   @include breakpoint(md) {
-    font-size: 2vw;
+    font-size: 2.05vw;
+    padding: .85em 1em;
   }
 
   @include breakpoint(lg) {
-    font-size: 1.7vw;
+    font-size: 1.75vw;
   }
 
   &:hover {
@@ -44,7 +46,7 @@
   color: invert($text-color);
   display: block;
   font-family: $font-brand;
-  font-size: 1.7em;
+  font-size: 1.65em;
   font-weight: bolder;
   text-align: center;
 

@@ -28,7 +28,8 @@ class ProductRepository
         return $this->productResource
             ->orderBy('updated_at', 'desc')
             ->has('images')
-            ->take($limit)
+            ->with(['images', 'tags'])
+            ->limit($limit)
             ->get();
     }
 
@@ -63,7 +64,6 @@ class ProductRepository
     public function create(array $productData): Product
     {
         $newProduct = $this->productResource->create($productData);
-        $newProduct->save();
 
         return $newProduct;
     }
@@ -93,7 +93,8 @@ class ProductRepository
         /** @var Product $product */
         $product = $this->productResource
             ->where('sku', $sku)
-            ->with(['images', 'prices'])
+            ->with(['images', 'prices', 'tags'])
+            ->limit(1)
             ->first();
 
         if (!$product) {
@@ -113,7 +114,8 @@ class ProductRepository
         /** @var Product $product */
         $product = $this->productResource
             ->where('id', $id)
-            ->with(['images', 'prices'])
+            ->with(['images', 'prices', 'tags'])
+            ->limit(1)
             ->first();
 
         if (!$product) {
@@ -130,7 +132,11 @@ class ProductRepository
      */
     public function mustLoadById(int $id): Product
     {
-        return $this->productResource->where('id', $id)->limit(1)->first();
+        return $this->productResource
+            ->where('id', $id)
+            ->with(['images', 'prices', 'tags'])
+            ->limit(1)
+            ->first();
     }
 
     /**
@@ -140,7 +146,11 @@ class ProductRepository
      */
     public function mustLoadBySku(string $sku): Product
     {
-        return $this->productResource->where('sku', $sku)->limit(1)->first();
+        return $this->productResource
+            ->where('sku', $sku)
+            ->with(['images', 'prices', 'tags'])
+            ->limit(1)
+            ->first();
     }
 
     /**

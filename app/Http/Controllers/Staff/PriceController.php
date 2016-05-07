@@ -4,7 +4,7 @@ namespace ChingShop\Http\Controllers\Staff;
 
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Http\Requests\SetPriceRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\SetPriceRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace Testing\Unit\ChingShop\Http\Requests;
+namespace Testing\Unit\ChingShop\Http\Requests\Staff\Catalogue;
 
-use ChingShop\Http\Requests\NewImagesRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
+use Testing\Unit\ChingShop\Http\Requests\RequestTest;
 
 class NewImagesRequestTest extends RequestTest
 {
@@ -15,6 +16,7 @@ class NewImagesRequestTest extends RequestTest
     public function setUp()
     {
         parent::setUp();
+
         $this->newImagesRequest = new NewImagesRequest();
     }
 

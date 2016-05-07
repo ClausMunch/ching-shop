@@ -13,7 +13,7 @@ class ProductImagesTest extends ProductTest
      */
     public function testProductWithImagesShownOnCategoryPage()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
         $image = $this->attachImageToProduct($product);
 
         $this->visit(route('customer.cards'))
@@ -29,7 +29,7 @@ class ProductImagesTest extends ProductTest
      */
     public function testProductWithoutImagesNotShownOnCategoryPage()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
         $product->images()->detach();
 
         $this->visit(route('customer.cards'))

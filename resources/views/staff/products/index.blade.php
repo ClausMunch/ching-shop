@@ -40,7 +40,9 @@
                         <td class="product-index-images">
                             @foreach($product->images() as $image)
                                 <img src="{{ $image->url('thumbnail') }}"
-                                     srcset="{{ $image->srcSet() }}"
+                                     @if ($image->isSelfHosted())
+                                        srcset="{{ $image->srcSet() }}"
+                                     @endif
                                      alt="{{ $image->alt_text }}"
                                      class="img-responsive
                                         img-rounded

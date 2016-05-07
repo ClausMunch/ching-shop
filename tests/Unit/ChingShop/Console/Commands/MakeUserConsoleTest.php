@@ -73,7 +73,7 @@ class MakeUserConsoleTest extends CommandTest
                 $this->anything() // password
             );
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([
             '--email' => $email,
         ]);
@@ -96,7 +96,7 @@ class MakeUserConsoleTest extends CommandTest
                 $this->anything() // password
             );
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([]);
     }
 
@@ -119,7 +119,7 @@ class MakeUserConsoleTest extends CommandTest
                 ['password', $hash]
             );
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([
             '--password' => $password,
         ]);
@@ -142,7 +142,7 @@ class MakeUserConsoleTest extends CommandTest
                 ['password', $this->isType('string')]
             );
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([]);
     }
 
@@ -159,7 +159,7 @@ class MakeUserConsoleTest extends CommandTest
         $this->userResource->expects($this->atLeastOnce())
             ->method('roles');
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([
             '--staff' => true,
         ]);
@@ -176,7 +176,7 @@ class MakeUserConsoleTest extends CommandTest
         $this->userResource->expects($this->never())
             ->method('roles');
 
-        $tester = $this->tester($this->makeUser);
+        $tester = $this->commandTester($this->makeUser);
         $tester->execute([]);
     }
 }

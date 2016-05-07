@@ -1,7 +1,8 @@
 <?php
 
-namespace ChingShop\Http\Requests;
+namespace ChingShop\Http\Requests\Staff;
 
+use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
 
 class StaffRequest extends Request
