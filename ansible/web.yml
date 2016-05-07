@@ -230,7 +230,7 @@
             group=www-data
             mode=0700
 
-    - npm: path=/var/www/ching-shop production=yes state=present
+    - npm: path=/var/www/ching-shop production=yes
       become_user: www-data
 
     - name: rebuild node-sass
