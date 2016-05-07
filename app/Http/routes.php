@@ -143,7 +143,7 @@ Route::group(
                     'products/{sku}/tags',
                     [
                         'uses' => 'Staff\TagController@putProductTags',
-                        'as'   => 'staff.products.put-tags'
+                        'as'   => 'staff.products.put-tags',
                     ]
                 );
             }
