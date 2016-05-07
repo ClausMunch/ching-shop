@@ -3,20 +3,42 @@
 Route::group(
     ['middleware' => ['web']],
     function () {
+
         Route::group(
             [
-                'prefix'     => 'product',
-                'as'         => 'product::',
                 'namespace'  => 'Customer',
                 'middleware' => 'customer',
             ],
             function () {
-                Route::get(
-                    '{id}/{slug}',
+                Route::group(
                     [
-                        'as'   => 'view',
-                        'uses' => 'ProductController@viewAction',
-                    ]
+                        'prefix'     => 'product',
+                        'as'         => 'product::',
+                    ],
+                    function () {
+                        Route::get(
+                            '{id}/{slug}',
+                            [
+                                'as'   => 'view',
+                                'uses' => 'ProductController@viewAction',
+                            ]
+                        );
+                    }
+                );
+                Route::group(
+                    [
+                        'prefix'     => 'tag',
+                        'as'         => 'tag::',
+                    ],
+                    function () {
+                        Route::get(
+                            '{id}/{name}',
+                            [
+                                'as'   => 'view',
+                                'uses' => 'TagController@viewAction',
+                            ]
+                        );
+                    }
                 );
             }
         );
@@ -115,6 +137,14 @@ Route::group(
                 Route::put(
                     'products/{id}/image-order',
                     'Staff\ProductController@putImageOrder'
+                );
+                Route::resource('tags', 'Staff\TagController');
+                Route::put(
+                    'products/{sku}/tags',
+                    [
+                        'uses' => 'Staff\TagController@putProductTags',
+                        'as'   => 'staff.products.put-tags'
+                    ]
                 );
             }
         );

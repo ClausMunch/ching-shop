@@ -16,7 +16,9 @@
             <img class="img-responsive photo"
                  id="product-main-image"
                  src="{{ $product->mainImage()->url('large') }}"
-                 srcset="{{ $product->mainImage()->srcSet() }}"
+                 @if ($product->mainImage()->isSelfHosted())
+                    srcset="{{ $product->mainImage()->srcSet() }}"
+                 @endif
                  alt="{{ $product->mainImage()->altText() }}">
             @endif
 
@@ -28,8 +30,10 @@
                         title="{{ $image->altText() }}">
                         <img class="img-thumbnail img-responsive"
                              src="{{ $image->url('large') }}"
-                             srcset="{{ $image->srcSet() }}"
                              alt="{{ $image->altText() }}"
+                             @if ($image->isSelfHosted())
+                                srcset="{{ $image->srcSet() }}"
+                             @endif
                              width="128" height="97">
                     </a>
                 @endforeach
@@ -55,6 +59,20 @@
                     <td>Name</td>
                     <td>{{ $product->name() }}</td>
                 </tr>
+                @if ($product->tags->count())
+                    <tr>
+                        <td>Tags</td>
+                        <td>
+                            @foreach ($product->tags as $tag)
+                                <a href="{{ route(
+                                    'tag::view', [$tag->id, $tag->name]
+                                ) }}">
+                                    {{ $tag->name  }}<!--
+                                --></a>&nbsp;
+                            @endforeach
+                        </td>
+                    </tr>
+                @endif
             </table>
 
         </div>

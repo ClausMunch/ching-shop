@@ -1,7 +1,8 @@
 <?php
 
-namespace ChingShop\Http\Requests;
+namespace ChingShop\Http\Requests\Staff\Catalogue;
 
+use ChingShop\Http\Requests\Staff\StaffRequest;
 use Illuminate\Http\Request as HttpRequest;
 
 class PersistProductRequest extends StaffRequest

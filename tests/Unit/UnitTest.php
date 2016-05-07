@@ -18,7 +18,6 @@ abstract class UnitTest extends TestCase
     public function tearDown()
     {
         parent::tearDown();
-        Mockery::close();
         $this->generator()->reset();
     }
 
@@ -83,5 +82,35 @@ abstract class UnitTest extends TestCase
                     return $lastCall === $finalMethod ? $returnValue : $mockObj;
                 }
             );
+    }
+
+    /**
+     * Include Mockery assertions in PHPUnit.
+     */
+    protected function assertPostConditions()
+    {
+        $this->addMockeryExpectationsToAssertionCount();
+        $this->closeMockery();
+        parent::assertPostConditions();
+    }
+
+    /**
+     * Add Mockery assertion count to PHPUnit assertion count.
+     */
+    protected function addMockeryExpectationsToAssertionCount()
+    {
+        $container = Mockery::getContainer();
+        if ($container != null) {
+            $count = $container->mockery_getExpectationCount();
+            $this->addToAssertionCount($count);
+        }
+    }
+
+    /**
+     * End Mockery session.
+     */
+    protected function closeMockery()
+    {
+        Mockery::close();
     }
 }

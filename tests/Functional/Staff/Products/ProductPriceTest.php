@@ -13,7 +13,7 @@ class ProductPriceTest extends ProductTest
      */
     public function testCanSetPriceOnProduct()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
 
         $showProductRoute = route('staff.products.show', [
             'SKU' => $product->sku,
@@ -34,7 +34,7 @@ class ProductPriceTest extends ProductTest
      */
     public function testCanSeePriceOnCustomerSite()
     {
-        $product = $this->makeProduct();
+        $product = $this->createProduct();
 
         $showProductRoute = route('staff.products.show', [
             'SKU' => $product->sku,

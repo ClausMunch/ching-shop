@@ -113,6 +113,10 @@ class Image extends Model implements HttpCrudInterface
      */
     public function srcSet(): string
     {
+        if (!$this->isSelfHosted()) {
+            return '';
+        }
+
         return implode(
             ',',
             array_map(
@@ -210,5 +214,17 @@ class Image extends Model implements HttpCrudInterface
     public function crudId(): string
     {
         return (string) $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSelfHosted(): bool
+    {
+        $url = parse_url($this->url());
+        if (empty($url['host'])) {
+            return true;
+        }
+        return strpos($url['host'],'ching-shop') !== false;
     }
 }

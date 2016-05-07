@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "bootstrap-multiselect": "^0.9.13-1",
     "gulp": "*",
     "gulp-shell": "*"
   },

@@ -28,7 +28,7 @@ abstract class CommandTest extends UnitTest
      *
      * @return CommandTester
      */
-    protected function tester(Command $command): CommandTester
+    protected function commandTester(Command $command): CommandTester
     {
         return new CommandTester($command);
     }

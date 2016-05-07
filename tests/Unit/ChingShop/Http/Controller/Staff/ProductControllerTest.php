@@ -4,13 +4,16 @@ namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
+use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Staff\ProductController;
-use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\PersistProductRequest;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Mockery\MockInterface;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ProductControllerTest extends ControllerTest
@@ -21,6 +24,9 @@ class ProductControllerTest extends ControllerTest
     /** @var ImageRepository|MockInterface */
     private $imageRepository;
 
+    /** @var TagRepository|MockObject */
+    private $tagRepository;
+
     /**
      * Initialise product controller with mock dependencies.
      */
@@ -29,12 +35,14 @@ class ProductControllerTest extends ControllerTest
         parent::setUp();
 
         $this->imageRepository = $this->mockery(ImageRepository::class);
+        $this->tagRepository = $this->makeMock(TagRepository::class);
 
         $this->productController = new ProductController(
             $this->productRepository(),
             $this->viewFactory(),
             $this->responseFactory(),
-            $this->imageRepository
+            $this->imageRepository,
+            $this->tagRepository
         );
     }
 
@@ -139,9 +147,14 @@ class ProductControllerTest extends ControllerTest
             ->with($sku)
             ->willReturn($product);
 
+        $tags = new Collection;
+        $this->tagRepository->expects($this->atLeastOnce())
+            ->method('loadAll')
+            ->willReturn($tags);
+
         $view = $this->expectViewToBeMadeWith(
             'staff.products.show',
-            compact('product')
+            compact('product', 'tags')
         );
 
         $response = $this->productController->show($sku);

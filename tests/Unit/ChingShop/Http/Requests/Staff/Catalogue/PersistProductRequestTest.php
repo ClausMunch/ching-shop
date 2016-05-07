@@ -1,9 +1,10 @@
 <?php
 
-namespace Testing\Unit\ChingShop\Http\Requests;
+namespace Testing\Unit\ChingShop\Http\Requests\Staff\Catalogue;
 
-use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\PersistProductRequest;
 use Illuminate\Http\Request as HttpRequest;
+use Testing\Unit\ChingShop\Http\Requests\RequestTest;
 
 class PersistProductRequestTest extends RequestTest
 {

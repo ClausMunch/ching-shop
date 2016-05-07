@@ -6,14 +6,18 @@ use ChingShop\Http\View\Customer\Viewable;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Http\View\Staff\RelaterInterface;
 use ChingShop\Image\Image;
+use McCool\LaravelAutoPresenter\BasePresenter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use OutOfBoundsException;
 
-class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
+class ProductPresenter extends BasePresenter implements
+    HttpCrudInterface,
+    RelaterInterface,
+    Viewable
 {
     /** @var Product */
-    private $product;
+    protected $wrappedObject;
 
     /** @var array */
     private $relations = [
@@ -21,11 +25,12 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
     ];
 
     /**
-     * @param Product $product
+     * @param Product $resource
      */
-    public function __construct(Product $product)
+    public function __construct(Product $resource)
     {
-        $this->product = $product;
+        parent::__construct($resource);
+        $this->wrappedObject = $resource;
     }
 
     /**
@@ -33,7 +38,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function name(): string
     {
-        return str_limit((string) $this->product->name, 100);
+        return str_limit((string) $this->wrappedObject->name, 100);
     }
 
     /**
@@ -41,7 +46,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function sku(): string
     {
-        return (string) $this->product->sku;
+        return (string) $this->wrappedObject->sku;
     }
 
     /**
@@ -49,7 +54,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function isStored(): bool
     {
-        return $this->product->isStored();
+        return $this->wrappedObject->isStored();
     }
 
     /**
@@ -57,7 +62,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function id(): int
     {
-        return (int) $this->product->id;
+        return (int) $this->wrappedObject->id;
     }
 
     /**
@@ -89,7 +94,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function slug(): string
     {
-        return (string) $this->product->slug;
+        return (string) $this->wrappedObject->slug;
     }
 
     /**
@@ -97,7 +102,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function description(): string
     {
-        return (string) $this->product->description;
+        return (string) $this->wrappedObject->description;
     }
 
     /**
@@ -105,7 +110,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function images()
     {
-        return $this->product->images;
+        return $this->wrappedObject->images;
     }
 
     /**
@@ -113,7 +118,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function mainImage()
     {
-        $firstImage = $this->product->images->first();
+        $firstImage = $this->wrappedObject->images->first();
 
         return $firstImage ? $firstImage : new Image();
     }
@@ -123,7 +128,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function otherImages()
     {
-        return $this->product->images->slice(1);
+        return $this->wrappedObject->images->slice(1);
     }
 
     /**
@@ -146,7 +151,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function relationTo(Model $related): Relation
     {
-        return $this->product->{$this->relationKeyTo($related)}();
+        return $this->wrappedObject->{$this->relationKeyTo($related)}();
     }
 
     /**
@@ -164,7 +169,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function price(): string
     {
-        $firstPrice = $this->product->prices->first();
+        $firstPrice = $this->wrappedObject->prices->first();
 
         return $firstPrice ? $firstPrice->formatted() : '';
     }
@@ -174,7 +179,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function priceUnits(): int
     {
-        $firstPrice = $this->product->prices->first();
+        $firstPrice = $this->wrappedObject->prices->first();
 
         return $firstPrice ? $firstPrice->units : 0;
     }
@@ -184,7 +189,7 @@ class ProductPresenter implements HttpCrudInterface, RelaterInterface, Viewable
      */
     public function priceSubUnits(): int
     {
-        $firstPrice = $this->product->prices->first();
+        $firstPrice = $this->wrappedObject->prices->first();
 
         return $firstPrice ? $firstPrice->subUnitsFormatted() : 0;
     }

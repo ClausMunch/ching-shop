@@ -1,6 +1,8 @@
 <?php
 
-namespace ChingShop\Http\Requests;
+namespace ChingShop\Http\Requests\Staff\Catalogue;
+
+use ChingShop\Http\Requests\Staff\StaffRequest;
 
 class NewImagesRequest extends StaffRequest
 {

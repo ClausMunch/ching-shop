@@ -5,6 +5,7 @@
           rel="stylesheet"
           property="stylesheet"
           type="text/css">
+    <meta name="robots" content="noindex, nofollow">
 @endsection
 
 @section('body-class', 'dashboard')
@@ -63,6 +64,13 @@
                                 Images
                             </a>
                         </li>
+                        <li class="{{ $location->putActive(
+                                'staff.tags.index'
+                            ) }}">
+                            <a href="{{ route('staff.tags.index') }}">
+                                Tags
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -72,6 +80,8 @@
 </nav>
 
 @section('body')
+
+    @include('flash::message')
 
     @yield('pre-content')
 
@@ -98,6 +108,6 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script async defer src="{{ elixir('js/staff.js') }}"></script>
-@endsection
+@endpush

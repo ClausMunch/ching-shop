@@ -6,6 +6,7 @@ use ChingShop\Catalogue\Product\ProductRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
+use Laracasts\Flash\FlashNotifier;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;
 
@@ -17,6 +18,9 @@ abstract class ControllerTest extends UnitTest
     /** @var ResponseFactory */
     private $responseFactory;
 
+    /** @var FlashNotifier */
+    private $flashNotifier;
+
     /** @var ProductRepository|MockObject */
     private $productRepository;
 
@@ -26,9 +30,11 @@ abstract class ControllerTest extends UnitTest
     public function tearDown()
     {
         parent::tearDown();
+
         unset($this->viewFactory);
         unset($this->responseFactory);
         unset($this->productRepository);
+        unset($this->flashNotifier);
     }
 
     /**
@@ -53,6 +59,18 @@ abstract class ControllerTest extends UnitTest
         }
 
         return $this->responseFactory;
+    }
+
+    /**
+     * @return FlashNotifier|MockObject
+     */
+    protected function flashNotifier()
+    {
+        if (empty($this->flashNotifier)) {
+            $this->flashNotifier = $this->makeMock(FlashNotifier::class);
+        }
+
+        return $this->flashNotifier;
     }
 
     /**

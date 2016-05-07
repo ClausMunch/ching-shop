@@ -3,6 +3,7 @@
 namespace ChingShop\Catalogue\Product;
 
 use ChingShop\Catalogue\Price\Price;
+use ChingShop\Catalogue\Tag\Tag;
 use ChingShop\Image\Image;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
  * ChingShop\Catalogue\Product\Product.
@@ -28,7 +30,6 @@ use Illuminate\Database\Query\Builder;
  *
  * @method static Builder|Product whereName($value)
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
  * @property string $slug
  * @property string $description
  * @property string $deleted_at
@@ -38,9 +39,11 @@ use Illuminate\Database\Query\Builder;
  * @method static Builder|Product whereDeletedAt($value)
  * @mixin \Eloquent
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
  * @property-read Collection|\ChingShop\Catalogue\Price\Price[] $prices
+ * @property-read \Illuminate\Database\Eloquent\Collection|Tag[] $tags
  */
-class Product extends Model
+class Product extends Model implements HasPresenter
 {
     use SoftDeletes;
 
@@ -105,5 +108,23 @@ class Product extends Model
     public function setSkuAttribute(string $sku)
     {
         $this->attributes['sku'] = mb_strtoupper($sku);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * Get the presenter class.
+     *
+     * @return string
+     */
+    public function getPresenterClass(): string
+    {
+        return ProductPresenter::class;
     }
 }

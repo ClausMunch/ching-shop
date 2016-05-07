@@ -103,10 +103,9 @@ class ProductRepositoryTest extends UnitTest
         $newProduct = $this->makeMock(Product::class);
         $this->productResource->shouldReceive('create')
             ->with(compact('name', 'sku'))
-            ->atLeast()->once()
+            ->atLeast()
+            ->once()
             ->andReturn($newProduct);
-        $newProduct->expects($this->atLeastOnce())
-            ->method('save');
 
         $this->productRepository->create(compact('name', 'sku'));
     }
@@ -140,7 +139,7 @@ class ProductRepositoryTest extends UnitTest
         $sku = $this->generator()->anyString();
 
         $product = $this->makeMock(Product::class);
-        $this->productResource->shouldReceive('where->with->first')
+        $this->productResource->shouldReceive('where->with->limit->first')
             ->atLeast()->once()
             ->andReturn($product);
 
@@ -154,7 +153,7 @@ class ProductRepositoryTest extends UnitTest
      */
     public function testPresentsEmptyIfSKUNotFound()
     {
-        $this->productResource->shouldReceive('where->with->first')
+        $this->productResource->shouldReceive('where->with->limit->first')
             ->atLeast()->once()
             ->andReturn(null);
 
@@ -173,8 +172,9 @@ class ProductRepositoryTest extends UnitTest
         $id = $this->generator()->anyInteger();
 
         $product = $this->makeMock(Product::class);
-        $this->productResource->shouldReceive('where->with->first')
-            ->atLeast()->once()
+        $this->productResource->shouldReceive('where->with->limit->first')
+            ->atLeast()
+            ->once()
             ->andReturn($product);
 
         $presenter = $this->productRepository->presentById($id);
@@ -187,7 +187,7 @@ class ProductRepositoryTest extends UnitTest
      */
     public function testPresentsEmptyIfIDNotFound()
     {
-        $this->productResource->shouldReceive('where->with->first')
+        $this->productResource->shouldReceive('where->with->limit->first')
             ->atLeast()->once()
             ->andReturn(null);
 
@@ -205,7 +205,7 @@ class ProductRepositoryTest extends UnitTest
     {
         $sku = $this->generator()->anyString();
         $product = $this->makeMock(Product::class);
-        $this->productResource->shouldReceive('where->limit->first')
+        $this->productResource->shouldReceive('where->with->limit->first')
             ->atLeast()->once()
             ->andReturn($product);
 
@@ -221,7 +221,7 @@ class ProductRepositoryTest extends UnitTest
     {
         $id = $this->generator()->anyInteger();
         $product = $this->makeMock(Product::class);
-        $this->productResource->shouldReceive('where->limit->first')
+        $this->productResource->shouldReceive('where->with->limit->first')
             ->atLeast()->once()
             ->andReturn($product);
 
@@ -348,7 +348,7 @@ class ProductRepositoryTest extends UnitTest
         /** @var Collection $collection */
         $collection = new Collection();
         $this->productResource->shouldReceive(
-            'orderBy->has->take->get'
+            'orderBy->has->with->limit->get'
         )->once()->andReturn($collection);
 
         return $collection;

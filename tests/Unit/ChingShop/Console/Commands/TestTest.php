@@ -51,6 +51,6 @@ class TestTest extends CommandTest
         $this->process->expects($this->atLeastOnce())
             ->method('mustRun');
 
-        $this->tester($this->testCommand)->execute([]);
+        $this->commandTester($this->testCommand)->execute([]);
     }
 }

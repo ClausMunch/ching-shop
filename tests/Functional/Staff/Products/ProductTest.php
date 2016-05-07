@@ -5,21 +5,11 @@ namespace Testing\Functional\Staff\Products;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
 use Testing\Functional\FunctionalTest;
+use Testing\Functional\Util\CreateCatalogue;
 
 abstract class ProductTest extends FunctionalTest
 {
-    /**
-     * @return Product
-     */
-    protected function makeProduct(): Product
-    {
-        return Product::create([
-            'name'        => str_random(),
-            'sku'         => uniqid(),
-            'slug'        => uniqid(),
-            'description' => $this->generator()->anyString(30),
-        ]);
-    }
+    use CreateCatalogue;
 
     /**
      * @param Product $product

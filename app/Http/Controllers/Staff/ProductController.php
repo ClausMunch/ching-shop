@@ -5,9 +5,10 @@ namespace ChingShop\Http\Controllers\Staff;
 use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Http\Requests\NewImagesRequest;
-use ChingShop\Http\Requests\PersistProductRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\PersistProductRequest;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
@@ -32,6 +33,9 @@ class ProductController extends Controller
     /** @var ImageRepository */
     private $imageRepository;
 
+    /** @var TagRepository */
+    private $tagRepository;
+
     /**
      * ProductController constructor.
      *
@@ -39,17 +43,20 @@ class ProductController extends Controller
      * @param ViewFactory       $viewFactory
      * @param ResponseFactory   $responseFactory
      * @param ImageRepository   $imageRepository
+     * @param TagRepository     $tagRepository
      */
     public function __construct(
         ProductRepository $productRepository,
         ViewFactory $viewFactory,
         ResponseFactory $responseFactory,
-        ImageRepository $imageRepository
+        ImageRepository $imageRepository,
+        TagRepository $tagRepository
     ) {
         $this->productRepository = $productRepository;
         $this->viewFactory = $viewFactory;
         $this->responseFactory = $responseFactory;
         $this->imageRepository = $imageRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     /**
@@ -102,8 +109,9 @@ class ProductController extends Controller
     public function show(string $sku)
     {
         $product = $this->mustPresentProductBySku($sku);
+        $tags = $this->tagRepository->loadAll();
 
-        return $this->buildView('show', compact('product'));
+        return $this->buildView('show', compact('product', 'tags'));
     }
 
     /**
