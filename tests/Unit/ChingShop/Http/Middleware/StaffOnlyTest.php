@@ -56,7 +56,8 @@ class StaffOnlyTest extends MiddlewareTest
      */
     public function testRedirectsNonAjaxNonStaffUserRequestToLogin()
     {
-        $next = function () {};
+        $next = function () {
+        };
 
         $user = $this->mockRequestUser();
         $user->shouldReceive('isStaff')->andReturn(false);
@@ -76,7 +77,8 @@ class StaffOnlyTest extends MiddlewareTest
      */
     public function testGives401ForAjaxRequestWithoutUser()
     {
-        $next = function () {};
+        $next = function () {
+        };
 
         $this->requestIsAjax(true);
 
@@ -96,7 +98,8 @@ class StaffOnlyTest extends MiddlewareTest
      */
     public function testGives401ForAjaxRequestFromNonStaffUser()
     {
-        $next = function () {};
+        $next = function () {
+        };
 
         $this->requestIsAjax(true);
 
