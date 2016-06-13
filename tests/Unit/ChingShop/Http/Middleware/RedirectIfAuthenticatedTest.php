@@ -50,7 +50,8 @@ class RedirectIfAuthenticatedTest extends MiddlewareTest
             ->method('check')
             ->willReturn(true);
 
-        $next = function () {};
+        $next = function () {
+        };
 
         $response = $this->redirectIfAuthenticated->handle(
             $this->request,

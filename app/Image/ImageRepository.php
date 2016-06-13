@@ -129,12 +129,12 @@ class ImageRepository
     {
         $this->imageResource->orWhere(
             function (Builder $query) {
-                    $query->where('filename', '!=', '');
-                    $query->whereNotNull('filename');
+                $query->where('filename', '!=', '');
+                $query->whereNotNull('filename');
             }
         )->get()->each(
             function (Image $image) {
-                    $this->dispatcher->fire(new NewImageEvent($image));
+                $this->dispatcher->fire(new NewImageEvent($image));
             }
         );
     }

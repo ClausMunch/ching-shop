@@ -59,7 +59,8 @@ class AuthenticateTest extends MiddlewareTest
      */
     public function testGives401ForUnauthenticatedAjax()
     {
-        $next = function () {};
+        $next = function () {
+        };
 
         $this->requestIsAuthenticated(false);
         $this->requestIsAjax(true);
@@ -76,7 +77,8 @@ class AuthenticateTest extends MiddlewareTest
      */
     public function testRedirectsToLoginForUnauthenticatedRequest()
     {
-        $next = function () {};
+        $next = function () {
+        };
 
         $this->requestIsAuthenticated(false);
         $this->requestIsAjax(false);
