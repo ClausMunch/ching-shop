@@ -4,16 +4,18 @@
 //noinspection JSUnresolvedVariable
 process.env.DISABLE_NOTIFIER = true;
 
-var elixir = require("laravel-elixir");
-var gulp   = require("gulp");
-var shell  = require("gulp-shell");
+var elixir  = require("laravel-elixir");
+var gulp    = require("gulp");
+var shell   = require("gulp-shell");
+var typings = require("gulp-typings");
+var ts      = require("gulp-typescript");
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.sass("staff.scss");
     mix.sass("customer.scss");
 });
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.styles([
         "staff.css"
     ], "public/css/staff.css", "public/css");
@@ -22,34 +24,47 @@ elixir(function(mix) {
     ], "public/css/customer.css", "public/css");
 });
 
-elixir(function(mix) {
+gulp.task("typings", function () {
+    return gulp.src("./resources/assets/ts/typings.json")
+        .pipe(typings());
+});
+
+gulp.task("typescript", function () {
+    return gulp.src("./resources/assets/ts/src/**/*.ts")
+        .pipe(ts(ts.createProject("./resources/assets/ts/tsconfig.json")))
+        .pipe(gulp.dest("./resources/assets/js/"));
+});
+
+elixir(function (mix) {
+    mix.task("typings");
+    mix.task("typescript");
+});
+
+elixir(function (mix) {
     mix.browserify("staff.js");
+    mix.browserify("staff/product-options.js");
     mix.browserify("customer.js");
 });
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.version([
         "css/staff.css",
         "css/customer.css",
-        "js/main.js",
         "js/staff.js",
+        "js/product-options.js",
         "js/customer.js"
     ]);
 });
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.copy("resources/assets/img", "public/img");
 });
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.copy(
         "./node_modules/bootstrap-sass/assets/fonts",
         "public/build/fonts/"
     );
-});
-
-elixir(function(mix) {
-    mix.task("generate-test-db");
 });
 
 gulp.task("generate-test-db", shell.task(

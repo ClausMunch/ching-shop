@@ -42,7 +42,7 @@ class RootController extends Controller
     public function getIndex()
     {
         $productColumns = Arr::partition(
-            $this->productRepository->presentLatest(8),
+            $this->productRepository->loadLatest(8)->all(),
             4
         );
 

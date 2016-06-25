@@ -4,7 +4,6 @@ namespace ChingShop\Http\View\Staff;
 
 use ChingShop\Http\View\Customer\LocationComposer;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -122,6 +121,7 @@ class StaffLocationComposer extends LocationComposer
      * @param HttpCrudInterface $crud
      *
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function showHrefFor(HttpCrudInterface $crud): string
     {
@@ -145,6 +145,7 @@ class StaffLocationComposer extends LocationComposer
      * @param HttpCrudInterface $crud
      *
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function persistActionFor(HttpCrudInterface $crud): string
     {
@@ -164,36 +165,13 @@ class StaffLocationComposer extends LocationComposer
      * @param HttpCrudInterface $crud
      *
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function deleteActionFor(HttpCrudInterface $crud): string
     {
         return $this->urlGenerator->route(
             implode('.', [$crud->routePath(), self::ROUTE_DELETE]),
             $crud->crudId()
-        );
-    }
-
-    /**
-     * @param RelaterInterface $relater
-     * @param Model            $related
-     *
-     * @return string
-     */
-    public function detachActionFor(RelaterInterface $relater, Model $related)
-    {
-        return $this->urlGenerator->route(
-            implode(
-                '.',
-                [
-                    $relater->routePath(),
-                    self::ROUTE_DETACH,
-                    $relater->relationKeyTo($related),
-                ]
-            ),
-            [
-                'productId' => $relater->id(),
-                'imageId'   => $related->getAttribute('id'),
-            ]
         );
     }
 

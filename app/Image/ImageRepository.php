@@ -2,13 +2,11 @@
 
 namespace ChingShop\Image;
 
-use ChingShop\Catalogue\Product\Product;
 use ChingShop\Events\NewImageEvent;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 
 class ImageRepository
 {
@@ -43,21 +41,22 @@ class ImageRepository
      *
      * @return Image
      */
-    public function mustLoadById(int $imageId): Image
+    public function loadById(int $imageId): Image
     {
-        return $this->imageResource->where('id', $imageId)->limit(1)->first();
+        return $this->imageResource->where('id', $imageId)->first();
     }
 
     /**
      * @param UploadedFile $upload
      *
      * @return Image
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
     public function storeUploadedImage(UploadedFile $upload): Image
     {
         $newImage = $this->imageResource->create(
             [
-            'filename' => uniqid().$upload->getClientOriginalName(),
+                'filename' => uniqid('', true).$upload->getClientOriginalName(),
             ]
         );
         $upload->move(storage_path('image'), $newImage->filename());
@@ -65,33 +64,6 @@ class ImageRepository
         $this->dispatcher->fire(new NewImageEvent($newImage));
 
         return $newImage;
-    }
-
-    /**
-     * @param FileBag|UploadedFile[] $images
-     * @param Product                $product
-     */
-    public function attachUploadedImagesToProduct($images, Product $product)
-    {
-        $product->attachImages(
-            array_map(
-                function (UploadedFile $image) {
-                    return $this->storeUploadedImage($image)->id;
-                },
-                $images instanceof FileBag ? $images->all() : (array) $images
-            )
-        );
-    }
-
-    /**
-     * @param Image   $image
-     * @param Product $product
-     *
-     * @return int
-     */
-    public function detachImageFromProduct(Image $image, Product $product)
-    {
-        return $product->images()->detach($image->id);
     }
 
     /**
@@ -127,15 +99,18 @@ class ImageRepository
      */
     public function transferLocalImages()
     {
-        $this->imageResource->orWhere(
-            function (Builder $query) {
+        $this->imageResource
+            ->orWhere(
+                function (Builder $query) {
                     $query->where('filename', '!=', '');
                     $query->whereNotNull('filename');
-            }
-        )->get()->each(
-            function (Image $image) {
+                }
+            )
+            ->get()
+            ->each(
+                function (Image $image) {
                     $this->dispatcher->fire(new NewImageEvent($image));
-            }
-        );
+                }
+            );
     }
 }

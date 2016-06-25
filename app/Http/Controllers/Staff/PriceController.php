@@ -4,36 +4,29 @@ namespace ChingShop\Http\Controllers\Staff;
 
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Http\Requests\Staff\Catalogue\SetPriceRequest;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use ChingShop\Http\Requests\Staff\Catalogue\Product\SetPriceRequest;
+use ChingShop\Http\WebUi;
 
 class PriceController extends Controller
 {
     /** @var ProductRepository */
     private $productRepository;
 
-    /** @var ViewFactory */
-    private $viewFactory;
-
-    /** @var ResponseFactory */
-    private $responseFactory;
+    /** @var WebUi */
+    private $webUi;
 
     /**
      * ProductController constructor.
      *
      * @param ProductRepository $productRepository
-     * @param ViewFactory       $viewFactory
-     * @param ResponseFactory   $responseFactory
+     * @param WebUi             $webUi
      */
     public function __construct(
         ProductRepository $productRepository,
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory
+        WebUi $webUi
     ) {
         $this->productRepository = $productRepository;
-        $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
+        $this->webUi = $webUi;
     }
 
     /**
@@ -52,9 +45,6 @@ class PriceController extends Controller
             $setPriceRequest->get('subunits')
         );
 
-        return $this->responseFactory->redirectToRoute(
-            'staff.products.show',
-            ['sku' => $sku]
-        );
+        return $this->webUi->redirect('staff.products.show', ['sku' => $sku]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace ChingShop\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 
@@ -11,13 +12,12 @@ use Symfony\Component\Process\Process;
 class Test extends Command
 {
     /** @var array */
-    private $testCommands = [
+    private static $testCommands = [
         'phpcs --standard=./tests/analysis/phpcs.xml app',
         'phpmd --strict app text ./tests/analysis/phpmd.xml',
         'phpunit --testsuite unit --repeat 3',
-        'phpunit --testsuite unit --coverage-html build',
         'gulp generate-test-db',
-        'phpunit --testsuite functional',
+        'phpunit --coverage-html build --coverage-clover build/clover.xml',
     ];
 
     /** @var Process */
@@ -44,10 +44,12 @@ class Test extends Command
      */
     public function handle()
     {
-        $count = count($this->testCommands);
+        $start = Carbon::now();
+
+        $count = count(self::$testCommands);
         $this->line("Running {$count} test suites and analyses");
 
-        foreach ($this->testCommands as $command) {
+        foreach (self::$testCommands as $command) {
             $this->line("Starting:\t`{$command}`...");
             $process = $this->makeProcess($command);
             $process->enableOutput();
@@ -56,7 +58,11 @@ class Test extends Command
             $this->info("✔\tOK:\t`{$command}`");
         }
 
-        $this->info("\n✔\t{$count} test suites and analyses passed");
+        $spent = $start->diffForHumans(Carbon::now(), true);
+
+        $this->info(
+            "\n✔\t{$count} test suites and analyses passed in ~{$spent}"
+        );
     }
 
     /**

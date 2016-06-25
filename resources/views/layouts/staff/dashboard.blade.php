@@ -6,10 +6,12 @@
           property="stylesheet"
           type="text/css">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('body-class', 'dashboard')
 
+@section('top')
 <nav class="navbar navbar-default">
     <div class="container-fluid">
 
@@ -78,6 +80,7 @@
 
     </div>
 </nav>
+@endsection
 
 @section('body')
 
@@ -109,5 +112,8 @@
 @endsection
 
 @push('scripts')
-    <script async defer src="{{ elixir('js/staff.js') }}"></script>
+    <script async
+            defer
+            type="application/javascript"
+            src="{{ secure_asset(elixir('js/staff.js')) }}"></script>
 @endpush

@@ -2,7 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller;
 
+use ChingShop\Catalogue\CatalogueRepository;
 use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Http\WebUi;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
@@ -24,6 +26,12 @@ abstract class ControllerTest extends UnitTest
     /** @var ProductRepository|MockObject */
     private $productRepository;
 
+    /** @var WebUi|MockObject */
+    private $webUi;
+
+    /** @var CatalogueRepository|MockObject */
+    private $catalogueRepository;
+
     /**
      * Unset view factory after each test.
      */
@@ -35,6 +43,7 @@ abstract class ControllerTest extends UnitTest
         unset($this->responseFactory);
         unset($this->productRepository);
         unset($this->flashNotifier);
+        unset($this->webUi);
     }
 
     /**
@@ -85,6 +94,32 @@ abstract class ControllerTest extends UnitTest
         }
 
         return $this->productRepository;
+    }
+
+    /**
+     * @return WebUi|MockObject
+     */
+    protected function webUi()
+    {
+        if (empty($this->webUi)) {
+            $this->webUi = $this->makeMock(WebUi::class);
+        }
+
+        return $this->webUi;
+    }
+
+    /**
+     * @return CatalogueRepository|MockObject
+     */
+    protected function catalogueRepository()
+    {
+        if (empty($this->catalogueRepository)) {
+            $this->catalogueRepository = $this->makeMock(
+                CatalogueRepository::class
+            );
+        }
+
+        return $this->catalogueRepository;
     }
 
     /**

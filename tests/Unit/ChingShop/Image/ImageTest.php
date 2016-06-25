@@ -43,7 +43,7 @@ class ImageTest extends UnitTest
     {
         $this->image->filename = '';
         $this->image->url = $this->generator()->anySlug();
-        $this->assertSame($this->image->url, $this->image->url());
+        $this->assertSame($this->image->url, $this->image->sizeUrl());
     }
 
     /**
@@ -73,7 +73,7 @@ class ImageTest extends UnitTest
             'filename' => 'foo.jpg',
         ]);
 
-        $parts = parse_url($image->url());
+        $parts = parse_url($image->sizeUrl());
 
         $this->assertEquals('https', $parts['scheme']);
         $this->assertContains('ching-shop', $parts['host']);
@@ -91,7 +91,7 @@ class ImageTest extends UnitTest
 
         $this->assertEquals(
             'https://www.ching-shop.dev/image/foo-large.jpg',
-            $image->url('large')
+            $image->sizeUrl('large')
         );
     }
 

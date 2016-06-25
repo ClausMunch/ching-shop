@@ -1,36 +1,11 @@
-<ul class="product-images-sortable"
-    data-product-id="{{ $product->id() }}"
+<ul class="product-images-sortable connect-sortable"
+    data-sort-action="{{ route(
+        $parent->routePath() . '.image-order',
+        $parent->crudId()
+    ) }}"
+    id="owner-{{ $parent->crudId() }}-images"
     data-token="{{ csrf_token() }}">
-    @foreach($product->images() as $image)
-
-    <li class="product-image-sortable ui-state-default"
-        data-image-id="{{ $image->id }}">
-        <form class="form-inline form-full-inline staff-product-form image-form"
-              id="detach-image-{{ $image->id }}-form"
-              method="post"
-              draggable="true"
-              action="{{ $location->detachActionFor($product, $image) }}">
-
-            <img src="{{ $image->url('small') }}"
-                 @if ($image->isSelfHosted())
-                    srcset="{{ $image->srcSet() }}"
-                 @endif
-                 alt="{{ $image->alt_text }}"
-                 class="img-responsive img-rounded staff-product-image" />
-
-            {{ method_field('DELETE') }}
-            {{ csrf_field() }}
-
-            <button type="submit"
-                    form="detach-image-{{ $image->id }}-form"
-                    class="btn btn-link delete-image">
-                            <span class="glyphicon glyphicon-remove"
-                                  aria-hidden="true">
-                            </span><span class="sr-only">Remove</span>
-            </button>
-
-        </form>
-    </li>
-
+    @foreach($parent->images as $image)
+        @include('staff.products.image')
     @endforeach
 </ul>

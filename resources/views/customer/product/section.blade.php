@@ -6,7 +6,7 @@
                  @if ($product->mainImage()->isSelfHosted())
                  srcset="{{ $product->mainImage()->srcSet() }}"
                  @endif
-                 src="{{ $product->mainImage()->url('medium') }}">
+                 src="{{ $product->mainImage()->sizeUrl('medium') }}">
         </div>
         <div class="col-md-8">
             <h2>

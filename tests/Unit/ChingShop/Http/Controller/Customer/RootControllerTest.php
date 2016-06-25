@@ -3,6 +3,7 @@
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
 use ChingShop\Http\Controllers\Customer\RootController;
+use Illuminate\Database\Eloquent\Collection;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class RootControllerTest extends ControllerTest
@@ -37,11 +38,14 @@ class RootControllerTest extends ControllerTest
      */
     public function testGetIndex()
     {
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentLatest')
-            ->with($this->isType('int'));
+        $this->productRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadLatest')
+            ->with($this->isType('int'))
+            ->willReturn(new Collection([]));
 
-        $this->viewFactory()->expects($this->atLeastOnce())
+        $this->viewFactory()
+            ->expects($this->atLeastOnce())
             ->method('make')
             ->with(
                 $this->isType('string'),

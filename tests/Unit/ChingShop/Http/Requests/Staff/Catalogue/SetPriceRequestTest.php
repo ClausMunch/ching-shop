@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Http\Requests\Staff\Catalogue;
 
-use ChingShop\Http\Requests\Staff\Catalogue\SetPriceRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\Product\SetPriceRequest;
 use Testing\Unit\ChingShop\Http\Requests\RequestTest;
 
 class SetPriceRequestTest extends RequestTest

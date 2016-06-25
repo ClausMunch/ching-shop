@@ -18,4 +18,31 @@ abstract class FunctionalTest extends TestCase
         parent::tearDown();
         $this->generator()->reset();
     }
+
+    /**
+     * @return string
+     */
+    protected function documentCsrfToken(): string
+    {
+        return (string) $this->crawler()
+            ->filter('[name=csrf-token]')
+            ->first()
+            ->attr('content');
+    }
+
+    /**
+     * @param string $selector
+     * @param string $attribute
+     *
+     * @return string
+     */
+    protected function documentQueryAttribute(
+        string $selector,
+        string $attribute
+    ) {
+        return (string) $this->crawler()
+            ->filter($selector)
+            ->first()
+            ->attr($attribute);
+    }
 }

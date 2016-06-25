@@ -25,9 +25,6 @@ class Tag extends Model implements HasPresenter
     /** @var array */
     protected $fillable = ['name'];
 
-    /** @var array */
-    protected $guarded = ['id'];
-
     /**
      * @return BelongsToMany
      */

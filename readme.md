@@ -1,7 +1,7 @@
 Ching Shop
 ==========
 
-[![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg)](https://travis-ci.org/hughgrigg/ching-shop)
+[![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg?branch=master)](https://travis-ci.org/hughgrigg/ching-shop)
 [![StyleCI](https://styleci.io/repos/44910529/shield)](https://styleci.io/repos/44910529)
 [![Coverage Status](https://coveralls.io/repos/github/hughgrigg/ching-shop/badge.svg?branch=master)](https://coveralls.io/github/hughgrigg/ching-shop?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/e8ff26290e6b48a8995cb6600988cf4b)](https://www.codacy.com/app/hugh_2/ching-shop)
@@ -36,8 +36,7 @@ Then set up the Vagrant box, ssh into it and check everything is set up:
 vagrant up
 vagrant ssh
 cd ~/sites/ching-shop
-gulp
-phpunit
+php artisan test
 ```
 
 You should now be able to access the development site at
@@ -52,7 +51,7 @@ for Chrome.
 ```bash
 phpunit --testsuite unit
 phpunit --testsuite functional
-phpunit --testsuite unit --coverage-html build
+phpunit --coverage-html build
 ```
 
 ## Static analysis

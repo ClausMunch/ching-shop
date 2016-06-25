@@ -2,8 +2,9 @@
 
 namespace ChingShop\Catalogue\Product;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductRepository
 {
@@ -28,32 +29,9 @@ class ProductRepository
         return $this->productResource
             ->orderBy('updated_at', 'desc')
             ->has('images')
-            ->with(['images', 'tags'])
+            ->with($this->relations())
             ->limit($limit)
             ->get();
-    }
-
-    /**
-     * @param int $limit
-     *
-     * @return array
-     */
-    public function presentLatest($limit = 100): array
-    {
-        return array_map(
-            function (Product $product) : ProductPresenter {
-                return $this->presentProduct($product);
-            },
-            $this->loadLatest($limit)->all()
-        );
-    }
-
-    /**
-     * @return ProductPresenter
-     */
-    public function presentEmpty(): ProductPresenter
-    {
-        return new ProductPresenter(new Product());
     }
 
     /**
@@ -86,43 +64,16 @@ class ProductRepository
     /**
      * @param string $sku
      *
-     * @return ProductPresenter
+     * @return Product
      */
-    public function presentBySku(string $sku): ProductPresenter
+    public function loadBySku(string $sku): Product
     {
-        /** @var Product $product */
         $product = $this->productResource
             ->where('sku', $sku)
-            ->with(['images', 'prices', 'tags'])
-            ->limit(1)
+            ->with($this->relations())
             ->first();
 
-        if (!$product) {
-            return $this->presentEmpty();
-        }
-
-        return $this->presentProduct($product);
-    }
-
-    /**
-     * @param int $id
-     *
-     * @return ProductPresenter
-     */
-    public function presentById(int $id): ProductPresenter
-    {
-        /** @var Product $product */
-        $product = $this->productResource
-            ->where('id', $id)
-            ->with(['images', 'prices', 'tags'])
-            ->limit(1)
-            ->first();
-
-        if (!$product) {
-            return $this->presentEmpty();
-        }
-
-        return $this->presentProduct($product);
+        return $product ? $product : new Product();
     }
 
     /**
@@ -130,26 +81,11 @@ class ProductRepository
      *
      * @return Product
      */
-    public function mustLoadById(int $id): Product
+    public function loadById(int $id): Product
     {
         return $this->productResource
             ->where('id', $id)
-            ->with(['images', 'prices', 'tags'])
-            ->limit(1)
-            ->first();
-    }
-
-    /**
-     * @param string $sku
-     *
-     * @return Product
-     */
-    public function mustLoadBySku(string $sku): Product
-    {
-        return $this->productResource
-            ->where('sku', $sku)
-            ->with(['images', 'prices', 'tags'])
-            ->limit(1)
+            ->with($this->relations())
             ->first();
     }
 
@@ -158,11 +94,11 @@ class ProductRepository
      *
      * @throws \Exception
      *
-     * @return bool|null
+     * @return bool
      */
     public function deleteBySku(string $sku)
     {
-        return $this->productResource
+        return (bool) $this->productResource
             ->where('sku', $sku)
             ->limit(1)
             ->first()
@@ -194,40 +130,17 @@ class ProductRepository
     }
 
     /**
-     * @param int   $productId
-     * @param array $imageOrder
-     *
-     * @return bool
+     * @return array
      */
-    public function updateImageOrder(int $productId, array $imageOrder): bool
+    private function relations(): array
     {
-        /** @var Product $product */
-        $product = $this->productResource
-            ->where('id', '=', $productId)
-            ->with('images')
-            ->limit(1)
-            ->first();
-
-        foreach ($product->images as $image) {
-            if (!array_key_exists($image->id, $imageOrder)) {
-                continue;
-            }
-            $product->images()->updateExistingPivot(
-                $image->id,
-                ['position' => $imageOrder[$image->id]]
-            );
-        }
-
-        return true;
-    }
-
-    /**
-     * @param $product
-     *
-     * @return ProductPresenter
-     */
-    private function presentProduct($product)
-    {
-        return new ProductPresenter($product);
+        return [
+            'images',
+            'prices',
+            'tags',
+            'options' => function (HasMany $query) {
+                $query->orderBy('position', 'asc');
+            },
+        ];
     }
 }

@@ -2,9 +2,7 @@
 
 namespace ChingShop\Catalogue\Price;
 
-use ChingShop\Catalogue\Product\Product;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
@@ -44,9 +42,6 @@ class Price extends Model
     /** @var array */
     protected $fillable = ['units', 'subunits', 'currency'];
 
-    /** @var array */
-    protected $guarded = ['id'];
-
     /**
      * @return string
      */
@@ -68,13 +63,5 @@ class Price extends Model
             self::SUBUNITS_FORMAT,
             $this->subunits
         );
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
     }
 }

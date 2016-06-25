@@ -15,7 +15,7 @@
             @if ($product->mainImage())
             <img class="img-responsive photo"
                  id="product-main-image"
-                 src="{{ $product->mainImage()->url('large') }}"
+                 src="{{ $product->mainImage()->sizeUrl('large') }}"
                  @if ($product->mainImage()->isSelfHosted())
                     srcset="{{ $product->mainImage()->srcSet() }}"
                  @endif
@@ -29,7 +29,7 @@
                         href="{{ $image->url() }}"
                         title="{{ $image->altText() }}">
                         <img class="img-thumbnail img-responsive"
-                             src="{{ $image->url('large') }}"
+                             src="{{ $image->sizeUrl('large') }}"
                              alt="{{ $image->altText() }}"
                              @if ($image->isSelfHosted())
                                 srcset="{{ $image->srcSet() }}"

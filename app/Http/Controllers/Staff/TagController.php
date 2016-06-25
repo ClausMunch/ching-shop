@@ -7,51 +7,42 @@ use ChingShop\Catalogue\Tag\Tag;
 use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\Requests\Staff\Catalogue\NewTagRequest;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use ChingShop\Http\WebUi;
 use Illuminate\Http\Request;
-use Laracasts\Flash\FlashNotifier;
 use McCool\LaravelAutoPresenter\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * Class TagController
+ *
+ * @package ChingShop\Http\Controllers\Staff
+ */
 class TagController extends Controller
 {
-    /** @var ViewFactory */
-    private $viewFactory;
-
-    /** @var ResponseFactory */
-    private $responseFactory;
-
-    /** @var FlashNotifier */
-    private $notifier;
-
     /** @var TagRepository */
     private $tagRepository;
 
     /** @var ProductRepository */
     private $productRepository;
 
+    /** @var WebUi */
+    private $webUi;
+
     /**
      * ImageController constructor.
      *
-     * @param ViewFactory       $viewFactory
-     * @param ResponseFactory   $responseFactory
-     * @param FlashNotifier     $notifier
      * @param TagRepository     $tagRepository
      * @param ProductRepository $productRepository
+     * @param WebUi             $webUi
      */
     public function __construct(
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory,
-        FlashNotifier $notifier,
         TagRepository $tagRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        WebUi $webUi
     ) {
-        $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
-        $this->notifier = $notifier;
         $this->tagRepository = $tagRepository;
         $this->productRepository = $productRepository;
+        $this->webUi = $webUi;
     }
 
     /**
@@ -62,7 +53,7 @@ class TagController extends Controller
         $tags = $this->tagRepository->loadAll();
         $newTag = new Tag();
 
-        return $this->viewFactory->make(
+        return $this->webUi->view(
             'staff.tags.index',
             compact('tags', 'newTag')
         );
@@ -78,9 +69,9 @@ class TagController extends Controller
         $tag = $this->tagRepository->create($request->all());
 
         if (isset($tag->id)) {
-            $this->notifier->success("Created new tag `{$tag->name}`");
+            $this->webUi->successMessage("Created new tag `{$tag->name}`");
         } else {
-            $this->notifier->error('Failed to create new tag');
+            $this->webUi->errorMessage('Failed to create new tag');
         }
 
         return $this->redirectToTagsIndex();
@@ -90,15 +81,18 @@ class TagController extends Controller
      * @param int $tagId
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(int $tagId)
     {
         $deleted = $this->tagRepository->deleteById($tagId);
 
         if ($deleted) {
-            $this->notifier->success("Deleted tag with ID `{$tagId}`");
+            $this->webUi->successMessage("Deleted tag with ID `{$tagId}`");
         } else {
-            $this->notifier->error("Failed to delete tag with ID `{$tagId}`");
+            $this->webUi->errorMessage(
+                "Failed to delete tag with ID `{$tagId}`"
+            );
         }
 
         return $this->redirectToTagsIndex();
@@ -114,13 +108,13 @@ class TagController extends Controller
      */
     public function putProductTags(Request $request, string $sku)
     {
-        $product = $this->productRepository->mustLoadBySku($sku);
+        $product = $this->productRepository->loadBySku($sku);
         $tagIds = (array) $request->get('tag-ids');
         $this->tagRepository->syncProductTagIds($product, $tagIds);
 
-        $this->notifier->success("Tags updated for `{$product->sku}`");
+        $this->webUi->successMessage("Tags updated for `{$product->sku}`");
 
-        return $this->responseFactory->redirectToRoute(
+        return $this->webUi->redirect(
             'staff.products.show',
             ['sku' => $product->sku]
         );
@@ -131,6 +125,6 @@ class TagController extends Controller
      */
     private function redirectToTagsIndex(): RedirectResponse
     {
-        return $this->responseFactory->redirectToRoute('staff.tags.index');
+        return $this->webUi->redirect('staff.tags.index');
     }
 }

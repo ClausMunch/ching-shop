@@ -1,9 +1,9 @@
 <?php
 
 use ChingShop\User\Role;
-use Illuminate\Database\Seeder;
+use ChingShop\User\User;
 
-class RolesTableSeeder extends Seeder
+class RolesTableSeeder extends Seed
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,15 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => Role::STAFF]);
+        $staff = Role::create(['name' => Role::STAFF]);
+
+        $developer = User::create([
+            'name'     => 'Developer',
+            'email'    => 'developer@ching-shop.com',
+            'password' => bcrypt('developer'),
+        ]);
+
+        $developer->roles()->sync([$staff->id]);
+        $developer->save();
     }
 }

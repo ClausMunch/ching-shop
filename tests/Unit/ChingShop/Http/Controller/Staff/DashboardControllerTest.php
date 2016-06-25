@@ -18,7 +18,7 @@ class DashboardControllerTest extends ControllerTest
     {
         parent::setUp();
 
-        $this->dashboardController = new DashboardController();
+        $this->dashboardController = new DashboardController($this->webUi());
     }
 
     /**
@@ -37,8 +37,9 @@ class DashboardControllerTest extends ControllerTest
      */
     public function testGetIndex()
     {
-        $view = $this->dashboardController->getIndex();
-        $this->assertInstanceOf(View::class, $view);
+        $this->webUi()->expects($this->atLeastOnce())->method('view');
+
+        $this->dashboardController->getIndex();
     }
 
     /**

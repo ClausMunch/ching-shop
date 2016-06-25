@@ -26,4 +26,14 @@ class DashboardTest extends FunctionalTest
             ->visit(route('staff.dashboard'))
             ->seePageIs(route('staff.dashboard'));
     }
+
+    /**
+     * CSRF token should be available on staff pages.
+     */
+    public function testCanGetCsrfToken()
+    {
+        $this->actingAs($this->staffUser())->visit(route('staff.dashboard'));
+        $this->see('csrf-token');
+        $this->assertNotEmpty($this->documentCsrfToken());
+    }
 }

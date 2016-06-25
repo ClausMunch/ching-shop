@@ -3,36 +3,27 @@
 namespace ChingShop\Http\Controllers\Staff;
 
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Http\WebUi;
 use ChingShop\Image\ImageRepository;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ImageController extends Controller
 {
-    /** @var ViewFactory */
-    private $viewFactory;
-
-    /** @var ResponseFactory */
-    private $responseFactory;
-
     /** @var ImageRepository */
     private $imageRepository;
+
+    /** @var WebUi */
+    private $webUi;
 
     /**
      * ImageController constructor.
      *
-     * @param ViewFactory     $viewFactory
-     * @param ResponseFactory $responseFactory
      * @param ImageRepository $imageRepository
+     * @param WebUi           $webUi
      */
-    public function __construct(
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory,
-        ImageRepository $imageRepository
-    ) {
-        $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
+    public function __construct(ImageRepository $imageRepository, WebUi $webUi)
+    {
         $this->imageRepository = $imageRepository;
+        $this->webUi = $webUi;
     }
 
     /**
@@ -42,10 +33,7 @@ class ImageController extends Controller
     {
         $images = $this->imageRepository->loadLatest(500);
 
-        return $this->viewFactory->make(
-            'staff.images.index',
-            compact('images')
-        );
+        return $this->webUi->view('staff.images.index', compact('images'));
     }
 
     /**
@@ -75,8 +63,6 @@ class ImageController extends Controller
      */
     private function redirectToImagesIndex()
     {
-        return $this->responseFactory->redirectToRoute(
-            'staff.products.images.index'
-        );
+        return $this->webUi->redirect('staff.products.images.index');
     }
 }

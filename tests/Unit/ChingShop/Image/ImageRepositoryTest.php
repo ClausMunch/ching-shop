@@ -64,15 +64,16 @@ class ImageRepositoryTest extends UnitTest
     /**
      * Should be able to load an image by ID.
      */
-    public function testMustLoadById()
+    public function testLoadById()
     {
         $id = $this->generator()->anyInteger();
         $image = $this->makeMock(Image::class);
-        $this->imageResource->shouldReceive('where->limit->first')
-            ->atLeast()->once()
+        $this->imageResource->shouldReceive('where->first')
+            ->atLeast()
+            ->once()
             ->andReturn($image);
 
-        $loaded = $this->imageRepository->mustLoadById($id);
+        $loaded = $this->imageRepository->loadById($id);
 
         $this->assertSame($image, $loaded);
     }
@@ -126,62 +127,6 @@ class ImageRepositoryTest extends UnitTest
             );
 
         $this->imageRepository->storeUploadedImage($upload);
-    }
-
-    /**
-     * Should be able to link uploaded images to a product.
-     */
-    public function testAttachesUploadedImagesToProduct()
-    {
-        $uploadedFile = $this->makeMockUploadedFile();
-        $uploadedFile->expects($this->atLeastOnce())
-            ->method('getClientOriginalName')
-            ->willReturn($this->generator()->anyString());
-        $uploadedFile->expects($this->atLeastOnce())
-            ->method('move');
-
-        $imageBag = $this->makeMockFileBag([$uploadedFile]);
-        $product = $this->makeMockProduct();
-
-        $product->shouldReceive('attachImages')
-            ->once()
-            ->with(\Mockery::type('array'));
-
-        $this->config->shouldReceive('get');
-
-        $this->expectImageCreation();
-
-        $this->imageRepository->attachUploadedImagesToProduct(
-            $imageBag,
-            $product
-        );
-    }
-
-    /**
-     * Should be able to detach and image from a product.
-     */
-    public function testDetachImageFromProduct()
-    {
-        $image = $this->imageResource;
-        $product = $this->makeMockProduct();
-
-        $image->shouldReceive('getAttribute')
-            ->atLeast()
-            ->once()
-            ->andReturn($this->generator()->anyInteger());
-
-        /** @var BelongsToMany|MockObject $imagesRelation */
-        $imagesRelation = $this->makeMock(BelongsToMany::class);
-
-        $product->shouldReceive('images')
-            ->once()
-            ->andReturn($imagesRelation);
-
-        $imagesRelation->expects($this->atLeastOnce())
-            ->method('detach')
-            ->with($image->id);
-
-        $this->imageRepository->detachImageFromProduct($image, $product);
     }
 
     /**
@@ -250,19 +195,6 @@ class ImageRepositoryTest extends UnitTest
         $uploadedFile = $this->makeMock(UploadedFile::class);
 
         return $uploadedFile;
-    }
-
-    /**
-     * @param UploadedFile[] $files
-     *
-     * @return MockInterface|FileBag
-     */
-    private function makeMockFileBag(array $files = []): MockInterface
-    {
-        $fileBag = $this->mockery(FileBag::class);
-        $fileBag->shouldReceive('all')->andReturn($files);
-
-        return $fileBag;
     }
 
     /**

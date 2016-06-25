@@ -115,8 +115,8 @@ Route::group(
                 Route::delete(
                     'product/{productId}/image/{imageId}',
                     [
-                        'uses' => 'Staff\ProductController@detachProductImage',
-                        'as'   => 'staff.products.detach.images',
+                        'uses' => 'Staff\ProductController@detachImage',
+                        'as'   => 'staff.products.detach-image',
                     ]
                 );
                 Route::post(
@@ -124,6 +124,27 @@ Route::group(
                     [
                         'uses' => 'Staff\PriceController@setProductPrice',
                         'as'   => 'staff.products.price',
+                    ]
+                );
+                Route::post(
+                    'products/{id}/post-option',
+                    [
+                        'uses' => 'Staff\ProductOptionController@postNew',
+                        'as'   => 'staff.products.post-option',
+                    ]
+                );
+                Route::put(
+                    'products/{productId}/options/{optionId}/label',
+                    [
+                        'uses' => 'Staff\ProductOptionController@putLabel',
+                        'as'   => 'staff.products.options.put-label',
+                    ]
+                );
+                Route::put(
+                    'products/options/{optionId}/colour',
+                    [
+                        'uses' => 'Staff\ProductOptionController@putColour',
+                        'as'   => 'staff.products.options.put-colour',
                     ]
                 );
                 Route::post(
@@ -135,8 +156,25 @@ Route::group(
                 );
                 Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
                 Route::put(
-                    'products/{id}/image-order',
-                    'Staff\ProductController@putImageOrder'
+                    'products/{sku}/image-order',
+                    [
+                        'uses' => 'Staff\ProductController@putImageOrder',
+                        'as'   => 'staff.products.image-order',
+                    ]
+                );
+                Route::put(
+                    'products/options/{id}/image-order',
+                    [
+                        'uses' => 'Staff\ProductOptionController@putImageOrder',
+                        'as'   => 'staff.products.options.image-order',
+                    ]
+                );
+                Route::delete(
+                    'products/options/{optionId}/image/{imageId}',
+                    [
+                        'uses' => 'Staff\ProductOptionController@detachImage',
+                        'as'   => 'staff.products.options.detach-image',
+                    ]
                 );
                 Route::resource('tags', 'Staff\TagController');
                 Route::put(

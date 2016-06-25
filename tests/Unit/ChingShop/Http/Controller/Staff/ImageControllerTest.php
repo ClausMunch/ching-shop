@@ -23,9 +23,8 @@ class ImageControllerTest extends ControllerTest
         $this->imageRepository = $this->makeMock(ImageRepository::class);
 
         $this->imageController = new ImageController(
-            $this->viewFactory(),
-            $this->responseFactory(),
-            $this->imageRepository
+            $this->imageRepository,
+            $this->webUi()
         );
     }
 
@@ -43,7 +42,8 @@ class ImageControllerTest extends ControllerTest
     public function testDestroy()
     {
         $imageId = $this->generator()->anyInteger();
-        $this->imageRepository->expects($this->atLeastOnce())
+        $this->imageRepository
+            ->expects($this->atLeastOnce())
             ->method('deleteById')
             ->with($imageId);
 
@@ -56,7 +56,8 @@ class ImageControllerTest extends ControllerTest
      */
     public function testTransferLocalImages()
     {
-        $this->imageRepository->expects($this->atLeastOnce())
+        $this->imageRepository
+            ->expects($this->atLeastOnce())
             ->method('transferLocalImages');
 
         $this->imageController->transferLocalImages();
