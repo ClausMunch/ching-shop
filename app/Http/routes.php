@@ -3,7 +3,6 @@
 Route::group(
     ['middleware' => ['web']],
     function () {
-
         Route::group(
             [
                 'namespace'  => 'Customer',
@@ -219,6 +218,5 @@ Route::group(
         );
 
         Route::get('home', 'Customer\RootController@getIndex');
-
     }
 );
