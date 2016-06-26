@@ -1,4 +1,6 @@
 language: php
+php:
+  - '7.0'
 sudo: false
 install:
   - mkdir -p build/logs
@@ -7,6 +9,7 @@ install:
   - composer install --no-interaction --no-scripts
   - composer require satooshi/php-coveralls:dev-master
   - cp -n .env.travis .env
+  - nvm install 6 && nvm use 6
   - npm install -g npm
   - npm install --no-progress
   - npm install --no-progress -g gulp
@@ -19,7 +22,5 @@ script:
   - ./vendor/bin/phpmd --strict app text ./tests/analysis/phpmd.xml
   - phpunit --testsuite unit --repeat 3
   - phpunit --coverage-clover build/logs/clover.xml
-php:
-  - '7.0'
 after_success:
   - travis_retry php vendor/bin/coveralls

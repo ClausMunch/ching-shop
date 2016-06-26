@@ -3,11 +3,11 @@
   "devDependencies": {
     "bootstrap-multiselect": "^0.9",
     "gulp": "^3",
+    "gulp-clean": "^0.3.2",
     "gulp-sass": "^2.3.2",
     "gulp-shell": "^0",
     "gulp-typescript": "^2",
     "gulp-typings": "^2",
-    "laravel-elixir-browserify-official": "^0.1.2",
     "tslint": "^3",
     "typescript": "^1",
     "typings": "^1"
@@ -16,7 +16,7 @@
     "bootstrap-sass": "^3",
     "jquery": "^2",
     "jquery-ui": "^1",
-    "laravel-elixir": "^6.0.0-4",
+    "laravel-elixir": "*",
     "node-sass": "^3"
   }
 }
