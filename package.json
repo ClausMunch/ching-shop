@@ -14,7 +14,7 @@
     "bootstrap-sass": "^3",
     "jquery": "^2",
     "jquery-ui": "^1",
-    "laravel-elixir": "^6",
+    "laravel-elixir": "^6.0.0-4",
     "node-sass": "^3"
   }
 }
