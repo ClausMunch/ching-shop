@@ -2,8 +2,8 @@
 
 use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
-use ChingShop\Image\Image;
 use ChingShop\Catalogue\Product\ProductOption;
+use ChingShop\Image\Image;
 
 class ProductsTableSeeder extends Seed
 {
@@ -59,8 +59,8 @@ class ProductsTableSeeder extends Seed
                 'alt_text' => $this->faker()->words(3, true),
                 'url'      => secure_asset(
                     "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
-                    . uniqid()
-                )
+                    .uniqid()
+                ),
             ]);
         }
     }
@@ -71,7 +71,7 @@ class ProductsTableSeeder extends Seed
     private function addProductOption(Product $product)
     {
         $productOption = new ProductOption([
-            'label' => ucfirst($this->faker()->unique()->word)
+            'label' => ucfirst($this->faker()->unique()->word),
         ]);
         $product->options()->save($productOption);
 

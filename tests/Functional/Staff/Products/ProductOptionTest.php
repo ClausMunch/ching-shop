@@ -5,9 +5,7 @@ namespace Testing\Functional\Staff\Products;
 use Testing\Functional\Staff\StaffUser;
 
 /**
- * Class ProductOptionTest
- *
- * @package Testing\Functional\Staff\Products
+ * Class ProductOptionTest.
  */
 class ProductOptionTest extends ProductTest
 {

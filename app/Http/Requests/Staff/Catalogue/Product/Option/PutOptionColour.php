@@ -20,7 +20,7 @@ class PutOptionColour extends StaffRequest
     public function rules(): array
     {
         return [
-            'colour' => 'required|integer|exists:colours,id'
+            'colour' => 'required|integer|exists:colours,id',
         ];
     }
 }

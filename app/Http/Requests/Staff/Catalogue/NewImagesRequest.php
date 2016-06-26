@@ -6,9 +6,7 @@ use ChingShop\Http\Requests\Staff\StaffRequest;
 use Symfony\Component\HttpFoundation\FileBag;
 
 /**
- * Class NewImagesRequest
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue
+ * Class NewImagesRequest.
  */
 class NewImagesRequest extends StaffRequest
 {
@@ -20,7 +18,7 @@ class NewImagesRequest extends StaffRequest
     public function hasNewImages(): bool
     {
         return $this->hasFile(self::PARAMETER)
-            || $this->hasFile(self::PARAMETER . '[0]');
+            || $this->hasFile(self::PARAMETER.'[0]');
     }
 
     /**
@@ -30,7 +28,7 @@ class NewImagesRequest extends StaffRequest
     {
         $images = $this->file(self::PARAMETER);
         if (!$images) {
-            $images = $this->file(self::PARAMETER . '[0]');
+            $images = $this->file(self::PARAMETER.'[0]');
         }
 
         if ($images instanceof FileBag) {

@@ -62,7 +62,6 @@ class ProductOptionController extends Controller
     /**
      * @param int            $productId
      * @param int            $optionId
-     *
      * @param PutOptionLabel $request
      *
      * @return \Illuminate\Http\JsonResponse

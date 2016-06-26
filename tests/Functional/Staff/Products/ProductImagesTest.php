@@ -3,13 +3,10 @@
 namespace Testing\Functional\Staff\Products;
 
 use Illuminate\Foundation\Testing\HttpException;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Testing\Functional\Staff\StaffUser;
 
 /**
- * Class ProductImagesTest
- *
- * @package Testing\Functional\Staff\Products
+ * Class ProductImagesTest.
  */
 class ProductImagesTest extends ProductTest
 {
@@ -24,7 +21,7 @@ class ProductImagesTest extends ProductTest
 
         $testImageFile = app_path('../tests/fixtures/product/image.jpg');
 
-        /**
+        /*
          * Unfortunately have not been able to get the file upload working
          * beyond UploadedFile's is_uploaded_file check; this is an unpleasant
          * compromise to at least exercise the code.

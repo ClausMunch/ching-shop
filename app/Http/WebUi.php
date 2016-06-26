@@ -7,11 +7,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 use Laracasts\Flash\FlashNotifier;
 
 /**
- * Class WebUi
- *
- * @package ChingShop\Http
- *
- * Adapter for commonly used web user interface components.
+ * Class WebUi.
  */
 class WebUi
 {

@@ -14,9 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ProductController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class ProductController.
  */
 class ProductController extends Controller
 {

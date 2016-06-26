@@ -5,9 +5,7 @@ namespace ChingShop\Http\Requests\Staff\Catalogue;
 use ChingShop\Http\Requests\Staff\StaffRequest;
 
 /**
- * Class ImageOrderRequest
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue
+ * Class ImageOrderRequest.
  */
 class ImageOrderRequest extends StaffRequest
 {

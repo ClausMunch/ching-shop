@@ -8,9 +8,7 @@ use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 
 /**
- * Class ProductTest
- *
- * @package Testing\Functional\Staff\Products
+ * Class ProductTest.
  */
 abstract class ProductTest extends FunctionalTest
 {
