@@ -5,9 +5,7 @@ namespace Testing;
 use Illuminate\Contracts\Console\Kernel;
 
 /**
- * Class TestCase
- *
- * @package Testing
+ * Class TestCase.
  */
 abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
 {

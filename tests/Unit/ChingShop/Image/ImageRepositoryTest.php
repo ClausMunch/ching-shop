@@ -8,12 +8,10 @@ use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Events\Dispatcher;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 use Testing\Unit\Behaviour\MocksModel;
 use Testing\Unit\UnitTest;
 

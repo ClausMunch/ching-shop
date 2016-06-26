@@ -13,9 +13,7 @@ use McCool\LaravelAutoPresenter\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class TagController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class TagController.
  */
 class TagController extends Controller
 {
@@ -80,8 +78,9 @@ class TagController extends Controller
     /**
      * @param int $tagId
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $tagId)
     {

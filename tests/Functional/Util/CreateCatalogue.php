@@ -11,11 +11,7 @@ use Faker\Factory;
 use Faker\Generator;
 
 /**
- * Class CreateCatalogue
- *
- * @package Testing\Functional\Util
- *
- * Helper methods for creating catalogue entities in tests.
+ * Class CreateCatalogue.
  */
 trait CreateCatalogue
 {
@@ -53,7 +49,7 @@ trait CreateCatalogue
     protected function createProductOptionFor(Product $product): ProductOption
     {
         $productOption = new ProductOption([
-            'label' => 'ProductOption' . ucfirst(str_random())
+            'label' => 'ProductOption'.ucfirst(str_random()),
         ]);
         $product->options()->save($productOption);
 
@@ -66,7 +62,7 @@ trait CreateCatalogue
     protected function createColour(): Colour
     {
         return Colour::create([
-            'name' => $this->faker()->unique()->colorName
+            'name' => $this->faker()->unique()->colorName,
         ]);
     }
 
@@ -77,7 +73,7 @@ trait CreateCatalogue
     {
         return Image::create([
             'alt_text' => str_random(),
-            'url'      => $this->faker()->slug
+            'url'      => $this->faker()->slug,
         ]);
     }
 

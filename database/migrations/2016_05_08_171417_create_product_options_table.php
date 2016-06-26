@@ -59,7 +59,7 @@ class CreateProductOptionsTable extends Migration
             echo "Creating option for product {$product->id}\n";
             $product->options()->save(
                 new ProductOption([
-                    'label' => 'Standard'
+                    'label' => 'Standard',
                 ])
             );
         }

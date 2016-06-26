@@ -7,15 +7,13 @@ use ChingShop\Http\Requests\Staff\StaffRequest;
 use Illuminate\Http\Request;
 
 /**
- * Class PutOptionLabel
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue\Product\Option
+ * Class PutOptionLabel.
  */
 class PutOptionLabel extends StaffRequest
 {
     /**
- * @return string
- */
+     * @return string
+     */
     public function label(): string
     {
         return (string) $this->request->get('label');

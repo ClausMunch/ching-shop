@@ -3,9 +3,7 @@
 namespace ChingShop\Validation;
 
 /**
- * Class ValidationFailure
- *
- * @package ChingShop\Validation
+ * Class ValidationFailure.
  */
 class ValidationFailure extends \Exception
 {

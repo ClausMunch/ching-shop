@@ -120,8 +120,9 @@ class StaffLocationComposer extends LocationComposer
     /**
      * @param HttpCrudInterface $crud
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function showHrefFor(HttpCrudInterface $crud): string
     {
@@ -144,8 +145,9 @@ class StaffLocationComposer extends LocationComposer
     /**
      * @param HttpCrudInterface $crud
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function persistActionFor(HttpCrudInterface $crud): string
     {
@@ -164,8 +166,9 @@ class StaffLocationComposer extends LocationComposer
     /**
      * @param HttpCrudInterface $crud
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function deleteActionFor(HttpCrudInterface $crud): string
     {

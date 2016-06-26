@@ -255,7 +255,8 @@ class ProductControllerTest extends ControllerTest
      *
      * @return View|MockInterface
      */
-    private function expectViewToBeMade(string $viewName): MockInterface {
+    private function expectViewToBeMade(string $viewName): MockInterface
+    {
         $view = $this->makeMockeryView();
         $this->webUi()
             ->expects($this->atLeastOnce())

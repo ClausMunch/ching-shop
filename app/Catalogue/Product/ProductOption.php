@@ -5,22 +5,20 @@ namespace ChingShop\Catalogue\Product;
 use ChingShop\Catalogue\Attribute\Colour;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageOwner;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Collection;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * Class Variant
+ * Class Variant.
  *
- * @package ChingShop\Catalogue\Product
  *
  * @property int    $id
  * @property string $label
  * @property int    $product_id
- *
  * @property-read Product $product
  * @property-read Collection|Image[] $images
  * @property-read Collection|Colour[] $colours
@@ -72,7 +70,6 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
 
     /**
      * @param int        $productId
-     *
      * @param int|string $optionId
      *
      * @return array
@@ -87,10 +84,10 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
                 'max:127',
                 // label must be unique for this product
                 sprintf(
-                    "unique:product_options,label,%d,id,product_id,%d",
+                    'unique:product_options,label,%d,id,product_id,%d',
                     $optionId,
                     $productId
-                )
+                ),
             ],
         ];
     }

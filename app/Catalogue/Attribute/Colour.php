@@ -3,9 +3,9 @@
 namespace ChingShop\Catalogue\Attribute;
 
 use ChingShop\Catalogue\Product\ProductOption;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class Colour.

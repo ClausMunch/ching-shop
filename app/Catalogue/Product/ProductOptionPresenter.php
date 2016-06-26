@@ -6,9 +6,7 @@ use ChingShop\Http\View\Staff\HttpCrudInterface;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 /**
- * Class ProductOptionPresenter
- *
- * @package ChingShop\Catalogue\Product
+ * Class ProductOptionPresenter.
  */
 class ProductOptionPresenter extends BasePresenter implements HttpCrudInterface
 {

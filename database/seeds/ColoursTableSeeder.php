@@ -24,7 +24,7 @@ class ColoursTableSeeder extends Seed
         /** @var ProductOption $productOption */
         foreach (ProductOption::all() as $productOption) {
             $productOption->colours()->sync([
-                $this->faker()->randomElement($colours)->id
+                $this->faker()->randomElement($colours)->id,
             ]);
         }
     }

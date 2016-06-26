@@ -49,8 +49,9 @@ class ImageRepository
     /**
      * @param UploadedFile $upload
      *
-     * @return Image
      * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
+     *
+     * @return Image
      */
     public function storeUploadedImage(UploadedFile $upload): Image
     {

@@ -16,11 +16,7 @@ use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 
 /**
- * Class CatalogueRepository
- *
- * @package ChingShop\Catalogue
- *
- * Facade access to common catalogue i/o operations.
+ * Class CatalogueRepository.
  */
 class CatalogueRepository
 {
