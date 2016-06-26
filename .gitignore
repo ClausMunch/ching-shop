@@ -15,7 +15,6 @@ storage/
 .env
 _ide_helper*
 .vagrant/
-phpunit
 composer.phar
 build/
 keys.*

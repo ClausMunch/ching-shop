@@ -29,14 +29,13 @@ gulp.task("typings", function () {
         .pipe(typings());
 });
 
-gulp.task("typescript", function () {
+gulp.task("typescript", ["typings"], function () {
     return gulp.src("./resources/assets/ts/src/**/*.ts")
         .pipe(ts(ts.createProject("./resources/assets/ts/tsconfig.json")))
         .pipe(gulp.dest("./resources/assets/js/"));
 });
 
 elixir(function (mix) {
-    mix.task("typings");
     mix.task("typescript");
 });
 

@@ -1,20 +1,20 @@
 {
   "private": true,
   "devDependencies": {
-    "bootstrap-multiselect": "^0.9.13-1",
-    "gulp": "*",
-    "gulp-shell": "*",
-    "gulp-typescript": "^2.13.4",
-    "gulp-typings": "^2.0.0",
-    "tslint": "^3.10.2",
-    "typescript": "^1.8.10",
-    "typings": "^1.0.4"
+    "bootstrap-multiselect": "^0.9",
+    "gulp": "^3",
+    "gulp-shell": "^0",
+    "gulp-typescript": "^2",
+    "gulp-typings": "^2",
+    "tslint": "^3",
+    "typescript": "^1",
+    "typings": "^1"
   },
   "dependencies": {
     "bootstrap-sass": "^3",
     "jquery": "^2",
-    "jquery-ui": "^1.10.5",
-    "laravel-elixir": "*",
-    "node-sass": "*"
+    "jquery-ui": "^1",
+    "laravel-elixir": "^6",
+    "node-sass": "^3"
   }
 }

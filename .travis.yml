@@ -10,6 +10,7 @@ install:
   - npm install -g npm
   - npm install --no-progress
   - npm install --no-progress -g gulp
+  - npm install --no-progress -g typings
   - gulp
   - php artisan key:generate
 script:
