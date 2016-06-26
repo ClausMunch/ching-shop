@@ -10,6 +10,8 @@ var shell   = require("gulp-shell");
 var typings = require("gulp-typings");
 var ts      = require("gulp-typescript");
 
+require('laravel-elixir-browserify-official');
+
 elixir(function (mix) {
     mix.sass("staff.scss");
     mix.sass("customer.scss");
