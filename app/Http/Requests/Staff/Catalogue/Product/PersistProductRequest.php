@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Http\Requests\Staff\Catalogue;
+namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 
 use ChingShop\Http\Requests\Staff\StaffRequest;
 use Illuminate\Http\Request as HttpRequest;

@@ -22,7 +22,7 @@
                         Name
                     </th>
                     <th>
-                        Images
+                        Image
                     </th>
                 </tr>
             </thead>
@@ -38,17 +38,15 @@
                             {{ $product->name() }}
                         </td>
                         <td class="product-index-images">
-                            @foreach($product->images() as $image)
-                                <img src="{{ $image->url('thumbnail') }}"
-                                     @if ($image->isSelfHosted())
-                                        srcset="{{ $image->srcSet() }}"
-                                     @endif
-                                     alt="{{ $image->alt_text }}"
-                                     class="img-responsive
-                                        img-rounded
-                                        staff-product-image
-                                     " />
-                            @endforeach
+                            <img src="{{ $product->mainImage()->sizeUrl('thumbnail') }}"
+                                 @if ($product->mainImage()->isSelfHosted())
+                                    srcset="{{ $product->mainImage()->srcSet() }}"
+                                 @endif
+                                 alt="{{ $product->mainImage()->alt_text }}"
+                                 class="img-responsive
+                                    img-rounded
+                                    staff-product-image
+                                 " />
                         </td>
                     </tr>
                 @endforeach

@@ -10,28 +10,54 @@
     <small>({{ $product->sku() }})</small>
 @endsection
 
+@section('heading')
+    <div class="pull-right">
+        <a class="btn btn-default"
+           href="{{ route('staff.products.edit', $product->sku()) }}">
+            Edit product
+        </a>
+    </div>
+@endsection
+
 @section('content')
 
-    <section>
+    <section id="description">
         <p>
             &ldquo;{{ $product->description() }}&rdquo;
         </p>
     </section>
 
-    <section>
-        <h3>Price</h3>
-        @include('staff.products.price')
+    <hr>
+
+    <section id="price">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <h3>Price</h3>
+                    @include('staff.products.price')
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h3>Tags</h3>
+                    @include('staff.products.tags')
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h3>Images</h3>
+    <hr>
 
-        @include('staff.products.images')
+    <section id="images">
+        <h3>General images</h3>
+
+        @include('staff.products.images', ['parent' => $product])
 
         <hr>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
+                <div class="well">
                 <form method="post"
                       enctype="multipart/form-data"
                       id="new-images-form"
@@ -44,7 +70,9 @@
                     {{ method_field('POST') }}
                     <div class="form-group">
                         <label for="new-image[]">
-                            Add @if ($product->isStored()) new @endif images
+                            Add
+                            @if ($product->isStored()) new @endif
+                            general images
                         </label>
                         <input type="file" name="new-image[]" id="new-image" multiple>
                         @foreach($reply->errorsFor('new-image.0') as $error)
@@ -53,49 +81,30 @@
                             </label>
                         @endforeach
                     </div>
-                    <button type="submit" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Add images
-                    </button>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <form method="post"
-                      id="product-tags-form"
-                      class="form-inline"
-                      action="{{ route(
-                  'staff.products.put-tags',
-                  ['sku' => $product->sku()]
-              ) }}">
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-                    <label for="tag-ids">
-                        Tags
-                    </label>
-                    <select class="form-control"
-                            name="tag-ids"
-                            id="tag-ids"
-                            multiple="multiple">
-                        @foreach ($tags as $tag)
-                            <option value="{{ $tag->id }}"
-                                    id="tag-option-{{ $tag->id  }}"
-                                @if ($product->tags->contains('id', $tag->id))
-                                    selected
-                                @endif
-                            >
-                                {{ $tag->name }}
-                            </option>
-                        @endforeach
-                    </select>
                     <button type="submit"
-                            id="save-tags-button"
-                            class="btn btn-success">
-                        <span class="glyphicon glyphicon-check"></span>
-                        Save tags
+                            class="btn btn-success"
+                            form="new-images-form"
+                            value="submit-new-images"
+                            name="submit-new-images"
+                            id="submit-new-images">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add general images
                     </button>
                 </form>
+                </div>
+            </div>
+            <div class="col-md-4">
             </div>
         </div>
+
+    </section>
+
+    <hr>
+
+    <section id="options">
+        <h3>Product options</h3>
+
+        @include('staff.products.options')
 
     </section>
 
@@ -109,7 +118,7 @@
 
     <a class="btn btn-default"
        href="{{ route('staff.products.edit', $product->sku()) }}">
-        Edit
+        Edit product
     </a>
 
     <div class="pull-right">
@@ -124,14 +133,3 @@
         </form>
     </div>
 @endsection
-
-@push('scripts')
-    <script type="text/javascript">
-        window.onload = function () {
-            $("#tag-ids").multiselect({
-                enableFiltering: true,
-                checkboxName: "tag-ids[]"
-            });
-        };
-    </script>
-@endpush

@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 class MakeUser extends Command
 {
     const PASSWORD_MINIMUM = 5;
+
     /**
      * The name and signature of the console command.
      *

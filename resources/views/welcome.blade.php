@@ -21,7 +21,7 @@
                         </h3>
                         @if (count($product->images()))
                             <a href="{{ $location->viewHrefFor($product) }}">
-                                <img src="{{ $product->images()[0]->url() }}"
+                                <img src="{{ $product->mainImage()->sizeUrl() }}"
                                      @if ($product->mainImage()->isSelfHosted())
                                         srcset="{{ $product->mainImage()->srcSet() }}"
                                      @endif

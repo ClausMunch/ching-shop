@@ -7,6 +7,9 @@ use ChingShop\Image\Image;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 
+/**
+ * Class ProductTest.
+ */
 abstract class ProductTest extends FunctionalTest
 {
     use CreateCatalogue;
@@ -19,7 +22,7 @@ abstract class ProductTest extends FunctionalTest
     protected function attachImageToProduct(Product $product): Image
     {
         $image = Image::create([
-            'alt_text' => uniqid(),
+            'alt_text' => str_random(),
             'url'      => $this->generator()->anySlug(),
         ]);
         $product->images()->attach($image->id);

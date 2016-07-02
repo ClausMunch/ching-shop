@@ -17,8 +17,7 @@ class PriceControllerTest extends ControllerTest
     {
         $this->priceController = new PriceController(
             $this->productRepository(),
-            $this->viewFactory(),
-            $this->responseFactory()
+            $this->webUi()
         );
     }
 

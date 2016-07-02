@@ -2,7 +2,8 @@
       action="{{ route('staff.products.price', [
                 'sku' => $product->sku()
               ]) }}"
-      method="post">
+      method="post"
+      id="set-price-form">
     {{ csrf_field() }}
     <div class="form-group
                 {{ $reply->putHasError('units') }}
@@ -33,7 +34,7 @@
                required>
         <label for="subunits">p</label>
 
-        <button type="submit" class="btn btn-default">
+        <button type="submit" class="btn btn-default" form="set-price-form">
             Set price
         </button>
 

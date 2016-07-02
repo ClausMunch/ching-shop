@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
-use ChingShop\Catalogue\Product\ProductPresenter;
+use ChingShop\Catalogue\Product\Product;
 use ChingShop\Http\Controllers\Customer\ProductController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
@@ -43,16 +43,19 @@ class ProductControllerTest extends ControllerTest
         $id = abs($this->generator()->anyInteger()) + 1;
         $slug = $this->generator()->anySlug();
 
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->makeMock(Product::class);
         $product->expects($this->atLeastOnce())
-            ->method('ID')
-            ->willReturn($id);
-        $product->expects($this->atLeastOnce())
-            ->method('slug')
-            ->willReturn($slug);
+            ->method('__get')
+            ->with($this->isType('string'))
+            ->will(
+                $this->returnValueMap([
+                    ['id', $id],
+                    ['slug', $slug],
+                ])
+            );
 
         $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentByID')
+            ->method('loadByID')
             ->with($id)
             ->willReturn($product);
 
@@ -77,15 +80,17 @@ class ProductControllerTest extends ControllerTest
      */
     public function testThrowsExceptionIfProductDoesNotExist()
     {
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->makeMock(Product::class);
         $product->expects($this->atLeastOnce())
-            ->method('ID')
+            ->method('__get')
+            ->with('id')
             ->willReturn(0);
 
         $id = $this->generator()->anyInteger();
 
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentByID')
+        $this->productRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadByID')
             ->with($id)
             ->willReturn($product);
 
@@ -99,19 +104,22 @@ class ProductControllerTest extends ControllerTest
      */
     public function testRedirectsOnIdSkuMisMatch()
     {
-        $id = $this->generator()->anyInteger();
+        $id = $this->generator()->anyInteger() + 1;
         $correctSlug = $this->generator()->anySlug();
 
-        $product = $this->makeMock(ProductPresenter::class);
+        $product = $this->makeMock(Product::class);
         $product->expects($this->atLeastOnce())
-            ->method('ID')
-            ->willReturn($id);
-        $product->expects($this->atLeastOnce())
-            ->method('slug')
-            ->willReturn($correctSlug);
-
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentByID')
+            ->method('__get')
+            ->with($this->isType('string'))
+            ->will(
+                $this->returnValueMap([
+                    ['id', $id],
+                    ['slug', $correctSlug],
+                ])
+            );
+        $this->productRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadByID')
             ->with($id)
             ->willReturn($product);
 

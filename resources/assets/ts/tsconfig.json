@@ -1,0 +1,7 @@
+{
+    "filesGlob": [
+        "./src/**/*.ts",
+        "./test/**/*.ts",
+        "./typings/index.d.ts"
+    ]
+}

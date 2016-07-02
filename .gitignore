@@ -4,6 +4,8 @@ Homestead.yaml
 Homestead.json
 .idea/
 resources/build/
+resources/assets/js/
+typings/
 public/build/
 public/css/
 public/js/
@@ -13,7 +15,6 @@ storage/
 .env
 _ide_helper*
 .vagrant/
-phpunit
 composer.phar
 build/
 keys.*

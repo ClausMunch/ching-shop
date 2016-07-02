@@ -3,10 +3,10 @@
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
 use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Staff\ProductController;
-use ChingShop\Http\Requests\Staff\Catalogue\PersistProductRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
+use ChingShop\Http\Requests\Staff\Catalogue\Product\PersistProductRequest;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
 use Illuminate\Contracts\View\View;
@@ -38,11 +38,8 @@ class ProductControllerTest extends ControllerTest
         $this->tagRepository = $this->makeMock(TagRepository::class);
 
         $this->productController = new ProductController(
-            $this->productRepository(),
-            $this->viewFactory(),
-            $this->responseFactory(),
-            $this->imageRepository,
-            $this->tagRepository
+            $this->catalogueRepository(),
+            $this->webUi()
         );
     }
 
@@ -62,15 +59,13 @@ class ProductControllerTest extends ControllerTest
      */
     public function testIndex()
     {
-        $products = [];
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentLatest')
+        $products = new Collection([]);
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadLatestProducts')
             ->willReturn($products);
 
-        $view = $this->expectViewToBeMadeWith(
-            'staff.products.index',
-            compact('products')
-        );
+        $view = $this->expectViewToBeMade('staff.products.index');
 
         $response = $this->productController->index();
 
@@ -82,15 +77,7 @@ class ProductControllerTest extends ControllerTest
      */
     public function testCreate()
     {
-        $product = $this->mockery(ProductPresenter::class);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentEmpty')
-            ->willReturn($product);
-
-        $view = $this->expectViewToBeMadeWith(
-            'staff.products.create',
-            compact('product')
-        );
+        $view = $this->expectViewToBeMade('staff.products.create');
 
         $response = $this->productController->create();
 
@@ -107,11 +94,12 @@ class ProductControllerTest extends ControllerTest
 
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
-        $this->mockNewImageUpload($storeProductRequest);
+//        $this->mockNewImageUpload($storeProductRequest);
 
         $product = $this->mockery(Product::class);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('create')
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('createProduct')
             ->with($requestData)
             ->willReturn($product);
 
@@ -121,17 +109,11 @@ class ProductControllerTest extends ControllerTest
             ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
-        $this->responseFactory()->expects($this->atLeastOnce())
-            ->method('redirectToRoute')
-            ->with(
-                'staff.products.show',
-                ['sku' => $sku]
-            )
+        $this->webUi()->expects($this->atLeastOnce())
+            ->method('redirect')
             ->willReturn($redirect);
 
-        $response = $this->productController->store($storeProductRequest);
-
-        $this->assertSame($redirect, $response);
+        $this->productController->store($storeProductRequest);
     }
 
     /**
@@ -140,22 +122,19 @@ class ProductControllerTest extends ControllerTest
     public function testShow()
     {
         $sku = $this->generator()->anyString();
-        $product = $this->mockery(ProductPresenter::class);
+        $product = $this->mockery(Product::class);
         $product->shouldReceive('isStored')->andReturn(true);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentBySKU')
-            ->with($sku)
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadProductBySku')
             ->willReturn($product);
 
         $tags = new Collection();
-        $this->tagRepository->expects($this->atLeastOnce())
-            ->method('loadAll')
+        $this->catalogueRepository()->expects($this->atLeastOnce())
+            ->method('loadAllTags')
             ->willReturn($tags);
 
-        $view = $this->expectViewToBeMadeWith(
-            'staff.products.show',
-            compact('product', 'tags')
-        );
+        $view = $this->expectViewToBeMade('staff.products.show');
 
         $response = $this->productController->show($sku);
 
@@ -168,17 +147,14 @@ class ProductControllerTest extends ControllerTest
     public function testEdit()
     {
         $sku = $this->generator()->anyString();
-        $product = $this->mockery(ProductPresenter::class);
+        $product = $this->mockery(Product::class);
         $product->shouldReceive('isStored')->andReturn(true);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('presentBySKU')
-            ->with($sku)
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadProductBySku')
             ->willReturn($product);
 
-        $view = $this->expectViewToBeMadeWith(
-            'staff.products.edit',
-            compact('product')
-        );
+        $view = $this->expectViewToBeMade('staff.products.edit');
 
         $response = $this->productController->edit($sku);
 
@@ -199,9 +175,9 @@ class ProductControllerTest extends ControllerTest
         $sku = $this->generator()->anyString();
 
         $product = $this->mockery(Product::class);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('update')
-            ->with($sku, $requestData)
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('updateProduct')
             ->willReturn($product);
 
         $product->shouldReceive('getAttribute')
@@ -209,15 +185,11 @@ class ProductControllerTest extends ControllerTest
             ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
-        $this->responseFactory()->expects($this->atLeastOnce())
-            ->method('redirectToRoute')
-            ->with(
-                'staff.products.show',
-                ['sku' => $sku]
-            )
+        $this->webUi()->expects($this->atLeastOnce())
+            ->method('redirect')
             ->willReturn($redirect);
 
-        $this->mockNewImageUpload($storeProductRequest);
+//        $this->mockNewImageUpload($storeProductRequest);
 
         $response = $this->productController->update(
             $storeProductRequest, $sku
@@ -235,20 +207,20 @@ class ProductControllerTest extends ControllerTest
         $imageId = $this->generator()->anyInteger();
 
         $product = $this->mockery(Product::class);
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('mustLoadById')
-            ->with($productId)
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadProductById')
             ->willReturn($product);
 
         $image = $this->makeMock(Image::class);
-        $this->imageRepository->shouldReceive('mustLoadById')
-            ->once()
-            ->with($imageId)
-            ->andReturn($image);
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadImageById')
+            ->willReturn($image);
 
-        $this->imageRepository->shouldReceive('detachImageFromProduct')
-            ->once()
-            ->with($image, $product);
+        $this->catalogueRepository()
+            ->expects($this->atLeastOnce())
+            ->method('detachImageFromOwner');
 
         $sku = $this->generator()->anyString();
         $product->shouldReceive('getAttribute')
@@ -256,15 +228,13 @@ class ProductControllerTest extends ControllerTest
             ->andReturn($sku);
 
         $redirect = $this->mockery(RedirectResponse::class);
-        $this->responseFactory()->expects($this->atLeastOnce())
-            ->method('redirectToRoute')
-            ->with(
-                'staff.products.show',
-                ['sku' => $sku]
-            )
+        $this->webUi()->expects($this->atLeastOnce())
+            ->method('redirect')
             ->willReturn($redirect);
 
-        $response = $this->productController->detachProductImage(
+        $this->imageRepository->shouldReceive('detachImage');
+
+        $response = $this->productController->detachImage(
             $productId,
             $imageId
         );
@@ -282,18 +252,16 @@ class ProductControllerTest extends ControllerTest
 
     /**
      * @param string $viewName
-     * @param array  $bindData
      *
      * @return View|MockInterface
      */
-    private function expectViewToBeMadeWith(
-        string $viewName,
-        array $bindData
-    ): MockInterface {
+    private function expectViewToBeMade(string $viewName): MockInterface
+    {
         $view = $this->makeMockeryView();
-        $this->viewFactory()->expects($this->atLeastOnce())
-            ->method('make')
-            ->with($viewName, $bindData)
+        $this->webUi()
+            ->expects($this->atLeastOnce())
+            ->method('view')
+            ->with($viewName, $this->isType('array'))
             ->willReturn($view);
 
         return $view;
@@ -305,7 +273,7 @@ class ProductControllerTest extends ControllerTest
     private function mockNewImageUpload(MockInterface $storeProductRequest)
     {
         $storeProductRequest->shouldReceive('hasFile')
-            ->with(ProductController::IMAGE_UPLOAD_PARAMETER)
+            ->with(NewImagesRequest::PARAMETER)
             ->andReturn($this->generator()->anyBoolean());
         $storeProductRequest->shouldReceive('file')
             ->with('new-image')

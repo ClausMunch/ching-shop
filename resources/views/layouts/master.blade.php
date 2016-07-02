@@ -5,7 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ef4560" />
-    <meta name="google-site-verification" content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U" />
+    <meta name="google-site-verification"
+          content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U" />
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'self' https://static.ching-shop.com;
+           default-src 'self' https://static.ching-shop.com;
+           img-src 'self' https://static.ching-shop.com;
+           child-src 'self';
+           object-src 'self';
+           form-action 'self';
+           style-src 'self' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com data:;">
     <title>@yield('page-title') | Ching Shop</title>
     @yield('html-head')
 </head>
@@ -19,7 +29,6 @@
         </div>
     </div>
 
-@stack('scripts')
 <link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab|Roboto+Condensed:700'
       property='stylesheet'
       rel='stylesheet'
@@ -28,5 +37,8 @@
       type="image/png"
       property="icon"
       href="/img/favicon.png" />
+
+@stack('scripts')
+
 </body>
 </html>

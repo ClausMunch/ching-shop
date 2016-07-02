@@ -150,4 +150,22 @@ class ProductCreationTest extends ProductTest
             ->seePageIs(route('staff.products.create'))
             ->see('The sku has already been taken');
     }
+
+    /**
+     * Should be able to edit an existing product.
+     */
+    public function testCanEditProduct()
+    {
+        $product = $this->createProduct();
+
+        $oldProductName = $product->name;
+        $newProductName = str_random();
+        $this->actingAs($this->staffUser())
+            ->visit(route('staff.products.show', [$product->sku]))
+            ->click('Edit product')
+            ->type($newProductName, 'name')
+            ->press('Save')
+            ->see($newProductName)
+            ->dontSee($oldProductName);
+    }
 }

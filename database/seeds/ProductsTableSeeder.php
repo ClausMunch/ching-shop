@@ -2,12 +2,11 @@
 
 use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Product\Product;
+use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Image\Image;
 
 class ProductsTableSeeder extends Seed
 {
-    const IMAGE_URL = 'http://lorempixel.com/800/600/abstract';
-
     /**
      * Run the database seeds.
      *
@@ -44,6 +43,10 @@ class ProductsTableSeeder extends Seed
             'currency' => 'GBP',
         ]);
         $product->prices()->save($price);
+
+        for ($i = 0; $i < rand(1, 3); $i++) {
+            $this->addProductOption($product);
+        }
     }
 
     /**
@@ -51,17 +54,32 @@ class ProductsTableSeeder extends Seed
      */
     private function makeImages(): Generator
     {
-        $count = mt_rand(5, 8);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < rand(2, 3); $i++) {
             yield Image::create([
-                'url'      => sprintf(
-                    '%s/%s/%s',
-                    self::IMAGE_URL,
-                    $this->faker()->numberBetween(0, 10),
-                    $this->faker()->unique()->word
-                ),
                 'alt_text' => $this->faker()->words(3, true),
+                'url'      => secure_asset(
+                    "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
+                    .uniqid()
+                ),
             ]);
         }
+    }
+
+    /**
+     * @param Product $product
+     */
+    private function addProductOption(Product $product)
+    {
+        $productOption = new ProductOption([
+            'label' => ucfirst($this->faker()->unique()->word),
+        ]);
+        $product->options()->save($productOption);
+
+        $imagesIDs = [];
+        foreach ($this->makeImages() as $image) {
+            $imagesIDs[] = $image->id;
+        }
+        $productOption->images()->attach($imagesIDs);
+        $productOption->save();
     }
 }

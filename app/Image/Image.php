@@ -48,9 +48,6 @@ class Image extends Model implements HttpCrudInterface
     const FILENAME_UNSAFE_PATTERN = '([^a-zA-Z0-9-\.]|\.{2,})';
 
     /** @var array */
-    protected $guarded = ['id'];
-
-    /** @var array */
     protected $fillable = ['filename', 'alt_text', 'url'];
 
     /**
@@ -87,7 +84,7 @@ class Image extends Model implements HttpCrudInterface
      *
      * @return string
      */
-    public function url(string $size = 'large'): string
+    public function sizeUrl(string $size = 'large'): string
     {
         if ($this->isInternal()) {
             return secure_asset(self::DIR.$this->filename());
@@ -121,7 +118,7 @@ class Image extends Model implements HttpCrudInterface
             ',',
             array_map(
                 function ($size, $width) {
-                    return "{$this->url($size)} {$width}w";
+                    return "{$this->sizeUrl($size)} {$width}w";
                 },
                 array_keys(self::SIZES),
                 array_values(self::SIZES)
@@ -221,7 +218,7 @@ class Image extends Model implements HttpCrudInterface
      */
     public function isSelfHosted(): bool
     {
-        $url = parse_url($this->url());
+        $url = parse_url($this->sizeUrl());
         if (empty($url['host'])) {
             return true;
         }

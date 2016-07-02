@@ -2,61 +2,40 @@
 
 namespace ChingShop\Http\Controllers\Staff;
 
+use ChingShop\Catalogue\CatalogueRepository;
 use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductPresenter;
-use ChingShop\Catalogue\Product\ProductRepository;
-use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Http\Requests\Staff\Catalogue\ImageOrderRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
-use ChingShop\Http\Requests\Staff\Catalogue\PersistProductRequest;
-use ChingShop\Image\ImageRepository;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use ChingShop\Http\Requests\Staff\Catalogue\Product\PersistProductRequest;
+use ChingShop\Http\WebUi;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class ProductController.
+ */
 class ProductController extends Controller
 {
-    const IMAGE_UPLOAD_PARAMETER = 'new-image';
+    /** @var CatalogueRepository */
+    private $catalogueRepository;
 
-    /** @var ProductRepository */
-    private $productRepository;
-
-    /** @var ViewFactory */
-    private $viewFactory;
-
-    /** @var ResponseFactory */
-    private $responseFactory;
-
-    /** @var ImageRepository */
-    private $imageRepository;
-
-    /** @var TagRepository */
-    private $tagRepository;
+    /** @var WebUi */
+    private $webUi;
 
     /**
      * ProductController constructor.
      *
-     * @param ProductRepository $productRepository
-     * @param ViewFactory       $viewFactory
-     * @param ResponseFactory   $responseFactory
-     * @param ImageRepository   $imageRepository
-     * @param TagRepository     $tagRepository
+     * @param CatalogueRepository $catalogueRepository
+     * @param WebUi               $webUi
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory,
-        ImageRepository $imageRepository,
-        TagRepository $tagRepository
+        CatalogueRepository $catalogueRepository,
+        WebUi $webUi
     ) {
-        $this->productRepository = $productRepository;
-        $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
-        $this->imageRepository = $imageRepository;
-        $this->tagRepository = $tagRepository;
+        $this->catalogueRepository = $catalogueRepository;
+        $this->webUi = $webUi;
     }
 
     /**
@@ -66,7 +45,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productRepository->presentLatest();
+        $products = $this->catalogueRepository->loadLatestProducts();
 
         return $this->buildView('index', compact('products'));
     }
@@ -78,7 +57,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = $this->productRepository->presentEmpty();
+        $product = new Product();
 
         return $this->buildView('create', compact('product'));
     }
@@ -92,7 +71,7 @@ class ProductController extends Controller
      */
     public function store(PersistProductRequest $request)
     {
-        $product = $this->productRepository->create($request->all());
+        $product = $this->catalogueRepository->createProduct($request->all());
 
         return $this->redirectToShowProduct($product->sku);
     }
@@ -108,10 +87,11 @@ class ProductController extends Controller
      */
     public function show(string $sku)
     {
-        $product = $this->mustPresentProductBySku($sku);
-        $tags = $this->tagRepository->loadAll();
+        $product = $this->mustLoadProductBySku($sku);
+        $tags = $this->catalogueRepository->loadAllTags();
+        $colours = $this->catalogueRepository->loadAllColours();
 
-        return $this->buildView('show', compact('product', 'tags'));
+        return $this->buildView('show', compact('product', 'tags', 'colours'));
     }
 
     /**
@@ -123,7 +103,7 @@ class ProductController extends Controller
      */
     public function edit(string $sku)
     {
-        $product = $this->mustPresentProductBySku($sku);
+        $product = $this->mustLoadProductBySku($sku);
 
         return $this->buildView('edit', compact('product'));
     }
@@ -138,7 +118,10 @@ class ProductController extends Controller
      */
     public function update(PersistProductRequest $request, string $sku)
     {
-        $product = $this->productRepository->update($sku, $request->all());
+        $product = $this->catalogueRepository->updateProduct(
+            $sku,
+            $request->all()
+        );
 
         return $this->redirectToShowProduct($product->sku);
     }
@@ -152,9 +135,11 @@ class ProductController extends Controller
      */
     public function destroy(string $sku)
     {
-        $this->productRepository->deleteBySku($sku);
+        $this->catalogueRepository->deleteProductBySku($sku);
 
-        return $this->responseFactory->redirectToRoute('staff.products.index');
+        $this->webUi->successMessage("Deleted product `{$sku}`");
+
+        return $this->webUi->redirect('staff.products.index');
     }
 
     /**
@@ -163,37 +148,34 @@ class ProductController extends Controller
      *
      * @return RedirectResponse
      */
-    public function detachProductImage(int $productId, int $imageId)
+    public function detachImage(int $productId, int $imageId)
     {
-        $product = $this->productRepository->mustLoadById($productId);
-        $image = $this->imageRepository->mustLoadById($imageId);
+        $product = $this->catalogueRepository->loadProductById($productId);
+        $image = $this->catalogueRepository->loadImageById($imageId);
 
-        $this->imageRepository->detachImageFromProduct($image, $product);
+        $this->catalogueRepository->detachImageFromOwner($image, $product);
+
+        $this->webUi->successMessage(
+            "Removed one image from product `{$product->sku}`."
+        );
 
         return $this->redirectToShowProduct($product->sku);
     }
 
     /**
-     * @param int     $productId
-     * @param Request $request
+     * @param string            $sku
+     * @param ImageOrderRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function putImageOrder(int $productId, Request $request)
+    public function putImageOrder(string $sku, ImageOrderRequest $request)
     {
-        $imageOrder = $request->get('imageOrder');
-        if (!$imageOrder) {
-            return $this->responseFactory->json('no image order', 400);
-        }
-        $updated = $this->productRepository->updateImageOrder(
-            $productId,
-            $imageOrder
+        $this->catalogueRepository->updateImageOrder(
+            $this->catalogueRepository->loadProductBySku($sku),
+            $request->imageOrder()
         );
-        if ($updated) {
-            return $this->responseFactory->json($imageOrder, 200);
-        }
 
-        return $this->responseFactory->json('failed to update', 500);
+        return $this->webUi->json($request->imageOrder(), 200);
     }
 
     /**
@@ -204,7 +186,7 @@ class ProductController extends Controller
      */
     public function postProductImages(NewImagesRequest $request, string $sku)
     {
-        $product = $this->productRepository->mustLoadBySku($sku);
+        $product = $this->catalogueRepository->loadProductBySku($sku);
         $this->persistUploadedImages($request, $product);
 
         return $this->redirectToShowProduct($product->sku);
@@ -218,20 +200,17 @@ class ProductController extends Controller
      */
     private function buildView($name, array $bindData = []): View
     {
-        return $this->viewFactory->make(
-            'staff.products.'.$name,
-            $bindData
-        );
+        return $this->webUi->view("staff.products.{$name}", $bindData);
     }
 
     /**
      * @param string $sku
      *
-     * @return ProductPresenter
+     * @return Product
      */
-    private function mustPresentProductBySku(string $sku): ProductPresenter
+    private function mustLoadProductBySku(string $sku): Product
     {
-        $product = $this->productRepository->presentBySku($sku);
+        $product = $this->catalogueRepository->loadProductBySku($sku);
         if (!$product->isStored()) {
             throw new NotFoundHttpException();
         }
@@ -246,24 +225,25 @@ class ProductController extends Controller
      */
     private function redirectToShowProduct(string $sku): RedirectResponse
     {
-        return $this->responseFactory->redirectToRoute(
-            'staff.products.show',
-            ['sku' => $sku]
-        );
+        return $this->webUi->redirect('staff.products.show', ['sku' => $sku]);
     }
 
     /**
-     * @param Request $request
-     * @param Product $product
+     * @param NewImagesRequest $request
+     * @param Product          $product
+     *
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
-    private function persistUploadedImages(Request $request, Product $product)
-    {
-        if (!$request->hasFile(self::IMAGE_UPLOAD_PARAMETER)) {
+    private function persistUploadedImages(
+        NewImagesRequest $request,
+        Product $product
+    ) {
+        if (!$request->hasNewImages()) {
             return;
         }
 
-        $this->imageRepository->attachUploadedImagesToProduct(
-            $request->file(self::IMAGE_UPLOAD_PARAMETER),
+        $this->catalogueRepository->attachUploadedImagesToProduct(
+            $request->newImages(),
             $product
         );
     }

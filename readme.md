@@ -36,8 +36,7 @@ Then set up the Vagrant box, ssh into it and check everything is set up:
 vagrant up
 vagrant ssh
 cd ~/sites/ching-shop
-gulp
-phpunit
+php artisan test
 ```
 
 You should now be able to access the development site at
@@ -52,7 +51,7 @@ for Chrome.
 ```bash
 phpunit --testsuite unit
 phpunit --testsuite functional
-phpunit --testsuite unit --coverage-html build
+phpunit --coverage-html build
 ```
 
 ## Static analysis

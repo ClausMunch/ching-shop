@@ -53,7 +53,7 @@
                             <td>
                                 <img class="img-responsive"
                                      width="128"
-                                     src="{{ $image->url('small') }}"
+                                     src="{{ $image->sizeUrl('small') }}"
                                      srcset="{{ $image->srcSet() }}"
                                      alt="{{ $image->altText() }}" />
                             </td>

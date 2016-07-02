@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Http\Requests\Staff\Catalogue;
+namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 
 use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
@@ -24,7 +24,7 @@ class SetPriceRequest extends Request
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'units'    => 'required|integer|min:0|max:999',

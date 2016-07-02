@@ -30,11 +30,9 @@ class TagControllerTest extends ControllerTest
         $this->tagRepository = $this->makeMock(TagRepository::class);
 
         $this->tagController = new TagController(
-            $this->viewFactory(),
-            $this->responseFactory(),
-            $this->flashNotifier(),
             $this->tagRepository,
-            $this->productRepository()
+            $this->productRepository(),
+            $this->webUi()
         );
     }
 
@@ -51,8 +49,7 @@ class TagControllerTest extends ControllerTest
      */
     public function testIndex()
     {
-        $this->viewFactory()->expects($this->atLeastOnce())
-            ->method('make');
+        $this->webUi()->expects($this->atLeastOnce())->method('view');
 
         $this->tagController->index();
     }
@@ -64,7 +61,8 @@ class TagControllerTest extends ControllerTest
     {
         $newTagAttributes = ['name' => str_random()];
 
-        $this->tagRepository->expects($this->atLeastOnce())
+        $this->tagRepository
+            ->expects($this->atLeastOnce())
             ->method('create')
             ->with($newTagAttributes)
             ->willReturn(new Tag());
@@ -86,7 +84,8 @@ class TagControllerTest extends ControllerTest
     public function testDestroy()
     {
         $tagId = $this->generator()->anyInteger();
-        $this->tagRepository->expects($this->atLeastOnce())
+        $this->tagRepository
+            ->expects($this->atLeastOnce())
             ->method('deleteById')
             ->with($tagId);
 
@@ -100,8 +99,9 @@ class TagControllerTest extends ControllerTest
      */
     public function testPutProductTags()
     {
-        $this->productRepository()->expects($this->atLeastOnce())
-            ->method('mustLoadBySku')
+        $this->productRepository()
+            ->expects($this->atLeastOnce())
+            ->method('loadBySku')
             ->willReturn($this->makeMock(Product::class));
 
         /** @var Request $request */
@@ -118,8 +118,9 @@ class TagControllerTest extends ControllerTest
      */
     private function responseFactoryWillMakeRedirect()
     {
-        $this->responseFactory()->expects($this->atLeastOnce())
-            ->method('redirectToRoute')
+        $this->webUi()
+            ->expects($this->atLeastOnce())
+            ->method('redirect')
             ->with($this->isType('string'))
             ->willReturn($this->makeMock(RedirectResponse::class));
     }

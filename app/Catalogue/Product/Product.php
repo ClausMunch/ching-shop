@@ -5,6 +5,7 @@ namespace ChingShop\Catalogue\Product;
 use ChingShop\Catalogue\Price\Price;
 use ChingShop\Catalogue\Tag\Tag;
 use ChingShop\Image\Image;
+use ChingShop\Image\ImageOwner;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -39,19 +40,17 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @method static Builder|Product whereDeletedAt($value)
  * @mixin \Eloquent
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|Image[] $images
+ * @property-read Collection|Image[] $images
  * @property-read Collection|\ChingShop\Catalogue\Price\Price[] $prices
- * @property-read \Illuminate\Database\Eloquent\Collection|Tag[] $tags
+ * @property-read Collection|Tag[] $tags
+ * @property-read Collection|ProductOption[] $variants
  */
-class Product extends Model implements HasPresenter
+class Product extends Model implements HasPresenter, ImageOwner
 {
     use SoftDeletes;
 
     /** @var array */
     protected $fillable = ['name', 'sku', 'slug', 'description'];
-
-    /** @var array */
-    protected $guarded = ['id'];
 
     /** @var BelongsToMany */
     private $imagesRelationship;
@@ -84,6 +83,14 @@ class Product extends Model implements HasPresenter
     public function prices(): HasMany
     {
         return $this->hasMany(Price::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(ProductOption::class);
     }
 
     /**
@@ -126,5 +133,13 @@ class Product extends Model implements HasPresenter
     public function getPresenterClass(): string
     {
         return ProductPresenter::class;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function imageCollection(): Collection
+    {
+        return $this->images;
     }
 }
