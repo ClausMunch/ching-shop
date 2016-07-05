@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use ChingShop\Database\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateUsersTable extends Migration
