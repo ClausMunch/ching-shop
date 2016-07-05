@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateTagsTable extends Migration
 {
     const TABLE_NAME = 'tags';
@@ -14,7 +15,7 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create(self::TABLE_NAME, function (Blueprint $table) {
+        $this->builder()->create(self::TABLE_NAME, function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('name', 63)->unique();
@@ -34,6 +35,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(self::TABLE_NAME);
+        $this->builder()->drop(self::TABLE_NAME);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use ChingShop\Database\Migration;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateUsersTable extends Migration
 {
     /** @var string */
@@ -15,7 +16,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->tableName, function (Blueprint $table) {
+        $this->builder()->create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('New User');
             $table->string('email')->unique();
@@ -33,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->tableName);
+        $this->builder()->drop($this->tableName);
     }
 }

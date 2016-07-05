@@ -2,9 +2,10 @@
 
 use ChingShop\User\Role;
 use ChingShop\User\User;
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateRoleUserTable extends Migration
 {
     /** @var string */
@@ -17,7 +18,7 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->tableName, function (Blueprint $table) {
+        $this->builder()->create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer(Role::FOREIGN_KEY)->unsigned();
@@ -44,10 +45,10 @@ class CreateRoleUserTable extends Migration
      */
     public function down()
     {
-        Schema::table($this->tableName, function (Blueprint $table) {
+        $this->builder()->table($this->tableName, function (Blueprint $table) {
             $table->dropForeign($this->tableName.'_role_id_foreign');
             $table->dropForeign($this->tableName.'_user_id_foreign');
         });
-        Schema::drop($this->tableName);
+        $this->builder()->drop($this->tableName);
     }
 }

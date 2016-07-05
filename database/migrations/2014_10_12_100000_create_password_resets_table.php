@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreatePasswordResetsTable extends Migration
 {
     /**
@@ -12,7 +13,7 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
+        $this->builder()->create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
@@ -26,6 +27,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('password_resets');
+        $this->builder()->drop('password_resets');
     }
 }

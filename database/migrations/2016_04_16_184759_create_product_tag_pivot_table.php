@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateProductTagPivotTable extends Migration
 {
     /**
@@ -12,7 +13,7 @@ class CreateProductTagPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_tag', function (Blueprint $table) {
+        $this->builder()->create('product_tag', function (Blueprint $table) {
             $table->integer('product_id')
                 ->unsigned()
                 ->index();
@@ -40,6 +41,6 @@ class CreateProductTagPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('product_tag');
+        $this->builder()->drop('product_tag');
     }
 }

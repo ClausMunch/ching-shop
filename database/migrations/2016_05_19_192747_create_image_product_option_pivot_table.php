@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateImageProductOptionPivotTable extends Migration
 {
     /**
@@ -12,7 +13,7 @@ class CreateImageProductOptionPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_product_option', function (Blueprint $table) {
+        $this->builder()->create('image_product_option', function (Blueprint $table) {
             $table->integer('image_id')
                 ->unsigned()
                 ->index();
@@ -45,6 +46,6 @@ class CreateImageProductOptionPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('image_product_option');
+        $this->builder()->drop('image_product_option');
     }
 }

@@ -69,13 +69,13 @@ class CatalogueRepository
     }
 
     /**
-     * @param int $id
+     * @param int $productId
      *
      * @return Product
      */
-    public function loadProductById(int $id): Product
+    public function loadProductById(int $productId): Product
     {
-        return $this->productRepository->loadById($id);
+        return $this->productRepository->loadById($productId);
     }
 
     /**
@@ -128,13 +128,13 @@ class CatalogueRepository
     }
 
     /**
-     * @param int $id
+     * @param int $imageId
      *
      * @return Image
      */
-    public function loadImageById(int $id): Image
+    public function loadImageById(int $imageId): Image
     {
-        return $this->imageRepository->loadById($id);
+        return $this->imageRepository->loadById($imageId);
     }
 
     /**

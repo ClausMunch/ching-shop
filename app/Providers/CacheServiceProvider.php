@@ -2,8 +2,8 @@
 
 namespace ChingShop\Providers;
 
-use Cache;
 use ChingShop\Cache\RedisStore;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,11 +17,11 @@ class CacheServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::extend(
+        $this->cache()->extend(
             'redis', function (Application $app) {
-                return Cache::repository(
+                return $this->cache()->repository(
                     new RedisStore(
-                        $app['redis'],
+                        $app->make('redis'),
                         config('cache.prefix'),
                         config('cache.stores.redis.connection')
                     )
@@ -37,5 +37,13 @@ class CacheServiceProvider extends ServiceProvider
      */
     public function register()
     {
+    }
+
+    /**
+     * @return CacheManager
+     */
+    private function cache()
+    {
+        return $this->app->make('cache');
     }
 }

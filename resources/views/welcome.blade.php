@@ -10,10 +10,10 @@
 
     <section>
         <h2>Stuff we love</h2>
-        <div class="row">
-            @foreach($productColumns as $products)
-                <div class="col-md-6 col-lg-3">
-                    @foreach($products as $product)
+        @foreach($productRows as $products)
+            <div class="row">
+                @foreach($products as $product)
+                    <div class="col-md-6 col-lg-3">
                         <h3>
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 {{ $product->name() }}
@@ -28,10 +28,10 @@
                                      class="img-responsive img-rounded photo">
                             </a>
                         @endif
-                    @endforeach
-                </div>
-            @endforeach
-        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endforeach
     </section>
 
 @endsection

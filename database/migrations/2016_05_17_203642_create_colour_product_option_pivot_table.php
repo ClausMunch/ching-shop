@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use ChingShop\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class CreateColourProductOptionPivotTable extends Migration
 {
     /**
@@ -12,7 +13,7 @@ class CreateColourProductOptionPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('colour_product_option', function (Blueprint $table) {
+        $this->builder()->create('colour_product_option', function (Blueprint $table) {
             $table->integer('colour_id')
                 ->unsigned()
                 ->index();
@@ -40,6 +41,6 @@ class CreateColourProductOptionPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('colour_product_option');
+        $this->builder()->drop('colour_product_option');
     }
 }
