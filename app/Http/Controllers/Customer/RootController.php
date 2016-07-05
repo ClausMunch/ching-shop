@@ -8,9 +8,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /**
- * Class RootController
- *
- * @package ChingShop\Http\Controllers\Customer
+ * Class RootController.
  */
 class RootController extends Controller
 {

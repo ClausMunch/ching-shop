@@ -1,7 +1,7 @@
 <?php
 
-use CreateImageProductPivotTable as ImageProductTable;
 use ChingShop\Database\Migration;
+use CreateImageProductPivotTable as ImageProductTable;
 use Illuminate\Database\Schema\Blueprint;
 
 /** @noinspection PhpIllegalPsrClassPathInspection */
