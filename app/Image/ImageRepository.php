@@ -81,16 +81,16 @@ class ImageRepository
     }
 
     /**
-     * @param int $id
+     * @param int $imageId
      *
      * @throws \Exception
      *
      * @return bool
      */
-    public function deleteById(int $id): bool
+    public function deleteById(int $imageId): bool
     {
         return (bool) $this->imageResource
-            ->where('id', '=', $id)
+            ->where('id', '=', $imageId)
             ->limit(1)
             ->delete();
     }

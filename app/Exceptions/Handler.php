@@ -24,16 +24,16 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
+     * @param \Exception               $err
      *
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $err)
     {
-        if ($e instanceof ModelNotFoundException) {
-            $e = new NotFoundHttpException($e->getMessage(), $e);
+        if ($err instanceof ModelNotFoundException) {
+            $err = new NotFoundHttpException($err->getMessage(), $err);
         }
 
-        return parent::render($request, $e);
+        return parent::render($request, $err);
     }
 }

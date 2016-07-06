@@ -45,8 +45,8 @@ class StaffOnly
     {
         if ($request->ajax()) {
             return response('Unauthorised', Response::HTTP_UNAUTHORIZED);
-        } else {
-            return redirect()->guest('auth/login');
         }
+
+        return redirect()->guest('auth/login');
     }
 }

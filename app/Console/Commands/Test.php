@@ -16,7 +16,7 @@ class Test extends Command
         'phpcs --standard=./tests/analysis/phpcs.xml app',
         'phpmd --strict app text ./tests/analysis/phpmd.xml',
         'phpunit --testsuite unit --repeat 3',
-        'gulp generate-test-db',
+        'gulp test-database',
         'phpunit --coverage-html build --coverage-clover build/clover.xml',
     ];
 

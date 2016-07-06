@@ -4,10 +4,12 @@ namespace ChingShop\Http\Controllers\Customer;
 
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Support\Arr;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
+/**
+ * Class RootController.
+ */
 class RootController extends Controller
 {
     /** @var ProductRepository */
@@ -41,11 +43,8 @@ class RootController extends Controller
      */
     public function getIndex()
     {
-        $productColumns = Arr::partition(
-            $this->productRepository->loadLatest(8)->all(),
-            4
-        );
+        $productRows = $this->productRepository->loadLatest(8)->chunk(4);
 
-        return $this->viewFactory->make('welcome', compact('productColumns'));
+        return $this->viewFactory->make('welcome', compact('productRows'));
     }
 }

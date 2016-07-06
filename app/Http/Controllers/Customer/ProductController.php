@@ -37,14 +37,14 @@ class ProductController extends Controller
     }
 
     /**
-     * @param int    $id
+     * @param int    $productId
      * @param string $slug
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function viewAction(int $id, string $slug)
+    public function viewAction(int $productId, string $slug)
     {
-        $product = $this->productRepository->loadById($id);
+        $product = $this->productRepository->loadById($productId);
         if (!$product->id) {
             throw new NotFoundHttpException();
         }

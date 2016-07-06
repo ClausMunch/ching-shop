@@ -1,9 +1,10 @@
 <?php
 
+use ChingShop\Database\Migration;
 use CreateImageProductPivotTable as ImageProductTable;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/** @noinspection PhpIllegalPsrClassPathInspection */
 class AddProductImagePositionColumn extends Migration
 {
     const TABLE_NAME = ImageProductTable::TABLE_NAME;
@@ -16,7 +17,7 @@ class AddProductImagePositionColumn extends Migration
      */
     public function up()
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
+        $this->builder()->table(self::TABLE_NAME, function (Blueprint $table) {
             $table->tinyInteger(self::COLUMN_NAME)
                 ->default(0)
                 ->unsigned();
@@ -31,7 +32,7 @@ class AddProductImagePositionColumn extends Migration
      */
     public function down()
     {
-        Schema::table(self::TABLE_NAME, function (Blueprint $table) {
+        $this->builder()->table(self::TABLE_NAME, function (Blueprint $table) {
             $table->dropIndex(self::COLUMN_NAME);
             $table->dropColumn(self::COLUMN_NAME);
         });

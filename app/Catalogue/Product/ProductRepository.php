@@ -77,14 +77,14 @@ class ProductRepository
     }
 
     /**
-     * @param int $id
+     * @param int $productId
      *
      * @return Product
      */
-    public function loadById(int $id): Product
+    public function loadById(int $productId): Product
     {
         return $this->productResource
-            ->where('id', $id)
+            ->where('id', $productId)
             ->with($this->relations())
             ->first();
     }

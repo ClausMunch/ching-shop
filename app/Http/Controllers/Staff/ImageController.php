@@ -37,13 +37,13 @@ class ImageController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param int $imageId
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $imageId)
     {
-        $this->imageRepository->deleteById($id);
+        $this->imageRepository->deleteById($imageId);
 
         return $this->redirectToImagesIndex();
     }

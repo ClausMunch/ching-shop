@@ -33,17 +33,17 @@ class TagRepository
     }
 
     /**
-     * @param int   $id
+     * @param int   $tagId
      * @param array $with
      *
      * @return Tag
      */
     public function loadById(
-        int $id,
+        int $tagId,
         array $with = ['products', 'products.images']
     ) {
         return $this->tagResource
-            ->where('id', '=', $id)
+            ->where('id', '=', $tagId)
             ->with($with)
             ->firstOrFail();
     }
