@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class Customer
- *
- * @package ChingShop\Http\Middleware
+ * Class Customer.
  */
 class Customer
 {

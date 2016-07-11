@@ -13,9 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Imagick;
 
 /**
- * Class ImageServiceProvider
- *
- * @package ChingShop\Providers
+ * Class ImageServiceProvider.
  */
 class ImageServiceProvider extends ServiceProvider
 {

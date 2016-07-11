@@ -8,9 +8,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /**
- * Class TagController
- *
- * @package ChingShop\Http\Controllers\Customer
+ * Class TagController.
  */
 class TagController extends Controller
 {
@@ -44,8 +42,9 @@ class TagController extends Controller
      * @param int    $tagId
      * @param string $tagName
      *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function viewAction(int $tagId, string $tagName)
     {

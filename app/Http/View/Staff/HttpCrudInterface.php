@@ -3,9 +3,7 @@
 namespace ChingShop\Http\View\Staff;
 
 /**
- * Interface HttpCrudInterface
- *
- * @package ChingShop\Http\View\Staff
+ * Interface HttpCrudInterface.
  */
 interface HttpCrudInterface
 {

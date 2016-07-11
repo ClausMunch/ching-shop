@@ -5,7 +5,7 @@ use ChingShop\Catalogue\Tag\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class TagsTableSeeder
+ * Class TagsTableSeeder.
  */
 class TagsTableSeeder extends Seed
 {
@@ -15,8 +15,9 @@ class TagsTableSeeder extends Seed
     /**
      * Run the database seeds.
      *
-     * @return void
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     public function run()
     {

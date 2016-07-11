@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 
 /**
- * Class ProductRepository
- *
- * @package ChingShop\Catalogue\Product
+ * Class ProductRepository.
  */
 class ProductRepository
 {
@@ -53,9 +51,10 @@ class ProductRepository
      * @param string $sku
      * @param array  $newData
      *
-     * @return Product
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return Product
      */
     public function update(string $sku, array $newData): Product
     {

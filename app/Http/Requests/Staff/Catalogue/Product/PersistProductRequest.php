@@ -6,9 +6,7 @@ use ChingShop\Http\Requests\Staff\StaffRequest;
 use Illuminate\Http\Request as HttpRequest;
 
 /**
- * Class PersistProductRequest
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue\Product
+ * Class PersistProductRequest.
  */
 class PersistProductRequest extends StaffRequest
 {

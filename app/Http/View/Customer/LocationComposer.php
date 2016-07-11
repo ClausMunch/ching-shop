@@ -8,9 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
 
 /**
- * Class LocationComposer
- *
- * @package ChingShop\Http\View\Customer
+ * Class LocationComposer.
  */
 class LocationComposer
 {
@@ -45,8 +43,9 @@ class LocationComposer
     /**
      * @param Viewable $viewable
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function viewHrefFor(Viewable $viewable): string
     {

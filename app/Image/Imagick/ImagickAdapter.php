@@ -5,9 +5,7 @@ namespace ChingShop\Image\Imagick;
 use Imagick;
 
 /**
- * Class ImagickAdapter
- *
- * @package ChingShop\Image\Imagick
+ * Class ImagickAdapter.
  */
 class ImagickAdapter extends Imagick implements ImagickContract
 {

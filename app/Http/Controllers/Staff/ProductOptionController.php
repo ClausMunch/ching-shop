@@ -12,9 +12,7 @@ use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionLabel;
 use ChingShop\Http\WebUi;
 
 /**
- * Class ProductOptionController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class ProductOptionController.
  */
 class ProductOptionController extends Controller
 {

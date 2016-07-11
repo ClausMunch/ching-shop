@@ -12,9 +12,7 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use OutOfBoundsException;
 
 /**
- * Class ProductPresenter
- *
- * @package ChingShop\Catalogue\Product
+ * Class ProductPresenter.
  */
 class ProductPresenter extends BasePresenter implements
     HttpCrudInterface,

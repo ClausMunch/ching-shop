@@ -6,9 +6,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as Provider;
 use Illuminate\Routing\Router;
 
 /**
- * Class RouteServiceProvider
- *
- * @package ChingShop\Providers
+ * Class RouteServiceProvider.
  */
 class RouteServiceProvider extends Provider
 {

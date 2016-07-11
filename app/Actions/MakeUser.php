@@ -9,9 +9,7 @@ use DomainException;
 use Illuminate\Contracts\Hashing\Hasher;
 
 /**
- * Class MakeUser
- *
- * @package ChingShop\Actions
+ * Class MakeUser.
  */
 class MakeUser
 {
@@ -50,9 +48,10 @@ class MakeUser
      * @param string $password
      * @param bool   $isStaff
      *
-     * @return User
      * @throws \DomainException
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return User
      */
     public function make(string $email, string $password, bool $isStaff): User
     {

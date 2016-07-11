@@ -3,9 +3,7 @@
 namespace ChingShop\Image\Imagick;
 
 /**
- * Interface ImageTransformer
- *
- * @package ChingShop\Image\Imagick
+ * Interface ImageTransformer.
  */
 interface ImageTransformer
 {

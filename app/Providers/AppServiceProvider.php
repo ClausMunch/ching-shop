@@ -10,9 +10,7 @@ use Laracasts\Generators\GeneratorsServiceProvider;
 use Pvm\ArtisanBeans\ArtisanBeansServiceProvider;
 
 /**
- * Class AppServiceProvider
- *
- * @package ChingShop\Providers
+ * Class AppServiceProvider.
  */
 class AppServiceProvider extends ServiceProvider
 {

@@ -5,9 +5,7 @@ namespace ChingShop\Image\Imagick;
 use ChingShop\Image\Image;
 
 /**
- * Class ImagePreProcessor
- *
- * @package ChingShop\Image\Imagick
+ * Class ImagePreProcessor.
  */
 class ImagePreProcessor
 {

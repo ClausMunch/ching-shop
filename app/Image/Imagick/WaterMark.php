@@ -6,9 +6,7 @@ use Imagick;
 use ImagickPixel;
 
 /**
- * Class WaterMark
- *
- * @package ChingShop\Image\Imagick
+ * Class WaterMark.
  */
 class WaterMark implements ImageTransformer
 {

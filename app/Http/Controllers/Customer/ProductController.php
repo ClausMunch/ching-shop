@@ -9,9 +9,7 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ProductController
- *
- * @package ChingShop\Http\Controllers\Customer
+ * Class ProductController.
  */
 class ProductController extends Controller
 {
@@ -45,8 +43,9 @@ class ProductController extends Controller
      * @param int    $productId
      * @param string $slug
      *
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function viewAction(int $productId, string $slug)
     {

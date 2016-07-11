@@ -6,9 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Class RedirectIfAuthenticated
- *
- * @package ChingShop\Http\Middleware
+ * Class RedirectIfAuthenticated.
  */
 class RedirectIfAuthenticated
 {

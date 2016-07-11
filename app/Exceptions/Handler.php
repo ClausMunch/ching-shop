@@ -9,9 +9,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class Handler
- *
- * @package ChingShop\Exceptions
+ * Class Handler.
  */
 class Handler extends ExceptionHandler
 {

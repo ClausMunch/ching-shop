@@ -3,15 +3,11 @@
 namespace ChingShop\Events;
 
 /**
- * Class Event
- *
- * @package ChingShop\Events
+ * Class Event.
  */
 
 /**
- * Class Event
- *
- * @package ChingShop\Events
+ * Class Event.
  */
 abstract class Event
 {

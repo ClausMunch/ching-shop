@@ -8,9 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * Class Controller
- *
- * @package ChingShop\Http\Controllers
+ * Class Controller.
  */
 abstract class Controller extends BaseController
 {

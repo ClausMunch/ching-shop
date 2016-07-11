@@ -7,9 +7,7 @@ use ChingShop\Http\WebUi;
 use ChingShop\Image\ImageRepository;
 
 /**
- * Class ImageController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class ImageController.
  */
 class ImageController extends Controller
 {
@@ -44,8 +42,9 @@ class ImageController extends Controller
     /**
      * @param int $imageId
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $imageId)
     {

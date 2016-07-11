@@ -7,9 +7,7 @@ use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /**
- * Class CategoriesController
- *
- * @package ChingShop\Http\Controllers\Customer
+ * Class CategoriesController.
  */
 class CategoriesController extends Controller
 {

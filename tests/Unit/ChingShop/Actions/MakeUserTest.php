@@ -15,9 +15,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;
 
 /**
- * Class MakeUserTest
- *
- * @package Testing\Unit\ChingShop\Action
+ * Class MakeUserTest.
  */
 class MakeUserTest extends UnitTest
 {

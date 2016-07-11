@@ -6,9 +6,7 @@ use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 
 /**
- * Class DashboardController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class DashboardController.
  */
 class DashboardController extends Controller
 {

@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request as HttpRequest;
 
 /**
- * Class Request
- *
- * @package ChingShop\Http\Requests
+ * Class Request.
  */
 abstract class Request extends FormRequest
 {

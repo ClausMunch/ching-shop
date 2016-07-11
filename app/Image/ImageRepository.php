@@ -8,9 +8,7 @@ use Illuminate\Events\Dispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * Class ImageRepository
- *
- * @package ChingShop\Image
+ * Class ImageRepository.
  */
 class ImageRepository
 {

@@ -6,9 +6,7 @@ use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
 
 /**
- * Class SetPriceRequest
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue\Product
+ * Class SetPriceRequest.
  */
 class SetPriceRequest extends Request
 {

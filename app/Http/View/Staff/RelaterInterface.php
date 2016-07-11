@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * Interface RelaterInterface
- *
- * @package ChingShop\Http\View\Staff
+ * Interface RelaterInterface.
  */
 interface RelaterInterface
 {
