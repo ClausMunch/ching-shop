@@ -9,6 +9,9 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class StaffOnly.
+ */
 class StaffOnly
 {
     /**

@@ -2,6 +2,9 @@
 
 namespace ChingShop\Validation;
 
+/**
+ * Interface ValidationInterface.
+ */
 interface ValidationInterface
 {
     /**

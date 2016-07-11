@@ -5,6 +5,9 @@ namespace ChingShop\Http\Controllers\Staff;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 
+/**
+ * Class DashboardController.
+ */
 class DashboardController extends Controller
 {
     /** @var WebUi */

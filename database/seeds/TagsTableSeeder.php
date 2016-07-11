@@ -4,6 +4,9 @@ use ChingShop\Catalogue\Product\Product;
 use ChingShop\Catalogue\Tag\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class TagsTableSeeder.
+ */
 class TagsTableSeeder extends Seed
 {
     /** @var Collection|Product[] */
@@ -11,6 +14,8 @@ class TagsTableSeeder extends Seed
 
     /**
      * Run the database seeds.
+     *
+     * @throws \InvalidArgumentException
      *
      * @return void
      */
@@ -23,11 +28,14 @@ class TagsTableSeeder extends Seed
 
     /**
      * Create a tag and attach to some products.
+     *
+     * @throws \InvalidArgumentException
      */
     private function seedTag()
     {
+        /** @var Tag $tag */
         $tag = Tag::create(['name' => ucfirst($this->faker()->unique()->word)]);
-        for ($i = 0; $i < rand(1, 8); $i++) {
+        for ($i = 0, $count = random_int(1, 8); $i < $count; $i++) {
             $product = $this->products()->random();
             if ($tag->products->contains('id', $product->id)) {
                 continue;
@@ -42,7 +50,7 @@ class TagsTableSeeder extends Seed
      */
     private function products(): Collection
     {
-        if (empty($this->products)) {
+        if ($this->products === null) {
             $this->products = Product::all();
         }
 

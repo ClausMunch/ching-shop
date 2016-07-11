@@ -38,13 +38,13 @@ class ProductsTableSeeder extends Seed
         $product->attachImages($imagesIDs);
 
         $price = new Price([
-            'units'    => mt_rand(1, 100),
-            'subunits' => mt_rand(0, 99),
+            'units'    => random_int(1, 100),
+            'subunits' => random_int(0, 99),
             'currency' => 'GBP',
         ]);
         $product->prices()->save($price);
 
-        for ($i = 0; $i < rand(1, 3); $i++) {
+        for ($i = 0, $count = random_int(1, 3); $i < $count; $i++) {
             $this->addProductOption($product);
         }
     }
@@ -54,12 +54,12 @@ class ProductsTableSeeder extends Seed
      */
     private function makeImages(): Generator
     {
-        for ($i = 0; $i < rand(2, 3); $i++) {
+        for ($i = 0, $count = random_int(2, 3); $i < $count; $i++) {
             yield Image::create([
                 'alt_text' => $this->faker()->words(3, true),
                 'url'      => secure_asset(
                     "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
-                    .uniqid()
+                    .uniqid('', true)
                 ),
             ]);
         }

@@ -8,6 +8,9 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class ProductController.
+ */
 class ProductController extends Controller
 {
     /** @var ProductRepository */
@@ -39,6 +42,8 @@ class ProductController extends Controller
     /**
      * @param int    $productId
      * @param string $slug
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */

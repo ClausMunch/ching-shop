@@ -4,10 +4,13 @@ namespace ChingShop\Actions;
 
 use ChingShop\User\Role;
 use ChingShop\User\User;
-use ChingShop\Validation\ValidationFailure;
 use ChingShop\Validation\ValidationInterface;
+use DomainException;
 use Illuminate\Contracts\Hashing\Hasher;
 
+/**
+ * Class MakeUser.
+ */
 class MakeUser
 {
     /** @var ValidationInterface */
@@ -45,14 +48,15 @@ class MakeUser
      * @param string $password
      * @param bool   $isStaff
      *
-     * @throws ValidationFailure
+     * @throws \DomainException
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
      * @return User
      */
     public function make(string $email, string $password, bool $isStaff): User
     {
         if (!$this->validate($email, $password)) {
-            throw new ValidationFailure();
+            throw new DomainException();
         }
 
         $user = new User();

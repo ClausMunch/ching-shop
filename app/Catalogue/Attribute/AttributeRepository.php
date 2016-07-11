@@ -5,6 +5,9 @@ namespace ChingShop\Catalogue\Attribute;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class AttributeRepository.
+ */
 class AttributeRepository
 {
     /** @var Colour|Builder */

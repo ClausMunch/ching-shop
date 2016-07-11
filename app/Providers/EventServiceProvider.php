@@ -6,6 +6,9 @@ use ChingShop\Events\NewImageEvent;
 use ChingShop\Listeners\NewImageListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as Provider;
 
+/**
+ * Class EventServiceProvider.
+ */
 class EventServiceProvider extends Provider
 {
     /**

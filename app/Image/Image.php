@@ -92,7 +92,7 @@ class Image extends Model implements HttpCrudInterface
 
         $url = isset($this->url) ? (string) $this->url : '';
         $path = pathinfo($url);
-        if (empty($path) || empty($path['extension'])) {
+        if (empty($path['extension'])) {
             return $url;
         }
 
@@ -101,7 +101,7 @@ class Image extends Model implements HttpCrudInterface
             $path['dirname'],
             $path['filename'],
             $size,
-            isset($path['extension']) ? $path['extension'] : ''
+            $path['extension'] ?? ''
         );
     }
 

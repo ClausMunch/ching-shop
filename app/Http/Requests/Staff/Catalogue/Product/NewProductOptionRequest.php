@@ -5,6 +5,9 @@ namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Http\Requests\Staff\StaffRequest;
 
+/**
+ * Class NewProductOptionRequest.
+ */
 class NewProductOptionRequest extends StaffRequest
 {
     /**

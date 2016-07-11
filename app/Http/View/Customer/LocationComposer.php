@@ -7,6 +7,9 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
 
+/**
+ * Class LocationComposer.
+ */
 class LocationComposer
 {
     const ROUTE_VIEW = 'view';
@@ -39,6 +42,8 @@ class LocationComposer
 
     /**
      * @param Viewable $viewable
+     *
+     * @throws \InvalidArgumentException
      *
      * @return string
      */

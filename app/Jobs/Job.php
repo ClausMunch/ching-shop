@@ -4,6 +4,9 @@ namespace ChingShop\Jobs;
 
 use Illuminate\Bus\Queueable;
 
+/**
+ * Class Job.
+ */
 abstract class Job
 {
     /*

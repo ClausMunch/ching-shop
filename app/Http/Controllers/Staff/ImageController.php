@@ -6,6 +6,9 @@ use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Image\ImageRepository;
 
+/**
+ * Class ImageController.
+ */
 class ImageController extends Controller
 {
     /** @var ImageRepository */
@@ -38,6 +41,8 @@ class ImageController extends Controller
 
     /**
      * @param int $imageId
+     *
+     * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */

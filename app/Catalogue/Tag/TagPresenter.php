@@ -5,6 +5,9 @@ namespace ChingShop\Catalogue\Tag;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
+/**
+ * Class TagPresenter.
+ */
 class TagPresenter extends BasePresenter implements HttpCrudInterface
 {
     /** @var Tag */

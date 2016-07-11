@@ -4,6 +4,9 @@ namespace ChingShop\Http\Requests\Staff\Catalogue\Product\Option;
 
 use ChingShop\Http\Requests\Staff\StaffRequest;
 
+/**
+ * Class PutOptionColour.
+ */
 class PutOptionColour extends StaffRequest
 {
     /**

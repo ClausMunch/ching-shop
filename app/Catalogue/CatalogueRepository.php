@@ -102,6 +102,9 @@ class CatalogueRepository
      * @param string $sku
      * @param array  $productData
      *
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
      * @return Product
      */
     public function updateProduct(string $sku, array $productData): Product
@@ -111,6 +114,8 @@ class CatalogueRepository
 
     /**
      * @param string $sku
+     *
+     * @throws \Exception
      *
      * @return bool
      */

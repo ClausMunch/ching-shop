@@ -2,9 +2,14 @@
 
 namespace ChingShop\Console;
 
+use ChingShop\Console\Commands\MakeUser;
+use ChingShop\Console\Commands\Test;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel.
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,8 +18,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \ChingShop\Console\Commands\MakeUser::class,
-        \ChingShop\Console\Commands\Test::class,
+        MakeUser::class,
+        Test::class,
     ];
 
     /**

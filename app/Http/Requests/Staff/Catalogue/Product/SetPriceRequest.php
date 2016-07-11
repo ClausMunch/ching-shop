@@ -5,6 +5,9 @@ namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
 
+/**
+ * Class SetPriceRequest.
+ */
 class SetPriceRequest extends Request
 {
     /**

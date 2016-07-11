@@ -12,6 +12,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Imagick;
 
+/**
+ * Class ImageServiceProvider.
+ */
 class ImageServiceProvider extends ServiceProvider
 {
     /** @var string[] */

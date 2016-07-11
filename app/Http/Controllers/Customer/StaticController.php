@@ -3,36 +3,33 @@
 namespace ChingShop\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class StaticController.
+ */
 class StaticController extends Controller
 {
     /** @var ViewFactory */
     private $viewFactory;
 
-    /** @var ResponseFactory */
-    private $responseFactory;
-
     /**
      * ProductController constructor.
      *
-     * @param ViewFactory     $viewFactory
-     * @param ResponseFactory $responseFactory
+     * @param ViewFactory $viewFactory
      */
-    public function __construct(
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory
-    ) {
+    public function __construct(ViewFactory $viewFactory)
+    {
         $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
     }
 
     /**
      * @param string $path
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return View|Response
      */

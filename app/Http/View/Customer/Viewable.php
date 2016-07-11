@@ -2,6 +2,9 @@
 
 namespace ChingShop\Http\View\Customer;
 
+/**
+ * Interface Viewable.
+ */
 interface Viewable
 {
     /**

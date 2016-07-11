@@ -99,6 +99,8 @@ class ProductController extends Controller
      *
      * @param string $sku
      *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(string $sku)
@@ -113,6 +115,9 @@ class ProductController extends Controller
      *
      * @param PersistProductRequest $request
      * @param string                $sku
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      *
      * @return \Illuminate\Http\Response
      */
@@ -130,6 +135,8 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param string $sku
+     *
+     * @throws \Exception
      *
      * @return \Illuminate\Http\Response
      */
@@ -182,6 +189,8 @@ class ProductController extends Controller
      * @param NewImagesRequest $request
      * @param string           $sku
      *
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
+     *
      * @return RedirectResponse
      */
     public function postProductImages(NewImagesRequest $request, string $sku)
@@ -205,6 +214,8 @@ class ProductController extends Controller
 
     /**
      * @param string $sku
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return Product
      */

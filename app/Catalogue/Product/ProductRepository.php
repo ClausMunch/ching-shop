@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 
+/**
+ * Class ProductRepository.
+ */
 class ProductRepository
 {
     /** @var Product|Builder */
@@ -24,7 +27,7 @@ class ProductRepository
      *
      * @return Collection
      */
-    public function loadLatest($limit = 100): Collection
+    public function loadLatest(int $limit = 100): Collection
     {
         return $this->productResource
             ->orderBy('updated_at', 'desc')
@@ -41,14 +44,15 @@ class ProductRepository
      */
     public function create(array $productData): Product
     {
-        $newProduct = $this->productResource->create($productData);
-
-        return $newProduct;
+        return $this->productResource->create($productData);
     }
 
     /**
      * @param string $sku
      * @param array  $newData
+     *
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
      * @return Product
      */
@@ -73,7 +77,7 @@ class ProductRepository
             ->with($this->relations())
             ->first();
 
-        return $product ? $product : new Product();
+        return $product ?: new Product();
     }
 
     /**

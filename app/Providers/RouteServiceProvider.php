@@ -5,6 +5,9 @@ namespace ChingShop\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as Provider;
 use Illuminate\Routing\Router;
 
+/**
+ * Class RouteServiceProvider.
+ */
 class RouteServiceProvider extends Provider
 {
     /**
@@ -28,6 +31,7 @@ class RouteServiceProvider extends Provider
         $router->group(
             ['namespace' => $this->namespace],
             function () {
+                /** @noinspection PhpIncludeInspection */
                 require app_path('Http/routes.php');
             }
         );

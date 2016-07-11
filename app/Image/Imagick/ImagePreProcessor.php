@@ -4,12 +4,15 @@ namespace ChingShop\Image\Imagick;
 
 use ChingShop\Image\Image;
 
+/**
+ * Class ImagePreProcessor.
+ */
 class ImagePreProcessor
 {
     /** @var ImagickContract */
     private $imagick;
 
-    /** @var ImageTransformer[] (not giant robots) */
+    /** @var ImageTransformer[] */
     private $transformers;
 
     /**

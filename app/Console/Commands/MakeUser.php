@@ -6,6 +6,9 @@ use ChingShop\User\Role;
 use ChingShop\User\User;
 use Illuminate\Console\Command;
 
+/**
+ * Class MakeUser.
+ */
 class MakeUser extends Command
 {
     const PASSWORD_MINIMUM = 5;
@@ -26,6 +29,8 @@ class MakeUser extends Command
 
     /**
      * Execute the console command.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
      * @return mixed
      */

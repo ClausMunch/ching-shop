@@ -3,18 +3,17 @@
 namespace ChingShop\Image;
 
 use ChingShop\Events\NewImageEvent;
-use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * Class ImageRepository.
+ */
 class ImageRepository
 {
     /** @var Image|Builder */
     private $imageResource;
-
-    /** @var Config */
-    private $config;
 
     /** @var Dispatcher */
     private $dispatcher;
@@ -23,16 +22,13 @@ class ImageRepository
      * ImageRepository constructor.
      *
      * @param Image      $imageResource
-     * @param Config     $config
      * @param Dispatcher $dispatcher
      */
     public function __construct(
         Image $imageResource,
-        Config $config,
         Dispatcher $dispatcher
     ) {
         $this->imageResource = $imageResource;
-        $this->config = $config;
         $this->dispatcher = $dispatcher;
     }
 

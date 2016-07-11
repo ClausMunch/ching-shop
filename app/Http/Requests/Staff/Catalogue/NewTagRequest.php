@@ -4,6 +4,9 @@ namespace ChingShop\Http\Requests\Staff\Catalogue;
 
 use ChingShop\Http\Requests\Staff\StaffRequest;
 
+/**
+ * Class NewTagRequest.
+ */
 class NewTagRequest extends StaffRequest
 {
     /**
