@@ -7,9 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 /**
- * Class AuthController
- *
- * @package ChingShop\Http\Controllers\Auth
+ * Class AuthController.
  */
 class AuthController extends Controller
 {

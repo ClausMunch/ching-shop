@@ -2,7 +2,6 @@
 
 namespace Testing\Unit\ChingShop\Image;
 
-use ChingShop\Catalogue\Product\Product;
 use ChingShop\Events\NewImageEvent;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
@@ -15,9 +14,7 @@ use Testing\Unit\Behaviour\MocksModel;
 use Testing\Unit\UnitTest;
 
 /**
- * Class ImageRepositoryTest
- *
- * @package Testing\Unit\ChingShop\Image
+ * Class ImageRepositoryTest.
  */
 class ImageRepositoryTest extends UnitTest
 {

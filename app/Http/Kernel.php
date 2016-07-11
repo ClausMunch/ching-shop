@@ -12,9 +12,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 /**
- * Class Kernel
- *
- * @package ChingShop\Http
+ * Class Kernel.
  */
 class Kernel extends HttpKernel
 {

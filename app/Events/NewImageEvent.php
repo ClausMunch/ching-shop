@@ -6,9 +6,7 @@ use ChingShop\Image\Image;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class NewImageEvent
- *
- * @package ChingShop\Events
+ * Class NewImageEvent.
  */
 class NewImageEvent extends Event
 {

@@ -6,9 +6,7 @@ use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\Validator;
 
 /**
- * Class IlluminateValidation
- *
- * @package ChingShop\Validation
+ * Class IlluminateValidation.
  */
 class IlluminateValidation implements ValidationInterface
 {

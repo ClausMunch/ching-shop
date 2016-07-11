@@ -9,9 +9,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class StaticController
- *
- * @package ChingShop\Http\Controllers\Customer
+ * Class StaticController.
  */
 class StaticController extends Controller
 {
@@ -21,7 +19,7 @@ class StaticController extends Controller
     /**
      * ProductController constructor.
      *
-     * @param ViewFactory     $viewFactory
+     * @param ViewFactory $viewFactory
      */
     public function __construct(ViewFactory $viewFactory)
     {
@@ -31,8 +29,9 @@ class StaticController extends Controller
     /**
      * @param string $path
      *
-     * @return View|Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return View|Response
      */
     public function pageAction(string $path)
     {

@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class StaffOnly
- *
- * @package ChingShop\Http\Middleware
+ * Class StaffOnly.
  */
 class StaffOnly
 {

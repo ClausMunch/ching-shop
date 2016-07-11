@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Interface ImageOwner
- *
- * @package ChingShop\Image
+ * Interface ImageOwner.
  */
 interface ImageOwner
 {

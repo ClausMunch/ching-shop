@@ -5,9 +5,7 @@ namespace ChingShop\Http\Middleware;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 /**
- * Class VerifyCsrfToken
- *
- * @package ChingShop\Http\Middleware
+ * Class VerifyCsrfToken.
  */
 class VerifyCsrfToken extends BaseVerifier
 {

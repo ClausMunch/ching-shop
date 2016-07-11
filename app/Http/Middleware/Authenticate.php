@@ -7,9 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
 /**
- * Class Authenticate
- *
- * @package ChingShop\Http\Middleware
+ * Class Authenticate.
  */
 class Authenticate
 {

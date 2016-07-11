@@ -6,9 +6,7 @@ use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
 
 /**
- * Class StaffRequest
- *
- * @package ChingShop\Http\Requests\Staff
+ * Class StaffRequest.
  */
 class StaffRequest extends Request
 {

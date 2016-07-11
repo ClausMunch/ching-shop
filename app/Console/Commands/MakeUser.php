@@ -7,9 +7,7 @@ use ChingShop\User\User;
 use Illuminate\Console\Command;
 
 /**
- * Class MakeUser
- *
- * @package ChingShop\Console\Commands
+ * Class MakeUser.
  */
 class MakeUser extends Command
 {
@@ -32,8 +30,9 @@ class MakeUser extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return mixed
      */
     public function handle()
     {

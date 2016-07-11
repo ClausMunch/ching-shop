@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection $users
  * @property-read \Illuminate\Database\Eloquent\Collection $perms
- *
  * @property string $deleted_at
  *
  * @mixin \Eloquent

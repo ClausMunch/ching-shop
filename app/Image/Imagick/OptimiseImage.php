@@ -5,9 +5,7 @@ namespace ChingShop\Image\Imagick;
 use Imagick;
 
 /**
- * Class OptimiseImage
- *
- * @package ChingShop\Image\Imagick
+ * Class OptimiseImage.
  */
 class OptimiseImage implements ImageTransformer
 {

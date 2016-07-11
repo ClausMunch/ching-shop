@@ -6,9 +6,7 @@ use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Http\Requests\Staff\StaffRequest;
 
 /**
- * Class NewProductOptionRequest
- *
- * @package ChingShop\Http\Requests\Staff\Catalogue\Product
+ * Class NewProductOptionRequest.
  */
 class NewProductOptionRequest extends StaffRequest
 {

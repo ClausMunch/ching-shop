@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class AttributeRepository
- *
- * @package ChingShop\Catalogue\Attribute
+ * Class AttributeRepository.
  */
 class AttributeRepository
 {

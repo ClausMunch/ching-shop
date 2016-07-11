@@ -8,9 +8,7 @@ use ChingShop\Http\Requests\Staff\Catalogue\Product\SetPriceRequest;
 use ChingShop\Http\WebUi;
 
 /**
- * Class PriceController
- *
- * @package ChingShop\Http\Controllers\Staff
+ * Class PriceController.
  */
 class PriceController extends Controller
 {

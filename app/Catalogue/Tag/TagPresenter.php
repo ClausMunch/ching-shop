@@ -6,9 +6,7 @@ use ChingShop\Http\View\Staff\HttpCrudInterface;
 use McCool\LaravelAutoPresenter\BasePresenter;
 
 /**
- * Class TagPresenter
- *
- * @package ChingShop\Catalogue\Tag
+ * Class TagPresenter.
  */
 class TagPresenter extends BasePresenter implements HttpCrudInterface
 {

@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class TagRepository
- *
- * @package ChingShop\Catalogue\Tag
+ * Class TagRepository.
  */
 class TagRepository
 {
@@ -41,8 +39,9 @@ class TagRepository
      * @param int   $tagId
      * @param array $with
      *
-     * @return Tag
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return Tag
      */
     public function loadById(
         int $tagId,

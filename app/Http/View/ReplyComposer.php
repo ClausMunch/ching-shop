@@ -7,9 +7,7 @@ use Illuminate\Session\Store as SessionStore;
 use Illuminate\Support\MessageBag;
 
 /**
- * Class ReplyComposer
- *
- * @package ChingShop\Http\View
+ * Class ReplyComposer.
  */
 class ReplyComposer
 {
