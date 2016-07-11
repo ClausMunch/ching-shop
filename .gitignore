@@ -2,7 +2,6 @@
 /node_modules
 Homestead.yaml
 Homestead.json
-.idea/
 resources/build/
 resources/assets/js/
 typings/

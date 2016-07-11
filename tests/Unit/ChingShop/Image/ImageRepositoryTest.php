@@ -6,7 +6,6 @@ use ChingShop\Catalogue\Product\Product;
 use ChingShop\Events\NewImageEvent;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
-use Illuminate\Config\Repository as Config;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Events\Dispatcher;
 use Mockery\MockInterface;
@@ -15,6 +14,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Testing\Unit\Behaviour\MocksModel;
 use Testing\Unit\UnitTest;
 
+/**
+ * Class ImageRepositoryTest
+ *
+ * @package Testing\Unit\ChingShop\Image
+ */
 class ImageRepositoryTest extends UnitTest
 {
     use MocksModel;
@@ -24,9 +28,6 @@ class ImageRepositoryTest extends UnitTest
 
     /** @var Image|MockInterface */
     private $imageResource;
-
-    /** @var Config|MockInterface */
-    private $config;
 
     /** @var Dispatcher|MockObject */
     private $dispatcher;
@@ -41,12 +42,10 @@ class ImageRepositoryTest extends UnitTest
         $this->imageResource = $this->mockery(Image::class);
         $this->setMockModel($this->imageResource);
 
-        $this->config = $this->mockery(Config::class);
         $this->dispatcher = $this->makeMock(Dispatcher::class);
 
         $this->imageRepository = new ImageRepository(
             $this->imageResource,
-            $this->config,
             $this->dispatcher
         );
     }
@@ -81,8 +80,6 @@ class ImageRepositoryTest extends UnitTest
      */
     public function testMakesImageResource()
     {
-        $this->config->shouldReceive('get');
-
         $fileName = $this->generator()->anyString();
         $upload = $this->makeMockUploadedFile();
         $upload->expects($this->atLeastOnce())
@@ -190,17 +187,7 @@ class ImageRepositoryTest extends UnitTest
      */
     private function makeMockUploadedFile(): MockObject
     {
-        $uploadedFile = $this->makeMock(UploadedFile::class);
-
-        return $uploadedFile;
-    }
-
-    /**
-     * @return MockInterface|Product
-     */
-    private function makeMockProduct(): MockInterface
-    {
-        return $this->mockery(Product::class);
+        return $this->makeMock(UploadedFile::class);
     }
 
     /**
@@ -210,7 +197,7 @@ class ImageRepositoryTest extends UnitTest
      */
     private function expectImageCreation(string $filename = null): MockInterface
     {
-        if (is_null($filename)) {
+        if ($filename === null) {
             $filename = $this->generator()->anyInteger();
         }
 

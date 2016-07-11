@@ -5,6 +5,11 @@ namespace ChingShop\Image\Imagick;
 use Imagick;
 use ImagickPixel;
 
+/**
+ * Class WaterMark
+ *
+ * @package ChingShop\Image\Imagick
+ */
 class WaterMark implements ImageTransformer
 {
     const SCALE = 0.4;

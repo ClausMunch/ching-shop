@@ -100,6 +100,7 @@ class ProductController extends Controller
      * @param string $sku
      *
      * @return \Illuminate\Http\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function edit(string $sku)
     {
@@ -115,6 +116,8 @@ class ProductController extends Controller
      * @param string                $sku
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      */
     public function update(PersistProductRequest $request, string $sku)
     {
@@ -132,6 +135,7 @@ class ProductController extends Controller
      * @param string $sku
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(string $sku)
     {
@@ -183,6 +187,7 @@ class ProductController extends Controller
      * @param string           $sku
      *
      * @return RedirectResponse
+     * @throws \Symfony\Component\HttpFoundation\File\Exception\FileException
      */
     public function postProductImages(NewImagesRequest $request, string $sku)
     {
@@ -207,6 +212,7 @@ class ProductController extends Controller
      * @param string $sku
      *
      * @return Product
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     private function mustLoadProductBySku(string $sku): Product
     {

@@ -3,9 +3,17 @@
 namespace ChingShop\Providers;
 
 use ChingShop\Http\View\ReplyComposer;
+use ChingShop\Validation\IlluminateValidation;
+use ChingShop\Validation\ValidationInterface;
 use Illuminate\Support\ServiceProvider;
 use Laracasts\Generators\GeneratorsServiceProvider;
+use Pvm\ArtisanBeans\ArtisanBeansServiceProvider;
 
+/**
+ * Class AppServiceProvider
+ *
+ * @package ChingShop\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,18 +33,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment() == 'local') {
+        if ($this->app->environment() === 'local') {
             $this->app->register(GeneratorsServiceProvider::class);
         }
 
         $this->app->singleton(
-            \ChingShop\Validation\ValidationInterface::class,
-            \ChingShop\Validation\IlluminateValidation::class
+            ValidationInterface::class,
+            IlluminateValidation::class
         );
 
-        if ($this->app->environment() == 'local' && \App::runningInConsole()) {
+        if ($this->app->environment() === 'local' && \App::runningInConsole()) {
             $this->app->register(
-                \Pvm\ArtisanBeans\ArtisanBeansServiceProvider::class
+                ArtisanBeansServiceProvider::class
             );
         }
     }

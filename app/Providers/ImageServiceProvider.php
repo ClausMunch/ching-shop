@@ -12,6 +12,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Imagick;
 
+/**
+ * Class ImageServiceProvider
+ *
+ * @package ChingShop\Providers
+ */
 class ImageServiceProvider extends ServiceProvider
 {
     /** @var string[] */

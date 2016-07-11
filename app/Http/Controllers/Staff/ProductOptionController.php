@@ -11,6 +11,11 @@ use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionColour;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionLabel;
 use ChingShop\Http\WebUi;
 
+/**
+ * Class ProductOptionController
+ *
+ * @package ChingShop\Http\Controllers\Staff
+ */
 class ProductOptionController extends Controller
 {
     /** @var CatalogueRepository */
@@ -73,7 +78,10 @@ class ProductOptionController extends Controller
     ) {
         $option = $this->catalogueRepository->loadOptionById($optionId);
 
-        if (!$option || !$option->id || $option->product_id != $productId) {
+        if (!$option
+            || !$option->id
+            || (int) $option->product_id !== $productId
+        ) {
             return $this->webUi->json(
                 ["No such option {$optionId} for product {$productId}."],
                 404

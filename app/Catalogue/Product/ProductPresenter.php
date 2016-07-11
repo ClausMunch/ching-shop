@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use OutOfBoundsException;
 
+/**
+ * Class ProductPresenter
+ *
+ * @package ChingShop\Catalogue\Product
+ */
 class ProductPresenter extends BasePresenter implements
     HttpCrudInterface,
     RelaterInterface,
@@ -120,7 +125,7 @@ class ProductPresenter extends BasePresenter implements
     {
         $firstImage = $this->wrappedObject->images->first();
 
-        return $firstImage ? $firstImage : new Image();
+        return $firstImage ?: new Image();
     }
 
     /**

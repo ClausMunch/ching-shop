@@ -72,7 +72,7 @@ class User extends Model implements
      */
     public function email(): string
     {
-        return isset($this->email) ? $this->email : '';
+        return $this->email ?? '';
     }
 
     /**

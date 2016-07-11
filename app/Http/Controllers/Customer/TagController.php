@@ -7,6 +7,11 @@ use ChingShop\Http\Controllers\Controller;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
+/**
+ * Class TagController
+ *
+ * @package ChingShop\Http\Controllers\Customer
+ */
 class TagController extends Controller
 {
     /** @var TagRepository */
@@ -40,6 +45,7 @@ class TagController extends Controller
      * @param string $tagName
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function viewAction(int $tagId, string $tagName)
     {

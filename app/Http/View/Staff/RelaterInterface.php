@@ -5,6 +5,11 @@ namespace ChingShop\Http\View\Staff;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
+/**
+ * Interface RelaterInterface
+ *
+ * @package ChingShop\Http\View\Staff
+ */
 interface RelaterInterface
 {
     /**

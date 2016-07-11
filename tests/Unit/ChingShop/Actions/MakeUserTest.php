@@ -5,8 +5,8 @@ namespace Testing\Unit\ChingShop\Action;
 use ChingShop\Actions\MakeUser;
 use ChingShop\User\Role;
 use ChingShop\User\User;
-use ChingShop\Validation\ValidationFailure;
 use ChingShop\Validation\ValidationInterface;
+use DomainException;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Mockery;
@@ -14,6 +14,11 @@ use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;
 
+/**
+ * Class MakeUserTest
+ *
+ * @package Testing\Unit\ChingShop\Action
+ */
 class MakeUserTest extends UnitTest
 {
     /** @var MakeUser */
@@ -85,9 +90,7 @@ class MakeUserTest extends UnitTest
      */
     public function testRejectsInvalidParams()
     {
-        $this->setExpectedExceptionRegExp(
-            ValidationFailure::class
-        );
+        $this->setExpectedExceptionRegExp(DomainException::class);
 
         $password = $this->generator()->anyString();
         $this->mockPasswordHashing($password);

@@ -2,9 +2,20 @@
 
 namespace ChingShop\Http;
 
+use Fideloper\Proxy\TrustProxies;
+use GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+/**
+ * Class Kernel
+ *
+ * @package ChingShop\Http
+ */
 class Kernel extends HttpKernel
 {
     /**
@@ -13,7 +24,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        CheckForMaintenanceMode::class,
     ];
 
     /**
@@ -23,20 +34,20 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Fideloper\Proxy\TrustProxies::class,
+            TrustProxies::class,
             Middleware\ForceSecure::class,
             Middleware\EncryptCookies::class,
 
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
 
             Middleware\VerifyCsrfToken::class,
 
-            \GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware::class,
+            MinifyMiddleware::class,
         ],
         'api' => [
-            \Fideloper\Proxy\TrustProxies::class,
+            TrustProxies::class,
             Middleware\ForceSecure::class,
             'throttle:60,1',
             'auth:api',

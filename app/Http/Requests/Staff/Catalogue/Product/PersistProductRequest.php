@@ -5,6 +5,11 @@ namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 use ChingShop\Http\Requests\Staff\StaffRequest;
 use Illuminate\Http\Request as HttpRequest;
 
+/**
+ * Class PersistProductRequest
+ *
+ * @package ChingShop\Http\Requests\Staff\Catalogue\Product
+ */
 class PersistProductRequest extends StaffRequest
 {
     /** @var array */
@@ -75,6 +80,6 @@ class PersistProductRequest extends StaffRequest
      */
     private function requestIsUpdate(HttpRequest $request): bool
     {
-        return in_array($request->method(), self::UPDATE_METHODS);
+        return in_array($request->method(), self::UPDATE_METHODS, true);
     }
 }

@@ -5,6 +5,11 @@ namespace ChingShop\Validation;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\Validator;
 
+/**
+ * Class IlluminateValidation
+ *
+ * @package ChingShop\Validation
+ */
 class IlluminateValidation implements ValidationInterface
 {
     /** @var Factory */

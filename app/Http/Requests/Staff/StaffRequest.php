@@ -5,6 +5,11 @@ namespace ChingShop\Http\Requests\Staff;
 use ChingShop\Http\Requests\Request;
 use Illuminate\Http\Request as HttpRequest;
 
+/**
+ * Class StaffRequest
+ *
+ * @package ChingShop\Http\Requests\Staff
+ */
 class StaffRequest extends Request
 {
     /**

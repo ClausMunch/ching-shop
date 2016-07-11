@@ -5,6 +5,11 @@ namespace ChingShop\Http\Controllers\Auth;
 use ChingShop\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+/**
+ * Class PasswordController
+ *
+ * @package ChingShop\Http\Controllers\Auth
+ */
 class PasswordController extends Controller
 {
     /*

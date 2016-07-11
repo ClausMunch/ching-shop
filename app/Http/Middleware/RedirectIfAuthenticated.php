@@ -5,6 +5,11 @@ namespace ChingShop\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class RedirectIfAuthenticated
+ *
+ * @package ChingShop\Http\Middleware
+ */
 class RedirectIfAuthenticated
 {
     /**

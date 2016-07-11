@@ -4,9 +4,13 @@ namespace ChingShop\Http\Controllers\Customer;
 
 use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
+/**
+ * Class CategoriesController
+ *
+ * @package ChingShop\Http\Controllers\Customer
+ */
 class CategoriesController extends Controller
 {
     /** @var ProductRepository */
@@ -15,24 +19,18 @@ class CategoriesController extends Controller
     /** @var ViewFactory */
     private $viewFactory;
 
-    /** @var ResponseFactory */
-    private $responseFactory;
-
     /**
      * ProductController constructor.
      *
      * @param ProductRepository $productRepository
      * @param ViewFactory       $viewFactory
-     * @param ResponseFactory   $responseFactory
      */
     public function __construct(
         ProductRepository $productRepository,
-        ViewFactory $viewFactory,
-        ResponseFactory $responseFactory
+        ViewFactory $viewFactory
     ) {
         $this->productRepository = $productRepository;
         $this->viewFactory = $viewFactory;
-        $this->responseFactory = $responseFactory;
     }
 
     /**

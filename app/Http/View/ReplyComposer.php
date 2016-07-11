@@ -6,6 +6,11 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Session\Store as SessionStore;
 use Illuminate\Support\MessageBag;
 
+/**
+ * Class ReplyComposer
+ *
+ * @package ChingShop\Http\View
+ */
 class ReplyComposer
 {
     const ERROR_CLASS = 'has-error';

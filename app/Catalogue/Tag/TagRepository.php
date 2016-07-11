@@ -6,6 +6,11 @@ use ChingShop\Catalogue\Product\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * Class TagRepository
+ *
+ * @package ChingShop\Catalogue\Tag
+ */
 class TagRepository
 {
     /** @var Tag|Builder */
@@ -37,6 +42,7 @@ class TagRepository
      * @param array $with
      *
      * @return Tag
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function loadById(
         int $tagId,

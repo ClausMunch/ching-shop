@@ -7,6 +7,11 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;
 
+/**
+ * Class LocationComposer
+ *
+ * @package ChingShop\Http\View\Customer
+ */
 class LocationComposer
 {
     const ROUTE_VIEW = 'view';
@@ -41,6 +46,7 @@ class LocationComposer
      * @param Viewable $viewable
      *
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function viewHrefFor(Viewable $viewable): string
     {

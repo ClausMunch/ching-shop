@@ -4,6 +4,11 @@ namespace ChingShop\Catalogue\Product;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Class ProductOptionRepository
+ *
+ * @package ChingShop\Catalogue\Product
+ */
 class ProductOptionRepository
 {
     /** @var ProductOption|Builder */

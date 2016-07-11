@@ -5,6 +5,11 @@ namespace ChingShop\Events;
 use ChingShop\Image\Image;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class NewImageEvent
+ *
+ * @package ChingShop\Events
+ */
 class NewImageEvent extends Event
 {
     use SerializesModels;
