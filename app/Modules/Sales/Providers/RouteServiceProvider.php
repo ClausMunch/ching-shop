@@ -6,9 +6,7 @@ use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
 /**
- * Class RouteServiceProvider
- *
- * @package ChingShop\Modules\Sales\Providers
+ * Class RouteServiceProvider.
  */
 class RouteServiceProvider extends ServiceProvider
 {
@@ -22,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the module.
      *
-     * @param  \Illuminate\Routing\Router $router
+     * @param \Illuminate\Routing\Router $router
      *
      * @return void
      */
@@ -35,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
             ],
             function () {
                 /** @noinspection PhpIncludeInspection */
-                require config('modules.path') . '/Sales/Http/routes.php';
+                require config('modules.path').'/Sales/Http/routes.php';
             }
         );
     }

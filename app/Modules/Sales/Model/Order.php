@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Carbon\Carbon         $created_at
  * @property \Carbon\Carbon         $updated_at
  * @property string                 $deleted_at
- *
  * @property OrderItem[]|Collection $orderItems
  */
 class Order extends Model
