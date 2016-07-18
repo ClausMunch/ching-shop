@@ -12,7 +12,8 @@
 */
 
 /** @var Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(ChingShop\User\User::class, function (Faker\Generator $faker) {
+$factory->define(
+    ChingShop\Modules\User\Model\User::class, function (Faker\Generator $faker) {
     return [
         'name'           => $faker->name,
         'email'          => $faker->email,

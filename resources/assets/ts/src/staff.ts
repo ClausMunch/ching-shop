@@ -1,8 +1,6 @@
 require("./main.js");
 
-require("../../../node_modules/jquery-ui/ui/widgets/sortable.js");
 require("../../../node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js");
-
 require("./staff/product.js");
 
 interface Document {
@@ -12,6 +10,7 @@ interface Document {
 let csrfToken: string = "";
 document.getCsrfToken = function getCsrfToken(): string {
     if (!csrfToken.length) {
+        // noinspection TypeScriptUnresolvedFunction
         let docToken: string = document
             .querySelector("[name=csrf-token]")
             .getAttribute("content");

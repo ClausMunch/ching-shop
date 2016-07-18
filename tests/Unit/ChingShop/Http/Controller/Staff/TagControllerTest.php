@@ -2,11 +2,11 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Tag\Tag;
-use ChingShop\Catalogue\Tag\TagRepository;
-use ChingShop\Http\Controllers\Staff\TagController;
 use ChingShop\Http\Requests\Staff\Catalogue\NewTagRequest;
+use ChingShop\Modules\Catalogue\Http\Controllers\Staff\TagController;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Tag\Tag;
+use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
@@ -14,7 +14,7 @@ use Testing\Unit\MockObject;
 
 class TagControllerTest extends ControllerTest
 {
-    /** @var TagController */
+    /** @var \ChingShop\Modules\Catalogue\Http\Controllers\Staff\TagController */
     private $tagController;
 
     /** @var TagRepository|MockObject */

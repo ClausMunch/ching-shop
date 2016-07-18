@@ -8,3 +8,4 @@ window.addEventListener("load", function () {
 });
 
 require("./images.js");
+require("./product-options.js");

@@ -2,9 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller;
 
-use ChingShop\Catalogue\CatalogueRepository;
-use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\WebUi;
+use ChingShop\Modules\Catalogue\Model\CatalogueRepository;
+use ChingShop\Modules\Catalogue\Model\Product\ProductRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Contracts\View\View;

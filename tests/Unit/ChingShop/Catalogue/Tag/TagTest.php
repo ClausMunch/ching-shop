@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Tag;
 
-use ChingShop\Catalogue\Tag\Tag;
+use ChingShop\Modules\Catalogue\Model\Tag\Tag;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Testing\Unit\UnitTest;
 

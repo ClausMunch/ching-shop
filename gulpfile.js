@@ -12,6 +12,14 @@ var typings     = require("gulp-typings");
 var ts          = require("gulp-typescript");
 var Task        = elixir.Task;
 
+elixir.config.css.autoprefix = {
+    enabled: true,
+    options: {
+        cascade: true,
+        browsers: ['last 3 versions', '> 1%']
+    }
+};
+
 elixir.extend("typings", function () {
     new Task("typings", function () {
         return gulp.src("./resources/assets/ts/typings.json").pipe(typings());

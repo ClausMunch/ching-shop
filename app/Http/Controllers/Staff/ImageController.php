@@ -68,6 +68,6 @@ class ImageController extends Controller
      */
     private function redirectToImagesIndex()
     {
-        return $this->webUi->redirect('staff.products.images.index');
+        return $this->webUi->redirect('catalogue.staff.products.images.index');
     }
 }

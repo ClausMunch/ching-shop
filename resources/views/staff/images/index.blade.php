@@ -13,7 +13,7 @@
     <form method="post"
           class="form-inline"
           id="transfer-images-form"
-          action="{{ route('staff.products.images.transfer-local') }}">
+          action="{{ route('catalogue.staff.products.images.transfer-local') }}">
         {{ csrf_field() }}
         <button type="submit"
                 class="btn btn-success"

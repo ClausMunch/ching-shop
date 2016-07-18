@@ -1,0 +1,9 @@
+{
+    "name": "Sales",
+    "slug": "sales",
+    "namespace": "Sales",
+    "version": "1.0",
+    "author": "Hugh Grigg",
+    "license": "MIT",
+    "description": "Sales and ordering"
+}

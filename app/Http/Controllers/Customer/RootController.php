@@ -2,8 +2,8 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
-use ChingShop\Catalogue\Product\ProductRepository;
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Modules\Catalogue\Model\Product\ProductRepository;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
 /**

@@ -20,7 +20,8 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "vetruvet/laravel-phpredis": "^1.0",
         "mccool/laravel-auto-presenter": "^4.2",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "caffeinated/modules": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

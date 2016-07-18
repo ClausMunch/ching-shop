@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\User;
 
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 use Testing\Unit\UnitTest;
 
 class UserTest extends UnitTest

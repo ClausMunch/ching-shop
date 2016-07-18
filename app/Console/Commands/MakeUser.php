@@ -2,8 +2,8 @@
 
 namespace ChingShop\Console\Commands;
 
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Console\Command;
 
 /**

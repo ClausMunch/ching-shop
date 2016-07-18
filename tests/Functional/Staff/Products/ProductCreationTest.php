@@ -14,8 +14,8 @@ class ProductCreationTest extends ProductTest
     public function testIndex()
     {
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.index'))
-            ->seePageIs(route('staff.products.index'));
+            ->visit(route('catalogue.staff.products.index'))
+            ->seePageIs(route('catalogue.staff.products.index'));
     }
 
     /**
@@ -24,8 +24,8 @@ class ProductCreationTest extends ProductTest
     public function testCreate()
     {
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
-            ->seePageIs(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
+            ->seePageIs(route('catalogue.staff.products.create'))
             ->see('Create a new product');
     }
 
@@ -40,13 +40,13 @@ class ProductCreationTest extends ProductTest
         $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->type($productName, 'name')
             ->type($productDescription, 'description')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
             ->press('Save')
-            ->seePageIs(route('staff.products.show', ['SKU' => $productSKU]))
+            ->seePageIs(route('catalogue.staff.products.show', ['SKU' => $productSKU]))
             ->see($productName)
             ->see($productSKU);
     }
@@ -57,7 +57,7 @@ class ProductCreationTest extends ProductTest
     public function testShowProduct()
     {
         $product = $this->createProduct();
-        $showRoute = route('staff.products.show', [
+        $showRoute = route('catalogue.staff.products.show', [
             'sku' => $product->sku,
         ]);
 
@@ -77,9 +77,9 @@ class ProductCreationTest extends ProductTest
     public function testRequiredFieldErrorMessages()
     {
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->press('Save')
-            ->seePageIs(route('staff.products.create'))
+            ->seePageIs(route('catalogue.staff.products.create'))
             ->see('The name field is required')
             ->see('The description field is required')
             ->see('The sku field is required');
@@ -91,12 +91,12 @@ class ProductCreationTest extends ProductTest
     public function testSlugFieldLengthErrorMessage()
     {
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($this->generator()->anySlug(), 'sku')
             ->type('1234', 'slug')
             ->press('Save')
-            ->seePageIs(route('staff.products.create'))
+            ->seePageIs(route('catalogue.staff.products.create'))
             ->see('The slug must be at least 5 characters.');
     }
 
@@ -110,12 +110,12 @@ class ProductCreationTest extends ProductTest
         $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->type($productName, 'name')
             ->type($productSlug, 'slug')
             ->type($productDescription, 'description')
             ->press('Save')
-            ->seePageIs(route('staff.products.create'))
+            ->seePageIs(route('catalogue.staff.products.create'))
             ->see($productName)
             ->see($productSlug)
             ->see($productDescription);
@@ -131,23 +131,23 @@ class ProductCreationTest extends ProductTest
         $productDescription = 'foobar nice description of the product';
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
             ->type($productDescription, 'description')
             ->press('Save')
             ->dontSee('already been taken')
-            ->seePageIs(route('staff.products.show', ['sku' => $productSKU]));
+            ->seePageIs(route('catalogue.staff.products.show', ['sku' => $productSKU]));
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.create'))
+            ->visit(route('catalogue.staff.products.create'))
             ->type($this->generator()->anyString(), 'name')
             ->type($productSKU, 'sku')
             ->type($productSlug, 'slug')
             ->type($productDescription, 'description')
             ->press('Save')
-            ->seePageIs(route('staff.products.create'))
+            ->seePageIs(route('catalogue.staff.products.create'))
             ->see('The sku has already been taken');
     }
 
@@ -161,7 +161,7 @@ class ProductCreationTest extends ProductTest
         $oldProductName = $product->name;
         $newProductName = str_random();
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]))
+            ->visit(route('catalogue.staff.products.show', [$product->sku]))
             ->click('Edit product')
             ->type($newProductName, 'name')
             ->press('Save')

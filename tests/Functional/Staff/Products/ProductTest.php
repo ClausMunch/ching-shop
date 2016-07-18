@@ -2,8 +2,8 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use ChingShop\Catalogue\Product\Product;
 use ChingShop\Image\Image;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 

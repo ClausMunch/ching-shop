@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Price;
 
-use ChingShop\Catalogue\Price\Price;
+use ChingShop\Modules\Catalogue\Model\Price\Price;
 use Testing\Unit\UnitTest;
 
 class PriceTest extends UnitTest

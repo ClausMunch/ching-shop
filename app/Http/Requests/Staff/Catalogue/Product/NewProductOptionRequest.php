@@ -2,8 +2,8 @@
 
 namespace ChingShop\Http\Requests\Staff\Catalogue\Product;
 
-use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Http\Requests\Staff\StaffRequest;
+use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 
 /**
  * Class NewProductOptionRequest.

@@ -3,8 +3,8 @@
 namespace Testing\Unit\ChingShop\Console\Commands;
 
 use ChingShop\Console\Commands\MakeUser;
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Contracts\Hashing\Hasher;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 

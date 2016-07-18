@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model'  => \ChingShop\User\User::class,
+            'model'  => \ChingShop\Modules\User\Model\User::class,
         ],
 
         // 'users' => [

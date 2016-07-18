@@ -3,7 +3,7 @@
 namespace Testing\Functional\Staff;
 
 use ChingShop\Actions\MakeUser;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 
 trait StaffUser
 {

@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Tags;
 
-use ChingShop\Catalogue\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
 use Testing\Functional\Util\CreateCatalogue;
@@ -19,9 +19,9 @@ class TagsTest extends FunctionalTest
         $this->actingAs($this->staffUser())
             ->visit(route('staff.dashboard'))
             ->seePageIs(route('staff.dashboard'))
-            ->see(route('staff.tags.index'))
+            ->see(route('catalogue.staff.tags.index'))
             ->click('Tags')
-            ->seePageIs(route('staff.tags.index'));
+            ->seePageIs(route('catalogue.staff.tags.index'));
 
         $this->assertResponseOk();
     }
@@ -49,7 +49,7 @@ class TagsTest extends FunctionalTest
         $this->goToTagIndex()
             ->type($tagName, 'name')
             ->press('add-new-tag')
-            ->seePageIs(route('staff.tags.index'))
+            ->seePageIs(route('catalogue.staff.tags.index'))
             ->see('Created')
             ->see($tagName);
     }
@@ -67,7 +67,7 @@ class TagsTest extends FunctionalTest
             ->see($tag->name)
             ->see($product->sku)
             ->click($product->sku)
-            ->seePageIs(route('staff.products.show', ['sku' => $product->sku]));
+            ->seePageIs(route('catalogue.staff.products.show', ['sku' => $product->sku]));
     }
 
     /**
@@ -80,7 +80,7 @@ class TagsTest extends FunctionalTest
         $this->goToTagIndex()
             ->see($tag->name)
             ->press("delete-tag-{$tag->id}")
-            ->seePageIs(route('staff.tags.index'))
+            ->seePageIs(route('catalogue.staff.tags.index'))
             ->see('Deleted')
             ->dontSee($tag->name);
     }
@@ -92,7 +92,7 @@ class TagsTest extends FunctionalTest
     {
         $tag = $this->createTag();
         $product = $this->createProduct();
-        $productView = route('staff.products.show', ['sku' => $product->sku]);
+        $productView = route('catalogue.staff.products.show', ['sku' => $product->sku]);
 
         $this->actingAs($this->staffUser())
             ->visit($productView)
@@ -116,7 +116,7 @@ class TagsTest extends FunctionalTest
     private function goToTagIndex()
     {
         return $this->actingAs($this->staffUser())
-            ->visit(route('staff.tags.index'))
-            ->seePageIs(route('staff.tags.index'));
+            ->visit(route('catalogue.staff.tags.index'))
+            ->seePageIs(route('catalogue.staff.tags.index'));
     }
 }

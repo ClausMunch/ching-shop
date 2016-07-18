@@ -3,7 +3,7 @@
 namespace Testing\Functional\Console;
 
 use Artisan;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 use DB;
 use Hash;
 use Testing\Functional\FunctionalTest;

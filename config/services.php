@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model'  => ChingShop\User\User::class,
+        'model'  => ChingShop\Modules\User\Model\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

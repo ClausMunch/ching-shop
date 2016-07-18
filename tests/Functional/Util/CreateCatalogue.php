@@ -2,11 +2,11 @@
 
 namespace Testing\Functional\Util;
 
-use ChingShop\Catalogue\Attribute\Colour;
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductOption;
-use ChingShop\Catalogue\Tag\Tag;
 use ChingShop\Image\Image;
+use ChingShop\Modules\Catalogue\Model\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Model\Tag\Tag;
 use Faker\Factory;
 use Faker\Generator;
 
@@ -62,7 +62,7 @@ trait CreateCatalogue
     protected function createColour(): Colour
     {
         return Colour::create([
-            'name' => $this->faker()->unique()->colorName,
+            'name' => uniqid($this->faker()->unique()->colorName, false),
         ]);
     }
 

@@ -3,7 +3,7 @@
 namespace ChingShop\Http\Middleware;
 
 use ChingShop\Http\View\Staff\StaffLocationComposer;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 use Closure;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
@@ -50,6 +50,6 @@ class StaffOnly
             return response('Unauthorised', Response::HTTP_UNAUTHORIZED);
         }
 
-        return redirect()->guest('auth/login');
+        return redirect()->guest(route('auth::login'));
     }
 }

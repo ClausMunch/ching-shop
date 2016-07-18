@@ -26,7 +26,7 @@
                 @foreach($product->images() as $i => $image)
                     <a class="product-thumbnail"
                        @if ($i === 0) data-selected="true" @endif
-                        href="{{ $image->url() }}"
+                        href="{{ $image->sizeUrl('large') }}"
                         title="{{ $image->altText() }}">
                         <img class="img-thumbnail img-responsive"
                              src="{{ $image->sizeUrl('large') }}"
