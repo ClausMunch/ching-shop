@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 /**
- * Class UserDatabaseSeeder
- *
- * @package ChingShop\Modules\User\Database\Seeds
+ * Class UserDatabaseSeeder.
  */
 class UserDatabaseSeeder extends Seeder
 {
