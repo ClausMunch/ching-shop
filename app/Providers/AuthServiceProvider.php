@@ -2,7 +2,7 @@
 
 namespace ChingShop\Providers;
 
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as Provider;
 

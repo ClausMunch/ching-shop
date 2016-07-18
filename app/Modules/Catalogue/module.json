@@ -1,0 +1,9 @@
+{
+    "name": "Catalogue",
+    "slug": "catalogue",
+    "namespace": "Catalogue",
+    "version": "1.0",
+    "author": "Hugh Grigg",
+    "license": "MIT",
+    "description": "Product information"
+}

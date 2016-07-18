@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Auth;
 
-use ChingShop\Http\Controllers\Auth\AuthController;
+use ChingShop\Modules\User\Http\Controllers\Auth\AuthController;
 use Testing\Unit\UnitTest;
 
 class AuthControllerTest extends UnitTest
@@ -23,6 +23,7 @@ class AuthControllerTest extends UnitTest
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf(AuthController::class, $this->authController);
+        $this->assertInstanceOf(
+            \ChingShop\Modules\User\Http\Controllers\Auth\AuthController::class, $this->authController);
     }
 }

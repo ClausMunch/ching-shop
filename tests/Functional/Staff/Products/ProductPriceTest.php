@@ -15,7 +15,7 @@ class ProductPriceTest extends ProductTest
     {
         $product = $this->createProduct();
 
-        $showProductRoute = route('staff.products.show', [
+        $showProductRoute = route('catalogue.staff.products.show', [
             'SKU' => $product->sku,
         ]);
         $this->actingAs($this->staffUser())
@@ -36,7 +36,7 @@ class ProductPriceTest extends ProductTest
     {
         $product = $this->createProduct();
 
-        $showProductRoute = route('staff.products.show', [
+        $showProductRoute = route('catalogue.staff.products.show', [
             'SKU' => $product->sku,
         ]);
         $this->actingAs($this->staffUser())

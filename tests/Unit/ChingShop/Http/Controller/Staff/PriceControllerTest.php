@@ -2,12 +2,12 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use ChingShop\Http\Controllers\Staff\PriceController;
+use ChingShop\Modules\Catalogue\Http\Controllers\Staff\PriceController;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class PriceControllerTest extends ControllerTest
 {
-    /** @var PriceController */
+    /** @var \ChingShop\Modules\Catalogue\Http\Controllers\Staff\PriceController */
     private $priceController;
 
     /**
@@ -26,6 +26,7 @@ class PriceControllerTest extends ControllerTest
      */
     public function testConstruct()
     {
-        $this->assertInstanceOf(PriceController::class, $this->priceController);
+        $this->assertInstanceOf(
+            \ChingShop\Modules\Catalogue\Http\Controllers\Staff\PriceController::class, $this->priceController);
     }
 }

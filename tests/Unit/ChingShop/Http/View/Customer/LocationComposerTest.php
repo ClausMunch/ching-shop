@@ -2,9 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Http\Customer\View;
 
-use ChingShop\Catalogue\Product\ProductPresenter;
 use ChingShop\Http\View\Customer\LocationComposer;
 use ChingShop\Http\View\Customer\Viewable;
+use ChingShop\Modules\Catalogue\Model\Product\ProductPresenter;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;

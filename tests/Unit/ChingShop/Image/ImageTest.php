@@ -146,7 +146,7 @@ class ImageTest extends UnitTest
      */
     public function testRoutePath()
     {
-        $this->assertEquals('staff.products.images', $this->image->routePath());
+        $this->assertEquals('catalogue.staff.products.images', $this->image->routePath());
     }
 
     /**

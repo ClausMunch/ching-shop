@@ -140,10 +140,16 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Caffeinated\Modules\ModulesServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+
+        /*
+         * Module Service Providers
+         */
+//        ChingShop\Modules\Catalogue\Providers\CatalogueServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -204,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'Module'    => Caffeinated\Modules\Facades\Module::class,
         'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
 
     ],

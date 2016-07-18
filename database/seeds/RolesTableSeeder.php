@@ -1,7 +1,7 @@
 <?php
 
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 
 class RolesTableSeeder extends Seed
 {

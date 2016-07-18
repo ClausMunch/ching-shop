@@ -2,8 +2,8 @@
 
 namespace ChingShop\Image;
 
-use ChingShop\Catalogue\Product\Product;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -200,7 +200,7 @@ class Image extends Model implements HttpCrudInterface
      */
     public function routePath(): string
     {
-        return 'staff.products.images';
+        return 'catalogue.staff.products.images';
     }
 
     /**

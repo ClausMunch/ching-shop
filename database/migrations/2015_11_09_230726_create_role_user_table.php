@@ -1,8 +1,8 @@
 <?php
 
 use ChingShop\Database\Migration;
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Schema\Blueprint;
 
 /** @noinspection PhpIllegalPsrClassPathInspection */

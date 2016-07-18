@@ -1,9 +1,9 @@
 <?php
 
-use ChingShop\Catalogue\Price\Price;
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Image\Image;
+use ChingShop\Modules\Catalogue\Model\Price\Price;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 
 class ProductsTableSeeder extends Seed
 {

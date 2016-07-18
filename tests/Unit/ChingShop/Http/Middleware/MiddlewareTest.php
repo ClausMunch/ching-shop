@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Http\Request;
 use Mockery\MockInterface;
 use Testing\Unit\UnitTest;

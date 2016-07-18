@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use ChingShop\Catalogue\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
 use Testing\Functional\Staff\StaffUser;
 
 class ProductDeletionTest extends ProductTest
@@ -17,14 +17,14 @@ class ProductDeletionTest extends ProductTest
         $product = $this->createProduct();
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', ['SKU' => $product->sku]))
+            ->visit(route('catalogue.staff.products.show', ['SKU' => $product->sku]))
             ->see($product->sku)
             ->see('Delete');
 
         $deleteForm = $this->crawler->filter('#delete-product-form')->first();
 
         $this->assertEquals(
-            route('staff.products.destroy', ['sku' => $product->sku]),
+            route('catalogue.staff.products.destroy', ['sku' => $product->sku]),
             $deleteForm->attr('action')
         );
     }
@@ -37,9 +37,9 @@ class ProductDeletionTest extends ProductTest
         $product = $this->createProduct();
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', ['SKU' => $product->sku]))
+            ->visit(route('catalogue.staff.products.show', ['SKU' => $product->sku]))
             ->press('Delete')
-            ->seePageIs(route('staff.products.index'));
+            ->seePageIs(route('catalogue.staff.products.index'));
 
         /** @var Product $deletedProduct */
         $deletedProduct = Product::onlyTrashed()
@@ -57,7 +57,7 @@ class ProductDeletionTest extends ProductTest
     {
         $product = $this->createProduct();
         $image = $this->attachImageToProduct($product);
-        $showRoute = route('staff.products.show', ['SKU' => $product->sku]);
+        $showRoute = route('catalogue.staff.products.show', ['SKU' => $product->sku]);
 
         $this->actingAs($this->staffUser())
             ->visit($showRoute)

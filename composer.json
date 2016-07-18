@@ -20,7 +20,9 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "vetruvet/laravel-phpredis": "^1.0",
         "mccool/laravel-auto-presenter": "^4.2",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "caffeinated/modules": "^3.1",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
@@ -31,7 +33,6 @@
         "symfony/css-selector": "^3.0",
         "mockery/mockery": ">=0.9.4",
         "hamcrest/hamcrest-php": "^2.0.0",
-        "guzzle/guzzle": "^3.9.3",
         "johnkary/phpunit-speedtrap": "^1.0.1",
         "pda/pheanstalk": "^3.0",
         "squizlabs/php_codesniffer": "^2.5",

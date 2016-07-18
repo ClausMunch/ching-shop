@@ -46,30 +46,30 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="{{ $location->putActive(
-                                'staff.products.index'
+                                'catalogue.staff.products.index'
                             ) }}">
-                            <a href="{{ route('staff.products.index') }}">
+                            <a href="{{ route('catalogue.staff.products.index') }}">
                                 View all
                             </a>
                         </li>
                         <li class="{{ $location->putActive(
-                                'staff.products.create'
+                                'catalogue.staff.products.create'
                             ) }}">
-                            <a href="{{ route('staff.products.create') }}">
+                            <a href="{{ route('catalogue.staff.products.create') }}">
                                 Create new
                             </a>
                         </li>
                         <li class="{{ $location->putActive(
-                                'staff.products.images.index'
+                                'catalogue.staff.products.images.index'
                             ) }}">
-                            <a href="{{ route('staff.products.images.index') }}">
+                            <a href="{{ route('catalogue.staff.products.images.index') }}">
                                 Images
                             </a>
                         </li>
                         <li class="{{ $location->putActive(
-                                'staff.tags.index'
+                                'catalogue.staff.tags.index'
                             ) }}">
-                            <a href="{{ route('staff.tags.index') }}">
+                            <a href="{{ route('catalogue.staff.tags.index') }}">
                                 Tags
                             </a>
                         </li>
@@ -112,8 +112,9 @@
 @endsection
 
 @push('scripts')
-    <script async
-            defer
-            type="application/javascript"
+    <script type="application/javascript"
             src="{{ secure_asset(elixir('js/staff.js')) }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+            integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+            crossorigin="anonymous"></script>
 @endpush

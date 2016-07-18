@@ -2,8 +2,8 @@
 
 namespace ChingShop\Actions;
 
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 use ChingShop\Validation\ValidationInterface;
 use DomainException;
 use Illuminate\Contracts\Hashing\Hasher;

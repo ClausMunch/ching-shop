@@ -22,10 +22,10 @@ class ProductOptionTest extends ProductTest
 
         $newOptionLabel = str_random();
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]))
+            ->visit(route('catalogue.staff.products.show', [$product->sku]))
             ->type($newOptionLabel, 'label')
             ->press('Add option')
-            ->seePageIs(route('staff.products.show', [$product->sku]))
+            ->seePageIs(route('catalogue.staff.products.show', [$product->sku]))
             ->see('Added new option')
             ->see($newOptionLabel);
     }
@@ -42,11 +42,11 @@ class ProductOptionTest extends ProductTest
         $colour = $this->createColour();
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]))
+            ->visit(route('catalogue.staff.products.show', [$product->sku]))
             ->see($option->label)
             ->select($colour->id, 'colour')
             ->press('Set colour')
-            ->seePageIs(route('staff.products.show', [$product->sku]))
+            ->seePageIs(route('catalogue.staff.products.show', [$product->sku]))
             ->see('Updated the colour for option');
 
         $colourOption = $this->crawler()
@@ -64,7 +64,7 @@ class ProductOptionTest extends ProductTest
         $option = $this->createProductOptionFor($product);
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]))
+            ->visit(route('catalogue.staff.products.show', [$product->sku]))
             ->see($option->id);
 
         $newOptionLabel = '';
@@ -78,7 +78,7 @@ class ProductOptionTest extends ProductTest
         );
 
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]))
+            ->visit(route('catalogue.staff.products.show', [$product->sku]))
             ->see($newOptionLabel);
     }
 
@@ -98,7 +98,7 @@ class ProductOptionTest extends ProductTest
 
         // When we update the image order;
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]));
+            ->visit(route('catalogue.staff.products.show', [$product->sku]));
         $updatedImageOrder = [
             $images[1]->id => 0,
             $images[0]->id => 1,
@@ -119,7 +119,7 @@ class ProductOptionTest extends ProductTest
 
         // That new order should be reflected on the staff product page;
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]));
+            ->visit(route('catalogue.staff.products.show', [$product->sku]));
         $imageList = $this->crawler()
             ->filter("#owner-{$option->id}-images")
             ->first()
@@ -147,7 +147,7 @@ class ProductOptionTest extends ProductTest
 
         // When we move the image from the product to the option;
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]));
+            ->visit(route('catalogue.staff.products.show', [$product->sku]));
         $optionSortAction = $this->documentQueryAttribute(
             "#owner-{$option->id}-images",
             'data-sort-action'
@@ -170,7 +170,7 @@ class ProductOptionTest extends ProductTest
 
         // Then the option should have the image;
         $this->actingAs($this->staffUser())
-            ->visit(route('staff.products.show', [$product->sku]));
+            ->visit(route('catalogue.staff.products.show', [$product->sku]));
         $optionImages = $this->crawler()
             ->filter("#owner-{$option->id}-images")
             ->first()

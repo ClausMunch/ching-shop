@@ -2,13 +2,13 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Tag\TagRepository;
-use ChingShop\Http\Controllers\Staff\ProductController;
 use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\PersistProductRequest;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageRepository;
+use ChingShop\Modules\Catalogue\Http\Controllers\Staff\ProductController;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
@@ -65,7 +65,7 @@ class ProductControllerTest extends ControllerTest
             ->method('loadLatestProducts')
             ->willReturn($products);
 
-        $view = $this->expectViewToBeMade('staff.products.index');
+        $view = $this->expectViewToBeMade('catalogue::staff.products.index');
 
         $response = $this->productController->index();
 
@@ -77,7 +77,7 @@ class ProductControllerTest extends ControllerTest
      */
     public function testCreate()
     {
-        $view = $this->expectViewToBeMade('staff.products.create');
+        $view = $this->expectViewToBeMade('catalogue::staff.products.create');
 
         $response = $this->productController->create();
 
@@ -94,7 +94,6 @@ class ProductControllerTest extends ControllerTest
 
         $requestData = [];
         $storeProductRequest->shouldReceive('all')->andReturn($requestData);
-//        $this->mockNewImageUpload($storeProductRequest);
 
         $product = $this->mockery(Product::class);
         $this->catalogueRepository()
@@ -134,7 +133,7 @@ class ProductControllerTest extends ControllerTest
             ->method('loadAllTags')
             ->willReturn($tags);
 
-        $view = $this->expectViewToBeMade('staff.products.show');
+        $view = $this->expectViewToBeMade('catalogue::staff.products.show');
 
         $response = $this->productController->show($sku);
 
@@ -154,7 +153,7 @@ class ProductControllerTest extends ControllerTest
             ->method('loadProductBySku')
             ->willReturn($product);
 
-        $view = $this->expectViewToBeMade('staff.products.edit');
+        $view = $this->expectViewToBeMade('catalogue::staff.products.edit');
 
         $response = $this->productController->edit($sku);
 

@@ -29,7 +29,7 @@ return [
     */
 
     'providers' => [
-        //
+        Caffeinated\Modules\ModulesServiceProvider::class,
     ],
 
 ];

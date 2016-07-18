@@ -1,8 +1,8 @@
 <?php
 
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductOption;
 use ChingShop\Database\Migration;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use Illuminate\Database\Schema\Blueprint;
 
 /** @noinspection PhpIllegalPsrClassPathInspection */

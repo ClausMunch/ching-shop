@@ -2,8 +2,8 @@
 
 namespace ChingShop\Http\Controllers\Customer;
 
-use ChingShop\Catalogue\Tag\TagRepository;
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 

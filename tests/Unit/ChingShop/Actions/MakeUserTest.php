@@ -3,13 +3,12 @@
 namespace Testing\Unit\ChingShop\Action;
 
 use ChingShop\Actions\MakeUser;
-use ChingShop\User\Role;
-use ChingShop\User\User;
+use ChingShop\Modules\User\Model\Role;
+use ChingShop\Modules\User\Model\User;
 use ChingShop\Validation\ValidationInterface;
 use DomainException;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Mockery;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;

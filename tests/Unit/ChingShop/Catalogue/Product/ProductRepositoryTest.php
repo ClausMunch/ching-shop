@@ -2,9 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use ChingShop\Catalogue\Price\Price;
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Product\ProductRepository;
+use ChingShop\Modules\Catalogue\Model\Price\Price;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mockery\MockInterface;

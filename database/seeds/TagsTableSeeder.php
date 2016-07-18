@@ -1,7 +1,7 @@
 <?php
 
-use ChingShop\Catalogue\Product\Product;
-use ChingShop\Catalogue\Tag\Tag;
+use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Model\Tag\Tag;
 use Illuminate\Database\Eloquent\Collection;
 
 /**

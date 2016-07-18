@@ -1,7 +1,7 @@
 <?php
 
-use ChingShop\Catalogue\Attribute\Colour;
-use ChingShop\Catalogue\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Model\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 
 class ColoursTableSeeder extends Seed
 {
