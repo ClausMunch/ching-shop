@@ -27,7 +27,13 @@
     <filter>
         <whitelist>
             <directory suffix=".php">app/</directory>
+            <exclude>
+                <directory suffix="blade.php">app/</directory>
+            </exclude>
         </whitelist>
+        <blacklist>
+            <directory suffix=".blade.php">app/</directory>
+        </blacklist>
     </filter>
     <listeners>
         <listener class="Mockery\Adapter\Phpunit\TestListener" />
