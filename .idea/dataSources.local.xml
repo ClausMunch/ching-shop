@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Sqlite (Xerial) - test_db.sqlite" uuid="1e504095-316d-4c75-8ba8-e5c3ac1eeb8a">
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+    </data-source>
+    <data-source name="Vagrant" uuid="08f45c98-30b7-459f-9b6b-238aaf514faa">
+      <secret-storage>master_key</secret-storage>
+      <user-name>homestead</user-name>
+      <introspection-scope>ching_shop:</introspection-scope>
+      <resolve-scope>ching_shop:</resolve-scope>
+    </data-source>
+  </component>
+</project>

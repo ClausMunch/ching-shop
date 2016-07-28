@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Providers;
 
 use App;
-use Caffeinated\Modules\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Lang;
 use View;
 
@@ -41,11 +41,6 @@ class CatalogueServiceProvider extends ServiceProvider
             'ChingShop\Modules\Catalogue\Providers\RouteServiceProvider'
         );
 
-        /* @noinspection RealpathOnRelativePathsInspection */
-        Lang::addNamespace(
-            'catalogue',
-            app_path('Modules/Catalogue/Resources/Lang')
-        );
         /* @noinspection RealpathOnRelativePathsInspection */
         View::addNamespace(
             'catalogue',

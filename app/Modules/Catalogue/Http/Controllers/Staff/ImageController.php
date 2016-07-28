@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Http\Controllers\Staff;
+namespace ChingShop\Modules\Catalogue\Http\Controllers\Staff;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;

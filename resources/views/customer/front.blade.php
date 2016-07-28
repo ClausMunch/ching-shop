@@ -11,22 +11,26 @@
             Ching Shop
         </a>
 
-        <nav class="container">
-            <ul class="top-links">
-                <li>
-                    <a class="top-link" href="/">Home</a>
-                </li>
-                <li>
-                    <a class="top-link" href="/cards">Cards</a>
-                </li>
-                <li>
-                    <a class="top-link" href="/about">About</a>
-                </li>
-                <li>
-                    <a class="top-link" href="/contact">Contact</a>
-                </li>
-            </ul>
-        </nav>
+        <ul class="top-links">
+            <li>
+                <a class="top-link" href="/">Home</a>
+            </li>
+            <li>
+                <a class="top-link" href="/cards">Cards</a>
+            </li>
+            <li>
+                <a class="top-link" href="/about">About</a>
+            </li>
+            <li>
+                <a class="top-link" href="/contact">Contact</a>
+            </li>
+        </ul>
+
+        <a class="mini-basket top-link"
+           href="{{ route('sales.customer.basket') }}">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            {{ $basket->basketItems->count()  }}
+        </a>
 
     </div>
 

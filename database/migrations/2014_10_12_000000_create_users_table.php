@@ -34,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop($this->tableName);
+        $this->builder()->dropIfExists($this->tableName);
     }
 }

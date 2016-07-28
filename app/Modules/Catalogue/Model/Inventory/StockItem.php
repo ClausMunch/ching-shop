@@ -11,12 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @mixin \Eloquent
  *
- * @property int $id
+ * @property int            $id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $deleted_at
- * @property ProductOption|Collection $productOption
- * @property OrderItem|Collection $orderItem
+ * @property \Carbon\Carbon $deleted_at
+ *
+ * @property ProductOption  $productOption
+ * @property OrderItem      $orderItem
  */
 class StockItem extends Model
 {

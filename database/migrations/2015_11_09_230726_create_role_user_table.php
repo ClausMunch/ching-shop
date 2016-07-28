@@ -49,6 +49,6 @@ class CreateRoleUserTable extends Migration
             $table->dropForeign($this->tableName.'_role_id_foreign');
             $table->dropForeign($this->tableName.'_user_id_foreign');
         });
-        $this->builder()->drop($this->tableName);
+        $this->builder()->dropIfExists($this->tableName);
     }
 }

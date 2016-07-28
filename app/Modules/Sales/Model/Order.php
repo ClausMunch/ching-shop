@@ -2,8 +2,10 @@
 
 namespace ChingShop\Modules\Sales\Model;
 
+use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -12,8 +14,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int                    $id
  * @property \Carbon\Carbon         $created_at
  * @property \Carbon\Carbon         $updated_at
- * @property string                 $deleted_at
+ * @property \Carbon\Carbon         $deleted_at
+ *
  * @property OrderItem[]|Collection $orderItems
+ * @property User                   $user
  */
 class Order extends Model
 {
@@ -25,5 +29,15 @@ class Order extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * An order belongs to a user.
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

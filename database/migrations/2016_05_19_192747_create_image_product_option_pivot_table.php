@@ -46,6 +46,6 @@ class CreateImageProductOptionPivotTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop('image_product_option');
+        $this->builder()->dropIfExists('image_product_option');
     }
 }

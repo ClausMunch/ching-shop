@@ -41,6 +41,6 @@ class CreateColourProductOptionPivotTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop('colour_product_option');
+        $this->builder()->dropIfExists('colour_product_option');
     }
 }

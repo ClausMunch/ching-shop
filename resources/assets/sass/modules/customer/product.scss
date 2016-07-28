@@ -46,7 +46,9 @@
   margin: $gutter auto;
 
   @include breakpoint(md-up) {
-    margin-top: 0;
+    .product-option-only + & {
+      margin-top: 0;
+    }
   }
 }
 

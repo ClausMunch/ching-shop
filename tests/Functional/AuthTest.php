@@ -8,6 +8,8 @@ class AuthTest extends FunctionalTest
 {
     /**
      * Should be able to visit login page.
+     *
+     * @slowThreshold 700
      */
     public function testGetLogin()
     {

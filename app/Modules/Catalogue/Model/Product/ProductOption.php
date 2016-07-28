@@ -5,10 +5,12 @@ namespace ChingShop\Modules\Catalogue\Model\Product;
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageOwner;
 use ChingShop\Modules\Catalogue\Model\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -46,6 +48,14 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     public function colours(): BelongsToMany
     {
         return $this->belongsToMany(Colour::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function stockItems(): HasMany
+    {
+        return $this->hasMany(StockItem::class);
     }
 
     /**

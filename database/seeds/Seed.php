@@ -23,4 +23,20 @@ abstract class Seed extends Seeder
     {
         return $this->faker;
     }
+
+    /**
+     * @param callable $action
+     * @param int $times
+     *
+     * @return array
+     */
+    protected function repeat(callable $action, int $times = 1): array
+    {
+        $results = [];
+        for ($i = 0; $i < $times; $i++) {
+            $results[] = $action();
+        }
+
+        return $results;
+    }
 }

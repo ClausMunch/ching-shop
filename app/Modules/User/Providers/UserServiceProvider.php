@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\User\Providers;
 
 use App;
-use Caffeinated\Modules\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Lang;
 use View;
 
@@ -39,9 +39,6 @@ class UserServiceProvider extends ServiceProvider
     {
         App::register('ChingShop\Modules\User\Providers\RouteServiceProvider');
 
-        /* @noinspection RealpathOnRelativePathsInspection */
-        Lang::addNamespace('user', realpath(__DIR__.'/../Resources/Lang'));
-        View::addNamespace('user', base_path('resources/views/vendor/user'));
         /* @noinspection RealpathOnRelativePathsInspection */
         View::addNamespace('user', realpath(__DIR__.'/../Resources/Views'));
     }
