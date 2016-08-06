@@ -11,8 +11,8 @@ Route::group(
             function () {
                 Route::group(
                     [
-                        'prefix'     => 'product',
-                        'as'         => 'product::',
+                        'prefix' => 'product',
+                        'as'     => 'product::',
                     ],
                     function () {
                         Route::get(
@@ -26,8 +26,8 @@ Route::group(
                 );
                 Route::group(
                     [
-                        'prefix'     => 'tag',
-                        'as'         => 'tag::',
+                        'prefix' => 'tag',
+                        'as'     => 'tag::',
                     ],
                     function () {
                         Route::get(
