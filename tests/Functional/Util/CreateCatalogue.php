@@ -24,9 +24,9 @@ trait CreateCatalogue
     protected function createProduct(): Product
     {
         return Product::create([
-            'name'        => 'Product '.str_random(),
-            'sku'         => 'SKU'.str_random(),
-            'slug'        => 'slug-'.str_random(),
+            'name'        => uniqid('Product ', false),
+            'sku'         => uniqid('SKU', false),
+            'slug'        => uniqid('slug-,', false),
             'description' => 'Description '.str_random(30),
         ]);
     }
@@ -37,7 +37,7 @@ trait CreateCatalogue
     protected function createTag(): Tag
     {
         return Tag::create([
-            'name' => 'Tag'.ucfirst(str_random()),
+            'name' => uniqid('Tag', false),
         ]);
     }
 
@@ -49,7 +49,7 @@ trait CreateCatalogue
     protected function createProductOptionFor(Product $product): ProductOption
     {
         $productOption = new ProductOption([
-            'label' => 'ProductOption'.ucfirst(str_random()),
+            'label' => uniqid('ProductOption', false),
         ]);
         $product->options()->save($productOption);
 

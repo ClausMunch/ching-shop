@@ -2,13 +2,13 @@
 
 namespace ChingShop\Modules\User\Providers;
 
-use Caffeinated\Modules\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as Provider;
 use Illuminate\Routing\Router;
 
 /**
  * Class RouteServiceProvider.
  */
-class RouteServiceProvider extends ServiceProvider
+class RouteServiceProvider extends Provider
 {
     /**
      * The controller namespace for the module.

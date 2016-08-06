@@ -1,6 +1,7 @@
 <?php
 
 use ChingShop\Image\Image;
+use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Model\Price\Price;
 use ChingShop\Modules\Catalogue\Model\Product\Product;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
@@ -74,6 +75,14 @@ class ProductsTableSeeder extends Seed
             'label' => ucfirst($this->faker()->unique()->word),
         ]);
         $product->options()->save($productOption);
+
+        // Add stock items for the product option.
+        $this->repeat(
+            function () use ($productOption) {
+                $productOption->stockItems()->save(new StockItem());
+            },
+            random_int(1, 3)
+        );
 
         $imagesIDs = [];
         foreach ($this->makeImages() as $image) {

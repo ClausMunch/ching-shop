@@ -26,6 +26,9 @@ if ! grep -q 'COMPOSER_DISABLE_XDEBUG_WARN' ~/.bashrc; then
     echo "export COMPOSER_DISABLE_XDEBUG_WARN=1" >> ~/.bashrc
 fi
 
+git config --global core.excludesfile ~/.gitignore_global
+echo '.idea' > ~/.gitignore_global
+
 function appSetup
 {
     cd ~/ching-shop

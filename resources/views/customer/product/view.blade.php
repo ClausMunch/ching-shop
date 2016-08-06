@@ -37,16 +37,31 @@
                              width="128" height="97">
                     </a>
                 @endforeach
+                @foreach ($product->options as $option)
+                    @foreach ($option->images as $image)
+                            <a class="product-thumbnail"
+                               data-option-id="{{ $option->id  }}"
+                               href="{{ $image->sizeUrl('large') }}"
+                               title="{{ $option->label }} ({{ $image->altText() }})">
+                                <img class="img-thumbnail img-responsive"
+                                     src="{{ $image->sizeUrl('large') }}"
+                                     alt="{{ $image->altText() }}"
+                                     @if ($image->isSelfHosted())
+                                     srcset="{{ $image->srcSet() }}"
+                                     @endif
+                                     width="128" height="97">
+                            </a>
+                    @endforeach
+                @endforeach
             </div>
 
         </div>
 
         <div class="col-md-4">
 
-            <a class="btn btn-success btn-lg btn-block buy-button"
-               href="{{ $location->productEnquiryMail($product) }}">
-                Buy this: {{ $product->price() }}
-            </a>
+            @include('customer.product.add-to-basket')
+
+            <p class="product-price">{{ $product->price()  }}</p>
 
             <p>{{ $product->description() }}</p>
 

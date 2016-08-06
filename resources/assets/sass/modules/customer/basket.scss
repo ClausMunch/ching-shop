@@ -1,0 +1,17 @@
+.basket-title {
+  font-size: 2em;
+  margin: 1em 0;
+
+  @include breakpoint(sm-up) {
+    font-size-adjust: 1;
+  }
+}
+
+.basket-product-image {
+  height: auto;
+  max-width: 4em;
+
+  @include breakpoint(sm-up) {
+    max-width: 8em;
+  }
+}

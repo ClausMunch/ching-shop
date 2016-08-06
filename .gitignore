@@ -13,6 +13,7 @@ public/filesystem/
 storage/
 .env
 _ide_helper*
+.phpstorm.meta.php
 .vagrant/
 composer.phar
 build/

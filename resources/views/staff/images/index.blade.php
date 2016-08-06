@@ -65,8 +65,8 @@
                                     <span class="glyphicon
                                         glyphicon-{{ $image->locationGlyph() }}"
                                           aria-hidden="true"></span>
-                                    <a href="{{ $image->url() }}">
-                                        {{ $image->url() }}
+                                    <a href="{{ $image->sizeUrl('small') }}">
+                                        {{ $image->sizeUrl('small') }}
                                     </a>
                                 </small>
                                 @if ($image->isInternal())

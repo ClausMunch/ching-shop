@@ -27,6 +27,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop('password_resets');
+        $this->builder()->dropIfExists('password_resets');
     }
 }

@@ -2,8 +2,10 @@
 
 namespace ChingShop\Modules\Sales\Model;
 
+use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @mixin \Eloquent
@@ -11,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int            $id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string         $deleted_at
+ * @property \Carbon\Carbon $deleted_at
  * @property-read Order     $order
  */
 class OrderItem extends Model
@@ -24,5 +26,15 @@ class OrderItem extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * An order item has an allocated stock item.
+     *
+     * @return HasOne
+     */
+    public function stockItem(): HasOne
+    {
+        return $this->hasOne(StockItem::class);
     }
 }

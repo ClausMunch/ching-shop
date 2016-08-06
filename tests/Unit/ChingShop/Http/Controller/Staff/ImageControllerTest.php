@@ -2,14 +2,14 @@
 
 namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
-use ChingShop\Http\Controllers\Staff\ImageController;
 use ChingShop\Image\ImageRepository;
+use ChingShop\Modules\Catalogue\Http\Controllers\Staff\ImageController;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 
 class ImageControllerTest extends ControllerTest
 {
-    /** @var ImageController */
+    /** @var \ChingShop\Modules\Catalogue\Http\Controllers\Staff\ImageController */
     private $imageController;
 
     /** @var ImageRepository|MockObject */
@@ -22,7 +22,7 @@ class ImageControllerTest extends ControllerTest
     {
         $this->imageRepository = $this->makeMock(ImageRepository::class);
 
-        $this->imageController = new ImageController(
+        $this->imageController = new \ChingShop\Modules\Catalogue\Http\Controllers\Staff\ImageController(
             $this->imageRepository,
             $this->webUi()
         );

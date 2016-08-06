@@ -37,6 +37,6 @@ class CreateImageProductPivotTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop(self::TABLE_NAME);
+        $this->builder()->dropIfExists(self::TABLE_NAME);
     }
 }

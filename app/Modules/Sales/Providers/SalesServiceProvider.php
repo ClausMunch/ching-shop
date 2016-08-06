@@ -3,8 +3,12 @@
 namespace ChingShop\Modules\Sales\Providers;
 
 use App;
-use Caffeinated\Modules\Support\ServiceProvider;
-use Lang;
+use ChingShop\Modules\Sales\Model\Basket\Basket;
+use ChingShop\Modules\Sales\Model\Clerk;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Foundation\Application;
+use Illuminate\Session\Store;
+use Illuminate\Support\ServiceProvider;
 use View;
 
 /**
@@ -40,10 +44,18 @@ class SalesServiceProvider extends ServiceProvider
         App::register('ChingShop\Modules\Sales\Providers\RouteServiceProvider');
 
         /* @noinspection RealpathOnRelativePathsInspection */
-        Lang::addNamespace('sales', realpath(__DIR__.'/../Resources/Lang'));
-        View::addNamespace('sales', base_path('resources/views/vendor/sales'));
-        /* @noinspection RealpathOnRelativePathsInspection */
         View::addNamespace('sales', realpath(__DIR__.'/../Resources/Views'));
+
+        $this->app->singleton(
+            Clerk::class,
+            function () {
+                return new Clerk(
+                    $this->app->make(Store::class),
+                    $this->app->make(Guard::class),
+                    $this->app->make(Basket::class)
+                );
+            }
+        );
     }
 
     /**

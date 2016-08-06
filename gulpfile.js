@@ -83,7 +83,7 @@ gulp.task("clean", function () {
 gulp.task("test-database", shell.task(
     [
         "rm -f ./database/test_db.sqlite",
-        "touch ./database/test_db.sqlite",
+        "sqlite3 ./database/test_db.sqlite ''",
         "php artisan migrate:refresh --seed --database=testing --env=testing"
     ],
     {

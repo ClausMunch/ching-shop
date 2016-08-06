@@ -8,11 +8,18 @@ let mainImage: HTMLImageElement = <HTMLImageElement>document.getElementById(
 
 initThumbnails(document.getElementsByClassName("product-thumbnail"));
 
+document.getElementById('product-option-choice').addEventListener(
+    'change',
+    selectOption
+);
+
 /**
  * @param {NodeList} thumbnails
  */
 function initThumbnails(thumbnails) {
-    forEach(thumbnails, initThumbnail);
+    for (let thumbnail of thumbnails) {
+        initThumbnail(thumbnail);
+    }
 }
 
 /**
@@ -24,18 +31,45 @@ function initThumbnail(thumbnail) {
 }
 
 /**
- * Handle a click on a product thumbnail
+ * Handle a click on a product thumbnail.
  */
 function viewThumbnail() {
-    let thisImage: HTMLImageElement;
-    forEach(
-        document.querySelectorAll(".product-thumbnail"),
-        function(otherThumbnail: HTMLElement) {
-            otherThumbnail.removeAttribute("data-selected");
-        }
+    // Focus this image in the main image view.
+    focusThumbnail(this);
+
+    // Select this in the drop-down if available.
+    let optionId = this.getAttribute('data-option-id');
+    if (!optionId) {
+        return;
+    }
+    let optionSelect: HTMLSelectElement;
+    optionSelect = <HTMLSelectElement>document.getElementById(
+        "product-option-choice"
     );
-    this.setAttribute("data-selected", "true");
-    thisImage = this.querySelector(".img-thumbnail");
+    for (let option: HTMLOptionElement, i = 0;
+         option = <HTMLOptionElement>optionSelect.options[i];
+         i++
+    ) {
+        if (option.value === optionId) {
+            optionSelect.selectedIndex = i;
+            break;
+        }
+    }
+}
+
+/**
+ * @param {HTMLAnchorElement} thumbnail
+ */
+function focusThumbnail(thumbnail: HTMLAnchorElement) {
+    let thisImage:HTMLImageElement;
+    let thumbnails: NodeListOf<Element> = document.querySelectorAll(
+        ".product-thumbnail"
+    );
+    for (let otherThumbnail of thumbnails) {
+        otherThumbnail.removeAttribute("data-selected");
+    }
+    thumbnail.setAttribute("data-selected", "true");
+    thisImage = <HTMLImageElement>thumbnail.querySelector(".img-thumbnail");
     mainImage.src = thisImage.src;
     mainImage.alt = thisImage.alt;
     if (thisImage.srcset) {
@@ -44,14 +78,17 @@ function viewThumbnail() {
 }
 
 /**
- *
- * @param {NodeList} elements
- * @param {function} func
+ * Handle selection of a product option from the drop-down.
  */
-function forEach(elements, func) {
-    if (!elements.length) {
-        return;
+function selectOption() {
+    // Focus the first relevant product option image.
+    let thumbnails: NodeListOf<Element> = document.querySelectorAll(
+        ".product-thumbnail"
+    );
+    for (let thumbnail of thumbnails) {
+        if (thumbnail.getAttribute('data-option-id') === this.value) {
+            focusThumbnail(thumbnail);
+            break;
+        }
     }
-    Array.prototype.forEach.call(elements, func);
 }
-

@@ -1,6 +1,7 @@
 .top-band {
   background: $text-color;
   color: invert($text-color);
+  min-height: 2em;
   padding-top: .5em;
 
   @include breakpoint(sm-up) {
@@ -12,6 +13,11 @@
   @extend %inline-list;
 
   text-align: center;
+
+  @include breakpoint(sm-up) {
+    float: left;
+    width: 50%;
+  }
 }
 
 .top-link {
@@ -48,11 +54,14 @@
   font-family: $font-brand;
   font-size: 1.65em;
   font-weight: bolder;
+  margin: auto;
   text-align: center;
 
   @include breakpoint(sm-up) {
     display: inline;
     float: left;
+    text-align: left;
+    width: 25%;
   }
 
   &:hover {
@@ -82,5 +91,24 @@
 
   @include breakpoint(lg) {
     height: 3.3vw;
+  }
+}
+
+.mini-basket {
+  @include breakpoint(xs) {
+    font-size: 7vw;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  @include breakpoint(sm-up) {
+    display: inline-block;
+    text-align: right;
+    width: 25%;
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 }

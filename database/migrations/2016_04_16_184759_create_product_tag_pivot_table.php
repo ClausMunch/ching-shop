@@ -41,6 +41,6 @@ class CreateProductTagPivotTable extends Migration
      */
     public function down()
     {
-        $this->builder()->drop('product_tag');
+        $this->builder()->dropIfExists('product_tag');
     }
 }

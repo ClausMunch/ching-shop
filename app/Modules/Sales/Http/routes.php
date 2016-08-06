@@ -1,18 +1,35 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Module Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for the module.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
 Route::group(
-    ['prefix' => 'sales'],
+    [
+        'prefix' => 'sales',
+    ],
     function () {
+        Route::group(
+            [],
+            function () {
+                Route::post(
+                    'add-to-basket',
+                    [
+                        'as'   => 'sales.customer.add-to-basket',
+                        'uses' => 'Customer\BasketController@addProductOptionAction',
+                    ]
+                );
+                Route::get(
+                    'basket',
+                    [
+                        'as'   => 'sales.customer.basket',
+                        'uses' => 'Customer\BasketController@viewBasketAction',
+                    ]
+                )->middleware('customer');
+                Route::post(
+                    'remove-from-basket',
+                    [
+                        'as'   => 'sales.customer.remove-from-basket',
+                        'uses' => 'Customer\BasketController@removeBasketItemAction',
+                    ]
+                );
+            }
+        );
     }
 );

@@ -50,6 +50,8 @@ class MakeUserTest extends UnitTest
 
     /**
      * Should be able to make a staff user.
+     *
+     * @slowThreshold 900
      */
     public function testCanMakeStaffUser()
     {
