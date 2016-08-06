@@ -26,7 +26,7 @@ abstract class Seed extends Seeder
 
     /**
      * @param callable $action
-     * @param int $times
+     * @param int      $times
      *
      * @return array
      */

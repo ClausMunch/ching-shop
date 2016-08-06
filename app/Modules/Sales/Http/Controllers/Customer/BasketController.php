@@ -11,8 +11,7 @@ use ChingShop\Modules\Sales\Model\Clerk;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
- * Class BasketController
- * @package ChingShop\Modules\Sales\Http\Controllers\Customer
+ * Class BasketController.
  */
 class BasketController extends Controller
 {
@@ -27,6 +26,7 @@ class BasketController extends Controller
 
     /**
      * BasketController constructor.
+     *
      * @param Clerk                   $clerk
      * @param ProductOptionRepository $optionRepository
      * @param WebUi                   $webUi
@@ -77,9 +77,10 @@ class BasketController extends Controller
     /**
      * @param RemoveFromBasketRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function removeBasketItemAction(RemoveFromBasketRequest $request)
     {
@@ -92,7 +93,7 @@ class BasketController extends Controller
             );
         }
 
-        /** @var  $item */
+        /** @var $item */
         $item = $this->clerk->basket()->getItem($request->basketItemId());
         $item->delete();
 

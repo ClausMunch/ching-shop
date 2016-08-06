@@ -4,7 +4,6 @@ namespace ChingShop\Modules\Catalogue\Model\Inventory;
 
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use ChingShop\Modules\Sales\Model\OrderItem;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -15,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
- *
  * @property ProductOption  $productOption
  * @property OrderItem      $orderItem
  */

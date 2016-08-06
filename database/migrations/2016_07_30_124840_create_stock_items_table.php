@@ -2,8 +2,8 @@
 
 use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateStockItemsTable extends Migration
 {

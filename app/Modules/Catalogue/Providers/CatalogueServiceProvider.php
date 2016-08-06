@@ -4,7 +4,6 @@ namespace ChingShop\Modules\Catalogue\Providers;
 
 use App;
 use Illuminate\Support\ServiceProvider;
-use Lang;
 use View;
 
 /**

@@ -8,11 +8,9 @@ use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 
 /**
- * Class BasketTest
+ * Class BasketTest.
  *
  * Test basic shopping basket functionality.
- *
- * @package Testing\Functional\Sales
  */
 class BasketTest extends FunctionalTest
 {
@@ -69,7 +67,7 @@ class BasketTest extends FunctionalTest
     {
         // Given there is a product with a multiple options;
         $product = $this->createProduct();
-        /** @var ProductOption[] $options */
+        /* @var ProductOption[] $options */
         $options[] = $this->createProductOptionFor($product);
         $options[] = $this->createProductOptionFor($product);
 
