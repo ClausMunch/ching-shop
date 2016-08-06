@@ -70,5 +70,6 @@ php artisan test
 ## Deployment
  
 ```bash
+pip install -r requirements.txt
 ansible-playbook ./ansible/web.yml
 ```
