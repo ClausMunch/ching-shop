@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
- *
  * @property-read Order     $order
  */
 class OrderItem extends Model

@@ -18,9 +18,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property \Carbon\Carbon          $created_at
  * @property \Carbon\Carbon          $updated_at
  * @property \Carbon\Carbon          $deleted_at
- *
  * @property int                     $user_id
- *
  * @property BasketItem[]|Collection $basketItems
  * @property Order                   $order
  * @property User|null               $user

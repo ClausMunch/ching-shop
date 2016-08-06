@@ -3,7 +3,6 @@
 namespace ChingShop\Modules\Sales\Model\Basket;
 
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
-use ChingShop\Modules\Sales\Model\Basket\Basket;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use McCool\LaravelAutoPresenter\HasPresenter;
@@ -15,7 +14,6 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
- *
  * @property Basket         $basket
  * @property ProductOption  $productOption
  */

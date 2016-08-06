@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Carbon\Carbon         $created_at
  * @property \Carbon\Carbon         $updated_at
  * @property \Carbon\Carbon         $deleted_at
- *
  * @property OrderItem[]|Collection $orderItems
  * @property User                   $user
  */

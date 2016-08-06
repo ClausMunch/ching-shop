@@ -9,7 +9,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Application;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
-use Lang;
 use View;
 
 /**
