@@ -60,8 +60,8 @@
                         </div>
                         <button class="btn btn-sm btn-default"
                                 type="submit"
-                                id="set-option-{{ $colour->id }}-colour"
-                                form="option-{{$option->id}}-colour-form">
+                                id="set-option-{{ $option->id }}-colour"
+                                form="option-{{ $option->id }}-colour-form">
                             Set colour
                         </button>
                     </form>

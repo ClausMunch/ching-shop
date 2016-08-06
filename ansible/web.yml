@@ -240,11 +240,13 @@
       become_user: www-data
       shell: "cd /var/www/ching-shop && ./node_modules/.bin/gulp {{ item }} --production"
       with_items:
-        - "copy"
         - "sass"
         - "styles"
+        - "typings"
+        - "typescript"
         - "browserify"
         - "version"
+        - "copy"
 
   handlers:
 
