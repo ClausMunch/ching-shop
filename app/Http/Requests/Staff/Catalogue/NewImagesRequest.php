@@ -35,7 +35,7 @@ class NewImagesRequest extends StaffRequest
             return $images;
         }
 
-        return new FileBag(is_array($images) ?: [$images]);
+        return new FileBag((array) $images);
     }
 
     /**
