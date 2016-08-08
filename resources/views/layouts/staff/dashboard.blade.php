@@ -75,11 +75,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="/staff/logs">
-                        Logs
-                    </a>
-                </li>
             </ul>
         </div>
 
