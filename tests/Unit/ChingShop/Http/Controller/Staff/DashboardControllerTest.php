@@ -41,13 +41,4 @@ class DashboardControllerTest extends ControllerTest
 
         $this->dashboardController->getIndex();
     }
-
-    /**
-     * Should be able to get PHP info page.
-     */
-    public function testGetPhpInfo()
-    {
-        $this->expectOutputRegex('/PHP/');
-        $this->dashboardController->getPhpInfo();
-    }
 }

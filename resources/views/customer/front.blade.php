@@ -29,7 +29,9 @@
         <a class="mini-basket top-link"
            href="{{ route('sales.customer.basket') }}">
             <span class="glyphicon glyphicon-shopping-cart"></span>
-            {{ $basket->basketItems->count()  }}
+            @if (isset($basket))
+                {{ $basket->basketItems->count() }}
+            @endif
         </a>
 
     </div>
