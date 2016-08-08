@@ -49,10 +49,11 @@
         line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
         regexp: "^github\\.com"
 
-    - name: PHP memory limit
-      lineinefile:
-        dest: /root/.ssh/known_hosts
+    - name: PHP web memory limit
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
         create: no
+        state: present
         line: "memory_limit = 512M"
         regexp: "^memory_limit = "
 
@@ -272,4 +273,3 @@
     - name: restart workers
       supervisorctl: name=`ching-shop-worker:*`
                      state=restarted
-                     config=/etc/supervisor/conf.d/ching-shop-worker.conf
