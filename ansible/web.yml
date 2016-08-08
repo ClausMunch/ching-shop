@@ -49,6 +49,13 @@
         line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
         regexp: "^github\\.com"
 
+    - name: PHP memory limit
+      lineinefile:
+        dest: /root/.ssh/known_hosts
+        create: no
+        line: "memory_limit = 512M"
+        regexp: "^memory_limit = "
+
     - name: install phpredis
       script: phpredis.sh
               creates=/etc/php/7.0/fpm/conf.d/20-redis.ini
@@ -93,6 +100,9 @@
       shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
       args:
         creates: /usr/local/bin/composer
+
+    - name: update composer
+      shell: /usr/local/bin/composer self-update
 
     - name: install project with composer
       become_user: www-data
