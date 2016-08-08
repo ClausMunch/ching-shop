@@ -33,9 +33,16 @@ class DashboardController extends Controller
 
     /**
      * Display PHP info output.
+     *
+     * @return string
      */
     public function getPhpInfo()
     {
+        ob_start();
         phpinfo();
+        $info = ob_get_contents();
+        ob_get_clean();
+
+        return $this->webUi->view('staff.dashboard.info', compact('info'));
     }
 }

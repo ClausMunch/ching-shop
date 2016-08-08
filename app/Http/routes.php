@@ -58,6 +58,10 @@ Route::group(
                         'as'   => 'staff.dashboard',
                     ]
                 );
+                Route::get(
+                    'logs',
+                    '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index'
+                );
                 Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
             }
         );
