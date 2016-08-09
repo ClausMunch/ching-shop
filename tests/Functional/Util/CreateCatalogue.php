@@ -65,8 +65,8 @@ trait CreateCatalogue
     protected function createPriceForProduct(Product $product): Price
     {
         $price = new Price([
-            'units'    => random_int(1,99),
-            'subunits' => random_int(0,99),
+            'units'    => random_int(1, 99),
+            'subunits' => random_int(0, 99),
         ]);
         $product->prices()->save($price);
 

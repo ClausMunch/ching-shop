@@ -99,7 +99,7 @@ class Basket extends Model implements HasPresenter
             array_reduce(
                 $this->basketItems->all(),
                 function (float $total, $item) {
-                    /** @var BasketItem $item */
+                    /* @var BasketItem $item */
                     return $total + $item->priceAsFloat();
                 },
                 0.0

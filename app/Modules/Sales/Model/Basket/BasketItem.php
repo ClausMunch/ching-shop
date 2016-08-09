@@ -55,7 +55,7 @@ class BasketItem extends Model implements HasPresenter
      */
     public function priceAsFloat(): float
     {
-        /** @noinspection IsEmptyFunctionUsageInspection */
+        /* @noinspection IsEmptyFunctionUsageInspection */
         if (empty($this->productOption->product->prices)) {
             return 0.0;
         }
