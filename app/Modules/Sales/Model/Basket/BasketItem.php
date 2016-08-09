@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Model\Basket;
 
+use ChingShop\Modules\Catalogue\Model\Price\Price;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -47,5 +48,22 @@ class BasketItem extends Model implements HasPresenter
     public function getPresenterClass()
     {
         return BasketItemPresenter::class;
+    }
+
+    /**
+     * @return float
+     */
+    public function priceAsFloat(): float
+    {
+        /* @noinspection IsEmptyFunctionUsageInspection */
+        if (empty($this->productOption->product->prices)) {
+            return 0.0;
+        }
+
+        if (!$this->productOption->product->prices->first() instanceof Price) {
+            return 0.0;
+        }
+
+        return $this->productOption->product->prices->first()->asFloat();
     }
 }
