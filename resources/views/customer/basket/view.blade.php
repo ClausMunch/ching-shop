@@ -2,7 +2,8 @@
 
 @section('page-title')
     Basket ({{ $basket->basketItems->count() }}
-    {{ str_plural('item', $basket->basketItems->count()) }})
+    {{ str_plural('item', $basket->basketItems->count()) }},
+    £{{ $basket->totalPrice() }})
 @endsection
 
 @section('body')
@@ -41,7 +42,7 @@
                         </a>
                     @endif
                 </td>
-                <td class="basket-item-price">
+                <td class="basket-item-price price">
                     {{ $basketItem->productOption->product->price() }}
                 </td>
                 <td>
@@ -62,5 +63,17 @@
                 </td>
             </tr>
         @endforeach
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td class="basket-total">
+                    <span class="price basket-total-amount">
+                        £{{ $basket->totalPrice() }}
+                    </span>
+                </td>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
 @endsection

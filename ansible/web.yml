@@ -230,6 +230,7 @@
         - "route:clear"
         - "route:cache"
         - "optimize"
+        - "queue:restart"
 
     - name: make sure latest npm is installed
       npm: name=npm global=yes

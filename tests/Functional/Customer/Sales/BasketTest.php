@@ -2,10 +2,12 @@
 
 namespace Testing\Functional\Sales;
 
+use ChingShop\Modules\Catalogue\Model\Product\Product;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
+use Testing\TestUtil;
 
 /**
  * Class BasketTest.
@@ -14,7 +16,7 @@ use Testing\Functional\Util\CreateCatalogue;
  */
 class BasketTest extends FunctionalTest
 {
-    use CreateCatalogue, CustomerUsers;
+    use CreateCatalogue, CustomerUsers, TestUtil;
 
     /**
      * Should be able to see the mini-basket.
@@ -46,11 +48,7 @@ class BasketTest extends FunctionalTest
         $option = $this->createProductOptionFor($product);
 
         // When we add it to the basket;
-        $this->actingAs($this->customerUser())
-            ->visit(route('product::view', [$product->id, $product->slug]))
-            ->see($product->name)
-            ->press('Add to basket')
-            ->see('added');
+        $this->addProductToBasket($product);
 
         // Then we should see it in the basket.
         $this->actingAs($this->customerUser())
@@ -102,18 +100,81 @@ class BasketTest extends FunctionalTest
         $option = $this->createProductOptionFor($product);
 
         // And we add it to the basket;
-        $this->actingAs($this->customerUser())
-            ->visit(route('product::view', [$product->id, $product->slug]))
-            ->see($product->name)
-            ->press('Add to basket');
+        $this->addProductToBasket($product);
 
         // When we remove it from the basket;
-        $this->press("Remove {$product->name}")
-            ->see('removed');
+        $this->press("Remove {$product->name}")->see('removed');
 
         // Then it should not be in the basket.
         $this->actingAs($this->customerUser())
             ->visit(route('sales.customer.basket'))
             ->dontSee($option->label);
+    }
+
+    /**
+     * Should be able to see a count of items in the basket.
+     */
+    public function testCanSeeMiniBasketCount()
+    {
+        // Given there is a product with an option;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+
+        // When we add it to the basket three times;
+        $this->repeat(
+            3,
+            function () use ($product) {
+                $this->addProductToBasket($product);
+            }
+        );
+
+        // And remove it once;
+        $this->press("Remove {$product->name}")->see('removed');
+
+        // Then we should see the count in the mini basket.
+        $this->actingAs($this->customerUser())
+            ->visit('/')
+            ->assertEquals(
+                2,
+                (int) $this->crawler()
+                    ->filter('#mini-basket-count')
+                    ->first()
+                    ->text()
+            );
+    }
+
+    /**
+     * Should be able to see the total price of items in the basket.
+     */
+    public function testCanSeeBasketTotalPrice()
+    {
+        // Given there is a product with a price;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+        $price = $this->createPriceForProduct($product);
+
+        // When we add it to the basket three times;
+        $this->repeat(
+            3,
+            function () use ($product) {
+                $this->addProductToBasket($product);
+            }
+        );
+
+        // Then the total should be shown on the basket page.
+        $this->actingAs($this->customerUser())
+            ->visit(route('sales.customer.basket'))
+            ->see($price->asFloat() * 3);
+    }
+
+    /**
+     * @param Product $product
+     */
+    private function addProductToBasket(Product $product)
+    {
+        $this->actingAs($this->customerUser())
+            ->visit(route('product::view', [$product->id, $product->slug]))
+            ->see($product->name)
+            ->press('Add to basket');
     }
 }

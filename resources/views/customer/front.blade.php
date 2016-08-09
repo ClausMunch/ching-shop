@@ -30,7 +30,9 @@
            href="{{ route('sales.customer.basket') }}">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             @if (isset($basket))
-                {{ $basket->basketItems->count() }}
+                <span id="mini-basket-count">
+                    {{ $basket->basketItems->count() }}
+                </span>
             @endif
         </a>
 

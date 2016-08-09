@@ -47,11 +47,7 @@ class Price extends Model
      */
     public function formatted(): string
     {
-        return sprintf(
-            '£'.self::UNITS_FORMAT.'.'.self::SUBUNITS_FORMAT,
-            $this->units,
-            $this->subunits
-        );
+        return '£' . money_format('%i', $this->asFloat());
     }
 
     /**
@@ -63,5 +59,13 @@ class Price extends Model
             self::SUBUNITS_FORMAT,
             $this->subunits
         );
+    }
+
+    /**
+     * @return float
+     */
+    public function asFloat(): float
+    {
+        return (float) ($this->units + ($this->subunits / 100));
     }
 }

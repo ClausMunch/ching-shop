@@ -88,4 +88,22 @@ class Basket extends Model implements HasPresenter
 
         return new BasketItem();
     }
+
+    /**
+     * @return float
+     */
+    public function totalPrice(): float
+    {
+        return money_format(
+            '%i',
+            array_reduce(
+                $this->basketItems->all(),
+                function (float $total, $item) {
+                    /** @var BasketItem $item */
+                    return $total + $item->priceAsFloat();
+                },
+                0.0
+            )
+        );
+    }
 }
