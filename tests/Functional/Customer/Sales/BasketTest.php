@@ -136,10 +136,7 @@ class BasketTest extends FunctionalTest
             ->visit('/')
             ->assertEquals(
                 2,
-                (int) $this->crawler()
-                    ->filter('#mini-basket-count')
-                    ->first()
-                    ->text()
+                (int) $this->getElement('#mini-basket-count')->text()
             );
     }
 
@@ -165,6 +162,56 @@ class BasketTest extends FunctionalTest
         $this->actingAs($this->customerUser())
             ->visit(route('sales.customer.basket'))
             ->see($price->asFloat() * 3);
+    }
+
+    /**
+     * Trailing zeros should be displayed in the basket total.
+     */
+    public function testBasketPriceFormatTwoTrailingZeros()
+    {
+        // Given there is a product with a price with 0 subunits;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+        $price = $this->createPriceForProduct($product);
+        $price->units = 5;
+        $price->subunits = 0;
+        $price->save();
+
+        // When we add it to the basket;
+        $this->addProductToBasket($product);
+
+        // Then the total shown should have trailing zeros.
+        $this->actingAs($this->customerUser())
+            ->visit(route('sales.customer.basket'))
+            ->assertSame(
+                '5.00',
+                trim($this->getElementText('.basket-total-amount'))
+            );
+    }
+
+    /**
+     * A trailing zero should be displayed in the basket total.
+     */
+    public function testBasketPriceFormatTrailingZero()
+    {
+        // Given there is a product with a price with x10 subunits;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+        $price = $this->createPriceForProduct($product);
+        $price->units = 4;
+        $price->subunits = 20;
+        $price->save();
+
+        // When we add it to the basket;
+        $this->addProductToBasket($product);
+
+        // Then the total shown should have trailing zeros.
+        $this->actingAs($this->customerUser())
+            ->visit(route('sales.customer.basket'))
+            ->assertSame(
+                '4.20',
+                trim($this->getElementText('.basket-total-amount'))
+            );
     }
 
     /**

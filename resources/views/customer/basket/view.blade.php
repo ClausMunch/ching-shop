@@ -67,9 +67,9 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td class="basket-total">
-                    <span class="price basket-total-amount">
-                        £{{ $basket->totalPrice() }}
+                <td class="price basket-total">
+                    £<span class="basket-total-amount">
+                        {{ $basket->totalPrice() }}
                     </span>
                 </td>
                 <td></td>

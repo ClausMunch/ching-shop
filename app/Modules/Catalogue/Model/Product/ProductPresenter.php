@@ -6,6 +6,7 @@ use ChingShop\Http\View\Customer\Viewable;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Http\View\Staff\RelaterInterface;
 use ChingShop\Image\Image;
+use ChingShop\Modules\Catalogue\Model\Price\Price;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use McCool\LaravelAutoPresenter\BasePresenter;
@@ -173,6 +174,7 @@ class ProductPresenter extends BasePresenter implements
      */
     public function price(): string
     {
+        /** @var Price $firstPrice */
         $firstPrice = $this->wrappedObject->prices->first();
 
         return $firstPrice ? $firstPrice->formatted() : '';

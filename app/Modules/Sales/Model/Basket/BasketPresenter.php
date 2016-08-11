@@ -18,4 +18,12 @@ class BasketPresenter extends BasePresenter
 
         $this->wrappedObject = $resource;
     }
+
+    /**
+     * @return string
+     */
+    public function totalPrice(): string
+    {
+        return number_format($this->wrappedObject->totalPrice(), 2);
+    }
 }

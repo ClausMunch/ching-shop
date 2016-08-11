@@ -105,7 +105,7 @@ class ProductOptionTest extends ProductTest
         ];
         $this->json(
             'PUT',
-            $this->documentQueryAttribute(
+            $this->getElementAttribute(
                 "#owner-{$option->id}-images",
                 'data-sort-action'
             ),
@@ -148,11 +148,11 @@ class ProductOptionTest extends ProductTest
         // When we move the image from the product to the option;
         $this->actingAs($this->staffUser())
             ->visit(route('catalogue.staff.products.show', [$product->sku]));
-        $optionSortAction = $this->documentQueryAttribute(
+        $optionSortAction = $this->getElementAttribute(
             "#owner-{$option->id}-images",
             'data-sort-action'
         );
-        $productSortAction = $this->documentQueryAttribute(
+        $productSortAction = $this->getElementAttribute(
             "#owner-{$product->sku}-images",
             'data-sort-action'
         );
