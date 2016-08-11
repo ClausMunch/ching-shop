@@ -2,7 +2,6 @@
 
 namespace ChingShop\Modules\Sales\Model\Basket;
 
-use ChingShop\Modules\Catalogue\Model\Price\Price;
 use ChingShop\Modules\Sales\Model\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
