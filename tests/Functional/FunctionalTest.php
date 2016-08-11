@@ -32,17 +32,34 @@ abstract class FunctionalTest extends TestCase
 
     /**
      * @param string $selector
+     *
+     * @return \Symfony\Component\DomCrawler\Crawler
+     */
+    protected function getElement(string $selector)
+    {
+        return $this->crawler()
+            ->filter($selector)
+            ->first();
+    }
+
+    /**
+     * @param string $selector
+     *
+     * @return string
+     */
+    protected function getElementText(string $selector): string
+    {
+        return trim($this->getElement($selector)->text());
+    }
+
+    /**
+     * @param string $selector
      * @param string $attribute
      *
      * @return string
      */
-    protected function documentQueryAttribute(
-        string $selector,
-        string $attribute
-    ) {
-        return (string) $this->crawler()
-            ->filter($selector)
-            ->first()
-            ->attr($attribute);
+    protected function getElementAttribute(string $selector, string $attribute)
+    {
+        return trim($this->getElement($selector)->attr($attribute));
     }
 }

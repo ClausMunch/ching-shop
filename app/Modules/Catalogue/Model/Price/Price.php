@@ -47,7 +47,7 @@ class Price extends Model
      */
     public function formatted(): string
     {
-        return '£'.money_format('%i', $this->asFloat());
+        return '£'.number_format($this->asFloat(), 2);
     }
 
     /**
