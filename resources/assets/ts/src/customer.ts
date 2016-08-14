@@ -1,6 +1,7 @@
 /// <reference path="../typings/browser/index.d.ts" />
 
 require("./main.js");
+require("./modules/button");
 
 let mainImage: HTMLImageElement = <HTMLImageElement>document.getElementById(
     "product-main-image"
@@ -8,10 +9,12 @@ let mainImage: HTMLImageElement = <HTMLImageElement>document.getElementById(
 
 initThumbnails(document.getElementsByClassName("product-thumbnail"));
 
-document.getElementById('product-option-choice').addEventListener(
-    'change',
-    selectOption
+let productOptionChoice = <HTMLOptionElement>document.getElementById(
+    "product-option-choice"
 );
+if (productOptionChoice) {
+    productOptionChoice.addEventListener("change", selectOption);
+}
 
 /**
  * @param {NodeList} thumbnails
@@ -38,7 +41,7 @@ function viewThumbnail() {
     focusThumbnail(this);
 
     // Select this in the drop-down if available.
-    let optionId = this.getAttribute('data-option-id');
+    let optionId = this.getAttribute("data-option-id");
     if (!optionId) {
         return;
     }
@@ -86,9 +89,10 @@ function selectOption() {
         ".product-thumbnail"
     );
     for (let thumbnail of thumbnails) {
-        if (thumbnail.getAttribute('data-option-id') === this.value) {
+        if (thumbnail.getAttribute("data-option-id") === this.value) {
             focusThumbnail(thumbnail);
             break;
         }
     }
 }
+

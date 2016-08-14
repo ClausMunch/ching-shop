@@ -2,6 +2,7 @@ require("./main.js");
 
 require("../../../node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js");
 require("./staff/product.js");
+require("./modules/button");
 
 interface Document {
     getCsrfToken(): string;

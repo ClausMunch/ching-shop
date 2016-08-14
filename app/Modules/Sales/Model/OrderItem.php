@@ -6,6 +6,7 @@ use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @mixin \Eloquent
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class OrderItem extends Model
 {
+    use SoftDeletes;
+
     /**
      * An order item is part of an order.
      *

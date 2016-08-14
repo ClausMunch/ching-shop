@@ -14,8 +14,9 @@
            child-src 'self';
            object-src 'self';
            form-action 'self';
-           style-src 'self' https://fonts.googleapis.com;
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
            font-src 'self' https://fonts.gstatic.com data:;">
+    <meta name="robots" content="@yield('meta-robots', 'index,follow')">
     <title>@yield('page-title') | Ching Shop</title>
     @yield('html-head')
 </head>

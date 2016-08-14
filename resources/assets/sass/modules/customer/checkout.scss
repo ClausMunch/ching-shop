@@ -1,0 +1,49 @@
+.checkout-title {
+  margin: auto;
+}
+
+.checkout-section {
+  margin-top: 1em;
+}
+
+.checkout-section-summary {
+  background: lighten($colour-primary, 39%);
+  border-radius: $border-radius-base;
+  font-size: 80%;
+  padding: 2em;
+  text-align: center;
+}
+
+.checkout-section-title {
+  margin-bottom: 1em;
+
+  @include breakpoint(sm-up) {
+    margin-bottom: 2em;
+  }
+}
+
+.form-control.checkout {
+  @include breakpoint(sm-up) {
+    max-width: 30em;
+  }
+}
+
+.summary-list {
+  @extend %plain-list;
+}
+
+.payment-choice {
+  display: block;
+  font-size: 1.35em;
+  margin: 1.5em auto;
+  max-width: 100%;
+  width: 17em;
+}
+
+.btn.paypal {
+  @include button-variant(
+    $floral-white,
+    $colour-paypal,
+    darken($colour-paypal, 5%)
+  );
+}

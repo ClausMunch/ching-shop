@@ -6,6 +6,10 @@
     £{{ $basket->totalPrice() }})
 @endsection
 
+@section('meta-robots')
+    noindex,nofollow
+@endsection
+
 @section('body')
 
     @include('flash::message')
@@ -68,12 +72,23 @@
                 <td></td>
                 <td></td>
                 <td class="price basket-total">
-                    £<span class="basket-total-amount">
-                        {{ $basket->totalPrice() }}
+                    £<span class="basket-total-amount"><!--
+                        -->{{ $basket->totalPrice() }}
                     </span>
                 </td>
                 <td></td>
             </tr>
         </tfoot>
     </table>
+
+    @if ($basket->basketItems->count())
+        <div class="continue">
+            <a class="btn btn-lg btn-success continue-button"
+               href="{{ route('sales.customer.checkout.address') }}"
+               rel="nofollow">
+                Go to checkout &rarr;
+            </a>
+        </div>
+    @endif
+
 @endsection

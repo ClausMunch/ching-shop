@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Sales\Providers;
 
 use App;
 use ChingShop\Modules\Sales\Model\Basket\Basket;
+use ChingShop\Modules\Sales\Model\CheckoutAssistant;
 use ChingShop\Modules\Sales\Model\Clerk;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Application;
@@ -53,6 +54,14 @@ class SalesServiceProvider extends ServiceProvider
                     $this->app->make(Store::class),
                     $this->app->make(Guard::class),
                     $this->app->make(Basket::class)
+                );
+            }
+        );
+        $this->app->singleton(
+            CheckoutAssistant::class,
+            function () {
+                return new CheckoutAssistant(
+                    $this->app->make(Clerk::class)
                 );
             }
         );

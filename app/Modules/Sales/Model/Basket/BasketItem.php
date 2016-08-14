@@ -6,6 +6,7 @@ use ChingShop\Modules\Catalogue\Model\Price\Price;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
@@ -20,6 +21,8 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class BasketItem extends Model implements HasPresenter
 {
+    use SoftDeletes;
+
     /**
      * A basket item belongs to a basket.
      *

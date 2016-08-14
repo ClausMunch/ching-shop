@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Model\Basket;
 
+use ChingShop\Modules\Sales\Model\Address;
 use ChingShop\Modules\Sales\Model\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
@@ -22,9 +24,12 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property BasketItem[]|Collection $basketItems
  * @property Order                   $order
  * @property User|null               $user
+ * @property Address|null            $address
  */
 class Basket extends Model implements HasPresenter
 {
+    use SoftDeletes;
+
     /**
      * A basket contains basket items.
      *
@@ -56,6 +61,16 @@ class Basket extends Model implements HasPresenter
     }
 
     /**
+     * A basket may have an address (during checkout).
+     *
+     * @return BelongsTo
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
+    /**
      * @param Builder $query
      *
      * @return Builder
@@ -78,9 +93,9 @@ class Basket extends Model implements HasPresenter
     /**
      * @param int $id
      *
-     * @return BasketItem
+     * @return BasketItem|BasketItemPresenter
      */
-    public function getItem(int $id): BasketItem
+    public function getItem(int $id)
     {
         if ($this->basketItems->contains('id', $id)) {
             return $this->basketItems->where('id', $id)->first();
