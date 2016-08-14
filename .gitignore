@@ -20,3 +20,5 @@ build/
 keys.*
 *.sqlite-journal
 test_db.sqlite
+import/
+public/fonts

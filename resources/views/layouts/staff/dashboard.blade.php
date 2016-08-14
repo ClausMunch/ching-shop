@@ -5,8 +5,11 @@
           rel="stylesheet"
           property="stylesheet"
           type="text/css">
-    <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+@endsection
+
+@section('meta-robots')
+    noindex,nofollow
 @endsection
 
 @section('body-class', 'dashboard')

@@ -4,29 +4,25 @@
 
     <div class="top-band">
 
-        <a class="top-logo-link" href="/" title="Ching Shop Home">
-            <img src="/img/logo-brand-colour.svg"
-                 class="top-logo"
-                 alt="Ching Shop">
-            Ching Shop
-        </a>
+        @include('customer.partials.top-band-logo')
 
-        <ul class="top-links">
+        <ul class="top-links top-center">
             <li>
-                <a class="top-link" href="/">Home</a>
+                <a class="top-link top-text" href="/">Home</a>
             </li>
             <li>
-                <a class="top-link" href="/cards">Cards</a>
+                <a class="top-link top-text" href="/cards">Cards</a>
             </li>
             <li>
-                <a class="top-link" href="/about">About</a>
+                <a class="top-link top-text" href="/about">About</a>
             </li>
             <li>
-                <a class="top-link" href="/contact">Contact</a>
+                <a class="top-link top-text" href="/contact">Contact</a>
             </li>
         </ul>
 
-        <a class="mini-basket top-link"
+        <a class="mini-basket top-link top-text"
+           rel="nofollow"
            href="{{ route('sales.customer.basket') }}">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             @if (isset($basket))

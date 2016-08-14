@@ -4,12 +4,16 @@
     "bootstrap-multiselect": "^0.9",
     "gulp": "^3",
     "gulp-clean": "^0.3.2",
+    "gulp-filter": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.3.2",
     "gulp-shell": "^0",
     "gulp-typescript": "^2",
     "gulp-typings": "^2",
+    "gulp-unzip": "^0.1.4",
     "tslint": "^3",
-    "typescript": "^1",
+    "typescript": "^2",
     "typings": "^1"
   },
   "dependencies": {

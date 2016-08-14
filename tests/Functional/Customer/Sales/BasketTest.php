@@ -12,11 +12,13 @@ use Testing\TestUtil;
 /**
  * Class BasketTest.
  *
- * Test basic shopping basket functionality.
+ * Test shopping basket functionality.
+ *
+ * @group sales
  */
 class BasketTest extends FunctionalTest
 {
-    use CreateCatalogue, CustomerUsers, TestUtil;
+    use SalesInteractions, TestUtil;
 
     /**
      * Should be able to see the mini-basket.
@@ -48,7 +50,7 @@ class BasketTest extends FunctionalTest
         $option = $this->createProductOptionFor($product);
 
         // When we add it to the basket;
-        $this->addProductToBasket($product);
+        $this->addProductToBasket($product, $this);
 
         // Then we should see it in the basket.
         $this->actingAs($this->customerUser())
@@ -100,7 +102,7 @@ class BasketTest extends FunctionalTest
         $option = $this->createProductOptionFor($product);
 
         // And we add it to the basket;
-        $this->addProductToBasket($product);
+        $this->addProductToBasket($product, $this);
 
         // When we remove it from the basket;
         $this->press("Remove {$product->name}")->see('removed');
@@ -124,7 +126,7 @@ class BasketTest extends FunctionalTest
         $this->repeat(
             3,
             function () use ($product) {
-                $this->addProductToBasket($product);
+                $this->addProductToBasket($product, $this);
             }
         );
 
@@ -154,7 +156,7 @@ class BasketTest extends FunctionalTest
         $this->repeat(
             3,
             function () use ($product) {
-                $this->addProductToBasket($product);
+                $this->addProductToBasket($product, $this);
             }
         );
 
@@ -178,7 +180,7 @@ class BasketTest extends FunctionalTest
         $price->save();
 
         // When we add it to the basket;
-        $this->addProductToBasket($product);
+        $this->addProductToBasket($product, $this);
 
         // Then the total shown should have trailing zeros.
         $this->actingAs($this->customerUser())
@@ -203,7 +205,7 @@ class BasketTest extends FunctionalTest
         $price->save();
 
         // When we add it to the basket;
-        $this->addProductToBasket($product);
+        $this->addProductToBasket($product, $this);
 
         // Then the total shown should have trailing zeros.
         $this->actingAs($this->customerUser())
@@ -215,13 +217,21 @@ class BasketTest extends FunctionalTest
     }
 
     /**
-     * @param Product $product
+     * Should be able to proceed to checkout from the basket.
      */
-    private function addProductToBasket(Product $product)
+    public function testCanGoToCheckoutFromBasket()
     {
+        // Given we have an item in the basket;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+        $this->addProductToBasket($product, $this);
+
+        // When we go to the basket;
         $this->actingAs($this->customerUser())
-            ->visit(route('product::view', [$product->id, $product->slug]))
-            ->see($product->name)
-            ->press('Add to basket');
+            ->visit(route('sales.customer.basket'));
+
+        // We should be able click a link to continue to checkout.
+        $this->click('Go to checkout')
+            ->seePageIs(route('sales.customer.checkout.address'));
     }
 }

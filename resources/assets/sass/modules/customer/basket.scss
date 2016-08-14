@@ -23,3 +23,16 @@
 .price {
   font-family: monospace;
 }
+
+.continue {
+  text-align: center;
+
+  @include breakpoint(sm-up) {
+    padding: 1em;
+    text-align: right;
+  }
+}
+
+.continue-button {
+  margin: auto;
+}

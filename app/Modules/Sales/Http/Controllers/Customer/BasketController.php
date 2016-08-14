@@ -94,8 +94,7 @@ class BasketController extends Controller
         }
 
         /** @var $item */
-        $item = $this->clerk->basket()->getItem($request->basketItemId());
-        $item->delete();
+        $item = $this->clerk->removeBasketItem($request->basketItemId());
 
         $this->webUi->successMessage(
             sprintf(

@@ -4,19 +4,24 @@
 //noinspection JSUnresolvedVariable
 process.env.DISABLE_NOTIFIER = true;
 
-var elixir      = require("laravel-elixir");
-var gulp        = require("gulp");
-var clean       = require('gulp-clean');
-var shell       = require("gulp-shell");
-var typings     = require("gulp-typings");
-var ts          = require("gulp-typescript");
-var Task        = elixir.Task;
+var elixir  = require("laravel-elixir");
+var gulp    = require("gulp");
+var clean   = require("gulp-clean");
+var shell   = require("gulp-shell");
+var typings = require("gulp-typings");
+var ts      = require("gulp-typescript");
+var unzip   = require('gulp-unzip');
+var filter  = require('gulp-filter');
+var replace = require('gulp-replace');
+var rename  = require('gulp-rename');
+
+var Task    = elixir.Task;
 
 elixir.config.css.autoprefix = {
     enabled: true,
     options: {
         cascade: true,
-        browsers: ['last 3 versions', '> 1%']
+        browsers: ["last 3 versions", "> 1%"]
     }
 };
 
@@ -62,6 +67,7 @@ elixir(function (mix) {
             "js/customer.js"
         ])
         .copy("resources/assets/img", "public/img")
+        .copy("resources/assets/fonts", "public/fonts")
         .copy(
             "./node_modules/bootstrap-sass/assets/fonts",
             "public/build/fonts/"
@@ -90,3 +96,26 @@ gulp.task("test-database", shell.task(
         verbose: true
     }
 ));
+
+gulp.task("import", function () {
+    // Icon files.
+    gulp.src("./import/icomoon.zip")
+        .pipe(unzip())
+        .pipe(filter("fonts/icomoon.*"))
+        .pipe(gulp.dest("./resources/assets/"));
+
+    // Selection config.
+    gulp.src("./import/icomoon.zip")
+        .pipe(unzip())
+        .pipe(filter("selection.json"))
+        .pipe(gulp.dest("./resources/config/icomoon/"));
+
+    // CSS file.
+    gulp.src("./import/icomoon.zip")
+        .pipe(unzip())
+        .pipe(filter("style.css"))
+        .pipe(replace(/\[class\^="icon-"], \[class\*=" icon-"]/g, ".icon"))
+        .pipe(replace("fonts/", "/fonts/"))
+        .pipe(rename("_icomoon.scss"))
+        .pipe(gulp.dest("./resources/assets/sass/vendor/"));
+});

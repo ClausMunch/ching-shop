@@ -71,7 +71,43 @@ class Clerk
         $this->basket = $this->getBasket();
         $this->saveBasket();
 
-        return (bool) $this->basket->basketItems()->save($basketItem);
+        $saved = (bool) $this->basket->basketItems()->save($basketItem);
+
+        $this->basket()->basketItems->add($basketItem);
+
+        return $saved;
+    }
+
+    /**
+     * @param int $basketItemId
+     *
+     * @return BasketItem
+     * @throws \Exception
+     */
+    public function removeBasketItem(int $basketItemId)
+    {
+        $item = $this->basket()->getItem($basketItemId);
+        $item->delete();
+
+        // Unset basket to ensure reload.
+        $this->basket = null;
+
+        return $item;
+    }
+
+    /**
+     * Ensure the basket is stored with current user_id and noted in the
+     * session.
+     */
+    public function saveBasket()
+    {
+        if ($this->guard->user() instanceof User
+            && $this->guard->user()->getAuthIdentifier()
+        ) {
+            $this->basket->user_id = $this->guard->user()->getAuthIdentifier();
+        }
+        $this->basket->save();
+        $this->session->set(self::SESSION_BASKET, $this->basket->id);
     }
 
     /**
@@ -79,6 +115,10 @@ class Clerk
      */
     private function getBasket(): Basket
     {
+        if ($this->basket !== null) {
+            return $this->basket;
+        }
+
         $this->basket = $this->basketResource
             ->with('basketItems.productOption.product.prices')
             ->where(
@@ -110,18 +150,5 @@ class Clerk
         }
 
         return new Basket();
-    }
-
-    /**
-     * Ensure the basket is stored with current user_id and noted in the
-     * session.
-     */
-    public function saveBasket()
-    {
-        if ($this->guard->user() instanceof User) {
-            $this->basket->user_id = $this->guard->user()->getAuthIdentifier();
-        }
-        $this->basket->save();
-        $this->session->set(self::SESSION_BASKET, $this->basket->id);
     }
 }

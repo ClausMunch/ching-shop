@@ -2,31 +2,62 @@
 
 Route::group(
     [
-        'prefix' => 'sales',
+        'prefix' => 'shopping',
     ],
     function () {
+        Route::post(
+            'add-to-basket',
+            [
+                'as'   => 'sales.customer.add-to-basket',
+                'uses' => 'Customer\BasketController@addProductOptionAction',
+            ]
+        );
+        Route::get(
+            'basket',
+            [
+                'as'   => 'sales.customer.basket',
+                'uses' => 'Customer\BasketController@viewBasketAction',
+            ]
+        )->middleware('customer');
+        Route::post(
+            'remove-from-basket',
+            [
+                'as'   => 'sales.customer.remove-from-basket',
+                'uses' => 'Customer\BasketController@removeBasketItemAction',
+            ]
+        );
+
         Route::group(
-            [],
+            [
+                'prefix' => 'checkout',
+            ],
             function () {
-                Route::post(
-                    'add-to-basket',
+                Route::get(
+                    'address',
                     [
-                        'as'   => 'sales.customer.add-to-basket',
-                        'uses' => 'Customer\BasketController@addProductOptionAction',
+                        'as'   => 'sales.customer.checkout.address',
+                        'uses' => 'Customer\CheckoutController@addressAction'
+                    ]
+                )->middleware(['customer', 'checkout']);
+                Route::post(
+                    'save-address',
+                    [
+                        'as'   => 'sales.customer.checkout.save-address',
+                        'uses' => 'Customer\CheckoutController@saveAddressAction'
                     ]
                 );
                 Route::get(
-                    'basket',
+                    'payment-method',
                     [
-                        'as'   => 'sales.customer.basket',
-                        'uses' => 'Customer\BasketController@viewBasketAction',
+                        'as'   => 'sales.customer.checkout.choose-payment',
+                        'uses' => 'Customer\CheckoutController@choosePaymentAction',
                     ]
-                )->middleware('customer');
+                )->middleware(['customer', 'checkout']);
                 Route::post(
-                    'remove-from-basket',
+                    'paypal-express-checkout',
                     [
-                        'as'   => 'sales.customer.remove-from-basket',
-                        'uses' => 'Customer\BasketController@removeBasketItemAction',
+                        'as'   => 'sales.customer.paypal-express-checkout',
+                        'uses' => 'Customer\PayPalController@startExpressCheckoutAction',
                     ]
                 );
             }

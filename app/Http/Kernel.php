@@ -2,6 +2,7 @@
 
 namespace ChingShop\Http;
 
+use ChingShop\Modules\Sales\Http\Middleware\CheckoutMiddleware;
 use Fideloper\Proxy\TrustProxies;
 use GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
@@ -63,5 +64,6 @@ class Kernel extends HttpKernel
         'guest'      => Middleware\RedirectIfAuthenticated::class,
         'staff'      => Middleware\StaffOnly::class,
         'customer'   => Middleware\Customer::class,
+        'checkout'   => CheckoutMiddleware::class,
     ];
 }

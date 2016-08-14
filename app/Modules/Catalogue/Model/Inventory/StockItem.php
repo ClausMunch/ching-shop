@@ -6,6 +6,7 @@ use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
 use ChingShop\Modules\Sales\Model\OrderItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @mixin \Eloquent
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class StockItem extends Model
 {
+    use SoftDeletes;
+
     /**
      * A stock item is a physical instance of a product option.
      *

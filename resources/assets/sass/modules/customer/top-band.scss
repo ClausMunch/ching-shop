@@ -1,7 +1,9 @@
 .top-band {
   background: $text-color;
+  box-sizing: border-box;
   color: invert($text-color);
   min-height: 2em;
+  overflow: auto;
   padding-top: .5em;
 
   @include breakpoint(sm-up) {
@@ -9,9 +11,7 @@
   }
 }
 
-.top-links {
-  @extend %inline-list;
-
+.top-center {
   text-align: center;
 
   @include breakpoint(sm-up) {
@@ -20,14 +20,14 @@
   }
 }
 
-.top-link {
-  @extend %list-link;
+.top-links {
+  @extend %inline-list;
+}
 
-  color: invert($text-color);
+.top-text {
   font-family: $font-brand;
   font-size: 4.6vw;
   padding: .6em 1em;
-  text-decoration: none;
 
   @include breakpoint(sm) {
     font-size: 2.3vw;
@@ -41,6 +41,14 @@
   @include breakpoint(lg) {
     font-size: 1.75vw;
   }
+}
+
+.top-link {
+  @extend %list-link;
+
+  color: invert($text-color);
+  font-family: $font-brand;
+  text-decoration: none;
 
   &:hover {
     background: lighten($text-color, 10%);
@@ -58,7 +66,6 @@
   text-align: center;
 
   @include breakpoint(sm-up) {
-    display: inline;
     float: left;
     text-align: left;
     width: 25%;

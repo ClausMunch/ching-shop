@@ -22,7 +22,8 @@
         "mccool/laravel-auto-presenter": "^4.2",
         "laracasts/flash": "^2.0",
         "guzzlehttp/guzzle": "^6.2",
-        "rap2hpoutre/laravel-log-viewer": "^0.7.0"
+        "rap2hpoutre/laravel-log-viewer": "^0.7.0",
+        "paypal/rest-api-sdk-php": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

@@ -4,6 +4,7 @@ namespace ChingShop\Modules\User\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * ChingShop\Modules\User\Model\Role.
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Role extends Model
 {
+    use SoftDeletes;
+
     const USER_ASSOCIATION_TABLE = 'role_user';
     const FOREIGN_KEY = 'role_id';
 
