@@ -2,7 +2,6 @@
 
 namespace ChingShop\Modules\Sales\Model\Basket;
 
-use ChingShop\Modules\Catalogue\Model\Price\Price;
 use ChingShop\Modules\Sales\Model\Address;
 use ChingShop\Modules\Sales\Model\Order;
 use ChingShop\Modules\User\Model\User;
@@ -21,7 +20,6 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property \Carbon\Carbon          $created_at
  * @property \Carbon\Carbon          $updated_at
  * @property \Carbon\Carbon          $deleted_at
- *
  * @property int                     $user_id
  * @property BasketItem[]|Collection $basketItems
  * @property Order                   $order

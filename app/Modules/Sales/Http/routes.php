@@ -36,14 +36,14 @@ Route::group(
                     'address',
                     [
                         'as'   => 'sales.customer.checkout.address',
-                        'uses' => 'Customer\CheckoutController@addressAction'
+                        'uses' => 'Customer\CheckoutController@addressAction',
                     ]
                 )->middleware(['customer', 'checkout']);
                 Route::post(
                     'save-address',
                     [
                         'as'   => 'sales.customer.checkout.save-address',
-                        'uses' => 'Customer\CheckoutController@saveAddressAction'
+                        'uses' => 'Customer\CheckoutController@saveAddressAction',
                     ]
                 );
                 Route::get(

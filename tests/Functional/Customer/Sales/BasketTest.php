@@ -4,9 +4,7 @@ namespace Testing\Functional\Sales;
 
 use ChingShop\Modules\Catalogue\Model\Product\Product;
 use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
-use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
-use Testing\Functional\Util\CreateCatalogue;
 use Testing\TestUtil;
 
 /**

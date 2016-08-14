@@ -48,8 +48,9 @@ class CheckoutController extends Controller
     /**
      * @param SaveAddressRequest $request
      *
-     * @return string
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     *
+     * @return string
      */
     public function saveAddressAction(SaveAddressRequest $request)
     {

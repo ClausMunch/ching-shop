@@ -18,8 +18,9 @@ class CheckoutAssistant
     /**
      * @param array $addressFields
      *
-     * @return Address
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     *
+     * @return Address
      */
     public function saveAddress(array $addressFields): Address
     {
