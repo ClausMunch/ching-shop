@@ -4,6 +4,7 @@ Ching Shop
 [![Build Status](https://travis-ci.org/hughgrigg/ching-shop.svg?branch=master)](https://travis-ci.org/hughgrigg/ching-shop)
 [![StyleCI](https://styleci.io/repos/44910529/shield)](https://styleci.io/repos/44910529)
 [![Coverage Status](https://coveralls.io/repos/github/hughgrigg/ching-shop/badge.svg?branch=master)](https://coveralls.io/github/hughgrigg/ching-shop?branch=master)
+[![Dependency Status](https://dependencyci.com/github/hughgrigg/ching-shop/badge)](https://dependencyci.com/github/hughgrigg/ching-shop)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/e8ff26290e6b48a8995cb6600988cf4b)](https://www.codacy.com/app/hugh_2/ching-shop)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/39464be8-2963-48b8-ad29-a1dc584b68f8/mini.png)](https://insight.sensiolabs.com/projects/39464be8-2963-48b8-ad29-a1dc584b68f8)
 
