@@ -5,8 +5,7 @@ namespace Testing\Functional\Sales;
 use Testing\Functional\FunctionalTest;
 
 /**
- * Class CheckoutAddressTest
- * @package Testing\Functional\Sales
+ * Class CheckoutAddressTest.
  *
  * @group sales
  * @group checkout

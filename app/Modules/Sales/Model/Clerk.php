@@ -81,8 +81,9 @@ class Clerk
     /**
      * @param int $basketItemId
      *
-     * @return BasketItem
      * @throws \Exception
+     *
+     * @return BasketItem
      */
     public function removeBasketItem(int $basketItemId)
     {

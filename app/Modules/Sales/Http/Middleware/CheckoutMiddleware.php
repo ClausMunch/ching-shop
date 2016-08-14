@@ -2,9 +2,9 @@
 
 namespace ChingShop\Modules\Sales\Http\Middleware;
 
-use Illuminate\Http\Request;
 use ChingShop\Modules\Sales\Model\Clerk;
 use Closure;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutMiddleware
@@ -23,7 +23,7 @@ class CheckoutMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param Request  $request
+     * @param Request $request
      * @param Closure $next
      *
      * @return Response

@@ -7,8 +7,7 @@ use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Model\CheckoutAssistant;
 
 /**
- * Class PayPalController
- * @package ChingShop\Modules\Sales\Http\Controllers\Customer
+ * Class PayPalController.
  */
 class PayPalController extends Controller
 {
@@ -34,6 +33,5 @@ class PayPalController extends Controller
 
     public function startExpressCheckoutAction()
     {
-
     }
 }
