@@ -4,34 +4,67 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Sales\Model\CheckoutAssistant;
+use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Model\PayPal\PayPalCheckout;
+use ChingShop\Modules\Sales\Model\PayPal\PayPalCheckoutFactory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 /**
  * Class PayPalController.
  */
 class PayPalController extends Controller
 {
-    /** @var CheckoutAssistant */
-    private $checkoutAssistant;
+    /** @var Clerk */
+    private $clerk;
 
     /** @var WebUi */
     private $webUi;
 
+    /** @var PayPalCheckoutFactory */
+    private $checkoutFactory;
+
     /**
-     * PayPalController constructor.
-     *
-     * @param CheckoutAssistant $checkoutAssistant
-     * @param WebUi             $webUi
+     * @param Clerk                 $clerk
+     * @param WebUi                 $webUi
+     * @param PayPalCheckoutFactory $checkoutFactory
      */
     public function __construct(
-        CheckoutAssistant $checkoutAssistant,
-        WebUi $webUi
+        Clerk $clerk,
+        WebUi $webUi,
+        PayPalCheckoutFactory $checkoutFactory
     ) {
-        $this->checkoutAssistant = $checkoutAssistant;
+        $this->clerk = $clerk;
         $this->webUi = $webUi;
+        $this->checkoutFactory = $checkoutFactory;
     }
 
-    public function startExpressCheckoutAction()
+    /**
+     * @return RedirectResponse
+     * @throws \InvalidArgumentException
+     */
+    public function startAction()
     {
+        return $this->webUi->redirectAway(
+            $this->checkoutFactory->makePayPalCheckout(
+                $this->clerk->basket()
+            )->approvalUrl()
+        );
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function returnAction()
+    {
+        return $this->webUi->redirectAway('TODO');
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function cancelAction()
+    {
+        return $this->webUi->redirectAway('TODO');
     }
 }

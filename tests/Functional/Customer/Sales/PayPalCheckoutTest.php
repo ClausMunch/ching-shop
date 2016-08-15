@@ -17,7 +17,6 @@ class PayPalCheckoutTest extends FunctionalTest
         $this->completeCheckoutAddress($this);
 
         // When we select PayPal as the payment method;
-        $this->press('Pay with PayPal');
 
         self::markTestIncomplete();
     }

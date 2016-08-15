@@ -4,9 +4,11 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
+use ChingShop\Modules\Data\Model\Country;
 use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 use ChingShop\Modules\Sales\Model\CheckoutAssistant;
 use ChingShop\Modules\Sales\Model\Clerk;
+use PayPal\Api\CountryCode;
 
 class CheckoutController extends Controller
 {
@@ -41,7 +43,10 @@ class CheckoutController extends Controller
     {
         return $this->webUi->view(
             'customer.checkout.address',
-            ['progress' => 25]
+            [
+                'progress'  => 25,
+                'countries' => Country::CODES,
+            ]
         );
     }
 

@@ -59,9 +59,11 @@ trait SalesInteractions
             ->type($addressName, 'name')
             ->type('42 Some Street', 'line_one')
             ->type('Some Town', 'line_two')
+            ->type('London', 'city')
             ->type('FOO BAR', 'post_code')
-            ->type('Some Country', 'country')
-            ->press('Continue');
+            ->select('GB', 'country_code')
+            ->press('Continue')
+            ->assertResponseOk();
 
         $this->address = Address::where('name', '=', $addressName)->first();
 

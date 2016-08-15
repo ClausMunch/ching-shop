@@ -103,4 +103,14 @@ class WebUi
     {
         $this->flashNotifier->error($message);
     }
+
+    /**
+     * @param string $url
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectAway(string $url)
+    {
+        return redirect()->away($url);
+    }
 }

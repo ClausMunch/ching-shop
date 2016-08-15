@@ -17,7 +17,7 @@
             </label>
             <div class="col-sm-9">
                 <input type="text"
-                       autocomplete="name"
+                       autocomplete="shipping name"
                        class="form-control checkout"
                        id="name"
                        name="name"
@@ -41,7 +41,7 @@
             <div class="col-sm-9">
                 <input type="text"
                        class="form-control checkout"
-                       autocomplete="address-line1"
+                       autocomplete="shipping address-line1"
                        id="line_one"
                        name="line_one"
                        value="{{ $reply->oldInputOr(
@@ -63,15 +63,36 @@
             <div class="col-sm-9">
                 <input type="text"
                        class="form-control checkout"
-                       autocomplete="address-line2"
+                       autocomplete="shipping address-line2"
                        id="line_two"
                        name="line_two"
-                value="{{ $reply->oldInputOr(
-                     'nline_two',
-                     $basket->address->line_two ?? ''
-                   ) }}">
+                       value="{{ $reply->oldInputOr(
+                         'line_two',
+                         $basket->address->line_two ?? ''
+                       ) }}">
                 @foreach($reply->errorsFor('line_two') as $error)
                     <label class="help-block" for="line_two">
+                        {{ $error }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        <div class="form-group {{ $reply->putHasError('city') }}">
+            <label class="col-sm-3 control-label" for="city">
+                City
+            </label>
+            <div class="col-sm-9">
+                <input type="text"
+                       class="form-control checkout"
+                       autocomplete="shipping address-line2"
+                       id="city"
+                       name="city"
+                       value="{{ $reply->oldInputOr(
+                         'city',
+                         $basket->address->city ?? ''
+                       ) }}">
+                @foreach($reply->errorsFor('city') as $error)
+                    <label class="help-block" for="city">
                         {{ $error }}
                     </label>
                 @endforeach
@@ -84,7 +105,7 @@
             <div class="col-sm-9">
                 <input type="text"
                        class="form-control checkout"
-                       autocomplete="postal-code"
+                       autocomplete="shipping postal-code"
                        id="post_code"
                        name="post_code"
                        value="{{ $reply->oldInputOr(
@@ -99,23 +120,31 @@
                 @endforeach
             </div>
         </div>
-        <div class="form-group {{ $reply->putHasError('country') }}">
-            <label class="col-sm-3 control-label" for="country">
+        <div class="form-group {{ $reply->putHasError('country_code') }}">
+            <label class="col-sm-3 control-label" for="country_code">
                 Country
             </label>
             <div class="col-sm-9">
-                <input type="text"
-                       class="form-control checkout"
-                       autocomplete="country"
-                       id="country"
-                       name="country"
-                       value="{{ $reply->oldInputOr(
-                         'country',
-                         $basket->address->country ?? ''
-                       ) }}"
-                       required>
-                @foreach($reply->errorsFor('country') as $error)
-                    <label class="help-block" for="country">
+                <select class="form-control checkout"
+                        autocomplete="shipping country"
+                        id="country_code"
+                        name="country_code"
+                        required>
+                    @foreach ($countries as $code => $country)
+                        <option value="{{ $code }}"
+                          @if($code === $reply->oldInputOr(
+                            'country_code',
+                            $basket->address->country_code ?? 'GB'
+                          ))
+                              selected aria-selected="true"
+                          @endif
+                        >
+                            {{ $country }}
+                        </option>
+                    @endforeach
+                </select>
+                @foreach($reply->errorsFor('country_code') as $error)
+                    <label class="help-block" for="country_code">
                         {{ $error }}
                     </label>
                 @endforeach

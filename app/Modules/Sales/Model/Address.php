@@ -17,8 +17,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string         $name
  * @property string         $line_one
  * @property string         $line_two
+ * @property string         $city
  * @property string         $post_code
- * @property string         $country
+ * @property string         $country_code
  */
 class Address extends Model
 {
@@ -31,8 +32,9 @@ class Address extends Model
         'name',
         'line_one',
         'line_two',
+        'city',
         'post_code',
-        'country',
+        'country_code',
     ];
 
     /**

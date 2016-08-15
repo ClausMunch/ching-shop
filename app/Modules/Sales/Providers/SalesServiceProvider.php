@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Application;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
+use PayPal\Rest\ApiContext;
 use View;
 
 /**
@@ -63,6 +64,16 @@ class SalesServiceProvider extends ServiceProvider
                 return new CheckoutAssistant(
                     $this->app->make(Clerk::class)
                 );
+            }
+        );
+
+        $this->app->singleton(
+            ApiContext::class,
+            function () {
+                $apiContext = new ApiContext();
+                $apiContext->setConfig(config('payment.paypal'));
+
+                return $apiContext;
             }
         );
     }

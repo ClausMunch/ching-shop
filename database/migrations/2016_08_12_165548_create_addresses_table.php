@@ -24,8 +24,9 @@ class CreateAddressesTable extends Migration
 
                 $table->string('line_one');
                 $table->string('line_two')->nullable();
+                $table->string('city');
                 $table->string('post_code');
-                $table->string('country')->default('United Kingdom');
+                $table->string('country_code')->default('GB');
 
                 $table->timestamps();
                 $table->softDeletes();

@@ -12,7 +12,7 @@
 <p>How would you like to pay for this order?</p>
 
 <form method="post"
-      action="{{ route('sales.customer.paypal-express-checkout') }}">
+      action="{{ route('sales.customer.paypal.start') }}">
     {{ csrf_field() }}
 <button type="submit" class="btn btn-success btn-lg payment-choice">
     <span class="icon icon-credit-card inline-icon"></span>
@@ -21,7 +21,7 @@
 </form>
 
 <form method="post"
-      action="{{ route('sales.customer.paypal-express-checkout') }}">
+      action="{{ route('sales.customer.paypal.start') }}">
     {{ csrf_field() }}
     <button type="submit"
             class="btn paypal btn-lg payment-choice"

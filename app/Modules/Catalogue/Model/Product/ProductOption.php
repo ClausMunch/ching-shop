@@ -6,6 +6,7 @@ use ChingShop\Image\Image;
 use ChingShop\Image\ImageOwner;
 use ChingShop\Modules\Catalogue\Model\Attribute\Colour;
 use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
+use ChingShop\Modules\Catalogue\Model\Price\Price;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -118,5 +119,26 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     public function imageCollection(): Collection
     {
         return $this->images;
+    }
+
+    /**
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return "{$this->product->name} ({$this->label})";
+    }
+
+    /**
+     * @return float
+     */
+    public function priceAsFloat(): float
+    {
+        $price = $this->product->prices->first();
+        if ($price instanceof Price) {
+            return $price->asFloat();
+        }
+
+        return 0.0;
     }
 }

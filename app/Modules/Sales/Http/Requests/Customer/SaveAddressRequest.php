@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
+use ChingShop\Modules\Data\Model\Country;
 use Illuminate\Http\Request as HttpRequest;
 
 class SaveAddressRequest extends Request
@@ -23,11 +24,12 @@ class SaveAddressRequest extends Request
     public function rules(): array
     {
         return [
-            'name'      => 'required|string|min:2|max:255',
-            'line_one'  => 'required|string|min:2|max:255',
-            'line_two'  => 'string|max:255',
-            'post_code' => 'required|string|min:5|max:31',
-            'country'   => 'required|string|min:2|max:255',
+            'name'         => 'required|string|min:2|max:255',
+            'line_one'     => 'required|string|min:2|max:255',
+            'line_two'     => 'string|max:255',
+            'city'         => 'required|string|min:2|max:255',
+            'post_code'    => 'required|string|min:3|max:31',
+            'country_code' => 'required|in:' . Country::codesString(),
         ];
     }
 

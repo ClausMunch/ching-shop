@@ -13,7 +13,7 @@
            img-src 'self' https://static.ching-shop.com;
            child-src 'self';
            object-src 'self';
-           form-action 'self';
+           form-action 'self' {{ config('payment.paypal.base-url') }};
            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
            font-src 'self' https://fonts.gstatic.com data:;">
     <meta name="robots" content="@yield('meta-robots', 'index,follow')">
