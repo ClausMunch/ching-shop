@@ -3,10 +3,7 @@
 namespace ChingShop\Modules\Data\Model;
 
 /**
- * Class Countries
- * @package ChingShop\Modules\Data\Model
- *
- * Static list of country codes.
+ * Class Countries.
  */
 class Country
 {

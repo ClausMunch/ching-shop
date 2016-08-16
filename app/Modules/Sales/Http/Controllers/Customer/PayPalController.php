@@ -5,10 +5,8 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Model\Clerk;
-use ChingShop\Modules\Sales\Model\PayPal\PayPalCheckout;
 use ChingShop\Modules\Sales\Model\PayPal\PayPalCheckoutFactory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 
 /**
  * Class PayPalController.
@@ -40,8 +38,9 @@ class PayPalController extends Controller
     }
 
     /**
-     * @return RedirectResponse
      * @throws \InvalidArgumentException
+     *
+     * @return RedirectResponse
      */
     public function startAction()
     {

@@ -9,7 +9,7 @@ return [
         'base-url'           => env(
             'PAYPAL_BASE_URL',
             'https://www.sandbox.paypal.com/'
-        )
+        ),
     ],
 
     'stripe' => [

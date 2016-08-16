@@ -16,8 +16,7 @@ use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
 
 /**
- * Class PayPalCheckout
- * @package ChingShop\Modules\Sales\Model\PayPal
+ * Class PayPalCheckout.
  */
 class PayPalCheckout
 {
@@ -40,8 +39,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function approvalUrl(): string
     {
@@ -51,8 +51,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return Payer
      * @throws \InvalidArgumentException
+     *
+     * @return Payer
      */
     protected function payer(): Payer
     {
@@ -60,8 +61,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return ItemList
      * @throws \InvalidArgumentException
+     *
+     * @return ItemList
      */
     private function itemList(): ItemList
     {
@@ -83,8 +85,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return ShippingAddress
      * @throws \InvalidArgumentException
+     *
+     * @return ShippingAddress
      */
     private function shippingAddress(): ShippingAddress
     {
@@ -98,8 +101,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return Details
      * @throws \InvalidArgumentException
+     *
+     * @return Details
      */
     private function details(): Details
     {
@@ -110,8 +114,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return Amount
      * @throws \InvalidArgumentException
+     *
+     * @return Amount
      */
     private function amount(): Amount
     {
@@ -122,8 +127,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return Transaction
      * @throws \InvalidArgumentException
+     *
+     * @return Transaction
      */
     private function transaction(): Transaction
     {
@@ -135,8 +141,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return RedirectUrls
      * @throws \InvalidArgumentException
+     *
+     * @return RedirectUrls
      */
     private function redirectUrls(): RedirectUrls
     {
@@ -150,8 +157,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return Payment
      * @throws \InvalidArgumentException
+     *
+     * @return Payment
      */
     private function payment(): Payment
     {

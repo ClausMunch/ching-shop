@@ -8,7 +8,6 @@ use ChingShop\Modules\Data\Model\Country;
 use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 use ChingShop\Modules\Sales\Model\CheckoutAssistant;
 use ChingShop\Modules\Sales\Model\Clerk;
-use PayPal\Api\CountryCode;
 
 class CheckoutController extends Controller
 {

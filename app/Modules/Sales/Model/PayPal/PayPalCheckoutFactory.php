@@ -6,10 +6,7 @@ use ChingShop\Modules\Sales\Model\Basket\Basket;
 use PayPal\Rest\ApiContext;
 
 /**
- * Class PayPalCheckoutFactory
- * @package ChingShop\Modules\Sales\Model\PayPal
- *
- * Make it easy to use the PayPalCheckout class with dependency injection.
+ * Class PayPalCheckoutFactory.
  */
 class PayPalCheckoutFactory
 {
@@ -36,7 +33,7 @@ class PayPalCheckoutFactory
         $basket->load(
             [
                 'basketItems.productOption.product.prices',
-                'address'
+                'address',
             ]
         );
 
