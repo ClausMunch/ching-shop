@@ -64,7 +64,7 @@ function viewThumbnail() {
  * @param {HTMLAnchorElement} thumbnail
  */
 function focusThumbnail(thumbnail: HTMLAnchorElement) {
-    let thisImage:HTMLImageElement;
+    let thisImage: HTMLImageElement;
     let thumbnails: NodeListOf<Element> = document.querySelectorAll(
         ".product-thumbnail"
     );

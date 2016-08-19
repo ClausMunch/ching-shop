@@ -8,7 +8,7 @@
             handleFormSubmit(this);
             // dispatchEvent(event);
             return true;
-        })
+        });
     }
 })();
 
@@ -35,7 +35,7 @@ function handleFormSubmit(form: HTMLFormElement) {
 /**
  * @param {HTMLButtonElement} button
  */
-function disableButton(button:HTMLButtonElement) {
+function disableButton(button: HTMLButtonElement) {
     button.disabled = true;
     button.setAttribute(
         "style",
