@@ -15,6 +15,7 @@ var filter   = require('gulp-filter');
 var replace  = require('gulp-replace');
 var rename   = require('gulp-rename');
 var scssLint = require('gulp-scss-lint');
+var tsLint   = require("gulp-tslint");
 
 var Task    = elixir.Task;
 
@@ -129,4 +130,13 @@ gulp.task("scss-lint", function () {
     ])
         .pipe(scssLint())
         .pipe(scssLint.failReporter());
+});
+
+gulp.task("ts-lint", function () {
+    return gulp.src([
+        "resources/assets/ts/**/*.ts",
+        "!**/*.d.ts"
+    ])
+        .pipe(tsLint())
+        .pipe(tsLint.report());
 });
