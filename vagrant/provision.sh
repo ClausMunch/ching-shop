@@ -34,6 +34,7 @@ function appSetup
     cd ~/ching-shop
     cp -n .env.example .env
     composer install
+    bundler install
     php ~/ching-shop/artisan config:clear
     php artisan key:generate
     php artisan migrate --seed

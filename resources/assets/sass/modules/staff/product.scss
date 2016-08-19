@@ -31,7 +31,7 @@ $image-size: 6em;
     border-color: $colour-info;
   }
 
-  &:after {
+  &::after {
     clear: both;
     content: ' ';
     display: block;
