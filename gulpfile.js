@@ -4,16 +4,17 @@
 //noinspection JSUnresolvedVariable
 process.env.DISABLE_NOTIFIER = true;
 
-var elixir  = require("laravel-elixir");
-var gulp    = require("gulp");
-var clean   = require("gulp-clean");
-var shell   = require("gulp-shell");
-var typings = require("gulp-typings");
-var ts      = require("gulp-typescript");
-var unzip   = require('gulp-unzip');
-var filter  = require('gulp-filter');
-var replace = require('gulp-replace');
-var rename  = require('gulp-rename');
+var elixir   = require("laravel-elixir");
+var gulp     = require("gulp");
+var clean    = require("gulp-clean");
+var shell    = require("gulp-shell");
+var typings  = require("gulp-typings");
+var ts       = require("gulp-typescript");
+var unzip    = require('gulp-unzip');
+var filter   = require('gulp-filter');
+var replace  = require('gulp-replace');
+var rename   = require('gulp-rename');
+var scssLint = require('gulp-scss-lint');
 
 var Task    = elixir.Task;
 
@@ -118,4 +119,14 @@ gulp.task("import", function () {
         .pipe(replace("fonts/", "/fonts/"))
         .pipe(rename("_icomoon.scss"))
         .pipe(gulp.dest("./resources/assets/sass/vendor/"));
+});
+
+gulp.task("scss-lint", function () {
+    return gulp.src([
+        "resources/assets/sass/**/*.scss",
+        "!**/vendor/**",
+        "!**/bootstrap-variables.scss"
+    ])
+        .pipe(scssLint())
+        .pipe(scssLint.failReporter());
 });
