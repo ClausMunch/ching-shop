@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Sales;
 
+use Testing\Functional\Customer\Sales\SalesInteractions;
 use Testing\Functional\FunctionalTest;
 
 class PayPalCheckoutTest extends FunctionalTest

@@ -4,20 +4,9 @@ namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
 use ChingShop\Modules\Data\Model\Country;
-use Illuminate\Http\Request as HttpRequest;
 
 class SaveAddressRequest extends Request
 {
-    /**
-     * @param HttpRequest $request
-     *
-     * @return bool
-     */
-    public function authorize(HttpRequest $request): bool
-    {
-        return true;
-    }
-
     /**
      * @return array
      */

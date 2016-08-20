@@ -6,8 +6,8 @@ use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Data\Model\Country;
 use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
-use ChingShop\Modules\Sales\Model\CheckoutAssistant;
-use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
+use ChingShop\Modules\Sales\Domain\Clerk;
 
 class CheckoutController extends Controller
 {

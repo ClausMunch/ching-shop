@@ -2,7 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Http\Middleware;
 
-use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Domain\Clerk;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

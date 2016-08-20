@@ -4,9 +4,9 @@ namespace Testing\Unit\ChingShop\Catalogue\Product;
 
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Image\Image;
-use ChingShop\Modules\Catalogue\Model\Price\Price;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Product\ProductPresenter;
+use ChingShop\Modules\Catalogue\Domain\Price\Price;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductPresenter;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Mockery\MockInterface;

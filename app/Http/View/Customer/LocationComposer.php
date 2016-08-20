@@ -2,7 +2,7 @@
 
 namespace ChingShop\Http\View\Customer;
 
-use ChingShop\Modules\Catalogue\Model\Product\ProductPresenter;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductPresenter;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Router;

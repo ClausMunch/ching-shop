@@ -3,7 +3,7 @@
 namespace ChingShop\Http\Requests\Staff\Catalogue\Product\Option;
 
 use ChingShop\Http\Requests\Staff\StaffRequest;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use Illuminate\Http\Request;
 
 /**

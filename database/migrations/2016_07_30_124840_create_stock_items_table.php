@@ -1,7 +1,7 @@
 <?php
 
-use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 

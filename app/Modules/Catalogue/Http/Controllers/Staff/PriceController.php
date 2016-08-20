@@ -5,7 +5,7 @@ namespace ChingShop\Modules\Catalogue\Http\Controllers\Staff;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\SetPriceRequest;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Catalogue\Model\Product\ProductRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
 
 /**
  * Class PriceController.

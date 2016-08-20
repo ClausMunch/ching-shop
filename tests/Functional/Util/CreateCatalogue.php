@@ -3,11 +3,11 @@
 namespace Testing\Functional\Util;
 
 use ChingShop\Image\Image;
-use ChingShop\Modules\Catalogue\Model\Attribute\Colour;
-use ChingShop\Modules\Catalogue\Model\Price\Price;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Domain\Price\Price;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
 use Faker\Factory;
 use Faker\Generator;
 

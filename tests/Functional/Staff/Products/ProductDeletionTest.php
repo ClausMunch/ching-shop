@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Testing\Functional\Staff\StaffUser;
 
 class ProductDeletionTest extends ProductTest

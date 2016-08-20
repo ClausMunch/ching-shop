@@ -1,0 +1,55 @@
+<?php
+
+namespace ChingShop\Modules\Sales\Domain;
+
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+ * @mixin \Eloquent
+ *
+ * @property int            $id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \Carbon\Carbon $deleted_at
+ * @property string         $name
+ * @property string         $line_one
+ * @property string         $line_two
+ * @property string         $city
+ * @property string         $post_code
+ * @property string         $country_code
+ */
+class Address extends Model
+{
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'line_one',
+        'line_two',
+        'city',
+        'post_code',
+        'country_code',
+    ];
+
+    /**
+     * @return HasOne
+     */
+    public function basket(): HasOne
+    {
+        return $this->hasOne(Basket::class);
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function order(): HasOne
+    {
+        return $this->hasOne(Order::class);
+    }
+}

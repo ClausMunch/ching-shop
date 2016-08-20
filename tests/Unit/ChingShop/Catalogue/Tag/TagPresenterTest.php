@@ -2,8 +2,8 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Tag;
 
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
-use ChingShop\Modules\Catalogue\Model\Tag\TagPresenter;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Tag\TagPresenter;
 use Mockery\MockInterface;
 use Testing\Unit\Behaviour\MocksModel;
 use Testing\Unit\UnitTest;

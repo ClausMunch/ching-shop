@@ -3,11 +3,10 @@
 namespace ChingShop\Modules\Sales\Providers;
 
 use App;
-use ChingShop\Modules\Sales\Model\Basket\Basket;
-use ChingShop\Modules\Sales\Model\CheckoutAssistant;
-use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
+use ChingShop\Modules\Sales\Domain\Clerk;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Foundation\Application;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
 use PayPal\Rest\ApiContext;

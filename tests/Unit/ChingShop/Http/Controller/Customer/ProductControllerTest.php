@@ -3,7 +3,7 @@
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
 use ChingShop\Http\Controllers\Customer\ProductController;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 

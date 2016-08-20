@@ -3,7 +3,7 @@
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
 use ChingShop\Http\Middleware\Customer;
-use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Domain\Clerk;
 use Illuminate\Http\Request;
 use Testing\Unit\MockObject;
 

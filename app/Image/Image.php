@@ -3,7 +3,7 @@
 namespace ChingShop\Image;
 
 use ChingShop\Http\View\Staff\HttpCrudInterface;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;

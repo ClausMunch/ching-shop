@@ -90,7 +90,8 @@
                        value="{{ $reply->oldInputOr(
                          'city',
                          $basket->address->city ?? ''
-                       ) }}">
+                       ) }}"
+                       required>
                 @foreach($reply->errorsFor('city') as $error)
                     <label class="help-block" for="city">
                         {{ $error }}

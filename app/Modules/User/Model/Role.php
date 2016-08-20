@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * ChingShop\Modules\User\Model\Role.
+ * ChingShop\Modules\User\Domain\Role.
  *
  * @property int $id
  * @property string $name

@@ -14,7 +14,7 @@
 <form method="post"
       action="{{ route('sales.customer.paypal.start') }}">
     {{ csrf_field() }}
-<button type="submit" class="btn btn-success btn-lg payment-choice">
+<button type="submit" class="btn btn-success btn-lg payment-choice" disabled>
     <span class="icon icon-credit-card inline-icon"></span>
     Pay by credit or debit card
 </button>

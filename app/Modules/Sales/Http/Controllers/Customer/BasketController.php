@@ -4,10 +4,10 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOptionRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
 use ChingShop\Modules\Sales\Http\Requests\Customer\AddToBasketRequest;
 use ChingShop\Modules\Sales\Http\Requests\Customer\RemoveFromBasketRequest;
-use ChingShop\Modules\Sales\Model\Clerk;
+use ChingShop\Modules\Sales\Domain\Clerk;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**

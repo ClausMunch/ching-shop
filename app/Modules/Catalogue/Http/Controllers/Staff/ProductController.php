@@ -7,8 +7,8 @@ use ChingShop\Http\Requests\Staff\Catalogue\ImageOrderRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\NewImagesRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\PersistProductRequest;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Catalogue\Model\CatalogueRepository;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\CatalogueRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -120,7 +120,7 @@ class ProductController extends Controller
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|RedirectResponse
      */
     public function update(PersistProductRequest $request, string $sku)
     {

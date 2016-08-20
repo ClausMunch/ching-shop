@@ -4,8 +4,10 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Sales\Model\Clerk;
-use ChingShop\Modules\Sales\Model\PayPal\PayPalCheckoutFactory;
+use ChingShop\Modules\Sales\Domain\Clerk;
+use ChingShop\Modules\Sales\Domain\PayPal\PayPalExecution;
+use ChingShop\Modules\Sales\Domain\PayPal\PayPalRepository;
+use ChingShop\Modules\Sales\Http\Requests\Customer\PayPalReturnRequest;
 use Illuminate\Http\RedirectResponse;
 
 /**
@@ -19,22 +21,22 @@ class PayPalController extends Controller
     /** @var WebUi */
     private $webUi;
 
-    /** @var PayPalCheckoutFactory */
-    private $checkoutFactory;
+    /** @var PayPalRepository */
+    private $payPalRepository;
 
     /**
-     * @param Clerk                 $clerk
-     * @param WebUi                 $webUi
-     * @param PayPalCheckoutFactory $checkoutFactory
+     * @param Clerk            $clerk
+     * @param WebUi            $webUi
+     * @param PayPalRepository $payPalRepository
      */
     public function __construct(
         Clerk $clerk,
         WebUi $webUi,
-        PayPalCheckoutFactory $checkoutFactory
+        PayPalRepository $payPalRepository
     ) {
         $this->clerk = $clerk;
         $this->webUi = $webUi;
-        $this->checkoutFactory = $checkoutFactory;
+        $this->payPalRepository = $payPalRepository;
     }
 
     /**
@@ -44,19 +46,41 @@ class PayPalController extends Controller
      */
     public function startAction()
     {
-        return $this->webUi->redirectAway(
-            $this->checkoutFactory->makePayPalCheckout(
-                $this->clerk->basket()
-            )->approvalUrl()
+        $payPalCheckout = $this->payPalRepository->makeCheckout(
+            $this->clerk->basket()
         );
+        $this->payPalRepository->createInitiation($payPalCheckout);
+
+        return $this->webUi->redirectAway($payPalCheckout->approvalUrl());
     }
 
     /**
+     * @param PayPalReturnRequest $request
+     *
      * @return RedirectResponse
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
-    public function returnAction()
+    public function returnAction(PayPalReturnRequest $request)
     {
-        return $this->webUi->redirectAway('TODO');
+        if (!$request->isSuccessful()) {
+            return $this->failure();
+        }
+
+        $order = $this->payPalRepository->executePayment(
+            $request->paymentId(),
+            $request->payerId()
+        );
+
+        if ($order && $order->id) {
+            $this->webUi->successMessage('Thank you; your order is confirmed.');
+            return $this->webUi->redirect(
+                'sales.customer.order.view',
+                [$order]
+            );
+        }
+
+        return $this->failure();
     }
 
     /**
@@ -65,5 +89,18 @@ class PayPalController extends Controller
     public function cancelAction()
     {
         return $this->webUi->redirectAway('TODO');
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    private function failure()
+    {
+        $this->webUi->errorMessage(
+            'Something went wrong whilst setting up the PayPal payment.
+            You have not been charged. Please try again.'
+        );
+
+        return $this->webUi->redirect('sales.customer.checkout.choose-payment');
     }
 }

@@ -4,9 +4,9 @@ namespace Testing\Unit\ChingShop\Http\Controller\Staff;
 
 use ChingShop\Http\Requests\Staff\Catalogue\NewTagRequest;
 use ChingShop\Modules\Catalogue\Http\Controllers\Staff\TagController;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
-use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;

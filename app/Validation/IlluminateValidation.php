@@ -2,6 +2,7 @@
 
 namespace ChingShop\Validation;
 
+use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Validation\Validator;
 
@@ -38,7 +39,7 @@ class IlluminateValidation implements ValidationInterface
     }
 
     /**
-     * @return array
+     * @return array|MessageBag
      */
     public function messages(): array
     {

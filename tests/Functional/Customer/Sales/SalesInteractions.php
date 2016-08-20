@@ -1,10 +1,10 @@
 <?php
 
-namespace Testing\Functional\Sales;
+namespace Testing\Functional\Customer\Sales;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Sales\Model\Address;
-use ChingShop\Modules\Sales\Model\Basket\Basket;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Sales\Domain\Address;
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
