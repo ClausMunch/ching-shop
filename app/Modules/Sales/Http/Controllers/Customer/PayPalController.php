@@ -5,7 +5,6 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Clerk;
-use ChingShop\Modules\Sales\Domain\PayPal\PayPalExecution;
 use ChingShop\Modules\Sales\Domain\PayPal\PayPalRepository;
 use ChingShop\Modules\Sales\Http\Requests\Customer\PayPalReturnRequest;
 use Illuminate\Http\RedirectResponse;
@@ -57,9 +56,10 @@ class PayPalController extends Controller
     /**
      * @param PayPalReturnRequest $request
      *
-     * @return RedirectResponse
      * @throws \Exception
      * @throws \InvalidArgumentException
+     *
+     * @return RedirectResponse
      */
     public function returnAction(PayPalReturnRequest $request)
     {
@@ -74,6 +74,7 @@ class PayPalController extends Controller
 
         if ($order && $order->id) {
             $this->webUi->successMessage('Thank you; your order is confirmed.');
+
             return $this->webUi->redirect(
                 'sales.customer.order.view',
                 [$order]

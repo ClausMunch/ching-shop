@@ -8,7 +8,6 @@ use PayPal\Api\Payment;
  * Container for data on return from PayPal checkout.
  *
  * Class PayPalReturn
- * @package ChingShop\Modules\Sales\Domain\PayPal
  */
 class PayPalReturn
 {

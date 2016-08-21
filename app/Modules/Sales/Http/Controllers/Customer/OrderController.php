@@ -10,7 +10,6 @@ use ChingShop\Modules\Sales\Domain\Order;
  * Controller for viewing and managing orders.
  *
  * Class OrderController
- * @package ChingShop\Modules\Sales\Http\Controllers\Customer
  */
 class OrderController extends Controller
 {

@@ -15,7 +15,6 @@ use PayPal\Rest\ApiContext;
  * checkout.
  *
  * Class PayPalExecution
- * @package ChingShop\Modules\Sales\Domain\PayPal
  */
 class PayPalExecution
 {
@@ -49,8 +48,9 @@ class PayPalExecution
     }
 
     /**
-     * @return bool
      * @throws \InvalidArgumentException
+     *
+     * @return bool
      */
     public function isApproved(): bool
     {
@@ -58,8 +58,9 @@ class PayPalExecution
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function message(): string
     {
@@ -75,8 +76,9 @@ class PayPalExecution
     }
 
     /**
-     * @return Payment
      * @throws \InvalidArgumentException
+     *
+     * @return Payment
      */
     private function payment(): Payment
     {
@@ -90,8 +92,9 @@ class PayPalExecution
     }
 
     /**
-     * @return Amount
      * @throws \InvalidArgumentException
+     *
+     * @return Amount
      */
     private function amount(): Amount
     {
@@ -107,8 +110,9 @@ class PayPalExecution
     }
 
     /**
-     * @return Transaction
      * @throws \InvalidArgumentException
+     *
+     * @return Transaction
      */
     private function transaction(): Transaction
     {
@@ -116,8 +120,9 @@ class PayPalExecution
     }
 
     /**
-     * @return PaymentExecution
      * @throws \InvalidArgumentException
+     *
+     * @return PaymentExecution
      */
     private function execution(): PaymentExecution
     {

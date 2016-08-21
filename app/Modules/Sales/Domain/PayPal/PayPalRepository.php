@@ -63,8 +63,9 @@ class PayPalRepository
     /**
      * @param PayPalCheckout $payPalCheckout
      *
-     * @return PayPalInitiation
      * @throws \InvalidArgumentException
+     *
+     * @return PayPalInitiation
      */
     public function createInitiation(
         PayPalCheckout $payPalCheckout
@@ -101,9 +102,10 @@ class PayPalRepository
      * @param string $paymentId
      * @param string $payerId
      *
-     * @return Order
      * @throws \Exception
      * @throws \InvalidArgumentException
+     *
+     * @return Order
      */
     public function executePayment(string $paymentId, string $payerId)
     {
@@ -117,6 +119,7 @@ class PayPalRepository
                     'payer_id'   => $payerId,
                 ]
             );
+
             return $this->cashier->settle($execution->basket(), $settlement);
         }
 

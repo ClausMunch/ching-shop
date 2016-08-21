@@ -44,8 +44,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function approvalUrl(): string
     {
@@ -53,8 +54,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function paymentId(): string
     {
@@ -70,8 +72,9 @@ class PayPalCheckout
     }
 
     /**
-     * @return float
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function amountTotal(): float
     {

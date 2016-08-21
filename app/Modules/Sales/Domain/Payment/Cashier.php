@@ -14,7 +14,6 @@ use Psr\Log\LoggerInterface;
  * Manages order creation by payment.
  *
  * Class Cashier
- * @package ChingShop\Modules\Sales\Domain\Payment
  */
 class Cashier
 {
@@ -40,8 +39,9 @@ class Cashier
      * @param Basket     $basket
      * @param Settlement $settlement
      *
-     * @return Order
      * @throws \Exception
+     *
+     * @return Order
      */
     public function settle(Basket $basket, Settlement $settlement): Order
     {
@@ -69,8 +69,9 @@ class Cashier
     /**
      * @param Basket $basket
      *
-     * @return Order
      * @throws \Exception
+     *
+     * @return Order
      */
     private function basketToOrder(Basket $basket): Order
     {

@@ -5,9 +5,9 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Data\Model\Country;
-use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
 use ChingShop\Modules\Sales\Domain\Clerk;
+use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 
 class CheckoutController extends Controller
 {

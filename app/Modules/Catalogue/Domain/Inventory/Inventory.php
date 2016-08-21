@@ -5,10 +5,7 @@ namespace ChingShop\Modules\Catalogue\Domain\Inventory;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 
 /**
- * Class Inventory
- * @package ChingShop\Modules\Catalogue\Domain\Inventory
- *
- * Manages stock items.
+ * Class Inventory.
  */
 class Inventory
 {
