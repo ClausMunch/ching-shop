@@ -2,14 +2,17 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-add-apt-repository ppa:ondrej/php -y
-apt-get update --fix-missing
-apt-get dist-upgrade -y
+export DEBIAN_FRONTEND=noninteractive
 
-apt-get install htop imagemagick -y
-apt-get install php-imagick php7.0-mbstring -y
-composer global require "squizlabs/php_codesniffer=^2.5"
-composer global require "phpmd/phpmd=@stable"
+add-apt-repository ppa:ondrej/php -y
+apt-get update --quiet --fix-missing
+apt-get dist-upgrade --quiet --yes --allow-change-held-packages \
+    -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+
+apt-get install htop imagemagick ruby --quiet --yes \
+    -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+apt-get install php-imagick php7.0-mbstring php7.0-gmp --quiet --yes \
+    -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 gem install bundler
 
@@ -25,7 +28,7 @@ function removeHHVM
 {
     if [ $(type -P hhvm) ]; then
         /usr/share/hhvm/uninstall_fastcgi.sh
-        apt-get remove hhvm -y
+        apt-get remove hhvm --yes --force-yes
     fi
 }
 removeHHVM
@@ -45,7 +48,7 @@ function installXdebug
         cp modules/xdebug.so /usr/lib/php/xdebug/
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/fpm/php.ini
         echo 'zend_extension=/usr/lib/php/xdebug/xdebug.so' >> /etc/php/7.0/cli/php.ini
-        export CONFIG = "
+        CONFIG="
 xdebug.remote_enable=on
 xdebug.remote_log=/tmp/xdebug.log
 xdebug.remote_port=9001
@@ -55,7 +58,7 @@ xdebug.idekey=PHPSTORM
 xdebug.force_error_reporting=1
 xdebug.force_display_errors=1
 "
-        for ITEM in CONFIG; do
+        for ITEM in ${CONFIG}; do
             echo ${ITEM} >> /etc/php/7.0/fpm/conf.d/20-xdebug.ini
             echo ${ITEM} >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
         done
@@ -79,10 +82,11 @@ function installPHPRedis
         echo "extension=redis.so" > /etc/php/7.0/cli/conf.d/20-redis.ini
     fi
 }
+installPHPRedis
 
 function setUpSupervisor
 {
-    apt-get install supervisor -y
+    apt-get install supervisor --yes --force-yes
     cp -f /home/vagrant/ching-shop/vagrant/supervisor.conf /etc/supervisor/conf.d/
     mkdir -p /var/log/ching-shop && touch /var/log/ching-shop/worker.log
     supervisorctl reread
