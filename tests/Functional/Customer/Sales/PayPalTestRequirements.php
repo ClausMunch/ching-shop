@@ -7,8 +7,6 @@ use Testing\Functional\FunctionalTest;
 /**
  * Helper for skipping tests if requirements for functional PayPal testing are
  * not fulfilled.
- *
- * @package Testing\Functional\Sales
  */
 trait PayPalTestRequirements
 {
@@ -17,7 +15,7 @@ trait PayPalTestRequirements
         'acct1.ClientId',
         'acct1.ClientSecret',
         'test-buyer.email',
-        'test-buyer.password'
+        'test-buyer.password',
     ];
 
     /** @var bool */
@@ -26,8 +24,9 @@ trait PayPalTestRequirements
     /**
      * @param FunctionalTest $test
      *
-     * @return bool
      * @throws \PHPUnit_Framework_SkippedTestError
+     *
+     * @return bool
      */
     private function checkPayPalTestRequirements(FunctionalTest $test): bool
     {
@@ -37,8 +36,9 @@ trait PayPalTestRequirements
     /**
      * @param FunctionalTest $test
      *
-     * @return bool
      * @throws \PHPUnit_Framework_SkippedTestError
+     *
+     * @return bool
      */
     private function configOk(FunctionalTest $test): bool
     {
@@ -47,6 +47,7 @@ trait PayPalTestRequirements
                 $test->markTestSkipped(
                     "Missing required {$configKey} config for PayPal test."
                 );
+
                 return false;
             }
         }
@@ -57,8 +58,9 @@ trait PayPalTestRequirements
     /**
      * @param FunctionalTest $test
      *
-     * @return bool
      * @throws \PHPUnit_Framework_SkippedTestError
+     *
+     * @return bool
      */
     private function remoteOk(FunctionalTest $test): bool
     {
