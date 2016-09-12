@@ -8,8 +8,9 @@ use ChingShop\Http\Requests\Staff\Catalogue\Product\NewProductOptionRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionColour;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionLabel;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Catalogue\Model\CatalogueRepository;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\CatalogueRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
+use Illuminate\Http\JsonResponse;
 
 /**
  * Class ProductOptionController.
@@ -115,7 +116,7 @@ class ProductOptionController extends Controller
      * @param int               $optionId
      * @param ImageOrderRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|JsonResponse
      */
     public function putImageOrder(int $optionId, ImageOrderRequest $request)
     {

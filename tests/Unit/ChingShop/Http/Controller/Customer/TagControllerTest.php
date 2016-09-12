@@ -3,8 +3,8 @@
 namespace Testing\Unit\ChingShop\Http\Controller\Customer;
 
 use ChingShop\Http\Controllers\Customer\TagController;
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
-use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Testing\Unit\ChingShop\Http\Controller\ControllerTest;
 use Testing\Unit\MockObject;
 

@@ -2,9 +2,9 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Tag;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
-use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Mockery\MockInterface;

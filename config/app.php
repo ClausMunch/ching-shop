@@ -144,6 +144,7 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Propaganistas\LaravelFakeId\FakeIdServiceProvider::class,
 
         /*
          * Module Service Providers

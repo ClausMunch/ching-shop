@@ -3,31 +3,22 @@
 namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
-use Illuminate\Http\Request as HttpRequest;
+use ChingShop\Modules\Data\Model\Country;
 
 class SaveAddressRequest extends Request
 {
-    /**
-     * @param HttpRequest $request
-     *
-     * @return bool
-     */
-    public function authorize(HttpRequest $request): bool
-    {
-        return true;
-    }
-
     /**
      * @return array
      */
     public function rules(): array
     {
         return [
-            'name'      => 'required|string|min:2|max:255',
-            'line_one'  => 'required|string|min:2|max:255',
-            'line_two'  => 'string|max:255',
-            'post_code' => 'required|string|min:5|max:31',
-            'country'   => 'required|string|min:2|max:255',
+            'name'         => 'required|string|min:2|max:255',
+            'line_one'     => 'required|string|min:2|max:255',
+            'line_two'     => 'string|max:255',
+            'city'         => 'required|string|min:2|max:255',
+            'post_code'    => 'required|string|min:3|max:31',
+            'country_code' => 'required|in:'.Country::codesString(),
         ];
     }
 

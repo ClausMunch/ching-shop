@@ -2,7 +2,7 @@
 
 namespace Testing\Unit\ChingShop\Catalogue\Product;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Testing\Unit\UnitTest;

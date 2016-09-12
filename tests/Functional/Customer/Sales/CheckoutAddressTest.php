@@ -1,6 +1,6 @@
 <?php
 
-namespace Testing\Functional\Sales;
+namespace Testing\Functional\Customer\Sales;
 
 use Testing\Functional\FunctionalTest;
 
@@ -81,7 +81,7 @@ class CheckoutAddressTest extends FunctionalTest
         $this->see('name field is required')
             ->see('line one field is required')
             ->dontSee('line two field is required') // (because it's not)
-            ->see('post code field is required')
-            ->see('country field is required');
+            ->see('city field is required')
+            ->see('post code field is required');
     }
 }

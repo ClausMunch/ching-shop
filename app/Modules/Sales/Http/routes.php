@@ -1,5 +1,7 @@
 <?php
 
+use ChingShop\Modules\Sales\Domain\Order;
+
 Route::group(
     [
         'prefix' => 'shopping',
@@ -54,12 +56,42 @@ Route::group(
                     ]
                 )->middleware(['customer', 'checkout']);
                 Route::post(
-                    'paypal-express-checkout',
+                    'paypal/express-checkout',
                     [
-                        'as'   => 'sales.customer.paypal-express-checkout',
-                        'uses' => 'Customer\PayPalController@startExpressCheckoutAction',
+                        'as'   => 'sales.customer.paypal.start',
+                        'uses' => 'Customer\PayPalController@startAction',
                     ]
                 );
+                Route::get(
+                    'paypal/return',
+                    [
+                        'as'   => 'sales.customer.paypal.return',
+                        'uses' => 'Customer\PayPalController@returnAction',
+                    ]
+                );
+                Route::get(
+                    'paypal/cancel',
+                    [
+                        'as'   => 'sales.customer.paypal.cancel',
+                        'uses' => 'Customer\PayPalController@cancelAction',
+                    ]
+                );
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'orders',
+            ],
+            function () {
+                Route::fakeIdModel('order', Order::class);
+                Route::get(
+                    '{order}',
+                    [
+                        'as'   => 'sales.customer.order.view',
+                        'uses' => 'Customer\OrderController@viewAction',
+                    ]
+                )->middleware('customer');
             }
         );
     }

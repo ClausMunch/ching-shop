@@ -15,5 +15,8 @@ abstract class Request extends FormRequest
      *
      * @return bool
      */
-    abstract public function authorize(HttpRequest $request): bool;
+    public function authorize(HttpRequest $request): bool
+    {
+        return (bool) $request;
+    }
 }

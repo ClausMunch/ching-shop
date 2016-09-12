@@ -72,9 +72,11 @@
                 <td></td>
                 <td></td>
                 <td class="price basket-total">
+                    @if ($basket->basketItems->count())
                     £<span class="basket-total-amount"><!--
                         -->{{ $basket->totalPrice() }}
                     </span>
+                    @endif
                 </td>
                 <td></td>
             </tr>

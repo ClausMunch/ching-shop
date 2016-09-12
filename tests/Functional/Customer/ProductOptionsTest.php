@@ -2,7 +2,7 @@
 
 namespace Testing\Customer;
 
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 

@@ -1,9 +1,8 @@
 <?php
 
-namespace Testing\Functional\Sales;
+namespace Testing\Functional\Customer\Sales;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use Testing\Functional\FunctionalTest;
 use Testing\TestUtil;
 

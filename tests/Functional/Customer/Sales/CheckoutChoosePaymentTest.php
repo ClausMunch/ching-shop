@@ -1,6 +1,6 @@
 <?php
 
-namespace Testing\Functional\Sales;
+namespace Testing\Functional\Customer\Sales;
 
 use Testing\Functional\FunctionalTest;
 

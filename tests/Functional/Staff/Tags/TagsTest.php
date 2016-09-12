@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Tags;
 
-use ChingShop\Modules\Catalogue\Model\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
 use Testing\Functional\Util\CreateCatalogue;

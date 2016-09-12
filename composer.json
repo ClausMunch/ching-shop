@@ -9,7 +9,7 @@
         "php": "^7.0",
         "ext-imagick": "^3.4",
         "ext-redis": "*",
-        "laravel/framework": "~5.2",
+        "laravel/framework": "~5.2.0",
         "graham-campbell/htmlmin": "^4.1",
         "doctrine/dbal": "^2.5",
         "predis/predis": "^1.0",
@@ -23,7 +23,8 @@
         "laracasts/flash": "^2.0",
         "guzzlehttp/guzzle": "^6.2",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
-        "paypal/rest-api-sdk-php": "^1.7"
+        "paypal/rest-api-sdk-php": "^1.7",
+        "propaganistas/laravel-fakeid": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
@@ -37,7 +38,8 @@
         "johnkary/phpunit-speedtrap": "^1.0.1",
         "pda/pheanstalk": "^3.0",
         "squizlabs/php_codesniffer": "^2.5",
-        "phpmd/phpmd" : "@stable"
+        "phpmd/phpmd" : "@stable",
+        "phpcasperjs/phpcasperjs": "dev-typehints"
     },
 
     "autoload": {
@@ -79,6 +81,10 @@
         {
             "type": "git",
             "url": "https://github.com/laravel/homestead"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/hughgrigg/php-casperjs"
         }
     ]
 }

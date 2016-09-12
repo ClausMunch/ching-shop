@@ -5,9 +5,9 @@ namespace ChingShop\Modules\Catalogue\Http\Controllers\Staff;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\Requests\Staff\Catalogue\NewTagRequest;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Catalogue\Model\Product\ProductRepository;
-use ChingShop\Modules\Catalogue\Model\Tag\Tag;
-use ChingShop\Modules\Catalogue\Model\Tag\TagRepository;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Illuminate\Http\Request;
 use McCool\LaravelAutoPresenter\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -80,7 +80,7 @@ class TagController extends Controller
      *
      * @throws \Exception
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(int $tagId)
     {

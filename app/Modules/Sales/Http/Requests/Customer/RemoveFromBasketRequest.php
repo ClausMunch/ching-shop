@@ -3,7 +3,6 @@
 namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
-use Illuminate\Http\Request as HttpRequest;
 
 class RemoveFromBasketRequest extends Request
 {
@@ -22,15 +21,5 @@ class RemoveFromBasketRequest extends Request
         return [
             self::BASKET_ITEM_ID => 'required|integer|exists:basket_items,id',
         ];
-    }
-
-    /**
-     * @param HttpRequest $request
-     *
-     * @return bool
-     */
-    public function authorize(HttpRequest $request): bool
-    {
-        return true;
     }
 }

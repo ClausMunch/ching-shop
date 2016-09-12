@@ -1,10 +1,10 @@
 <?php
 
 use ChingShop\Image\Image;
-use ChingShop\Modules\Catalogue\Model\Inventory\StockItem;
-use ChingShop\Modules\Catalogue\Model\Price\Price;
-use ChingShop\Modules\Catalogue\Model\Product\Product;
-use ChingShop\Modules\Catalogue\Model\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
+use ChingShop\Modules\Catalogue\Domain\Price\Price;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 
 class ProductsTableSeeder extends Seed
 {
