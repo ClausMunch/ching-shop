@@ -1,8 +1,7 @@
 <?php
 
-namespace Testing\Functional\Sales;
+namespace Testing\Functional\Customer\Sales;
 
-use Testing\Functional\Customer\Sales\SalesInteractions;
 use Testing\Functional\FunctionalTest;
 
 /**

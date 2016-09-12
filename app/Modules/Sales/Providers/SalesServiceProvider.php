@@ -70,7 +70,16 @@ class SalesServiceProvider extends ServiceProvider
             ApiContext::class,
             function () {
                 $apiContext = new ApiContext();
-                $apiContext->setConfig(config('payment.paypal'));
+                $apiContext->setConfig(
+                    [
+                        'acct1.ClientId'     => config(
+                            'payment.paypal.acct1.ClientId'
+                        ),
+                        'acct1.ClientSecret' => config(
+                            'payment.paypal.acct1.ClientSecret'
+                        ),
+                    ]
+                );
 
                 return $apiContext;
             }

@@ -167,7 +167,7 @@ class PayPalCheckout
         return (new Transaction())
             ->setAmount($this->amount())
             ->setItemList($this->itemList())
-            ->setDescription('TODO')
+            ->setDescription('Ching Shop Purchase')
             ->setInvoiceNumber(uniqid($this->basket->id, false));
     }
 

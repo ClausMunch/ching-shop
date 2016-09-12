@@ -89,7 +89,7 @@ class PayPalController extends Controller
      */
     public function cancelAction()
     {
-        return $this->webUi->redirectAway('TODO');
+        return $this->webUi->redirectAway(url());
     }
 
     /**

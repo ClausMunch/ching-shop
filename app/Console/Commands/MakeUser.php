@@ -31,8 +31,6 @@ class MakeUser extends Command
      * Execute the console command.
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
-     *
-     * @return mixed
      */
     public function handle()
     {

@@ -2,9 +2,9 @@
 
 namespace Testing\Functional\Customer\Sales;
 
+use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Address;
-use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
@@ -27,6 +27,14 @@ trait SalesInteractions
     private function createProductAndAddToBasket(FunctionalTest $test): Product
     {
         $this->productInBasket = $this->createProduct();
+        $this->productInBasket->prices()->save(
+            new Price(
+                [
+                    'units'    => random_int(1, 99),
+                    'subunits' => random_int(1, 99),
+                ]
+            )
+        );
         $this->createProductOptionFor($this->productInBasket);
         $this->addProductToBasket($this->productInBasket, $test);
 

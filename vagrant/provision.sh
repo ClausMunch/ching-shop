@@ -14,9 +14,17 @@ if ! grep -q 'COMPOSER_DISABLE_XDEBUG_WARN' ~/.bashrc; then
     echo "export COMPOSER_DISABLE_XDEBUG_WARN=1" >> ~/.bashrc
 fi
 
+if ! grep -q 'PHANTOMJS_EXECUTABLE' ~/.bashrc; then
+    echo "export PHANTOMJS_EXECUTABLE=$HOME/ching-shop/node_modules/phantomjs-prebuilt/bin/phantomjs" >> ~/.bashrc
+fi
+
 if ! grep -q '.composer/vendor/bin' ~/.bashrc; then
     export PATH=$PATH:$HOME/.composer/vendor/bin/
     echo 'export PATH=$PATH:$HOME/.composer/vendor/bin/' >> ~/.bashrc
+fi
+
+if ! grep -q 'xdebug_on' ~/.bashrc; then
+    echo "alias xdebug_on=\"export XDEBUG_CONFIG='idekey=PHPSTORM'\"" >> ~/.bashrc
 fi
 
 source $HOME/.bashrc

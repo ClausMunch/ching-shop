@@ -12,6 +12,6 @@
 
     @include('flash::message')
 
-    <h1>Order #<span>{{ $order->publicId() }}</span></h1>
+    <h1>Order #<span id="order-id">{{ $order->publicId() }}</span></h1>
 
 @endsection
