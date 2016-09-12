@@ -6,7 +6,6 @@ use Browser\Casper;
 
 /**
  * Use the test browser functionality as a trait.
- * @package Testing\Functional
  */
 trait Browser
 {
@@ -43,14 +42,15 @@ trait Browser
      *
      * @param string $suffix
      */
-    private function browserScreenShot(string $suffix = '') {
+    private function browserScreenShot(string $suffix = '')
+    {
         $this->browser()->capturePage(
             storage_path(
-                'test/browser/' . date(DATE_ISO8601) . "-{$suffix}.png"
+                'test/browser/'.date(DATE_ISO8601)."-{$suffix}.png"
             )
         );
         $htmlCapture = storage_path(
-            'test/browser/' . date(DATE_ISO8601) . "-{$suffix}-foobar.html"
+            'test/browser/'.date(DATE_ISO8601)."-{$suffix}-foobar.html"
         );
         $this->browser()->evaluate(<<<js
 this.echo('Saving HTML to {$htmlCapture}');
