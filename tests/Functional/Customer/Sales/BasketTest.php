@@ -119,7 +119,12 @@ class BasketTest extends FunctionalTest
         $product = $this->createProduct();
         $this->createProductOptionFor($product);
 
-        // When we add it to the basket three times;
+        // And we have an empty basket;
+        $this->actingAs($this->customerUser())
+            ->visit(route('product::view', [$product->id, $product->slug]))
+            ->assertEquals(0, $this->getElementText('#mini-basket-count'));
+
+        // When we add the product to the basket three times;
         $this->repeat(
             3,
             function () use ($product) {
@@ -132,11 +137,8 @@ class BasketTest extends FunctionalTest
 
         // Then we should see the count in the mini basket.
         $this->actingAs($this->customerUser())
-            ->visit('/')
-            ->assertEquals(
-                2,
-                (int) $this->getElement('#mini-basket-count')->text()
-            );
+            ->visit(route('product::view', [$product->id, $product->slug]))
+            ->assertEquals(2, $this->getElementText('#mini-basket-count'));
     }
 
     /**

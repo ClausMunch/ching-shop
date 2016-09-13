@@ -7,8 +7,10 @@ use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
 use ChingShop\Modules\Sales\Domain\Clerk;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Foundation\Application;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
+use Jenssegers\Optimus\Optimus;
 use PayPal\Rest\ApiContext;
 use View;
 
@@ -82,6 +84,13 @@ class SalesServiceProvider extends ServiceProvider
                 );
 
                 return $apiContext;
+            }
+        );
+
+        $this->app->bind(
+            Optimus::class,
+            function (Application $app) {
+                return $app['fakeid'];
             }
         );
     }
