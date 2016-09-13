@@ -39,7 +39,7 @@ function appSetup
 {
     cd ~/ching-shop
     cp -n .env.example .env
-    composer install --quiet --no-interaction
+    composer install --quiet --no-interaction --no-scripts
     bundler install
     php ~/ching-shop/artisan config:clear
     php artisan key:generate
@@ -48,6 +48,7 @@ function appSetup
     gulp --silent
     phpcs --config-set colors 1
     phpcs --config-set severity 1
+    composer install --quiet --no-interaction
 }
 appSetup
 

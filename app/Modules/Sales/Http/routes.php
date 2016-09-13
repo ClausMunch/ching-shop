@@ -1,7 +1,5 @@
 <?php
 
-use ChingShop\Modules\Sales\Domain\Order;
-
 Route::group(
     [
         'prefix' => 'shopping',
@@ -84,9 +82,8 @@ Route::group(
                 'prefix' => 'orders',
             ],
             function () {
-                Route::fakeIdModel('order', Order::class);
                 Route::get(
-                    '{order}',
+                    '{orderId}',
                     [
                         'as'   => 'sales.customer.order.view',
                         'uses' => 'Customer\OrderController@viewAction',
