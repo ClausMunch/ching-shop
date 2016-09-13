@@ -39,8 +39,9 @@ class OrderController extends Controller
     /**
      * @param int $orderId
      *
-     * @return string
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return string
      */
     public function viewAction(int $orderId)
     {
