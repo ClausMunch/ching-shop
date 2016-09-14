@@ -6,6 +6,7 @@ use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Modules\Sales\Domain\Payment\Cashier;
 use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
 use PayPal\Rest\ApiContext;
 use Psr\Log\LoggerInterface;
 
@@ -112,15 +113,29 @@ class PayPalRepository
         $this->log->info("Executing PayPal payment {$paymentId} / {$payerId}");
         $execution = $this->createExecution($paymentId, $payerId);
 
-        if ($execution->isApproved()) {
-            $settlement = PayPalSettlement::create(
-                [
-                    'payment_id' => $paymentId,
-                    'payer_id'   => $payerId,
-                ]
-            );
+        try {
+            if ($execution->isApproved()) {
+                $settlement = PayPalSettlement::create(
+                    [
+                        'payment_id' => $paymentId,
+                        'payer_id'   => $payerId,
+                    ]
+                );
 
-            return $this->cashier->settle($execution->basket(), $settlement);
+                return $this->cashier->settle(
+                    $execution->basket(),
+                    $settlement
+                );
+            }
+        } catch (\Throwable $e) {
+            $this->log->error(
+                sprintf(
+                    'Error executing PayPal payment %s / %s: %s',
+                    $paymentId,
+                    $payerId,
+                    $e->getMessage()
+                )
+            );
         }
 
         return new Order();
