@@ -33,6 +33,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $err)
     {
+        $this->log->notice(
+            "{$err->getMessage()} ({$err->getFile()}:{$err->getLine()})"
+        );
+
         if ($err instanceof ModelNotFoundException) {
             $err = new NotFoundHttpException($err->getMessage(), $err);
         }
