@@ -6,7 +6,6 @@ use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Modules\Sales\Domain\Payment\Cashier;
 use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
 use PayPal\Rest\ApiContext;
 use Psr\Log\LoggerInterface;
 
