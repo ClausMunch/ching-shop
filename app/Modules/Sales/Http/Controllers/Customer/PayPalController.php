@@ -77,7 +77,7 @@ class PayPalController extends Controller
 
             return $this->webUi->redirect(
                 'sales.customer.order.view',
-                [$order]
+                [$order->getRouteKey()]
             );
         }
 
