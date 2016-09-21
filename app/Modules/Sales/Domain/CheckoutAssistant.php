@@ -3,8 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain;
 
 /**
- * Class CheckoutAssistant
- * @package ChingShop\Modules\Sales\Domain
+ * Class CheckoutAssistant.
  */
 class CheckoutAssistant
 {

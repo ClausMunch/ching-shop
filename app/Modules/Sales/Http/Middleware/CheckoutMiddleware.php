@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class CheckoutMiddleware
- * @package ChingShop\Modules\Sales\Http\Middleware
+ * Class CheckoutMiddleware.
  */
 class CheckoutMiddleware
 {

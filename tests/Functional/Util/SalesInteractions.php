@@ -7,12 +7,9 @@ use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Address;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
-use Testing\Functional\Util\CreateCatalogue;
 
 /**
  * Complete sequences of sales interactions as a customer.
- *
- * @package Testing\Functional\Util
  */
 trait SalesInteractions
 {
