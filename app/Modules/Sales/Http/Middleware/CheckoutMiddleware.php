@@ -7,6 +7,10 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class CheckoutMiddleware
+ * @package ChingShop\Modules\Sales\Http\Middleware
+ */
 class CheckoutMiddleware
 {
     /** @var Clerk */

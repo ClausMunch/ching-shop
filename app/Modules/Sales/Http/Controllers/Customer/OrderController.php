@@ -26,11 +26,15 @@ class OrderController extends Controller
     /**
      * OrderController constructor.
      *
-     * @param Order $orderResource
-     * @param WebUi $webUi
+     * @param Order   $orderResource
+     * @param WebUi   $webUi
+     * @param Optimus $optimus
      */
-    public function __construct(Order $orderResource, WebUi $webUi, Optimus $optimus)
-    {
+    public function __construct(
+        Order $orderResource,
+        WebUi $webUi,
+        Optimus $optimus
+    ) {
         $this->orderResource = $orderResource;
         $this->webUi = $webUi;
         $this->optimus = $optimus;

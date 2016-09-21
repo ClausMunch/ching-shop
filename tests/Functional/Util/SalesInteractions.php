@@ -1,6 +1,6 @@
 <?php
 
-namespace Testing\Functional\Customer\Sales;
+namespace Testing\Functional\Util;
 
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
@@ -9,6 +9,11 @@ use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 
+/**
+ * Complete sequences of sales interactions as a customer.
+ *
+ * @package Testing\Functional\Util
+ */
 trait SalesInteractions
 {
     use CustomerUsers, CreateCatalogue;

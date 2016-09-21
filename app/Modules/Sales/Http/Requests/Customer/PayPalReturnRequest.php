@@ -4,6 +4,10 @@ namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
 
+/**
+ * Class PayPalReturnRequest
+ * @package ChingShop\Modules\Sales\Http\Requests\Customer
+ */
 class PayPalReturnRequest extends Request
 {
     /**

@@ -81,16 +81,7 @@ class Cashier
         $order->orderItems()->saveMany(
             array_map(
                 function (BasketItem $basketItem) {
-                    $orderItem = new OrderItem();
-                    $orderItem->basketItem()->associate($basketItem);
-
-                    $orderItem->stockItem()->save(
-                        $this->inventory->allocate(
-                            $basketItem->productOption
-                        )
-                    );
-
-                    return $orderItem;
+                    return $this->basketItemToOrderItem($basketItem);
                 },
                 $basket->basketItems->all()
             )
@@ -99,5 +90,34 @@ class Cashier
         $basket->delete();
 
         return $order;
+    }
+
+    /**
+     * @param BasketItem $basketItem
+     *
+     * @return OrderItem
+     * @throws \RuntimeException
+     */
+    private function basketItemToOrderItem(BasketItem $basketItem)
+    {
+        $orderItem = new OrderItem();
+        $orderItem->basketItem()->associate($basketItem);
+
+        $stockItem = $this->inventory->allocate(
+            $basketItem->productOption
+        );
+
+        if (!$stockItem->isAvailable()) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Failed to allocate stock for product option `%s`.',
+                    $basketItem->productOption->id
+                )
+            );
+        }
+
+        $orderItem->stockItem()->save($stockItem);
+
+        return $orderItem;
     }
 }

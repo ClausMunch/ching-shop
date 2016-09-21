@@ -2,6 +2,10 @@
 
 namespace ChingShop\Modules\Sales\Domain;
 
+/**
+ * Class CheckoutAssistant
+ * @package ChingShop\Modules\Sales\Domain
+ */
 class CheckoutAssistant
 {
     /** @var Clerk */

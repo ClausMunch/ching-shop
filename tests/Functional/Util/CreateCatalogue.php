@@ -4,6 +4,7 @@ namespace Testing\Functional\Util;
 
 use ChingShop\Image\Image;
 use ChingShop\Modules\Catalogue\Domain\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
@@ -53,6 +54,7 @@ trait CreateCatalogue
             'label' => uniqid('ProductOption', false),
         ]);
         $product->options()->save($productOption);
+        $productOption->stockItems()->save(new StockItem());
 
         return $productOption;
     }

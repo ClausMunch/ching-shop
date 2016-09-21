@@ -90,7 +90,7 @@ class Image extends Model implements HttpCrudInterface
             return secure_asset(self::DIR.$this->filename());
         }
 
-        $url = isset($this->url) ? (string) $this->url : '';
+        $url = $this->url ? (string) $this->url : '';
         $path = pathinfo($url);
         if (empty($path['extension'])) {
             return $url;

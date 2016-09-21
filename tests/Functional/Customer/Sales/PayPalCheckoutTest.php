@@ -2,39 +2,62 @@
 
 namespace Testing\Functional\Customer\Sales;
 
-use Testing\Functional\Browser;
 use Testing\Functional\FunctionalTest;
+use Testing\Functional\Util\MockPayPal;
+use Testing\Functional\Util\SalesInteractions;
 
+/**
+ * Class PayPalCheckoutTest
+ * @package Testing\Functional\Customer\Sales
+ */
 class PayPalCheckoutTest extends FunctionalTest
 {
-    use PayPalTestRequirements, SalesInteractions, Browser;
+    use SalesInteractions, MockPayPal;
 
     /**
-     * Skip tests if PayPal config is missing.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->checkPayPalTestRequirements($this);
-    }
-
-    /**
-     * Should be able to get a PayPal checkout redirect.
+     * Should be able to complete checkout with PayPal.
      *
-     * @slowThreshold 20000
+     * @slowThreshold 1800
      */
     public function testPayPalCheckout()
     {
-        // Given we've got to the choose payment page;
+        // Given we are at the payment method page in the checkout process;
+        $this->createProductAndAddToBasket($this);
         $this->completeCheckoutAddress($this);
 
-        // And we choose to pay with PayPal;
-        $form = $this->getForm('Pay with PayPal');
-        $this->call($form->getMethod(), $form->getUri());
+        // When we pay with PayPal;
+        $this->customerWillReturnFromPayPal('approved');
+        $this->press('Pay with PayPal');
 
-        $this->markTestIncomplete(
-            'PayPal checkout integration test incomplete.'
-        );
+        // Then our order should be confirmed.
+        $this->see('order is confirmed');
+    }
+
+    /**
+     * An error during PayPal checkout should be handled gracefully.
+     *
+     * @slowThreshold 1100
+     */
+    public function testErrorDuringPayPalCheckout()
+    {
+        // Given we are at the payment method page in the checkout process;
+        $this->createProductAndAddToBasket($this);
+        $this->completeCheckoutAddress($this);
+
+        // When we pay with PayPal and something goes wrong;
+        $this->customerWillReturnFromPayPal('failed');
+        $this->press('Pay with PayPal');
+
+        // Then we should see a reassuring and useful page.
+        $this->see('Something went wrong');
+        $this->see('have not been charged');
+    }
+
+    /**
+     * Should be able to cancel PayPal checkout.
+     */
+    public function testPayPalCancel()
+    {
+        $this->markTestIncomplete('PayPal cancel not yet implemented.');
     }
 }

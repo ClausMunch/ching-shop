@@ -4,6 +4,10 @@ namespace ChingShop\Modules\Sales\Domain\Basket;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
 
+/**
+ * Class BasketPresenter
+ * @package ChingShop\Modules\Sales\Domain\Basket
+ */
 class BasketPresenter extends BasePresenter
 {
     /** @var Basket */

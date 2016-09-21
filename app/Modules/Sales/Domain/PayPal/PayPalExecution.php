@@ -83,9 +83,8 @@ class PayPalExecution
     private function payment(): Payment
     {
         if ($this->payment === null) {
-            $this->payment = $this->return
-                ->payment()
-                ->execute($this->execution(), $this->context);
+            $this->payment = $this->return->payment();
+            $this->payment->execute($this->execution(), $this->context);
         }
 
         return $this->payment;
