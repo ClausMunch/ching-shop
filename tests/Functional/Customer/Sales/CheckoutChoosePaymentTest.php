@@ -3,6 +3,7 @@
 namespace Testing\Functional\Customer\Sales;
 
 use Testing\Functional\FunctionalTest;
+use Testing\Functional\Util\SalesInteractions;
 
 /**
  * Class CheckoutChoosePaymentTest.
@@ -40,6 +41,6 @@ class CheckoutChoosePaymentTest extends FunctionalTest
      */
     public function testCanGoToPayByCard()
     {
-        self::markTestIncomplete();
+        self::markTestIncomplete('Card payment is not yet implemented');
     }
 }

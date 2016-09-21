@@ -9,6 +9,9 @@ use ChingShop\Modules\User\Model\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Session\Store;
 
+/**
+ * Class Clerk.
+ */
 class Clerk
 {
     const SESSION_BASKET = 'basket_id';

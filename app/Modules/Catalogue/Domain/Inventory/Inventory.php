@@ -34,7 +34,7 @@ class Inventory
             ->has('orderItem', '<', 1)
             ->first();
 
-        if (!$stockItem) {
+        if (!$stockItem instanceof StockItem) {
             return new StockItem();
         }
 

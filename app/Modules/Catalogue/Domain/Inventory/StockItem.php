@@ -43,4 +43,12 @@ class StockItem extends Model
     {
         return $this->belongsTo(OrderItem::class);
     }
+
+    /**
+     * @return bool
+     */
+    public function isAvailable()
+    {
+        return $this->id xor $this->orderItem;
+    }
 }

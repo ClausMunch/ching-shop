@@ -24,6 +24,9 @@ class PayPalCheckout
 {
     const DEFAULT_CURRENCY = 'GBP';
 
+    const RETURN_ROUTE = 'sales.customer.paypal.return';
+    const CANCEL_RETURN = 'sales.customer.paypal.cancel';
+
     /** @var Basket */
     private $basket;
 
@@ -179,12 +182,8 @@ class PayPalCheckout
     private function redirectUrls(): RedirectUrls
     {
         return (new RedirectUrls())
-            ->setReturnUrl(
-                route('sales.customer.paypal.return')
-            )
-            ->setCancelUrl(
-                route('sales.customer.paypal.cancel')
-            );
+            ->setReturnUrl(route(self::RETURN_ROUTE))
+            ->setCancelUrl(route(self::CANCEL_RETURN));
     }
 
     /**
@@ -195,12 +194,13 @@ class PayPalCheckout
     private function payment(): Payment
     {
         if ($this->payment === null) {
-            $this->payment = (new Payment())
-                ->setIntent('sale')
-                ->setPayer($this->payer())
-                ->setRedirectUrls($this->redirectUrls())
-                ->setTransactions([$this->transaction()])
-                ->create($this->apiContext);
+            $this->payment = app(Payment::class);
+            $this->payment->setIntent('sale');
+            $this->payment->setPayer($this->payer());
+            $this->payment->setRedirectUrls($this->redirectUrls());
+            $this->payment->setTransactions([$this->transaction()]);
+
+            $this->payment->create($this->apiContext);
         }
 
         return $this->payment;

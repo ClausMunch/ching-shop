@@ -3,6 +3,7 @@
 namespace Testing\Functional\Customer\Sales;
 
 use Testing\Functional\FunctionalTest;
+use Testing\Functional\Util\SalesInteractions;
 
 /**
  * Class CheckoutAddressTest.

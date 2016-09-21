@@ -27,8 +27,7 @@
         <label for="description">
             Product description
         </label>
-        <textarea type="text"
-               class="form-control"
+        <textarea class="form-control"
                id="description"
                name="description"
                minlength="16"

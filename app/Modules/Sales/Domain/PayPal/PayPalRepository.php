@@ -104,6 +104,7 @@ class PayPalRepository
      *
      * @throws \Exception
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      *
      * @return Order
      */
@@ -144,14 +145,26 @@ class PayPalRepository
      * @param string $paymentId
      * @param string $payerId
      *
+     * @throws \RuntimeException
+     *
      * @return PayPalExecution
      */
     private function createExecution(string $paymentId, string $payerId)
     {
+        /** @var Payment $payment */
+        $payment = app(Payment::class);
+
+        $initiation = $this->loadInitiation($paymentId);
+        if (!$initiation instanceof PayPalInitiation || !$initiation->id) {
+            throw new \RuntimeException(
+                "Failed to load PayPal initiation for payment `{$paymentId}`."
+            );
+        }
+
         return new PayPalExecution(
-            $this->loadInitiation($paymentId),
+            $initiation,
             new PayPalReturn(
-                Payment::get($paymentId, $this->apiContext),
+                $payment->get($paymentId, $this->apiContext),
                 $payerId
             ),
             $this->apiContext

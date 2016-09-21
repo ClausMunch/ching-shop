@@ -4,6 +4,9 @@ namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 
 use ChingShop\Http\Requests\Request;
 
+/**
+ * Class AddToBasketRequest.
+ */
 class AddToBasketRequest extends Request
 {
     /**

@@ -5,6 +5,9 @@ namespace ChingShop\Modules\Sales\Http\Requests\Customer;
 use ChingShop\Http\Requests\Request;
 use ChingShop\Modules\Data\Model\Country;
 
+/**
+ * Class SaveAddressRequest.
+ */
 class SaveAddressRequest extends Request
 {
     /**

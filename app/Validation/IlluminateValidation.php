@@ -43,7 +43,7 @@ class IlluminateValidation implements ValidationInterface
      */
     public function messages(): array
     {
-        if (!isset($this->validation)) {
+        if ($this->validation === null) {
             return [];
         }
 

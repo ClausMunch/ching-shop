@@ -9,6 +9,9 @@ use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
 use ChingShop\Modules\Sales\Domain\Clerk;
 use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 
+/**
+ * Class CheckoutController.
+ */
 class CheckoutController extends Controller
 {
     /** @var Clerk */

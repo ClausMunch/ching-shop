@@ -68,7 +68,7 @@ class Product extends Model implements HasPresenter, ImageOwner
      */
     public function images(): BelongsToMany
     {
-        if (isset($this->imagesRelationship)) {
+        if ($this->imagesRelationship !== null) {
             return $this->imagesRelationship;
         }
 

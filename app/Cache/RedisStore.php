@@ -19,6 +19,7 @@ class RedisStore extends IlluminateRedisStore
         $value = parent::get($key);
 
         if ($value === false) {
+            /* @noinspection PhpInconsistentReturnPointsInspection */
             return;
         }
 
