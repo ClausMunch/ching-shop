@@ -104,9 +104,9 @@ class PayPalRepository
      *
      * @throws \Exception
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      *
      * @return Order
-     * @throws \RuntimeException
      */
     public function executePayment(string $paymentId, string $payerId)
     {
@@ -145,8 +145,9 @@ class PayPalRepository
      * @param string $paymentId
      * @param string $payerId
      *
-     * @return PayPalExecution
      * @throws \RuntimeException
+     *
+     * @return PayPalExecution
      */
     private function createExecution(string $paymentId, string $payerId)
     {

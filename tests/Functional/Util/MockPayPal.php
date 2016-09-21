@@ -7,11 +7,6 @@ use Mockery;
 use Mockery\MockInterface;
 use PayPal\Api\Payment;
 
-/**
- * @package Testing\Functional\Customer\Sales
- *
- * Mock out external PayPal interactions in tests.
- */
 trait MockPayPal
 {
     /** @var Payment|MockInterface */
@@ -52,8 +47,9 @@ trait MockPayPal
     }
 
     /**
-     * @return Payment|MockInterface
      * @throws \InvalidArgumentException
+     *
+     * @return Payment|MockInterface
      */
     private function mockPayPalPayment()
     {

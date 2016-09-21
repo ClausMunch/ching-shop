@@ -7,8 +7,7 @@ use Testing\Functional\Util\MockPayPal;
 use Testing\Functional\Util\SalesInteractions;
 
 /**
- * Class PayPalCheckoutTest
- * @package Testing\Functional\Customer\Sales
+ * Class PayPalCheckoutTest.
  */
 class PayPalCheckoutTest extends FunctionalTest
 {

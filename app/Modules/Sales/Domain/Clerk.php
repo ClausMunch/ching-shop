@@ -10,8 +10,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Session\Store;
 
 /**
- * Class Clerk
- * @package ChingShop\Modules\Sales\Domain
+ * Class Clerk.
  */
 class Clerk
 {

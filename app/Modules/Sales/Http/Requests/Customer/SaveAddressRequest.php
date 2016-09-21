@@ -6,8 +6,7 @@ use ChingShop\Http\Requests\Request;
 use ChingShop\Modules\Data\Model\Country;
 
 /**
- * Class SaveAddressRequest
- * @package ChingShop\Modules\Sales\Http\Requests\Customer
+ * Class SaveAddressRequest.
  */
 class SaveAddressRequest extends Request
 {

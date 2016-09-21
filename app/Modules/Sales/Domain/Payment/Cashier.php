@@ -95,8 +95,9 @@ class Cashier
     /**
      * @param BasketItem $basketItem
      *
-     * @return OrderItem
      * @throws \RuntimeException
+     *
+     * @return OrderItem
      */
     private function basketItemToOrderItem(BasketItem $basketItem)
     {
