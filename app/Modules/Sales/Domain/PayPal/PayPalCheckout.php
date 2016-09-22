@@ -25,7 +25,7 @@ class PayPalCheckout
     const DEFAULT_CURRENCY = 'GBP';
 
     const RETURN_ROUTE = 'sales.customer.paypal.return';
-    const CANCEL_RETURN = 'sales.customer.paypal.cancel';
+    const CANCEL_ROUTE = 'sales.customer.paypal.cancel';
 
     /** @var Basket */
     private $basket;
@@ -183,7 +183,7 @@ class PayPalCheckout
     {
         return (new RedirectUrls())
             ->setReturnUrl(route(self::RETURN_ROUTE))
-            ->setCancelUrl(route(self::CANCEL_RETURN));
+            ->setCancelUrl(route(self::CANCEL_ROUTE));
     }
 
     /**
