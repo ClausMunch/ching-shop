@@ -58,9 +58,9 @@ class PayPalController extends Controller
      *
      * @throws \Exception
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      *
      * @return RedirectResponse
-     * @throws \RuntimeException
      */
     public function returnAction(PayPalReturnRequest $request)
     {
