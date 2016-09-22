@@ -7,10 +7,7 @@ use Testing\Generator\GeneratesValues;
 use Testing\TestCase;
 
 /**
- * Class FunctionalTest
- * @package Testing\Functional
- *
- * General behaviours for functional tests.
+ * Class FunctionalTest.
  */
 abstract class FunctionalTest extends TestCase
 {

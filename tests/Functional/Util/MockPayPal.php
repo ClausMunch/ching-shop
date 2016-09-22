@@ -81,8 +81,9 @@ trait MockPayPal
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     private function mockPayPalPaymentId()
     {
