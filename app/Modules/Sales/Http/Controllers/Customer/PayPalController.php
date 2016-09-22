@@ -58,6 +58,7 @@ class PayPalController extends Controller
      *
      * @throws \Exception
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      *
      * @return RedirectResponse
      */
@@ -89,7 +90,12 @@ class PayPalController extends Controller
      */
     public function cancelAction()
     {
-        return $this->webUi->redirectAway(url());
+        $this->webUi->warningMessage(
+            'No worries, your PayPal payment was cancelled.
+            Please choose a payment method'
+        );
+
+        return $this->webUi->redirect('sales.customer.checkout.choose-payment');
     }
 
     /**

@@ -105,6 +105,14 @@ class WebUi
     }
 
     /**
+     * @param string $message
+     */
+    public function warningMessage(string $message)
+    {
+        $this->flashNotifier->warning($message);
+    }
+
+    /**
      * @param string $url
      *
      * @return \Illuminate\Http\RedirectResponse

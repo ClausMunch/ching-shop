@@ -57,6 +57,16 @@ class PayPalCheckoutTest extends FunctionalTest
      */
     public function testPayPalCancel()
     {
-        $this->markTestIncomplete('PayPal cancel not yet implemented.');
+        // Given we are at the payment method page in the checkout process;
+        $this->createProductAndAddToBasket($this);
+        $this->completeCheckoutAddress($this);
+
+        // When we pay with PayPal and then cancel;
+        $this->customerWillCancelPayPal();
+        $this->press('Pay with PayPal');
+
+        // Then we should see a reassuring and useful page.
+        $this->see('No worries');
+        $this->see('cancelled');
     }
 }

@@ -19,8 +19,6 @@ trait MockPayPal
      */
     private function customerWillReturnFromPayPal(string $status = 'approved')
     {
-        $this->mockPayPalPayment()->id = uniqid('paypal-payment', false);
-
         $this->mockPayPalPayment()
             ->shouldReceive('getApprovalLink')
             ->zeroOrMoreTimes()
@@ -29,7 +27,7 @@ trait MockPayPal
                     PayPalCheckout::RETURN_ROUTE,
                     [
                         'token'     => uniqid('paypal-token', false),
-                        'paymentId' => $this->mockPayPalPayment()->id,
+                        'paymentId' => $this->mockPayPalPaymentId(),
                         'payerID'   => uniqid('paypal-payer', false),
                     ]
                 )
@@ -44,6 +42,20 @@ trait MockPayPal
             ->shouldReceive('getState')
             ->zeroOrMoreTimes()
             ->andReturn($status);
+    }
+
+    /**
+     * Simulate the customer going to PayPal checkout and then cancelling from
+     * there.
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function customerWillCancelPayPal()
+    {
+        $this->mockPayPalPayment()
+            ->shouldReceive('getApprovalLink')
+            ->zeroOrMoreTimes()
+            ->andReturn(route(PayPalCheckout::CANCEL_ROUTE));
     }
 
     /**
@@ -66,5 +78,19 @@ trait MockPayPal
         }
 
         return $this->payPalPayment;
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     *
+     * @return string
+     */
+    private function mockPayPalPaymentId()
+    {
+        if (!$this->mockPayPalPayment()->id) {
+            $this->mockPayPalPayment()->id = uniqid('paypal-payment', false);
+        }
+
+        return $this->mockPayPalPayment()->id;
     }
 }

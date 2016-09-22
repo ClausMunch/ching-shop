@@ -123,7 +123,10 @@ class BasketTest extends FunctionalTest
         // And we have an empty basket;
         $this->actingAs($this->customerUser())
             ->visit(route('product::view', [$product->id, $product->slug]))
-            ->assertEquals(0, $this->getElementText('#mini-basket-count'));
+            ->assertEquals(
+                0,
+                (int) $this->getElementText('#mini-basket-count')
+            );
 
         // When we add the product to the basket three times;
         $this->repeat(

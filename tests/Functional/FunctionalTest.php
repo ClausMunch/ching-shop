@@ -6,9 +6,25 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Testing\Generator\GeneratesValues;
 use Testing\TestCase;
 
+/**
+ * Class FunctionalTest.
+ */
 abstract class FunctionalTest extends TestCase
 {
     use GeneratesValues, DatabaseTransactions;
+
+    /**
+     * Confirm test database is being used.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        self::assertEquals(
+            'testing',
+            $this->app->make('db')->connection()->getName()
+        );
+    }
 
     /**
      * Close Mockery.
