@@ -87,6 +87,9 @@ class Cashier
             )
         );
 
+        $order->address()->associate($basket->address);
+        $order->save();
+
         $basket->delete();
 
         return $order;

@@ -39,6 +39,11 @@ class CreateBasketsTable extends Migration
                     ->on('orders')
                     ->onDelete('cascade');
 
+                /*
+                 * A basket may have an address.
+                 * @see \CreateAddressesTable
+                 */
+
                 $table->timestamps();
                 $table->softDeletes();
             }

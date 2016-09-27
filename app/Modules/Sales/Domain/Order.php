@@ -22,6 +22,7 @@ use Propaganistas\LaravelFakeId\FakeIdTrait;
  * @property \Carbon\Carbon         $deleted_at
  * @property OrderItem[]|Collection $orderItems
  * @property User                   $user
+ * @property Address                $address
  */
 class Order extends Model
 {
@@ -69,5 +70,15 @@ class Order extends Model
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
+    }
+
+    /**
+     * An order has a delivery address.
+     *
+     * @return BelongsTo
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 }

@@ -17,6 +17,6 @@
         <li>{{ $basket->address->line_two }}</li>
     @endif
     <li>{{ $basket->address->post_code }}</li>
-    <li>{{ $basket->address->country }}</li>
+    <li>{{ $basket->address->country_code }}</li>
 </ul>
 @endif

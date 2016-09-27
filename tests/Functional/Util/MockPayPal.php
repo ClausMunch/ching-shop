@@ -7,6 +7,9 @@ use Mockery;
 use Mockery\MockInterface;
 use PayPal\Api\Payment;
 
+/**
+ * Class MockPayPal.
+ */
 trait MockPayPal
 {
     /** @var Payment|MockInterface */

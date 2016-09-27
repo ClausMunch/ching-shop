@@ -32,7 +32,7 @@ source $HOME/.bashrc
 git config --global core.excludesfile ~/.gitignore_global
 echo '.idea' > ~/.gitignore_global
 
-composer global require "squizlabs/php_codesniffer=^2.5" --quiet
+composer global require "squizlabs/php_codesniffer=@stable" --quiet
 composer global require "phpmd/phpmd=@stable" --quiet
 
 function appSetup
