@@ -43,7 +43,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property-read Collection|Image[]         $images
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
- * @property-read Collection|ProductOption[] $variants
+ * @property-read Collection|ProductOption[] $options
  */
 class Product extends Model implements HasPresenter, ImageOwner
 {

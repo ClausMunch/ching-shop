@@ -49,13 +49,18 @@ class OrderController extends Controller
      */
     public function viewAction(int $orderId)
     {
-        return $this->webUi->view(
-            'customer.orders.view',
-            [
-                'order' => $this->orderResource->findOrFail(
-                    $this->optimus->decode($orderId)
-                ),
-            ]
-        );
+        /** @var Order $order */
+        $order = $this->orderResource
+            ->with(
+                [
+                    'orderItems.basketItem.productOption.product',
+                    'address',
+                ]
+            )
+            ->findOrFail(
+                $this->optimus->decode($orderId)
+            );
+
+        return $this->webUi->view('customer.orders.view', compact('order'));
     }
 }
