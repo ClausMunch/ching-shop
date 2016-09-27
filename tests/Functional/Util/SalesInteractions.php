@@ -18,8 +18,8 @@ trait SalesInteractions
     /** @var Address */
     private $address;
 
-    /** @var Product */
-    private $productInBasket;
+    /** @var Product[] */
+    private $productsInBasket;
 
     /**
      * @param FunctionalTest $test
@@ -28,8 +28,8 @@ trait SalesInteractions
      */
     private function createProductAndAddToBasket(FunctionalTest $test): Product
     {
-        $this->productInBasket = $this->createProduct();
-        $this->productInBasket->prices()->save(
+        $product = $this->createProduct();
+        $product->prices()->save(
             new Price(
                 [
                     'units'    => random_int(1, 99),
@@ -37,10 +37,12 @@ trait SalesInteractions
                 ]
             )
         );
-        $this->createProductOptionFor($this->productInBasket);
-        $this->addProductToBasket($this->productInBasket, $test);
+        $this->createProductOptionFor($product);
+        $this->addProductToBasket($product, $test);
 
-        return $this->productInBasket;
+        $this->productsInBasket[] = $product;
+
+        return $product;
     }
 
     /**
@@ -60,9 +62,20 @@ trait SalesInteractions
      *
      * @return Address
      */
-    private function completeCheckoutAddress(FunctionalTest $test): Address
+    private function completeCheckoutToAddress(FunctionalTest $test): Address
     {
         $this->createProductAndAddToBasket($test);
+
+        return $this->fillCheckoutAddress($test);
+    }
+
+    /**
+     * @param FunctionalTest $test
+     *
+     * @return Address
+     */
+    private function fillCheckoutAddress(FunctionalTest $test): Address
+    {
         $addressName = uniqid('address-name', false);
         $test->actingAs($this->customerUser())
             ->visit(route('sales.customer.checkout.address'))

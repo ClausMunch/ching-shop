@@ -22,7 +22,7 @@ class PayPalCheckoutTest extends FunctionalTest
     {
         // Given we are at the payment method page in the checkout process;
         $this->createProductAndAddToBasket($this);
-        $this->completeCheckoutAddress($this);
+        $this->completeCheckoutToAddress($this);
 
         // When we pay with PayPal;
         $this->customerWillReturnFromPayPal('approved');
@@ -41,7 +41,7 @@ class PayPalCheckoutTest extends FunctionalTest
     {
         // Given we are at the payment method page in the checkout process;
         $this->createProductAndAddToBasket($this);
-        $this->completeCheckoutAddress($this);
+        $this->completeCheckoutToAddress($this);
 
         // When we pay with PayPal and something goes wrong;
         $this->customerWillReturnFromPayPal('failed');
@@ -59,7 +59,7 @@ class PayPalCheckoutTest extends FunctionalTest
     {
         // Given we are at the payment method page in the checkout process;
         $this->createProductAndAddToBasket($this);
-        $this->completeCheckoutAddress($this);
+        $this->completeCheckoutToAddress($this);
 
         // When we pay with PayPal and then cancel;
         $this->customerWillCancelPayPal();

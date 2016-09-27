@@ -22,7 +22,19 @@ class OrderCompleteTest extends FunctionalTest
      */
     public function testCanSeeOrderItems()
     {
-        $this->markTestIncomplete();
+        // When I complete an order;
+        $this->createProductAndAddToBasket($this);
+        $this->createProductAndAddToBasket($this);
+        $this->fillCheckoutAddress($this);
+        $this->customerWillReturnFromPayPal();
+        $this->press('Pay with PayPal');
+
+        // Then I should be able to see the items I have ordered on the order
+        // completion page.
+        foreach ($this->productsInBasket as $product) {
+            $this->see($product->name);
+            $this->see($product->options->first()->label);
+        }
     }
 
     /**
@@ -31,7 +43,7 @@ class OrderCompleteTest extends FunctionalTest
     public function testCanSeeOrderAddress()
     {
         // When I complete an order;
-        $address = $this->completeCheckoutAddress($this);
+        $address = $this->completeCheckoutToAddress($this);
         $this->customerWillReturnFromPayPal();
         $this->press('Pay with PayPal');
 
@@ -42,7 +54,5 @@ class OrderCompleteTest extends FunctionalTest
         $this->see($address->city);
         $this->see($address->post_code);
         $this->see($address->country_code);
-
-        $this->markTestIncomplete();
     }
 }

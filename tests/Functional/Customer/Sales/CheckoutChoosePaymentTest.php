@@ -22,7 +22,7 @@ class CheckoutChoosePaymentTest extends FunctionalTest
     public function testCanGoBackToAddress()
     {
         // Given we've filled in the address;
-        $address = $this->completeCheckoutAddress($this);
+        $address = $this->completeCheckoutToAddress($this);
 
         // And we're on the choose payment method page;
         $this->seePageIs(route('sales.customer.checkout.choose-payment'));

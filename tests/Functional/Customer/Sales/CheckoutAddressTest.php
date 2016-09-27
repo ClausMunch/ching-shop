@@ -49,7 +49,7 @@ class CheckoutAddressTest extends FunctionalTest
     public function testCanCompleteAddress()
     {
         // When we fill in the address during checkout;
-        $address = $this->completeCheckoutAddress($this);
+        $address = $this->completeCheckoutToAddress($this);
 
         // Then we should get a success message and see the address saved;
         $this->seePageIs(route('sales.customer.checkout.choose-payment'))
