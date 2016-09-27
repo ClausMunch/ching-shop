@@ -7,10 +7,7 @@ use Testing\Functional\Util\MockPayPal;
 use Testing\Functional\Util\SalesInteractions;
 
 /**
- * Class OrderCompleteTest
- * @package Testing\Functional\Customer\Sales
- *
- * Confirm that the order completion page works correctly.
+ * Class OrderCompleteTest.
  *
  * @group sales
  * @group checkout

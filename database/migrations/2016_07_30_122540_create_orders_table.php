@@ -28,7 +28,7 @@ class CreateOrdersTable extends Migration
                     ->references('id')
                     ->on('users');
 
-                /**
+                /*
                  * An order may have an address.
                  * @see \CreateAddressesTable
                  */
