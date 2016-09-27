@@ -8,10 +8,7 @@ use Mockery\MockInterface;
 use PayPal\Api\Payment;
 
 /**
- * Class MockPayPal
- * @package Testing\Functional\Util
- *
- * Mock out interactions with PayPal checkout during functional tests.
+ * Class MockPayPal.
  */
 trait MockPayPal
 {
