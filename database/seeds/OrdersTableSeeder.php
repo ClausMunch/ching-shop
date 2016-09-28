@@ -1,4 +1,5 @@
 <?php
+
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Address;

@@ -46,8 +46,9 @@ class OrderController extends Controller
     /**
      * @param int $publicId
      *
-     * @return View
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return View
      */
     public function show(int $publicId)
     {
