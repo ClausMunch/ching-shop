@@ -11,11 +11,9 @@ use Illuminate\Contracts\View\View;
  * Staff order management actions.
  *
  * Class OrderController
- * @package ChingShop\Modules\Sales\Http\Controllers\Staff
  */
 class OrderController extends Controller
 {
-
     /** @var OrderRepository */
     private $orderRepository;
 

@@ -10,7 +10,6 @@ use Testing\Functional\Util\SalesInteractions;
  * Test viewing orders in the staff area.
  *
  * Class OrderViewTest
- * @package Testing\Functional\Staff\Sales
  */
 class OrderViewTest extends FunctionalTest
 {
