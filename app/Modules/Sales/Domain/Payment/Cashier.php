@@ -5,8 +5,8 @@ namespace ChingShop\Modules\Sales\Domain\Payment;
 use ChingShop\Modules\Catalogue\Domain\Inventory\Inventory;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
-use ChingShop\Modules\Sales\Domain\Order;
-use ChingShop\Modules\Sales\Domain\OrderItem;
+use ChingShop\Modules\Sales\Domain\Order\Order;
+use ChingShop\Modules\Sales\Domain\Order\OrderItem;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Log\LoggerInterface;
 
@@ -41,7 +41,7 @@ class Cashier
      *
      * @throws \Exception
      *
-     * @return Order
+     * @return \ChingShop\Modules\Sales\Domain\Order\Order
      */
     public function settle(Basket $basket, Settlement $settlement): Order
     {
@@ -71,7 +71,7 @@ class Cashier
      *
      * @throws \Exception
      *
-     * @return Order
+     * @return \ChingShop\Modules\Sales\Domain\Order\Order
      */
     private function basketToOrder(Basket $basket): Order
     {
@@ -100,7 +100,7 @@ class Cashier
      *
      * @throws \RuntimeException
      *
-     * @return OrderItem
+     * @return \ChingShop\Modules\Sales\Domain\Order\OrderItem
      */
     private function basketItemToOrderItem(BasketItem $basketItem)
     {

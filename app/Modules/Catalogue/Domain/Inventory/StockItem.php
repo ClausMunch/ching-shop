@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Domain\Inventory;
 
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
-use ChingShop\Modules\Sales\Domain\OrderItem;
+use ChingShop\Modules\Sales\Domain\Order\OrderItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;

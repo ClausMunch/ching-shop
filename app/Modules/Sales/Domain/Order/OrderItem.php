@@ -1,6 +1,6 @@
 <?php
 
-namespace ChingShop\Modules\Sales\Domain;
+namespace ChingShop\Modules\Sales\Domain\Order;
 
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;

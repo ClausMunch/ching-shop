@@ -51,7 +51,7 @@ abstract class FunctionalTest extends TestCase
      *
      * @return \Symfony\Component\DomCrawler\Crawler
      */
-    protected function getElement(string $selector)
+    public function getElement(string $selector)
     {
         return $this->crawler()
             ->filter($selector)
@@ -63,7 +63,7 @@ abstract class FunctionalTest extends TestCase
      *
      * @return string
      */
-    protected function getElementText(string $selector): string
+    public function getElementText(string $selector): string
     {
         return trim($this->getElement($selector)->text());
     }
@@ -74,7 +74,7 @@ abstract class FunctionalTest extends TestCase
      *
      * @return string
      */
-    protected function getElementAttribute(string $selector, string $attribute)
+    public function getElementAttribute(string $selector, string $attribute)
     {
         return trim($this->getElement($selector)->attr($attribute));
     }

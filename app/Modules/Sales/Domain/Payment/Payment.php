@@ -2,7 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Domain\Payment;
 
-use ChingShop\Modules\Sales\Domain\Order;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

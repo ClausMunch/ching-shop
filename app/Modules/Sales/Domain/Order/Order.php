@@ -1,7 +1,9 @@
 <?php
 
-namespace ChingShop\Modules\Sales\Domain;
+namespace ChingShop\Modules\Sales\Domain\Order;
 
+use ChingShop\Domain\PublicId;
+use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\User\Model\User;
@@ -11,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Propaganistas\LaravelFakeId\FakeIdTrait;
 
 /**
  * @mixin \Eloquent
@@ -26,15 +27,7 @@ use Propaganistas\LaravelFakeId\FakeIdTrait;
  */
 class Order extends Model
 {
-    use SoftDeletes, FakeIdTrait;
-
-    /**
-     * @return int
-     */
-    public function publicId(): int
-    {
-        return (int) $this->getRouteKey();
-    }
+    use SoftDeletes, PublicId;
 
     /**
      * An order contains order items.

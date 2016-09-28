@@ -3,7 +3,6 @@
 namespace Testing\Functional\Customer\Sales;
 
 use Testing\Functional\FunctionalTest;
-use Testing\Functional\Util\MockPayPal;
 use Testing\Functional\Util\SalesInteractions;
 
 /**
@@ -11,7 +10,7 @@ use Testing\Functional\Util\SalesInteractions;
  */
 class PayPalCheckoutTest extends FunctionalTest
 {
-    use SalesInteractions, MockPayPal;
+    use SalesInteractions;
 
     /**
      * Should be able to complete checkout with PayPal.
