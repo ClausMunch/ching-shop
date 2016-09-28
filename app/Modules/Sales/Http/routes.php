@@ -91,5 +91,18 @@ Route::group(
                 )->middleware('customer');
             }
         );
+
+        Route::group(
+            [
+                'prefix'     => 'staff',
+                'middleware' => [
+                    'auth',
+                    'staff',
+                ],
+            ],
+            function () {
+                Route::resource('orders', 'Staff\OrderController');
+            }
+        );
     }
 );

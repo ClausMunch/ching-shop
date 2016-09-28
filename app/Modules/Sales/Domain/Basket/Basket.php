@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain\Basket;
 
 use ChingShop\Modules\Sales\Domain\Address;
-use ChingShop\Modules\Sales\Domain\Order;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

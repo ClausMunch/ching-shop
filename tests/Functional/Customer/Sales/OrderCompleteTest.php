@@ -14,7 +14,7 @@ use Testing\Functional\Util\SalesInteractions;
  */
 class OrderCompleteTest extends FunctionalTest
 {
-    use SalesInteractions, MockPayPal;
+    use SalesInteractions;
 
     /**
      * Should be able to see the contents of the order on the order completion

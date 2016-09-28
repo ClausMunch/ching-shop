@@ -4,7 +4,7 @@ namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
-use ChingShop\Modules\Sales\Domain\Order;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use Jenssegers\Optimus\Optimus;
 
 /**

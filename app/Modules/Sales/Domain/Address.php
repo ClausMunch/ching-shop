@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;

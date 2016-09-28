@@ -11,7 +11,7 @@ use Testing\Functional\Util\SalesInteractions;
  */
 class PayPalCheckoutTest extends FunctionalTest
 {
-    use SalesInteractions, MockPayPal;
+    use SalesInteractions;
 
     /**
      * Should be able to complete checkout with PayPal.

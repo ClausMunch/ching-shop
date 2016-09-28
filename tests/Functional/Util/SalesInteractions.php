@@ -5,6 +5,7 @@ namespace Testing\Functional\Util;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Address;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 
@@ -13,13 +14,37 @@ use Testing\Functional\FunctionalTest;
  */
 trait SalesInteractions
 {
-    use CustomerUsers, CreateCatalogue;
+    use CustomerUsers, CreateCatalogue, MockPayPal;
 
     /** @var Address */
     private $address;
 
     /** @var Product[] */
     private $productsInBasket;
+
+    /** @var Order[] */
+    private $orders;
+
+    /**
+     * @param FunctionalTest $test
+     *
+     * @return Order
+     * @throws \InvalidArgumentException
+     */
+    private function completeOrder(FunctionalTest $test): Order
+    {
+        $this->completeCheckoutToAddress($test);
+        $this->customerWillReturnFromPayPal();
+        $this->press('Pay with PayPal');
+
+        $this->orders[] = Order::where(
+            'id',
+            '=',
+            Order::privateId($test->getElementText('#order-id'))
+        )->first();
+
+        return end($this->orders);
+    }
 
     /**
      * @param FunctionalTest $test

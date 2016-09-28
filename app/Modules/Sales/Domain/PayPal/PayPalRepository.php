@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain\PayPal;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
-use ChingShop\Modules\Sales\Domain\Order;
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Payment\Cashier;
 use PayPal\Api\Payment;
 use PayPal\Rest\ApiContext;
@@ -106,7 +106,7 @@ class PayPalRepository
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      *
-     * @return Order
+     * @return \ChingShop\Modules\Sales\Domain\Order\Order
      */
     public function executePayment(string $paymentId, string $payerId)
     {
