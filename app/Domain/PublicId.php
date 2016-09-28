@@ -8,8 +8,6 @@ use Propaganistas\LaravelFakeId\FakeIdTrait;
 
 /**
  * Encode and decode optimus ids for public display.
- *
- * @package ChingShop\Domain
  */
 trait PublicId
 {

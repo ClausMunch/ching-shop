@@ -28,8 +28,9 @@ trait SalesInteractions
     /**
      * @param FunctionalTest $test
      *
-     * @return Order
      * @throws \InvalidArgumentException
+     *
+     * @return Order
      */
     private function completeOrder(FunctionalTest $test): Order
     {
