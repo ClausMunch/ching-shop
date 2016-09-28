@@ -74,4 +74,19 @@ class Order extends Model
     {
         return $this->belongsTo(Address::class);
     }
+
+    /**
+     * @return float
+     */
+    public function totalPrice(): float
+    {
+        return (float) array_reduce(
+            $this->orderItems->all(),
+            function (float $total, $item) {
+                /* @var OrderItem $item */
+                return $total + $item->priceAsFloat();
+            },
+            0.0
+        );
+    }
 }

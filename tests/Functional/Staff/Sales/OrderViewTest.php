@@ -54,4 +54,24 @@ class OrderViewTest extends FunctionalTest
         // Then we should see the order there.
         $this->see($order->publicId());
     }
+
+    /**
+     * Should be able to view an individual customer order.
+     */
+    public function testCanViewIndividualCustomerOrder()
+    {
+        // Given a customer makes an order;
+        $order = $this->completeOrder($this);
+
+        // When we go to that order in the staff area;
+        $this->actingAs($this->staffUser())
+            ->visit(route('shopping.staff.orders.index'))
+            ->click($order->publicId());
+
+        // Then we should see the order view.
+        $this->see($order->publicId());
+        $this->see($order->address->line_one);
+        $this->see($order->payment->settlement->type());
+        $this->see($order->totalPrice());
+    }
 }

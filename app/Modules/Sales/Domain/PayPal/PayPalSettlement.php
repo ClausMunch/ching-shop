@@ -35,4 +35,12 @@ class PayPalSettlement extends Model implements Settlement
     {
         return $this->morphOne(Payment::class, 'settlement');
     }
+
+    /**
+     * @return string
+     */
+    public function type(): string
+    {
+        return 'paypal';
+    }
 }
