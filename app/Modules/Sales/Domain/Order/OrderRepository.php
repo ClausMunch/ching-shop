@@ -12,6 +12,11 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class OrderRepository
 {
+    const DEFAULT_RELATIONS = [
+        'address',
+        'orderItems.basketItem.productOption.product',
+    ];
+
     /** @var Order|Builder */
     private $orderResource;
 
@@ -24,16 +29,33 @@ class OrderRepository
     }
 
     /**
-     * @param int $page
-     *
      * @return Collection|Order[]
      */
-    public function all(int $page = 0)
+    public function all()
     {
         return $this->orderResource
+            ->with(self::DEFAULT_RELATIONS)
             ->orderBy('updated_at', 'desc')
-            ->skip($page * 100)
-            ->limit(100)
-            ->get();
+            ->simplePaginate(100);
+    }
+
+    /**
+     * @param int $publicId
+     *
+     * @return Order
+     */
+    public function byPublicId(int $publicId): Order
+    {
+        /** @var Order $order */
+        $order = $this->orderResource
+            ->with(self::DEFAULT_RELATIONS)
+            ->where('id', '=', Order::privateId($publicId))
+            ->first();
+
+        if ($order instanceof Order) {
+            return $order;
+        }
+
+        return new Order();
     }
 }

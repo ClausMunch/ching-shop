@@ -10,7 +10,6 @@
 
 @section('content')
 
-@if (count($orders))
 <div class="table-responsive">
     <table class="table table-striped table-condensed">
         <thead>
@@ -30,10 +29,10 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($orders as $order)
+        @foreach($orders->all() as $order)
             <tr>
                 <td>
-                    <a href="#">
+                    <a href="{{ route('shopping.staff.orders.show', $order) }}">
                         {{ $order->publicId() }}
                     </a>
                 </td>
@@ -43,9 +42,7 @@
                         @foreach ($order->orderItems as $item)
                         <li>
                         {{ $item->basketItem->productOption->product->name }}
-                        (<strong>
-                            {{ $item->basketItem->productOption->label }}
-                        </strong>)
+                        (<strong>{{ $item->basketItem->productOption->label }}</strong>)
                         </li>
                         @endforeach
                         @endif
@@ -53,13 +50,13 @@
                 </td>
                 <td>
                     @if ($order->address)
-                        {{ $order->address->name }},
-                        {{ $order->address->line_one }},
+                        {{ $order->address->name }}<br>
+                        {{ $order->address->line_one }}<br>
                         @if($order->address->line_two)
-                            {{ $order->address->line_two }},
+                            {{ $order->address->line_two }}<br>
                         @endif
-                        {{ $order->address->city }},
-                        {{ $order->address->post_code }},
+                        {{ $order->address->city }}<br>
+                        {{ $order->address->post_code }}<br>
                         {{ $order->address->country_code }}
                     @endif
                 </td>
@@ -71,6 +68,5 @@
         </tbody>
     </table>
 </div>
-@endif
 
 @endsection

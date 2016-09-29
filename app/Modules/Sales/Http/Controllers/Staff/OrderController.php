@@ -6,6 +6,7 @@ use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Order\OrderRepository;
 use Illuminate\Contracts\View\View;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Staff order management actions.
@@ -43,6 +44,24 @@ class OrderController extends Controller
     }
 
     /**
+     * @param int $publicId
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return View
+     */
+    public function show(int $publicId)
+    {
+        $order = $this->orderRepository->byPublicId($publicId);
+
+        if (!$order->id) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->buildView('show', compact('order'));
+    }
+
+    /**
      * @param $name
      * @param array $bindData
      *
@@ -50,9 +69,6 @@ class OrderController extends Controller
      */
     private function buildView($name, array $bindData = []): View
     {
-        return $this->webUi->view(
-            "sales::staff.orders.{$name}",
-            $bindData
-        );
+        return $this->webUi->view("sales::staff.orders.{$name}", $bindData);
     }
 }

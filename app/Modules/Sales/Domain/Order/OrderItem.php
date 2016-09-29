@@ -12,11 +12,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @mixin \Eloquent
  *
- * @property int            $id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
- * @property-read Order     $order
+ * @property int             $id
+ * @property \Carbon\Carbon  $created_at
+ * @property \Carbon\Carbon  $updated_at
+ * @property \Carbon\Carbon  $deleted_at
+ * @property-read Order      $order
+ * @property-read BasketItem $basketItem
  */
 class OrderItem extends Model
 {
@@ -48,5 +49,13 @@ class OrderItem extends Model
     public function basketItem(): BelongsTo
     {
         return $this->belongsTo(BasketItem::class);
+    }
+
+    /**
+     * @return float
+     */
+    public function priceAsFloat(): float
+    {
+        return $this->basketItem->priceAsFloat();
     }
 }
