@@ -2,12 +2,11 @@
 
 namespace ChingShop\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 /**
- * Class AuthServiceProvider
- * @package ChingShop\Providers
+ * Class AuthServiceProvider.
  */
 class AuthServiceProvider extends ServiceProvider
 {

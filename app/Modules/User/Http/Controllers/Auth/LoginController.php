@@ -6,8 +6,7 @@ use ChingShop\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /**
- * Class LoginController
- * @package ChingShop\Http\Controllers\Auth
+ * Class LoginController.
  */
 class LoginController extends Controller
 {

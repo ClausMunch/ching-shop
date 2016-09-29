@@ -6,8 +6,7 @@ use ChingShop\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 /**
- * Class ResetPasswordController
- * @package ChingShop\Http\Controllers\Auth
+ * Class ResetPasswordController.
  */
 class ResetPasswordController extends Controller
 {
