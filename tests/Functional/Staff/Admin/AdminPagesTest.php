@@ -25,6 +25,6 @@ class AdminPagesTest extends FunctionalTest
      */
     public function testNonStaffCantViewPhpInfo()
     {
-        $this->visit('/staff/php-info')->seePageIs(route('auth::login'));
+        $this->visit('/staff/php-info')->seePageIs(route('login'));
     }
 }

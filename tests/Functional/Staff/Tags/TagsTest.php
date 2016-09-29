@@ -19,9 +19,9 @@ class TagsTest extends FunctionalTest
         $this->actingAs($this->staffUser())
             ->visit(route('staff.dashboard'))
             ->seePageIs(route('staff.dashboard'))
-            ->see(route('catalogue.staff.tags.index'))
+            ->see(route('tags.index'))
             ->click('Tags')
-            ->seePageIs(route('catalogue.staff.tags.index'));
+            ->seePageIs(route('tags.index'));
 
         $this->assertResponseOk();
     }
@@ -49,7 +49,7 @@ class TagsTest extends FunctionalTest
         $this->goToTagIndex()
             ->type($tagName, 'name')
             ->press('add-new-tag')
-            ->seePageIs(route('catalogue.staff.tags.index'))
+            ->seePageIs(route('tags.index'))
             ->see('Created')
             ->see($tagName);
     }
@@ -67,7 +67,7 @@ class TagsTest extends FunctionalTest
             ->see($tag->name)
             ->see($product->sku)
             ->click($product->sku)
-            ->seePageIs(route('catalogue.staff.products.show', ['sku' => $product->sku]));
+            ->seePageIs(route('products.show', ['sku' => $product->sku]));
     }
 
     /**
@@ -80,7 +80,7 @@ class TagsTest extends FunctionalTest
         $this->goToTagIndex()
             ->see($tag->name)
             ->press("delete-tag-{$tag->id}")
-            ->seePageIs(route('catalogue.staff.tags.index'))
+            ->seePageIs(route('tags.index'))
             ->see('Deleted')
             ->dontSee($tag->name);
     }
@@ -92,7 +92,7 @@ class TagsTest extends FunctionalTest
     {
         $tag = $this->createTag();
         $product = $this->createProduct();
-        $productView = route('catalogue.staff.products.show', ['sku' => $product->sku]);
+        $productView = route('products.show', ['sku' => $product->sku]);
 
         $this->actingAs($this->staffUser())
             ->visit($productView)
@@ -116,7 +116,7 @@ class TagsTest extends FunctionalTest
     private function goToTagIndex()
     {
         return $this->actingAs($this->staffUser())
-            ->visit(route('catalogue.staff.tags.index'))
-            ->seePageIs(route('catalogue.staff.tags.index'));
+            ->visit(route('tags.index'))
+            ->seePageIs(route('tags.index'));
     }
 }

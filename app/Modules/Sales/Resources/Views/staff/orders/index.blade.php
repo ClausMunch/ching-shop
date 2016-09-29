@@ -32,7 +32,7 @@
         @foreach($orders->all() as $order)
             <tr>
                 <td>
-                    <a href="{{ route('shopping.staff.orders.show', $order) }}">
+                    <a href="{{ route('orders.show', $order) }}">
                         {{ $order->publicId() }}
                     </a>
                 </td>

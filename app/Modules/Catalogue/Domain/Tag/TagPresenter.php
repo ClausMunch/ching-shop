@@ -41,7 +41,7 @@ class TagPresenter extends BasePresenter implements HttpCrudInterface
      */
     public function routePath(): string
     {
-        return 'catalogue.staff.tags';
+        return 'tags';
     }
 
     /**

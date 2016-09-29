@@ -113,10 +113,7 @@ class TagController extends Controller
 
         $this->webUi->successMessage("Tags updated for `{$product->sku}`");
 
-        return $this->webUi->redirect(
-            'catalogue.staff.products.show',
-            ['sku' => $product->sku]
-        );
+        return $this->webUi->redirect('products.show', [$product->sku]);
     }
 
     /**
@@ -124,6 +121,6 @@ class TagController extends Controller
      */
     private function redirectToTagsIndex(): RedirectResponse
     {
-        return $this->webUi->redirect('catalogue.staff.tags.index');
+        return $this->webUi->redirect('tags.index');
     }
 }

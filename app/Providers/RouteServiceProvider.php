@@ -2,16 +2,17 @@
 
 namespace ChingShop\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as Provider;
-use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
- * Class RouteServiceProvider.
+ * Class RouteServiceProvider
+ * @package ChingShop\Providers
  */
-class RouteServiceProvider extends Provider
+class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * This namespace is applied to the controller routes in your routes file.
+     * This namespace is applied to your controller routes.
      *
      * In addition, it is set as the URL generator's root namespace.
      *
@@ -22,17 +23,53 @@ class RouteServiceProvider extends Provider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
+     * @return void
+     */
+    public function map()
+    {
+        $this->mapApiRoutes();
+        $this->mapWebRoutes();
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
      *
      * @return void
      */
-    public function map(Router $router)
+    protected function mapWebRoutes()
     {
-        $router->group(
-            ['namespace' => $this->namespace],
+        Route::group(
+            [
+                'middleware' => 'web',
+                'namespace'  => $this->namespace,
+            ],
             function () {
                 /** @noinspection PhpIncludeInspection */
-                require app_path('Http/routes.php');
+                require base_path('routes/web.php');
+            }
+        );
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::group(
+            [
+                'middleware' => 'api',
+                'namespace'  => $this->namespace,
+                'prefix'     => 'api',
+            ],
+            function () {
+                /** @noinspection PhpIncludeInspection */
+                require base_path('routes/api.php');
             }
         );
     }

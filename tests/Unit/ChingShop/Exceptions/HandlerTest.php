@@ -4,16 +4,24 @@ namespace Testing\Unit\ChingShop\Exceptions;
 
 use ChingShop\Exceptions\Handler;
 use Exception;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Log\LoggerInterface;
 use Testing\Unit\UnitTest;
 
+/**
+ * Class HandlerTest
+ * @package Testing\Unit\ChingShop\Exceptions
+ */
 class HandlerTest extends UnitTest
 {
     /** @var Handler */
     private $handler;
+
+    /** @var Container */
+    private $container;
 
     /** @var LoggerInterface|MockObject */
     private $logger;
@@ -25,7 +33,9 @@ class HandlerTest extends UnitTest
     {
         parent::setUp();
         $this->logger = $this->makeMock(LoggerInterface::class);
-        $this->handler = new Handler($this->logger);
+        $this->container = new \Illuminate\Container\Container();
+        $this->container[LoggerInterface::class] = $this->logger;
+        $this->handler = new Handler($this->container);
     }
 
     /**

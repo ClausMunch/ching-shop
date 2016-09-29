@@ -43,7 +43,7 @@ class Authenticate
                 return response('Unauthorized.', 401);
             }
 
-            return redirect()->guest(route('auth::login'));
+            return redirect()->guest(route('login'));
         }
 
         return $next($request);

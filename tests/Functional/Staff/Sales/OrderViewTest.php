@@ -24,7 +24,7 @@ class OrderViewTest extends FunctionalTest
     public function testAuthRequired()
     {
         $this->actingAs($this->customerUser())
-            ->visit(route('shopping.staff.orders.index'))
+            ->visit(route('orders.index'))
             ->dontSee('orders')
             ->dontSee('Orders');
     }
@@ -35,7 +35,7 @@ class OrderViewTest extends FunctionalTest
     public function testCanVisitOrdersIndex()
     {
         $this->actingAs($this->staffUser())
-            ->visit(route('shopping.staff.orders.index'))
+            ->visit(route('orders.index'))
             ->see('Orders');
     }
 
@@ -49,7 +49,7 @@ class OrderViewTest extends FunctionalTest
 
         // When we visit the staff orders index;
         $this->actingAs($this->staffUser())
-            ->visit(route('shopping.staff.orders.index'));
+            ->visit(route('orders.index'));
 
         // Then we should see the order there.
         $this->see($order->publicId());
@@ -65,7 +65,7 @@ class OrderViewTest extends FunctionalTest
 
         // When we go to that order in the staff area;
         $this->actingAs($this->staffUser())
-            ->visit(route('shopping.staff.orders.index'))
+            ->visit(route('orders.index'))
             ->click($order->publicId());
 
         // Then we should see the order view.

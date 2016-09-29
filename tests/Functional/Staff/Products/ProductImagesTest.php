@@ -29,7 +29,7 @@ class ProductImagesTest extends ProductTest
          * @see \Symfony\Component\HttpFoundation\File\UploadedFile::isValid
          */
         try {
-            $productPage = route('catalogue.staff.products.show', [$product->sku]);
+            $productPage = route('products.show', [$product->sku]);
             $this->actingAs($this->staffUser())
                 ->visit($productPage)
                 ->see($product->sku)

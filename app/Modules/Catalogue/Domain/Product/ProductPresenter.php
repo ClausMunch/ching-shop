@@ -83,7 +83,7 @@ class ProductPresenter extends BasePresenter implements
      */
     public function routePath(): string
     {
-        return 'catalogue.staff.products';
+        return 'products';
     }
 
     /**

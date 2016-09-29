@@ -57,10 +57,7 @@ class ProductOptionController extends Controller
             "Added new option `{$option->label}` for product `{$product->sku}`"
         );
 
-        return $this->webUi->redirect(
-            'catalogue.staff.products.show',
-            ['sku' => $product->sku]
-        );
+        return $this->webUi->redirect('products.show', [$product->sku]);
     }
 
     /**
@@ -155,9 +152,6 @@ class ProductOptionController extends Controller
      */
     private function redirectToOptionProduct(ProductOption $option)
     {
-        return $this->webUi->redirect(
-            'catalogue.staff.products.show',
-            [$option->product->sku]
-        );
+        return $this->webUi->redirect('products.show', [$option->product->sku]);
     }
 }
