@@ -136,7 +136,9 @@ class Clerk
             return $this->basket;
         }
 
-        if (!$this->guard->user() instanceof User) {
+        if (!$this->guard->user() instanceof User
+            || !$this->guard->user()->getAuthIdentifier()
+        ) {
             return new Basket();
         }
 
