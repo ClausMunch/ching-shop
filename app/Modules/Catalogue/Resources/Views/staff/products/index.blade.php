@@ -56,7 +56,7 @@
     @else
     <p>
         There are no products in the system. Would you like to
-        <a href="{{ route('catalogue.staff.products.create') }}">create one</a>?
+        <a href="{{ route('products.create') }}">create one</a>?
     </p>
     @endif
 

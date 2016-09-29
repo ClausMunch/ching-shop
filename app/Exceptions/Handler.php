@@ -5,6 +5,7 @@ namespace ChingShop\Exceptions;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -33,7 +34,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $err)
     {
-        $this->log->notice(
+        $this->log()->notice(
             "{$err->getMessage()} ({$err->getFile()}:{$err->getLine()})"
         );
 
@@ -42,5 +43,29 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $err);
+    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest('login');
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    private function log(): LoggerInterface
+    {
+        return $this->container->make(LoggerInterface::class);
     }
 }

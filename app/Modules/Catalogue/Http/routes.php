@@ -38,14 +38,14 @@ Route::group(
                     'product/{productId}/image/{imageId}',
                     [
                         'uses' => 'Staff\ProductController@detachImage',
-                        'as'   => 'catalogue.staff.products.detach-image',
+                        'as'   => 'products.detach-image',
                     ]
                 );
                 Route::post(
                     'products/{sku}/price',
                     [
                         'uses' => 'Staff\PriceController@setProductPrice',
-                        'as'   => 'catalogue.staff.products.price',
+                        'as'   => 'products.price',
                     ]
                 );
                 Route::post(
@@ -80,7 +80,7 @@ Route::group(
                     'products/{sku}/image-order',
                     [
                         'uses' => 'Staff\ProductController@putImageOrder',
-                        'as'   => 'catalogue.staff.products.image-order',
+                        'as'   => 'products.image-order',
                     ]
                 );
                 Route::put(

@@ -48,9 +48,6 @@ class PriceController extends Controller
             $setPriceRequest->get('subunits')
         );
 
-        return $this->webUi->redirect(
-            'catalogue.staff.products.show',
-            ['sku' => $sku]
-        );
+        return $this->webUi->redirect('products.show', [$sku]);
     }
 }

@@ -50,6 +50,6 @@ class StaffOnly
             return response('Unauthorised', Response::HTTP_UNAUTHORIZED);
         }
 
-        return redirect()->guest(route('auth::login'));
+        return redirect()->guest(route('login'));
     }
 }

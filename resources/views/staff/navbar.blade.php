@@ -34,14 +34,14 @@
                         <li class="{{ $location->putActive(
                                 'catalogue.staff.products.index'
                             ) }}">
-                            <a href="{{ route('catalogue.staff.products.index') }}">
+                            <a href="{{ route('products.index') }}">
                                 View all
                             </a>
                         </li>
                         <li class="{{ $location->putActive(
                                 'catalogue.staff.products.create'
                             ) }}">
-                            <a href="{{ route('catalogue.staff.products.create') }}">
+                            <a href="{{ route('products.create') }}">
                                 Create new
                             </a>
                         </li>
@@ -55,7 +55,7 @@
                         <li class="{{ $location->putActive(
                                 'catalogue.staff.tags.index'
                             ) }}">
-                            <a href="{{ route('catalogue.staff.tags.index') }}">
+                            <a href="{{ route('tags.index') }}">
                                 Tags
                             </a>
                         </li>
@@ -74,7 +74,7 @@
                         <li class="{{ $location->putActive(
                                 'shopping.staff.orders.index'
                             ) }}">
-                            <a href="{{ route('shopping.staff.orders.index') }}">
+                            <a href="{{ route('orders.index') }}">
                                 View all
                             </a>
                         </li>

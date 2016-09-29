@@ -13,7 +13,7 @@
 @section('heading')
     <div class="pull-right">
         <a class="btn btn-default"
-           href="{{ route('catalogue.staff.products.edit', $product->sku()) }}">
+           href="{{ route('products.edit', $product->sku()) }}">
             Edit product
         </a>
     </div>
@@ -117,7 +117,7 @@
     </a>
 
     <a class="btn btn-default"
-       href="{{ route('catalogue.staff.products.edit', $product->sku()) }}">
+       href="{{ route('products.edit', $product->sku()) }}">
         Edit product
     </a>
 

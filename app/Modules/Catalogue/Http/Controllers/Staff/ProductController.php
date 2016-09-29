@@ -147,7 +147,7 @@ class ProductController extends Controller
 
         $this->webUi->successMessage("Deleted product `{$sku}`");
 
-        return $this->webUi->redirect('catalogue.staff.products.index');
+        return $this->webUi->redirect('products.index');
     }
 
     /**
@@ -240,10 +240,7 @@ class ProductController extends Controller
      */
     private function redirectToShowProduct(string $sku): RedirectResponse
     {
-        return $this->webUi->redirect(
-            'catalogue.staff.products.show',
-            ['sku' => $sku]
-        );
+        return $this->webUi->redirect('products.show', ['sku' => $sku]);
     }
 
     /**

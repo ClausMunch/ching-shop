@@ -88,7 +88,7 @@ class AuthenticateTest extends MiddlewareTest
 
         $this->assertInstanceOf(RedirectResponse::class, $redirect);
         $this->assertSame(Response::HTTP_FOUND, $redirect->getStatusCode());
-        $this->assertSame(route('auth::login'), $redirect->getTargetUrl());
+        $this->assertSame(route('login'), $redirect->getTargetUrl());
     }
 
     /**

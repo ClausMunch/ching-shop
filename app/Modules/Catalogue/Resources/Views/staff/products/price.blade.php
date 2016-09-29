@@ -1,5 +1,5 @@
 <form class="form-inline"
-      action="{{ route('catalogue.staff.products.price', [
+      action="{{ route('products.price', [
                 'sku' => $product->sku()
               ]) }}"
       method="post"
