@@ -6,8 +6,7 @@ use ChingShop\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 /**
- * Class ForgotPasswordController
- * @package ChingShop\Http\Controllers\Auth
+ * Class ForgotPasswordController.
  */
 class ForgotPasswordController extends Controller
 {

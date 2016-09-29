@@ -12,8 +12,7 @@ use Psr\Log\LoggerInterface;
 use Testing\Unit\UnitTest;
 
 /**
- * Class HandlerTest
- * @package Testing\Unit\ChingShop\Exceptions
+ * Class HandlerTest.
  */
 class HandlerTest extends UnitTest
 {
