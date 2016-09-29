@@ -78,6 +78,9 @@ class SalesServiceProvider extends ServiceProvider
                         'acct1.ClientSecret' => config(
                             'payment.paypal.acct1.ClientSecret'
                         ),
+                        'mode'               => config(
+                            'payment.paypal.mode'
+                        ),
                     ]
                 );
 
