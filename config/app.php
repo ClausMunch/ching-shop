@@ -81,7 +81,7 @@ return [
     */
 
     // @see .env
-    'key'             => env('APP_KEY', 'SomeRandomString'),
+    'key'    => env('APP_KEY', 'SomeRandomString'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -132,8 +132,7 @@ return [
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
-//        Illuminate\Redis\RedisServiceProvider::class,
-        Vetruvet\PhpRedis\PhpRedisServiceProvider::class,
+        Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
@@ -161,7 +160,6 @@ return [
          * Application Service Providers...
          */
         ChingShop\Providers\AppServiceProvider::class,
-//        ChingShop\Providers\CacheServiceProvider::class,
         ChingShop\Providers\AuthServiceProvider::class,
         ChingShop\Providers\EventServiceProvider::class,
         ChingShop\Providers\RouteServiceProvider::class,
@@ -205,7 +203,7 @@ return [
         'Password'     => Illuminate\Support\Facades\Password::class,
         'Queue'        => Illuminate\Support\Facades\Queue::class,
         'Redirect'     => Illuminate\Support\Facades\Redirect::class,
-        'LRedis'       => Illuminate\Support\Facades\Redis::class,
+        'Redis'        => Illuminate\Support\Facades\Redis::class,
         'Request'      => Illuminate\Support\Facades\Request::class,
         'Response'     => Illuminate\Support\Facades\Response::class,
         'Route'        => Illuminate\Support\Facades\Route::class,

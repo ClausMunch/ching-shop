@@ -27,10 +27,11 @@ trait StaffUser
 
     /**
      * @return User
+     * @throws \DomainException
      */
     private function makeStaffUser()
     {
-        $email = str_random().'@ching-shop.com';
+        $email = uniqid('staff', false) . '@ching-shop.dev';
         $password = str_random(16);
 
         return $this->makeUser()->make($email, $password, true);

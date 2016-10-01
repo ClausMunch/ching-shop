@@ -50,7 +50,7 @@ class Kernel extends HttpKernel
         'api' => [
             TrustProxies::class,
             Middleware\ForceSecure::class,
-            'throttle:60,1',
+            'throttle:60,10',
             'auth:api',
         ],
     ];

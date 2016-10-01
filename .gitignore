@@ -22,3 +22,4 @@ keys.*
 test_db.sqlite
 import/
 public/fonts
+hosts
