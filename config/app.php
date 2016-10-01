@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'Ching SHop',
+    'name' => 'Ching Shop',
 
     'env' => env('APP_ENV', 'production'),
 
