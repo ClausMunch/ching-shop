@@ -37,7 +37,7 @@ Then set up the Vagrant box, ssh into it and check everything is set up:
 vagrant up
 vagrant ssh
 cd ~/sites/ching-shop
-php artisan test
+.test.sh
 ```
 
 You should now be able to access the development site at
@@ -65,7 +65,7 @@ phpmd --strict app text ./tests/analysis/phpmd.xml
 All tests and static analyses can be run with:
 
 ```bash
-php artisan test
+.test.sh
 ```
 
 ## Deployment

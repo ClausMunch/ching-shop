@@ -4,6 +4,8 @@ namespace ChingShop\Providers;
 
 use ChingShop\Events\NewImageEvent;
 use ChingShop\Listeners\NewImageListener;
+use ChingShop\Modules\Sales\Events\NewOrderEvent;
+use ChingShop\Modules\Sales\Listeners\SendStaffOrderNotifications;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as Provider;
 
 /**
@@ -19,6 +21,9 @@ class EventServiceProvider extends Provider
     protected $listen = [
         NewImageEvent::class => [
             NewImageListener::class,
+        ],
+        NewOrderEvent::class => [
+            SendStaffOrderNotifications::class,
         ],
     ];
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5e135bd293e712f9fc6b373504cccb60",
-    "content-hash": "92b47cb91a70167ef325645a1e5cfea5",
+    "hash": "361398dc509e3b149f53e53b8dc46138",
+    "content-hash": "c72904e8f9092606bf55156ef82ac878",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1269,16 +1269,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.3.14",
+            "version": "v5.3.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "960425aac9909ac7f4e4338919f7a187d20fa0ce"
+                "reference": "f034a02f38db77d4b0b3e89942394cae456a627f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/960425aac9909ac7f4e4338919f7a187d20fa0ce",
-                "reference": "960425aac9909ac7f4e4338919f7a187d20fa0ce",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f034a02f38db77d4b0b3e89942394cae456a627f",
+                "reference": "f034a02f38db77d4b0b3e89942394cae456a627f",
                 "shasum": ""
             },
             "require": {
@@ -1393,7 +1393,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-09-29 19:30:55"
+            "time": "2016-09-29 22:13:17"
         },
         {
             "name": "league/flysystem",
@@ -3584,49 +3584,6 @@
             "time": "2016-09-02 02:12:52"
         },
         {
-            "name": "vetruvet/laravel-phpredis",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vetruvet/laravel-phpredis.git",
-                "reference": "8f814ef5473a93f92e490044c9100f6eece3e2c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vetruvet/laravel-phpredis/zipball/8f814ef5473a93f92e490044c9100f6eece3e2c9",
-                "reference": "8f814ef5473a93f92e490044c9100f6eece3e2c9",
-                "shasum": ""
-            },
-            "require": {
-                "ext-redis": "*",
-                "illuminate/redis": "5.* || 4.*",
-                "illuminate/support": "5.* || 4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Vetruvet\\PhpRedis": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Valera Trubachev",
-                    "email": "vetruvet@gmail.com"
-                }
-            ],
-            "description": "Use phpredis as the redis connection in Laravel",
-            "keywords": [
-                "laravel",
-                "phpredis",
-                "redis"
-            ],
-            "time": "2016-06-09 19:32:20"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v2.4.0",
             "source": {
@@ -4164,16 +4121,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
-                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
                 "shasum": ""
             },
             "require": {
@@ -4205,7 +4162,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-06-10 09:48:41"
+            "time": "2016-09-30 07:12:33"
         },
         {
             "name": "phpdocumentor/type-resolver",

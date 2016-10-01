@@ -44,6 +44,7 @@ class AuthTest extends FunctionalTest
             ->type($email, 'email')
             ->type($password, 'password')
             ->press('Log in')
+            ->dontSee('Too many login attempts')
             ->seePageIs(route('staff.dashboard'));
 
         $user->delete();

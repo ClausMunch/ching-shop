@@ -7,6 +7,8 @@ use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Order\OrderItem;
+use ChingShop\Modules\Sales\Events\NewOrderEvent;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Model;
 use Psr\Log\LoggerInterface;
 
@@ -20,6 +22,9 @@ class Cashier
     /** @var Inventory */
     private $inventory;
 
+    /** @var Dispatcher */
+    private $dispatcher;
+
     /** @var LoggerInterface */
     private $log;
 
@@ -28,10 +33,15 @@ class Cashier
      *
      * @param Inventory       $inventory
      * @param LoggerInterface $log
+     * @param Dispatcher      $dispatcher
      */
-    public function __construct(Inventory $inventory, LoggerInterface $log)
-    {
+    public function __construct(
+        Inventory $inventory,
+        LoggerInterface $log,
+        Dispatcher $dispatcher
+    ) {
         $this->inventory = $inventory;
+        $this->dispatcher = $dispatcher;
         $this->log = $log;
     }
 
@@ -49,6 +59,8 @@ class Cashier
         $payment = $this->paymentForSettlement($settlement);
 
         $order->payment()->save($payment);
+
+        $this->dispatcher->fire(new NewOrderEvent($order));
 
         return $order;
     }

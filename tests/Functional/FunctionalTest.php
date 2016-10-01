@@ -24,6 +24,7 @@ abstract class FunctionalTest extends TestCase
             'testing',
             $this->app->make('db')->connection()->getName()
         );
+        self::assertEquals('sync', env('QUEUE_DRIVER'));
     }
 
     /**

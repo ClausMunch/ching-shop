@@ -3,7 +3,6 @@
 namespace ChingShop\Console;
 
 use ChingShop\Console\Commands\MakeUser;
-use ChingShop\Console\Commands\Test;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -19,7 +18,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         MakeUser::class,
-        Test::class,
     ];
 
     /**

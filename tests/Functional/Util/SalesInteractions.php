@@ -37,12 +37,16 @@ trait SalesInteractions
         $this->completeCheckoutToAddress($test);
         $this->customerWillReturnFromPayPal();
         $this->press('Pay with PayPal');
+        $this->see('order-id');
 
         $this->orders[] = Order::where(
             'id',
             '=',
             Order::privateId($test->getElementText('#order-id'))
         )->first();
+
+        $test->assertInstanceOf(Address::class, $this->address);
+        $test->assertInstanceOf(Order::class, end($this->orders));
 
         return end($this->orders);
     }

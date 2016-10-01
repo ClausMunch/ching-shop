@@ -42,9 +42,9 @@ class RedirectIfAuthenticatedTest extends MiddlewareTest
     }
 
     /**
-     * Should redirect to /home if authenticated.
+     * Should redirect if authenticated.
      */
-    public function testRedirectsToHomeIfAuthenticated()
+    public function testRedirectsIfAuthenticated()
     {
         $this->guard->expects($this->atLeastOnce())
             ->method('check')
