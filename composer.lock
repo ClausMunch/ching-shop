@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "361398dc509e3b149f53e53b8dc46138",
-    "content-hash": "c72904e8f9092606bf55156ef82ac878",
+    "hash": "fc878fcb3a532f1bd2d314da621029ce",
+    "content-hash": "9362722ef9c8cb2efddfea78ad7cb0b5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2550,6 +2550,121 @@
                 "test"
             ],
             "time": "2016-01-20 17:35:46"
+        },
+        {
+            "name": "spatie/db-dumper",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/db-dumper.git",
+                "reference": "cf3e695627755effc8e6e1aa9437aafac5f56cc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/cf3e695627755effc8e6e1aa9437aafac5f56cc6",
+                "reference": "cf3e695627755effc8e6e1aa9437aafac5f56cc6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/process": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DbDumper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dump databases",
+            "homepage": "https://github.com/spatie/db-dumper",
+            "keywords": [
+                "database",
+                "db-dumper",
+                "dump",
+                "mysqldump",
+                "spatie"
+            ],
+            "time": "2016-09-17 13:42:57"
+        },
+        {
+            "name": "spatie/laravel-backup",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-backup.git",
+                "reference": "fc013429a3c8543fa76abf0220b3209f5adcb9c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/fc013429a3c8543fa76abf0220b3209f5adcb9c2",
+                "reference": "fc013429a3c8543fa76abf0220b3209f5adcb9c2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.3.8",
+                "illuminate/contracts": "~5.3.8",
+                "illuminate/events": "~5.3.8",
+                "illuminate/filesystem": "~5.3.8",
+                "illuminate/support": "~5.3.8",
+                "league/flysystem": "^1.0.27",
+                "php": "^7.0",
+                "spatie/db-dumper": "^2.0",
+                "symfony/finder": "^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "orchestra/testbench": "^3.3.1",
+                "phpunit/phpunit": "^5.5.4",
+                "tightenco/mailthief": "^0.3.1"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows notifications to be sent via Slack"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Backup\\": "src"
+                },
+                "files": [
+                    "src/Helpers/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel 5 package to backup your application",
+            "homepage": "https://github.com/spatie/laravel-backup",
+            "keywords": [
+                "backup",
+                "database",
+                "laravel-backup",
+                "spatie"
+            ],
+            "time": "2016-09-21 17:39:55"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -220,9 +220,10 @@
         user=www-data
         name="php artisan schedule:run"
 
-    - name: refresh Laravel
+    - name: backup and refresh Laravel
       shell: "cd /var/www/ching-shop && php artisan {{ item }}"
       with_items:
+        - "backup:run"
         - "migrate --force"
         - "clear-compiled"
         - "config:clear"

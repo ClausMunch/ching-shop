@@ -78,6 +78,14 @@ return [
             'public' => env('S3_ENDPOINT', 'https://static.ching-shop.com/'),
         ],
 
+        'backup' => [
+            'driver' => 's3',
+            'key'    => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('S3_REGION', 'us-east-1'),
+            'bucket' => env('S3_BUCKET', 'ching-shop-backup'),
+        ],
+
         'rackspace' => [
             'driver'    => 'rackspace',
             'username'  => 'your-username',
