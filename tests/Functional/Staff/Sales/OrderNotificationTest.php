@@ -3,8 +3,6 @@
 namespace Testing\Functional\Staff\Sales;
 
 use ChingShop\Modules\Sales\Notifications\NewOrderNotification;
-use Illuminate\Contracts\Mail\Mailable;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
@@ -12,8 +10,6 @@ use Testing\Functional\Util\SalesInteractions;
 
 /**
  * Test new order notifications are sent to staff.
- *
- * @package Testing\Functional\Staff\Sales
  */
 class OrderNotificationTest extends FunctionalTest
 {

@@ -7,8 +7,7 @@ use ChingShop\Modules\Sales\Domain\Order\Order;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class NewOrderEvent
- * @package ChingShop\Modules\Sales\Events
+ * Class NewOrderEvent.
  */
 class NewOrderEvent extends Event
 {

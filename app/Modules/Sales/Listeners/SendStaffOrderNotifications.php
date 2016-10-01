@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class SendStaffOrderNotification
- * @package ChingShop\Modules\Sales\Listeners
+ * Class SendStaffOrderNotification.
  */
 class SendStaffOrderNotifications implements ShouldQueue
 {
