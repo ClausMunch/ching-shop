@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'Ching SHop',
+
     'env' => env('APP_ENV', 'production'),
 
     /*
