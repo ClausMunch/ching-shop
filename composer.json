@@ -23,7 +23,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
         "paypal/rest-api-sdk-php": "^1.7",
-        "propaganistas/laravel-fakeid": "^2"
+        "propaganistas/laravel-fakeid": "^2",
+        "spatie/laravel-backup": "^4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

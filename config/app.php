@@ -2,6 +2,8 @@
 
 return [
 
+    'name' => 'Ching SHop',
+
     'env' => env('APP_ENV', 'production'),
 
     /*
@@ -145,6 +147,7 @@ return [
         McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Propaganistas\LaravelFakeId\FakeIdServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Module Service Providers
