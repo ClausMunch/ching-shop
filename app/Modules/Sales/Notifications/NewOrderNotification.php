@@ -5,14 +5,13 @@ namespace ChingShop\Modules\Sales\Notifications;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 /**
- * Class NewOrder
- * @package ChingShop\Modules\Sales\Notifications
+ * Class NewOrder.
  */
 class NewOrderNotification extends Notification implements ShouldQueue
 {
@@ -50,7 +49,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->to($notifiable->email)
             ->subject(
                 sprintf(
