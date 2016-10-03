@@ -7,8 +7,6 @@ use Testing\Functional\Util\SalesInteractions;
 
 /**
  * Test product list page functionality.
- *
- * @package Testing\Functional\Customer\Sales
  */
 class ListPagesTest extends FunctionalTest
 {
