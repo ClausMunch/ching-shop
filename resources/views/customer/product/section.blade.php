@@ -15,6 +15,8 @@
                 </a>
             </h2>
             {{ $product->description() }}
+            <hr>
+            @include('customer.product.add-to-basket')
         </div>
     </div>
 </section>

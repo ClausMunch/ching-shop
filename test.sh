@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
 phpcs -v --standard=./tests/analysis/phpcs.xml app
 phpmd --strict app text ./tests/analysis/phpmd.xml
