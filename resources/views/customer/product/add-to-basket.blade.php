@@ -1,4 +1,5 @@
 <form method="post"
+      class="add-to-basket-form"
       action="{{ route('sales.customer.add-to-basket') }}">
     {{ csrf_field()  }}
     @if ($product->options->count() > 1)
@@ -25,6 +26,7 @@
                value="{{ $product->options->first()->id }}" />
     @endif
     <button type="submit"
+            id="add-{{$product->id}}-to-basket"
             class="btn btn-success btn-lg btn-block buy-button">
         Add to basket
     </button>
