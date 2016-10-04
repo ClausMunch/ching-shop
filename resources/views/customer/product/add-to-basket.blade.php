@@ -4,7 +4,7 @@
     {{ csrf_field()  }}
     @if ($product->options->count() > 1)
         <div class="form-group-lg product-options-group">
-            <label for="product-option-choice">
+            <label for="product-option-choice" class="sr-only">
                 Option:
             </label>
             <select class="form-control input-lg"

@@ -61,7 +61,7 @@
 
             @include('customer.product.add-to-basket')
 
-            <p class="product-price">{{ $product->price()  }}</p>
+            <p class="product-price price-display">{{$product->price()}}</p>
 
             <p>{{ $product->description() }}</p>
 

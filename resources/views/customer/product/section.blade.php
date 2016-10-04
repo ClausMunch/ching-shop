@@ -16,7 +16,16 @@
             </h2>
             {{ $product->description() }}
             <hr>
-            @include('customer.product.add-to-basket')
+            <div class="row">
+                <div class="col-md-2">
+                    <p class="price price-display product-price">
+                        {{$product->price()}}
+                    </p>
+                </div>
+                <div class="col-md-10">
+                    @include('customer.product.add-to-basket')
+                </div>
+            </div>
         </div>
     </div>
 </section>
