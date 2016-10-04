@@ -9,7 +9,7 @@
           content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U" />
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self' https://static.ching-shop.com;
-           script-src 'self' https://static.ching-shop.com https://code.jquery.com/;
+           script-src 'self' https://static.ching-shop.com https://code.jquery.com/ https://*.google-analytics.com;
            img-src 'self' https://static.ching-shop.com;
            child-src 'self';
            object-src 'self';
