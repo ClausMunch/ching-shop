@@ -56,17 +56,23 @@ elixir(function (mix) {
             "public/css/customer.css",
             "public/css"
         )
+        .copy(
+            "resources/assets/scripts/**/*.js",
+            "resources/assets/js/"
+        )
         .typings()
         .typescript()
         .browserify("staff.js")
         .browserify("staff/product-options.js")
         .browserify("customer.js")
+        .browserify("ga.js")
         .version([
             "css/staff.css",
             "css/customer.css",
             "js/staff.js",
             "js/product-options.js",
-            "js/customer.js"
+            "js/customer.js",
+            "js/ga.js"
         ])
         .copy("resources/assets/img", "public/img")
         .copy("resources/assets/fonts", "public/fonts")
