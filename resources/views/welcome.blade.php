@@ -20,6 +20,9 @@
                             </a>
                         </h3>
                         @if (count($product->images()))
+                            <p class="price price-display">
+                                {{$product->price()}} | In stock
+                            </p>
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 <img src="{{ $product->mainImage()->sizeUrl() }}"
                                      @if ($product->mainImage()->isSelfHosted())

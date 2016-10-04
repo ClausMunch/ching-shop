@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Customer\Sales;
 
+use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\SalesInteractions;
 
@@ -32,5 +33,28 @@ class ListPagesTest extends FunctionalTest
         $this->press('Add to basket')
             ->see('added')
             ->see($product->name);
+    }
+
+    /**
+     * Should be able to see product prices on list pages.
+     */
+    public function testCanSeePriceOnListPage()
+    {
+        // Given there is a product on a list page;
+        $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+        $tag = $this->createTag();
+        $tag->products()->attach($product);
+
+        // And the product has a price;
+        $price = $this->createPriceForProduct($product);
+
+        // When we visit that list page;
+        $this->actingAs($this->customerUser())
+            ->visit(route('tag::view', [$tag->id, $tag->name]))
+            ->see($product->name);
+
+        // Then we should be able to see the price for the product.
+        $this->see($price->formatted());
     }
 }
