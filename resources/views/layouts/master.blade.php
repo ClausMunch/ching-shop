@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self' https://static.ching-shop.com;
            script-src 'self' https://static.ching-shop.com https://code.jquery.com/ https://*.google-analytics.com;
-           img-src 'self' https://static.ching-shop.com;
+           img-src 'self' https://static.ching-shop.com https://*.google-analytics.com;
            child-src 'self';
            object-src 'self';
            form-action 'self' {{ config('payment.paypal.base-url') }};
@@ -40,6 +40,12 @@
       href="/img/favicon.png" />
 
 @stack('scripts')
+
+@push('scripts')
+@if (\App::environment('production'))
+<script async defer src="{{ elixir('js/ga.js') }}"></script>
+@endif
+@endpush
 
 </body>
 </html>

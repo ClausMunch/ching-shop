@@ -36,8 +36,3 @@
 
 @endsection
 
-@push('scripts')
-@if (\App::environment('production'))
-<script async defer src="{{ elixir('js/ga.js') }}"></script>
-@endif
-@endpush
