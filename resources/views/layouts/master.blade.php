@@ -39,13 +39,13 @@
       property="icon"
       href="/img/favicon.png" />
 
-@stack('scripts')
-
 @push('scripts')
 @if (\App::environment('production'))
 <script async defer src="{{ elixir('js/ga.js') }}"></script>
 @endif
 @endpush
+
+@stack('scripts')
 
 </body>
 </html>
