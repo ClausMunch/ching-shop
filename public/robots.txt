@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.ching-shop.com/sitemap.xml
+Sitemap: https://www.ching-shop.com/storage/sitemap.xml
