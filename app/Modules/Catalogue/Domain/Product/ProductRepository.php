@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Catalogue\Domain\Product;
 
+use Generator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
@@ -20,6 +21,20 @@ class ProductRepository
     public function __construct(Product $productResource)
     {
         $this->productResource = $productResource;
+    }
+
+    /**
+     * @return Generator|Product[]
+     */
+    public function iterateAll(): Generator
+    {
+        /** @var Product $product */
+        foreach ($this->productResource->with('images')->cursor() as $product) {
+            if (!$product->relationLoaded('images')) {
+                $product->load('images');
+            }
+            yield $product;
+        }
     }
 
     /**

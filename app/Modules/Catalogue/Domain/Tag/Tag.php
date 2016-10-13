@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Domain\Tag;
 
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,9 +15,11 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  *
  * @mixin \Eloquent
  *
- * @property int $id
- * @property string $name
- * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
+ * @property \Carbon\Carbon            $created_at
+ * @property \Carbon\Carbon            $updated_at
+ * @property int                       $id
+ * @property string                    $name
+ * @property-read Collection|Product[] $products
  */
 class Tag extends Model implements HasPresenter
 {
@@ -24,6 +27,14 @@ class Tag extends Model implements HasPresenter
 
     /** @var array */
     protected $fillable = ['name'];
+
+    /**
+     * @return string
+     */
+    public function url(): string
+    {
+        return route('tag::view', [$this->id, $this->name]);
+    }
 
     /**
      * @return BelongsToMany
