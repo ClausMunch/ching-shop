@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fc878fcb3a532f1bd2d314da621029ce",
-    "content-hash": "9362722ef9c8cb2efddfea78ad7cb0b5",
+    "hash": "ed43a65f6a261c3ec795446095c2efd0",
+    "content-hash": "580c7c5adb27a559b72d3be0a538d01e",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3697,6 +3697,48 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-09-02 02:12:52"
+        },
+        {
+            "name": "thepixeldeveloper/sitemap",
+            "version": "4.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ThePixelDeveloper/Sitemap.git",
+                "reference": "4ef6d935ecc2695c07f627fc23afdfde4a5b8513"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ThePixelDeveloper/Sitemap/zipball/4ef6d935ecc2695c07f627fc23afdfde4a5b8513",
+                "reference": "4ef6d935ecc2695c07f627fc23afdfde4a5b8513",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thepixeldeveloper\\Sitemap\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathew Davies",
+                    "email": "thepixeldeveloper@googlemail.com",
+                    "homepage": "http://mathew-davies.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "XML sitemap generation",
+            "keywords": [
+                "Sitemap",
+                "xml"
+            ],
+            "time": "2016-07-15 18:44:13"
         },
         {
             "name": "vlucas/phpdotenv",

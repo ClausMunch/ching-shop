@@ -11,6 +11,7 @@ use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
 use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
+use Generator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -58,6 +59,17 @@ class CatalogueRepository
         $this->tagRepository = $tagRepository;
         $this->imageRepository = $imageRepository;
         $this->optionRepository = $optionRepository;
+    }
+
+
+    /**
+     * @return Generator|Product[]
+     */
+    public function iterateAllProducts(): Generator
+    {
+        foreach ($this->productRepository->iterateAll() as $product) {
+            yield $product;
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  *
  * @property int                             $id
  * @property string                          $sku
- * @property \Carbon\Carbon                  $created_atProductRepository
+ * @property \Carbon\Carbon                  $created_at
  * @property \Carbon\Carbon                  $updated_at
  *
  * @method static Builder|Product whereId($value)
@@ -54,6 +54,14 @@ class Product extends Model implements HasPresenter, ImageOwner
 
     /** @var BelongsToMany */
     private $imagesRelationship;
+
+    /**
+     * @return string
+     */
+    public function url(): string
+    {
+        return route('product::view', [$this->id, $this->slug]);
+    }
 
     /**
      * @return bool

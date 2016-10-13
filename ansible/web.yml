@@ -223,6 +223,8 @@
     - name: backup and refresh Laravel
       shell: "cd /var/www/ching-shop && php artisan {{ item }}"
       with_items:
+        - "storage:link"
+        - "sitemap:build"
         - "backup:run"
         - "migrate --force"
         - "clear-compiled"
