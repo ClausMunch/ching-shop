@@ -13,12 +13,12 @@
             <li>
                 <a class="top-link top-text" href="/cards">Cards</a>
             </li>
-            <li>
-                <a class="top-link top-text" href="/about">About</a>
-            </li>
-            <li>
-                <a class="top-link top-text" href="/contact">Contact</a>
-            </li>
+            {{--<li>--}}
+                {{--<a class="top-link top-text" href="/about">About</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a class="top-link top-text" href="/contact">Contact</a>--}}
+            {{--</li>--}}
         </ul>
 
         <a class="mini-basket top-link top-text"
@@ -51,4 +51,20 @@
         </div>
     </div>
 
+@endsection
+
+@section('footer')
+    <footer class="footer">
+        <ul class="footer-links">
+            <li>
+                <a class="footer-link" href="/">Home</a>
+            </li>
+            <li>
+                <a class="footer-link" href="/about">About</a>
+            </li>
+            <li>
+                <a class="footer-link" href="/contact">Contact</a>
+            </li>
+        </ul>
+    </footer>
 @endsection

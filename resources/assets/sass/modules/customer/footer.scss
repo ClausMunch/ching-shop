@@ -1,0 +1,16 @@
+.footer {
+  @extend %brand-band;
+
+  font-size: 1.3em;
+  margin-top: 3em;
+  padding: 1em;
+  text-align: center;
+}
+
+.footer-links {
+  @extend %plain-list;
+}
+
+.footer-link {
+  @extend %brand-band-link;
+}
