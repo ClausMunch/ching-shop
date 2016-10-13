@@ -9,7 +9,7 @@
     </h1>
 
     <section>
-        <h2>Stuff we love</h2>
+        <h2>Beautiful 3D Pop-Up Cards</h2>
         @foreach($productRows as $products)
             <div class="row">
                 @foreach($products as $product)

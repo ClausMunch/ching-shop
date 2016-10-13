@@ -30,6 +30,8 @@
         </div>
     </div>
 
+    @yield('footer')
+
 <link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab|Roboto+Condensed:700'
       property='stylesheet'
       rel='stylesheet'

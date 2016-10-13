@@ -1,7 +1,6 @@
 .top-band {
-  background: $text-color;
-  box-sizing: border-box;
-  color: invert($text-color);
+  @extend %brand-band;
+
   min-height: 2em;
   overflow: auto;
   padding-top: .5em;
@@ -44,16 +43,7 @@
 }
 
 .top-link {
-  @extend %list-link;
-
-  color: invert($text-color);
-  font-family: $font-brand;
-  text-decoration: none;
-
-  &:hover {
-    background: lighten($text-color, 10%);
-    color: lighten(invert($text-color), 50%);
-  }
+  @extend %brand-band-link;
 }
 
 .top-logo-link {
