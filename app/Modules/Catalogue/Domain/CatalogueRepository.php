@@ -61,7 +61,6 @@ class CatalogueRepository
         $this->optionRepository = $optionRepository;
     }
 
-
     /**
      * @return Generator|Product[]
      */

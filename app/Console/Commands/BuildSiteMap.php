@@ -7,9 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Factory;
 
 /**
- * Class BuildSiteMap
- *
- * @package ChingShop\Console\Commands
+ * Class BuildSiteMap.
  */
 class BuildSiteMap extends Command
 {

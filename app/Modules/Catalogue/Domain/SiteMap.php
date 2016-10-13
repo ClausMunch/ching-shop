@@ -9,11 +9,7 @@ use Thepixeldeveloper\Sitemap\Url;
 use Thepixeldeveloper\Sitemap\Urlset;
 
 /**
- * Class SiteMap
- *
- * @package ChingShop\Modules\Catalogue\Domain
- *
- * An XML sitemap.
+ * Class SiteMap.
  */
 class SiteMap
 {

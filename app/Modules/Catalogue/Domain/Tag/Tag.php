@@ -17,7 +17,6 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  *
  * @property \Carbon\Carbon            $created_at
  * @property \Carbon\Carbon            $updated_at
- *
  * @property int                       $id
  * @property string                    $name
  * @property-read Collection|Product[] $products
