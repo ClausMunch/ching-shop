@@ -5,7 +5,13 @@
 @endsection
 
 @section('checkout-section-content')
+
     <h2 class="checkout-section-title">Your address</h2>
+
+    <div class="alert alert-info" role="alert">
+        <span class="icon icon-truck"></span>&nbsp;
+        Delivery is <strong>free</strong> for all UK orders.
+    </div>
 
     <form method="post"
           action="{{ route('sales.customer.checkout.save-address') }}"
@@ -133,12 +139,12 @@
                         required>
                     @foreach ($countries as $code => $country)
                         <option value="{{ $code }}"
-                          @if($code === $reply->oldInputOr(
-                            'country_code',
-                            $basket->address->country_code ?? 'GB'
-                          ))
-                              selected aria-selected="true"
-                          @endif
+                                @if($code === $reply->oldInputOr(
+                                  'country_code',
+                                  $basket->address->country_code ?? 'GB'
+                                ))
+                                selected aria-selected="true"
+                                @endif
                         >
                             {{ $country }}
                         </option>
@@ -153,9 +159,10 @@
         </div>
         <hr>
         <div class="continue">
-            <button class="btn btn-lg btn-success continue-button"
+            <button class="btn btn-lg btn-success continue-button btn-flow"
                     type="submit">
-                Continue &rarr;
+                Continue
+                <span class="glyphicon glyphicon-chevron-right"></span>
             </button>
         </div>
     </form>

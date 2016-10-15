@@ -41,8 +41,8 @@
                             $basketItem->productOption->product->id,
                             $basketItem->productOption->product->slug,
                         ]) }}">
-                    <img src="{{ $basketItem->productOption->images->first()->sizeUrl('small') }}"
-                         class="basket-product-image"/>
+                            <img src="{{ $basketItem->productOption->images->first()->sizeUrl('small') }}"
+                                 class="basket-product-image"/>
                         </a>
                     @endif
                 </td>
@@ -55,7 +55,7 @@
                         {{ csrf_field() }}
                         <input name="basket-item-id"
                                value="{{ $basketItem->id }}"
-                               type="hidden" />
+                               type="hidden"/>
                         <button type="submit" class="btn btn-link btn-sm">
                             <span class="glyphicon glyphicon-remove"></span>
                             <span class="sr-only">
@@ -68,27 +68,28 @@
             </tr>
         @endforeach
         <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td class="price basket-total">
-                    @if ($basket->basketItems->count())
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="price basket-total">
+                @if ($basket->basketItems->count())
                     £<span class="basket-total-amount"><!--
                         -->{{ $basket->totalPrice() }}
                     </span>
-                    @endif
-                </td>
-                <td></td>
-            </tr>
+                @endif
+            </td>
+            <td></td>
+        </tr>
         </tfoot>
     </table>
 
     @if ($basket->basketItems->count())
         <div class="continue">
-            <a class="btn btn-lg btn-success continue-button"
+            <a class="btn btn-lg btn-success continue-button btn-flow"
                href="{{ route('sales.customer.checkout.address') }}"
                rel="nofollow">
-                Go to checkout &rarr;
+                Go to checkout
+                <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
         </div>
     @endif

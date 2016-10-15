@@ -23,11 +23,11 @@
                id="product-option-only"
                class="product-option-only"
                name="product-option"
-               value="{{ $product->options->first()->id }}" />
+               value="{{ $product->options->first()->id }}"/>
     @endif
     <button type="submit"
             id="add-{{$product->id}}-to-basket"
-            class="btn btn-success btn-lg btn-block buy-button">
-        Add to basket
+            class="btn btn-success btn-lg btn-block buy-button btn-flow">
+        Add to basket <span class="glyphicon glyphicon-chevron-right"></span>
     </button>
 </form>

@@ -4,12 +4,9 @@
 
 @section('body')
 
-    <h1 class="home-title">
-        Ching Shop
-    </h1>
+    <h1 class="home-title">Beautiful 3D Pop-Up Cards</h1>
 
     <section>
-        <h2>Beautiful 3D Pop-Up Cards</h2>
         @foreach($productRows as $products)
             <div class="row">
                 @foreach($products as $product)
@@ -20,13 +17,13 @@
                             </a>
                         </h3>
                         @if (count($product->images()))
-                            <p class="price price-display">
+                            <p class="price">
                                 {{$product->price()}} | In stock
                             </p>
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 <img src="{{ $product->mainImage()->sizeUrl() }}"
                                      @if ($product->mainImage()->isSelfHosted())
-                                        srcset="{{ $product->mainImage()->srcSet() }}"
+                                     srcset="{{ $product->mainImage()->srcSet() }}"
                                      @endif
                                      class="img-responsive img-rounded photo">
                             </a>

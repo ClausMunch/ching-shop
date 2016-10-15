@@ -46,8 +46,29 @@
 
 .btn.paypal {
   @include button-variant(
-    $floral-white,
-    $colour-paypal,
-    darken($colour-paypal, 5%)
+                  $floral-white,
+                  $colour-paypal,
+                  darken($colour-paypal, 5%)
   );
+}
+
+.btn-flow {
+  background-image: linear-gradient(
+                  lighten($colour-success, 12%),
+                  darken($colour-success, 12%)
+  );
+  border: 2px outset $colour-success;
+  box-shadow: 2px 2px 4px $gray-lighter;
+  font-size: 1.5em;
+  font-weight: bold;
+
+  &:active,
+  &:active:disabled {
+    background-image: linear-gradient(
+                    darken($colour-success, 10%),
+                    lighten($colour-success, 10%)
+    );
+    border-style: inset;
+    box-shadow: none;
+  }
 }
