@@ -13,44 +13,44 @@
         <div class="col-md-8">
 
             @if ($product->mainImage())
-            <img class="img-responsive photo"
-                 id="product-main-image"
-                 src="{{ $product->mainImage()->sizeUrl('large') }}"
-                 @if ($product->mainImage()->isSelfHosted())
-                    srcset="{{ $product->mainImage()->srcSet() }}"
-                 @endif
-                 alt="{{ $product->mainImage()->altText() }}">
+                <img class="img-responsive photo"
+                     id="product-main-image"
+                     src="{{ $product->mainImage()->sizeUrl('large') }}"
+                     @if ($product->mainImage()->isSelfHosted())
+                     srcset="{{ $product->mainImage()->srcSet() }}"
+                     @endif
+                     alt="{{ $product->mainImage()->altText() }}">
             @endif
 
             <div class="product-thumbnails">
                 @foreach($product->images() as $i => $image)
                     <a class="product-thumbnail"
                        @if ($i === 0) data-selected="true" @endif
-                        href="{{ $image->sizeUrl('large') }}"
-                        title="{{ $image->altText() }}">
+                       href="{{ $image->sizeUrl('large') }}"
+                       title="{{ $image->altText() }}">
                         <img class="img-thumbnail img-responsive"
                              src="{{ $image->sizeUrl('large') }}"
                              alt="{{ $image->altText() }}"
                              @if ($image->isSelfHosted())
-                                srcset="{{ $image->srcSet() }}"
+                             srcset="{{ $image->srcSet() }}"
                              @endif
                              width="128" height="97">
                     </a>
                 @endforeach
                 @foreach ($product->options as $option)
                     @foreach ($option->images as $image)
-                            <a class="product-thumbnail"
-                               data-option-id="{{ $option->id  }}"
-                               href="{{ $image->sizeUrl('large') }}"
-                               title="{{ $option->label }} ({{ $image->altText() }})">
-                                <img class="img-thumbnail img-responsive"
-                                     src="{{ $image->sizeUrl('large') }}"
-                                     alt="{{ $image->altText() }}"
-                                     @if ($image->isSelfHosted())
-                                     srcset="{{ $image->srcSet() }}"
-                                     @endif
-                                     width="128" height="97">
-                            </a>
+                        <a class="product-thumbnail"
+                           data-option-id="{{ $option->id  }}"
+                           href="{{ $image->sizeUrl('large') }}"
+                           title="{{ $option->label }} ({{ $image->altText() }})">
+                            <img class="img-thumbnail img-responsive"
+                                 src="{{ $image->sizeUrl('large') }}"
+                                 alt="{{ $image->altText() }}"
+                                 @if ($image->isSelfHosted())
+                                 srcset="{{ $image->srcSet() }}"
+                                 @endif
+                                 width="128" height="97">
+                        </a>
                     @endforeach
                 @endforeach
             </div>
@@ -61,7 +61,7 @@
 
             @include('customer.product.add-to-basket')
 
-            <p class="product-price price-display">{{$product->price()}}</p>
+            <p class="product-price price">{{$product->price()}}</p>
 
             <p>{{ $product->description() }}</p>
 
@@ -82,7 +82,7 @@
                                 <a href="{{ route(
                                     'tag::view', [$tag->id, $tag->name]
                                 ) }}">
-                                    {{ $tag->name  }}<!--
+                                {{ $tag->name  }}<!--
                                 --></a>&nbsp;
                             @endforeach
                         </td>

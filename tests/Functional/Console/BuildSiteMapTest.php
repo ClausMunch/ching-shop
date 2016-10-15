@@ -6,6 +6,7 @@ use Artisan;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use DOMDocument;
 use GuzzleHttp\Client;
+use Storage;
 use Testing\Functional\FunctionalTest;
 
 /**
@@ -42,22 +43,36 @@ class BuildSiteMapTest extends FunctionalTest
     {
         Artisan::call('sitemap:build');
 
-        $getSiteMap = (new Client(['verify' => false]))->get(
-            url('/storage/sitemap.xml')
-        );
-        $this->assertEquals(200, $getSiteMap->getStatusCode());
+        $siteMapContent = $this->getSiteMap();
 
         $xml = new DOMDocument();
-        $xml->load($getSiteMap->getBody());
+        $xml->load($siteMapContent);
         $errors = libxml_get_errors();
         $this->assertEmpty($errors, print_r($errors, true));
 
         foreach (Product::all() as $product) {
             $this->assertContains(
                 $product->url(),
-                (string) $getSiteMap->getBody(),
+                $siteMapContent,
                 'Sitemap should contain all product URLs.'
             );
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getSiteMap(): string
+    {
+        if (env('NETWORK_TEST')) {
+            $getSiteMap = (new Client(['verify' => false]))->get(
+                url('/storage/sitemap.xml')
+            );
+            $this->assertEquals(200, $getSiteMap->getStatusCode());
+
+            return (string) $getSiteMap->getBody();
+        }
+
+        return Storage::disk('public')->get('sitemap.xml');
     }
 }

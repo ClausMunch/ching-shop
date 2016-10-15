@@ -21,12 +21,10 @@
 }
 
 .price {
+  color: lighten($text-color, 10%);
   font-family: monospace;
-}
-
-.price-display {
-  color: $brand-success;
-  font-weight: bold;
+  font-weight: lighter;
+  letter-spacing: .05em;
 }
 
 .continue {

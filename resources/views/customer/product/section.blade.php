@@ -18,7 +18,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-2">
-                    <p class="price price-display product-price">
+                    <p class="price product-price">
                         {{$product->price()}}
                     </p>
                 </div>
