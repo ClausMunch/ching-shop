@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
+use Laravel\Scout\Searchable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
@@ -47,7 +48,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class Product extends Model implements HasPresenter, ImageOwner
 {
-    use SoftDeletes;
+    use SoftDeletes, Searchable;
 
     /** @var array */
     protected $fillable = ['name', 'sku', 'slug', 'description'];

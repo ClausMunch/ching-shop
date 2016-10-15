@@ -6,20 +6,22 @@
 
         @include('customer.partials.top-band-logo')
 
-        <ul class="top-links top-center">
-            <li>
-                <a class="top-link top-text" href="/">Home</a>
-            </li>
-            <li>
-                <a class="top-link top-text" href="/cards">Cards</a>
-            </li>
-            {{--<li>--}}
-                {{--<a class="top-link top-text" href="/about">About</a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-                {{--<a class="top-link top-text" href="/contact">Contact</a>--}}
-            {{--</li>--}}
-        </ul>
+        <form class="form top-center" method="get"
+              action="{{route('catalogue.search')}}">
+            <div class="input-group">
+                <input name="q" type="text" class="form-control top-search"
+                       value="{{$query or ''}}"
+                       placeholder="Search for...">
+                <span class="input-group-btn">
+                        <button class="btn btn-default"
+                                id="search-button"
+                                type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </span>
+            </div>
+        </form>
 
         <a class="mini-basket top-link top-text"
            rel="nofollow"

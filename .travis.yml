@@ -2,6 +2,8 @@ language: php
 php:
   - '7.0'
 sudo: false
+services:
+  - elasticsearch
 install:
   - export PATH=$PATH:$PWD/vendor/bin/
   - mkdir -p build/logs

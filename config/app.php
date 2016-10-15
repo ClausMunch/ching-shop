@@ -83,7 +83,7 @@ return [
     */
 
     // @see .env
-    'key'    => env('APP_KEY', 'SomeRandomString'),
+    'key'             => env('APP_KEY', 'SomeRandomString'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -141,6 +141,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
 
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,

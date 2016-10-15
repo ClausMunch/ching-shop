@@ -50,16 +50,16 @@
         @if ($order->address)
             <div class="col-md-6">
                 <h2>Where we're sending it</h2>
-                <p>
-                    {{ $order->address->name }}<br>
-                    {{ $order->address->line_one }}<br>
-                    @if($order->address->line_two)
-                        {{ $order->address->line_two }}<br>
+                <address>
+                    <strong>{{ $basket->address->name }}</strong><br>
+                    {{ $basket->address->line_one }}<br>
+                    @if($basket->address->line_two)
+                        {{ $basket->address->line_two }}<br>
                     @endif
                     {{ $order->address->city }}<br>
-                    {{ $order->address->post_code }}<br>
-                    {{ $order->address->country_code }}<br>
-                </p>
+                    {{ $basket->address->post_code }}<br>
+                    {{ $basket->address->country_code }}<br>
+                </address>
             </div>
         @endif
     </div>
