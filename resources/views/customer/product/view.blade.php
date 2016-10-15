@@ -65,6 +65,11 @@
 
             <p>{{ $product->description() }}</p>
 
+            <div class="alert alert-info" role="alert">
+                <span class="icon icon-truck"></span>&nbsp;
+                Delivery is <strong>free</strong> for all UK orders.
+            </div>
+
             <table class="table product-details">
                 <tr>
                     <td>Reference</td>
