@@ -25,12 +25,14 @@ class ProductsTableSeeder extends Seed
      */
     private function seedProduct()
     {
-        $product = Product::create([
-            'name'        => ucfirst($this->faker()->words(5, true)),
-            'sku'         => mb_strtoupper($this->faker()->lexify('?????')),
-            'slug'        => $this->faker()->slug(),
-            'description' => $this->faker()->paragraph,
-        ]);
+        $product = Product::create(
+            [
+                'name'        => ucfirst($this->faker()->words(5, true)),
+                'sku'         => mb_strtoupper($this->faker()->lexify('?????')),
+                'slug'        => $this->faker()->slug(),
+                'description' => $this->faker()->paragraph,
+            ]
+        );
 
         $imagesIDs = [];
         foreach ($this->makeImages() as $image) {
@@ -38,11 +40,13 @@ class ProductsTableSeeder extends Seed
         }
         $product->attachImages($imagesIDs);
 
-        $price = new Price([
-            'units'    => random_int(1, 100),
-            'subunits' => random_int(0, 99),
-            'currency' => 'GBP',
-        ]);
+        $price = new Price(
+            [
+                'units'    => random_int(1, 100),
+                'subunits' => random_int(0, 99),
+                'currency' => 'GBP',
+            ]
+        );
         $product->prices()->save($price);
 
         for ($i = 0, $count = random_int(1, 3); $i < $count; $i++) {
@@ -55,14 +59,16 @@ class ProductsTableSeeder extends Seed
      */
     private function makeImages(): Generator
     {
-        for ($i = 0, $count = random_int(2, 3); $i < $count; $i++) {
-            yield Image::create([
-                'alt_text' => $this->faker()->words(3, true),
-                'url'      => secure_asset(
-                    "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
-                    .uniqid('', true)
-                ),
-            ]);
+        for ($i = 0, $count = random_int(1, 2); $i < $count; $i++) {
+            yield Image::create(
+                [
+                    'alt_text' => $this->faker()->words(3, true),
+                    'url'      => secure_asset(
+                        "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
+                        .uniqid('', true)
+                    ),
+                ]
+            );
         }
     }
 
@@ -71,9 +77,11 @@ class ProductsTableSeeder extends Seed
      */
     private function addProductOption(Product $product)
     {
-        $productOption = new ProductOption([
-            'label' => ucfirst($this->faker()->unique()->word),
-        ]);
+        $productOption = new ProductOption(
+            [
+                'label' => ucfirst($this->faker()->unique()->word),
+            ]
+        );
         $product->options()->save($productOption);
 
         // Add stock items for the product option.
