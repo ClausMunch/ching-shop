@@ -16,10 +16,6 @@
 
 .checkout-section-title {
   margin-bottom: 1em;
-
-  @include breakpoint(sm-up) {
-    margin-bottom: 2em;
-  }
 }
 
 .form-control.checkout {

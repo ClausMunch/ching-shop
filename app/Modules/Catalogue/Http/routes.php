@@ -3,6 +3,13 @@
 Route::group(
     ['prefix' => 'catalogue'],
     function () {
+        Route::get(
+            'search',
+            [
+                'uses' => 'SearchController@searchAction',
+                'as'   => 'catalogue.search',
+            ]
+        )->middleware(['customer']);
         Route::group(
             [
                 'prefix'     => 'staff',

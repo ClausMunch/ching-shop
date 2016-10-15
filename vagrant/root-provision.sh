@@ -95,5 +95,24 @@ function setUpSupervisor
 }
 setUpSupervisor
 
+function installElasticSearch
+{
+    wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" \
+        | tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+    add-apt-repository -y ppa:webupd8team/java
+    apt-get update
+    echo debconf shared/accepted-oracle-license-v1-1 select true \
+        | debconf-set-selections
+    echo debconf shared/accepted-oracle-license-v1-1 seen true \
+        | debconf-set-selections
+    apt-get install -y oracle-java8-installer
+    java -version
+    apt-get install -y elasticsearch
+    update-rc.d elasticsearch defaults 95 10
+    /etc/init.d/elasticsearch start
+}
+installElasticSearch
+
 service php7.0-fpm restart
 service nginx restart

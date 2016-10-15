@@ -4,6 +4,7 @@ namespace ChingShop\Console;
 
 use ChingShop\Console\Commands\BuildSiteMap;
 use ChingShop\Console\Commands\MakeUser;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -37,5 +38,10 @@ class Kernel extends ConsoleKernel
 
         // Daily sitemap generation.
         $schedule->command('sitemap:build')->daily()->at('23:00');
+
+        // Import products to ElasticSearch.
+        $schedule->command('scout:import', [Product::class])->daily()->at(
+            '03:00'
+        );
     }
 }

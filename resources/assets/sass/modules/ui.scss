@@ -1,6 +1,7 @@
 .spin {
   animation: spinner .8s infinite linear;
   display: inline-block;
+  transform-origin: 50% 46%;
 }
 
 @keyframes spinner {

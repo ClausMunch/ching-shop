@@ -36,10 +36,6 @@ class ProductImagesTest extends ProductTest
                 ->attach([$testImageFile], 'new-image')
                 ->press('Add general images')
                 ->assertResponseOk();
-
-            $this->actingAs($this->staffUser())
-                ->visit($productPage)
-                ->see(basename($testImageFile));
         } catch (HttpException $e) {
             $this->assertContains(
                 'Received status code [500]',

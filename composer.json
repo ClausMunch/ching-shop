@@ -25,7 +25,9 @@
         "paypal/rest-api-sdk-php": "^1.7",
         "propaganistas/laravel-fakeid": "^2",
         "spatie/laravel-backup": "^4.0",
-        "thepixeldeveloper/sitemap": "^4.4"
+        "thepixeldeveloper/sitemap": "^4.4",
+        "laravel/scout": "^1.1",
+        "elasticsearch/elasticsearch": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

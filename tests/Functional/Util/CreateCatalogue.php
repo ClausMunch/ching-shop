@@ -21,16 +21,23 @@ trait CreateCatalogue
     private $faker;
 
     /**
+     * @param array $attributes
+     *
      * @return Product
      */
-    protected function createProduct(): Product
+    protected function createProduct(array $attributes = []): Product
     {
-        return Product::create([
-            'name'        => uniqid('Product ', false),
-            'sku'         => uniqid('SKU', false),
-            'slug'        => uniqid('slug-,', false),
-            'description' => 'Description '.str_random(30),
-        ]);
+        return Product::create(
+            array_merge(
+                [
+                    'name'        => uniqid('', false),
+                    'sku'         => uniqid('SKU', false),
+                    'slug'        => uniqid('slug-,', false),
+                    'description' => 'Description '.str_random(30),
+                ],
+                $attributes
+            )
+        );
     }
 
     /**
@@ -38,9 +45,11 @@ trait CreateCatalogue
      */
     protected function createTag(): Tag
     {
-        return Tag::create([
-            'name' => uniqid('Tag', false),
-        ]);
+        return Tag::create(
+            [
+                'name' => uniqid('Tag', false),
+            ]
+        );
     }
 
     /**
@@ -50,9 +59,11 @@ trait CreateCatalogue
      */
     protected function createProductOptionFor(Product $product): ProductOption
     {
-        $productOption = new ProductOption([
-            'label' => uniqid('ProductOption', false),
-        ]);
+        $productOption = new ProductOption(
+            [
+                'label' => uniqid('ProductOption', false),
+            ]
+        );
         $product->options()->save($productOption);
         $productOption->stockItems()->save(new StockItem());
 
@@ -66,10 +77,12 @@ trait CreateCatalogue
      */
     protected function createPriceForProduct(Product $product): Price
     {
-        $price = new Price([
-            'units'    => random_int(1, 99),
-            'subunits' => random_int(0, 99),
-        ]);
+        $price = new Price(
+            [
+                'units'    => random_int(1, 99),
+                'subunits' => random_int(0, 99),
+            ]
+        );
         $product->prices()->save($price);
 
         return $price;
@@ -80,9 +93,11 @@ trait CreateCatalogue
      */
     protected function createColour(): Colour
     {
-        return Colour::create([
-            'name' => uniqid($this->faker()->unique()->colorName, false),
-        ]);
+        return Colour::create(
+            [
+                'name' => uniqid($this->faker()->unique()->colorName, false),
+            ]
+        );
     }
 
     /**
@@ -90,10 +105,12 @@ trait CreateCatalogue
      */
     protected function createImage(): Image
     {
-        return Image::create([
-            'alt_text' => str_random(),
-            'url'      => $this->faker()->slug,
-        ]);
+        return Image::create(
+            [
+                'alt_text' => str_random(),
+                'url'      => $this->faker()->slug,
+            ]
+        );
     }
 
     /**
