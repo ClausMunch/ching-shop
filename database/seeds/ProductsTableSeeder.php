@@ -67,7 +67,7 @@ class ProductsTableSeeder extends Seed
                     'alt_text' => $this->faker()->words(3, true),
                     'url'      => secure_asset(
                         "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
-                        . uniqid('', true)
+                        .uniqid('', true)
                     ),
                 ]
             );

@@ -70,7 +70,7 @@ class DeleteIndex extends Command
         } catch (\Throwable $err) {
             $this->error(
                 "Failed to delete index `{$this->indexName()}`: "
-                . $err->getMessage()
+                .$err->getMessage()
             );
         }
     }

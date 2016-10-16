@@ -6,7 +6,7 @@ use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Console\Command;
 
 /**
- * Delete and re-import
+ * Delete and re-import.
  */
 class RefreshIndex extends Command
 {
@@ -45,7 +45,7 @@ class RefreshIndex extends Command
         } catch (\Throwable $err) {
             $this->error(
                 "Failed to refresh index `{$this->indexName()}`: "
-                . $err->getMessage()
+                .$err->getMessage()
             );
         }
     }
@@ -57,7 +57,7 @@ class RefreshIndex extends Command
     {
         return $this->confirm(
             "Delete and re-import the `{$this->indexName()}` index"
-            . ' in Elasticsearch?'
+            .' in Elasticsearch?'
         );
     }
 }
