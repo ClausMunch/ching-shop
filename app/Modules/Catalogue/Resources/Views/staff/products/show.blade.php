@@ -58,39 +58,40 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="well">
-                <form method="post"
-                      enctype="multipart/form-data"
-                      id="new-images-form"
-                      class="form-inline"
-                      action="{{ route(
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          id="new-images-form"
+                          class="form-inline"
+                          action="{{ route(
                   'catalogue.staff.products.post-images',
                   ['sku' => $product->sku()]
               ) }}">
-                    {{ csrf_field() }}
-                    {{ method_field('POST') }}
-                    <div class="form-group">
-                        <label for="new-image[]">
-                            Add
-                            @if ($product->isStored()) new @endif
-                            general images
-                        </label>
-                        <input type="file" name="new-image[]" id="new-image" multiple>
-                        @foreach($reply->errorsFor('new-image.0') as $error)
-                            <label class="help-block" for="new-image[]">
-                                {{ $error }}
+                        {{ csrf_field() }}
+                        {{ method_field('POST') }}
+                        <div class="form-group">
+                            <label for="new-image[]">
+                                Add
+                                @if ($product->isStored()) new @endif
+                                general images
                             </label>
-                        @endforeach
-                    </div>
-                    <button type="submit"
-                            class="btn btn-success"
-                            form="new-images-form"
-                            value="submit-new-images"
-                            name="submit-new-images"
-                            id="submit-new-images">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Add general images
-                    </button>
-                </form>
+                            <input type="file" name="new-image[]" id="new-image"
+                                   multiple>
+                            @foreach($reply->errorsFor('new-image.*') as $error)
+                                <label class="help-block" for="new-image[]">
+                                    {{ $error }}
+                                </label>
+                            @endforeach
+                        </div>
+                        <button type="submit"
+                                class="btn btn-success"
+                                form="new-images-form"
+                                value="submit-new-images"
+                                name="submit-new-images"
+                                id="submit-new-images">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add general images
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-4">
@@ -110,8 +111,7 @@
 
 @endsection
 
-@section('footer')
-
+@section('dashboard-footer')
     <a class="btn btn-link" href="{{ $location->viewHrefFor($product) }}">
         View on site
     </a>

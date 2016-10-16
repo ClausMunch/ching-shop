@@ -3,6 +3,8 @@
 namespace ChingShop\Console;
 
 use ChingShop\Console\Commands\BuildSiteMap;
+use ChingShop\Console\Commands\Elasticsearch\DeleteIndex;
+use ChingShop\Console\Commands\Elasticsearch\RefreshIndex;
 use ChingShop\Console\Commands\MakeUser;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Console\Scheduling\Schedule;
@@ -21,6 +23,10 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         MakeUser::class,
         BuildSiteMap::class,
+
+        // Elasticsearch commands
+        DeleteIndex::class,
+        RefreshIndex::class,
     ];
 
     /**

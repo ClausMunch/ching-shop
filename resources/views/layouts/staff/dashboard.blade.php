@@ -5,7 +5,7 @@
           rel="stylesheet"
           property="stylesheet"
           type="text/css">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 @endsection
 
 @section('meta-robots')
@@ -15,7 +15,7 @@
 @section('body-class', 'dashboard')
 
 @section('top')
-@include('staff.navbar')
+    @include('staff.navbar')
 @endsection
 
 @section('body')
@@ -38,7 +38,7 @@
         </div>
 
         <div class="panel-footer">
-            @yield('footer')
+            @yield('dashboard-footer')
         </div>
 
     </div>
@@ -48,9 +48,9 @@
 @endsection
 
 @push('scripts')
-    <script type="application/javascript"
-            src="{{ secure_asset(elixir('js/staff.js')) }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-            integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-            crossorigin="anonymous"></script>
+<script type="application/javascript"
+        src="{{ secure_asset(elixir('js/staff.js')) }}"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+        crossorigin="anonymous"></script>
 @endpush

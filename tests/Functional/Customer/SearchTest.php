@@ -2,6 +2,9 @@
 
 namespace Testing\Customer;
 
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Http\Controllers\SearchController;
+use ChingShop\Modules\Catalogue\Http\Requests\SearchRequest;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\CreateCatalogue;
 
@@ -21,9 +24,7 @@ class SearchTest extends FunctionalTest
         $product = $this->createProduct();
 
         // When we search for the product's name;
-        $this->visit('/')
-            ->type($product->name, 'q')
-            ->press('Search');
+        $this->searchFor($product->name);
 
         // Then we should see the product in the search results.
         $this->see($product->name);
@@ -43,9 +44,7 @@ class SearchTest extends FunctionalTest
         $otherProduct = $this->createProduct(['name' => uniqid('', false)]);
 
         // When we search for the first product's name;
-        $this->visit('/')
-            ->type($product->name, 'q')
-            ->press('Search');
+        $this->searchFor($product->name);
 
         // Then we should see the first product;
         $this->see($product->description);
@@ -53,5 +52,41 @@ class SearchTest extends FunctionalTest
         // And we should not see the other product.
         $this->dontSee($otherProduct->name);
         $this->dontSee($otherProduct->description);
+    }
+
+    /**
+     * Should be able to paginate through search results.
+     */
+    public function testSearchPagination()
+    {
+        // Given there are products with similar names;
+        $similarName = 'foobar';
+        /** @var Product[] $products */
+        $products = [];
+        for ($i = 0; $i < SearchController::PAGE_SIZE + 5; $i++) {
+            $products[] = $this->createProduct(
+                ['name' => uniqid("{$similarName} ", false)]
+            );
+        }
+
+        // When we search for that name;
+        $this->searchFor($similarName);
+        $this->see($products[0]->name);
+
+        // Then we should be able to navigate to the next page of results;
+        $this->click('2');
+
+        // And see more of the products.
+        $this->see($products[SearchController::PAGE_SIZE + 2]->name);
+    }
+
+    /**
+     * @param string $query
+     */
+    private function searchFor(string $query)
+    {
+        $this->visit('/')
+            ->type($query, SearchRequest::QUERY_PARAMETER)
+            ->press('Search');
     }
 }

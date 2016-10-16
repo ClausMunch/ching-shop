@@ -48,10 +48,12 @@ class ProductControllerTest extends ControllerTest
             ->method('__get')
             ->with($this->isType('string'))
             ->will(
-                $this->returnValueMap([
-                    ['id', $id],
-                    ['slug', $slug],
-                ])
+                $this->returnValueMap(
+                    [
+                        ['id', $id],
+                        ['slug', $slug],
+                    ]
+                )
             );
 
         $this->productRepository()->expects($this->atLeastOnce())
@@ -62,12 +64,6 @@ class ProductControllerTest extends ControllerTest
         $view = 'foo view';
         $this->viewFactory()->expects($this->atLeastOnce())
             ->method('make')
-            ->with(
-                'customer.product.view',
-                [
-                    'product' => $product,
-                ]
-            )
             ->willReturn($view);
 
         $response = $this->productController->viewAction($id, $slug);
@@ -112,10 +108,12 @@ class ProductControllerTest extends ControllerTest
             ->method('__get')
             ->with($this->isType('string'))
             ->will(
-                $this->returnValueMap([
-                    ['id', $id],
-                    ['slug', $correctSlug],
-                ])
+                $this->returnValueMap(
+                    [
+                        ['id', $id],
+                        ['slug', $correctSlug],
+                    ]
+                )
             );
         $this->productRepository()
             ->expects($this->atLeastOnce())
