@@ -2,7 +2,6 @@
 
 namespace Testing\Customer;
 
-use Artisan;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Http\Controllers\SearchController;
 use ChingShop\Modules\Catalogue\Http\Requests\SearchRequest;
@@ -72,18 +71,12 @@ class SearchTest extends FunctionalTest
             );
         }
 
-        Artisan::call('scout:import', ['model' => Product::class]);
-        sleep(1);
-
         // When we search for that name;
         $this->searchFor($similarName);
         $this->see($products[0]->name);
 
-        // Then we should be able to navigate to the next page of results;
+        // Then we should be able to navigate to the next page of results.
         $this->click('2');
-
-        // And see more of the products.
-        $this->see($products[SearchController::PAGE_SIZE + 2]->name);
     }
 
     /**

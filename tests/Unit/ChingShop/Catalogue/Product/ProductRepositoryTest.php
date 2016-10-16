@@ -46,15 +46,6 @@ class ProductRepositoryTest extends UnitTest
     }
 
     /**
-     * Sanity check loading latest product resource models.
-     */
-    public function testLoadLatest()
-    {
-        $collection = $this->productResourceWillLoadCollection();
-        $this->assertSame($collection, $this->productRepository->loadLatest());
-    }
-
-    /**
      * Should be able to create with given data.
      */
     public function testCreate()

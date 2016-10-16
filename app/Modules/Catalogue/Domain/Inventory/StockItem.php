@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Catalogue\Domain\Inventory;
 
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Order\OrderItem;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon $deleted_at
  * @property ProductOption  $productOption
  * @property OrderItem      $orderItem
+ *
+ * @method Builder available()
  */
 class StockItem extends Model
 {
@@ -50,5 +53,15 @@ class StockItem extends Model
     public function isAvailable()
     {
         return $this->id xor $this->orderItem;
+    }
+
+    /**
+     * @param Builder $builder
+     *
+     * @return Builder
+     */
+    public function scopeAvailable(Builder $builder)
+    {
+        return $builder->doesntHave('orderItem');
     }
 }

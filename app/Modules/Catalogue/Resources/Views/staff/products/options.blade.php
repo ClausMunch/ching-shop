@@ -67,9 +67,41 @@
                     </form>
                 </td>
                 <td>
-                    @include('catalogue::staff.products.images', ['parent' => $option])
+                    @include(
+                        'catalogue::staff.products.images',
+                        ['parent' => $option]
+                    )
                 </td>
                 <td>
+                    <form class="form" method="post"
+                          action="{{
+                              route(
+                                'catalogue.staff.products.options.stock',
+                                [$option->id]
+                              )
+                        }}">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="input-group input-group-sm">
+                            <label for="quantity"
+                                   class="sr-only">Quantity</label>
+                            <input name="quantity" type="number" size="3"
+                                   id="option-{{$option->id}}-stock"
+                                   min="0" max="999" step="1"
+                                   title="Quantity of option {{$option->label}}"
+                                   class="form-control"
+                                   value="{{count($option->availableStock)}}"
+                                   required>
+                            <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                id="search-button"
+                                type="submit">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="sr-only">Save stock</span>
+                        </button>
+                    </span>
+                        </div>
+                    </form>
                 </td>
             </tr>
         @endforeach

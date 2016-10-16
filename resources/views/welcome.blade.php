@@ -18,7 +18,12 @@
                         </h3>
                         @if (count($product->images()))
                             <p class="price">
-                                {{$product->price()}} | In stock
+                                {{$product->price()}} |
+                                @if ($product->isInStock())
+                                    In stock
+                                @else
+                                    Out of stock
+                                @endif
                             </p>
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 <img src="{{ $product->mainImage()->sizeUrl() }}"

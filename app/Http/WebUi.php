@@ -99,6 +99,14 @@ class WebUi
     /**
      * @param string $message
      */
+    public function infoMessage(string $message)
+    {
+        $this->flashNotifier->info($message);
+    }
+
+    /**
+     * @param string $message
+     */
     public function errorMessage(string $message)
     {
         $this->flashNotifier->error($message);

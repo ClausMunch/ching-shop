@@ -41,7 +41,6 @@ class RootControllerTest extends ControllerTest
         $this->productRepository()
             ->expects($this->atLeastOnce())
             ->method('loadLatest')
-            ->with($this->isType('int'))
             ->willReturn(new Collection([]));
 
         $this->viewFactory()
