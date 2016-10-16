@@ -29,9 +29,10 @@ class Inventory
      */
     public function allocate(ProductOption $productOption): StockItem
     {
+        /** @var StockItem $stockItem */
         $stockItem = $this->stockItemResource
+            ->available()
             ->where('product_option_id', '=', $productOption->id)
-            ->has('orderItem', '<', 1)
             ->first();
 
         if (!$stockItem instanceof StockItem) {

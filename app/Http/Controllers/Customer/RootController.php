@@ -36,7 +36,7 @@ class RootController extends Controller
      */
     public function getIndex()
     {
-        $productRows = $this->productRepository->loadLatest(8)->chunk(4);
+        $productRows = $this->productRepository->loadLatest()->chunk(4);
 
         return $this->viewFactory->make('welcome', compact('productRows'));
     }

@@ -42,3 +42,7 @@
     color: lighten(invert($text-color), 50%);
   }
 }
+
+.form-control[type="number"] {
+  font-family: $font-family-monospace;
+}

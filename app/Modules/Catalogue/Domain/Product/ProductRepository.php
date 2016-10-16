@@ -43,6 +43,7 @@ class ProductRepository
     public function loadLatest()
     {
         return $this->productResource
+            ->inStock()
             ->orderBy('updated_at', 'desc')
             ->has('images')
             ->with($this->relations())
@@ -114,7 +115,6 @@ class ProductRepository
     {
         return $this->productResource
             ->search($product->name)
-            ->take(4)
             ->get()
             ->filter(
                 function (Product $similarProduct) use ($product) {
@@ -173,8 +173,10 @@ class ProductRepository
             'prices',
             'tags',
             'options' => function (HasMany $query) {
+                /** @var ProductOption $query */
                 $query->orderBy('position', 'asc');
             },
+            'options.availableStock',
         ];
     }
 }

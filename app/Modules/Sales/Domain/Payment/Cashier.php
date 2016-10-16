@@ -90,14 +90,9 @@ class Cashier
         $order = Order::create();
         $basket->order()->associate($order);
 
-        $order->orderItems()->saveMany(
-            array_map(
-                function (BasketItem $basketItem) {
-                    return $this->basketItemToOrderItem($basketItem);
-                },
-                $basket->basketItems->all()
-            )
-        );
+        foreach ($basket->basketItems as $basketItem) {
+            $this->basketItemToOrderItem($basketItem, $order);
+        }
 
         $order->address()->associate($basket->address);
         $order->save();
@@ -109,12 +104,11 @@ class Cashier
 
     /**
      * @param BasketItem $basketItem
+     * @param Order      $order
      *
      * @throws \RuntimeException
-     *
-     * @return \ChingShop\Modules\Sales\Domain\Order\OrderItem
      */
-    private function basketItemToOrderItem(BasketItem $basketItem)
+    private function basketItemToOrderItem(BasketItem $basketItem, Order $order)
     {
         $orderItem = new OrderItem();
         $orderItem->basketItem()->associate($basketItem);
@@ -132,8 +126,7 @@ class Cashier
             );
         }
 
+        $order->orderItems()->save($orderItem);
         $orderItem->stockItem()->save($stockItem);
-
-        return $orderItem;
     }
 }

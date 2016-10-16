@@ -97,6 +97,13 @@ Route::group(
                         'as'   => 'catalogue.staff.products.options.image-order',
                     ]
                 );
+                Route::put(
+                    'products/options/{id}/stock',
+                    [
+                        'uses' => 'Staff\StockController@putStock',
+                        'as'   => 'catalogue.staff.products.options.stock',
+                    ]
+                );
                 Route::delete(
                     'products/options/{optionId}/image/{imageId}',
                     [

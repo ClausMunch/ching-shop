@@ -50,6 +50,8 @@ class ProductImagesTest extends ProductTest
     public function testProductWithImagesShownOnCategoryPage()
     {
         $product = $this->createProduct();
+        $this->createProductOptionFor($product);
+
         $image = $this->attachImageToProduct($product);
 
         $this->visit(route('customer.cards'))

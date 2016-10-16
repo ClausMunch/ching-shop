@@ -7,6 +7,7 @@ use ChingShop\Image\ImageOwner;
 use ChingShop\Modules\Catalogue\Domain\Attribute\Colour;
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,15 +17,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * Class Variant.
+ * @property int                         $id
+ * @property string                      $label
+ * @property int                         $product_id
+ * @property-read Product                $product
+ * @property-read Collection|Image[]     $images
+ * @property-read Collection|Colour[]    $colours
+ * @property-read Collection|StockItem[] $stockItems
+ * @property-read Collection|StockItem[] $availableStock
  *
- *
- * @property int    $id
- * @property string $label
- * @property int    $product_id
- * @property-read Product $product
- * @property-read Collection|Image[] $images
- * @property-read Collection|Colour[] $colours
+ * @method Builder inStock()
  *
  * @mixin \Eloquent
  */
@@ -52,11 +54,37 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     }
 
     /**
-     * @return HasMany
+     * @return HasMany|StockItem
      */
     public function stockItems(): HasMany
     {
         return $this->hasMany(StockItem::class);
+    }
+
+    /**
+     * @return HasMany|StockItem
+     */
+    public function availableStock(): HasMany
+    {
+        return $this->stockItems()->available();
+    }
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeInStock(Builder $query): Builder
+    {
+        return $query->has('availableStock');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInStock(): bool
+    {
+        return (bool) count($this->availableStock);
     }
 
     /**

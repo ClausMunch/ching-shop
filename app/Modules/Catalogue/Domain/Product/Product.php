@@ -6,12 +6,12 @@ use ChingShop\Image\Image;
 use ChingShop\Image\ImageOwner;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Laravel\Scout\Searchable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
@@ -45,6 +45,8 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
  * @property-read Collection|ProductOption[] $options
+ *
+ * @method Builder inStock()
  */
 class Product extends Model implements HasPresenter, ImageOwner
 {
@@ -100,6 +102,35 @@ class Product extends Model implements HasPresenter, ImageOwner
     public function options(): HasMany
     {
         return $this->hasMany(ProductOption::class);
+    }
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeInStock(Builder $query): Builder
+    {
+        return $query->whereHas(
+            'options',
+            function (Builder $query) {
+                /** @var ProductOption $query */
+                $query->inStock();
+            }
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInStock(): bool
+    {
+        return $this->options->contains(
+            function ($option) {
+                /** @var ProductOption $option */
+                return $option->isInStock();
+            }
+        );
     }
 
     /**
