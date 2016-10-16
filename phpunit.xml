@@ -38,8 +38,7 @@
         </blacklist>
     </filter>
     <listeners>
-        <!--<listener class="Mockery\Adapter\Phpunit\TestListener" />-->
-        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener" />
+        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener"/>
     </listeners>
     <php>
         <env name="APP_ENV" value="testing"/>
@@ -47,6 +46,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="FILESYSTEM" value="local" />
+        <env name="SCOUT_QUEUE" value="false"/>
+        <env name="ELASTICSEARCH_INDEX" value="ching-shop-test"/>
+        <env name="FILESYSTEM" value="local"/>
     </php>
 </phpunit>

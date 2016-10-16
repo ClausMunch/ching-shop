@@ -187,7 +187,7 @@ class ProductRepositoryTest extends UnitTest
         $collection = new Collection();
         $this->productResource
             ->shouldReceive(
-                'orderBy->has->with->limit->get'
+                'orderBy->has->with->paginate'
             )
             ->once()
             ->andReturn($collection);

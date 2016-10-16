@@ -66,7 +66,10 @@ class ProductController extends Controller
 
         return $this->viewFactory->make(
             'customer.product.view',
-            compact('product')
+            [
+                'product' => $product,
+                'similar' => $this->productRepository->loadSimilar($product),
+            ]
         );
     }
 }

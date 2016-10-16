@@ -18,6 +18,8 @@ class ProductsTableSeeder extends Seed
         for ($i = 0; $i < 8; ++$i) {
             $this->seedProduct();
         }
+
+        Artisan::call('elasticsearch:index:refresh', ['-y' => true]);
     }
 
     /**

@@ -38,18 +38,15 @@ class ProductRepository
     }
 
     /**
-     * @param int $limit
-     *
-     * @return Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function loadLatest(int $limit = 100): Collection
+    public function loadLatest()
     {
         return $this->productResource
             ->orderBy('updated_at', 'desc')
             ->has('images')
             ->with($this->relations())
-            ->limit($limit)
-            ->get();
+            ->paginate();
     }
 
     /**
@@ -106,6 +103,24 @@ class ProductRepository
             ->where('id', $productId)
             ->with($this->relations())
             ->first();
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return Collection
+     */
+    public function loadSimilar(Product $product): Collection
+    {
+        return $this->productResource
+            ->search($product->name)
+            ->take(4)
+            ->get()
+            ->filter(
+                function (Product $similarProduct) use ($product) {
+                    return $similarProduct->id !== $product->id;
+                }
+            );
     }
 
     /**

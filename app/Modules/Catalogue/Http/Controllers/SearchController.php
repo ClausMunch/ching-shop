@@ -5,13 +5,15 @@ namespace ChingShop\Modules\Catalogue\Http\Controllers;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
-use Illuminate\Http\Request;
+use ChingShop\Modules\Catalogue\Http\Requests\SearchRequest;
 
 /**
  * Handles customer catalogue search methods.
  */
 class SearchController extends Controller
 {
+    const PAGE_SIZE = 15;
+
     /** @var Product */
     private $productResource;
 
@@ -31,19 +33,19 @@ class SearchController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param SearchRequest $request
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function searchAction(Request $request)
+    public function searchAction(SearchRequest $request)
     {
         return $this->webUi->view(
             'customer.product.search',
             [
-                'query'    => $request->get('q'),
+                'query'    => $request->searchQuery(),
                 'products' => $this->productResource->search(
-                    $request->get('q')
-                )->paginate(),
+                    $request->searchQuery()
+                )->paginate(self::PAGE_SIZE),
             ]
         );
     }

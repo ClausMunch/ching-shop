@@ -127,6 +127,14 @@ class Product extends Model implements HasPresenter, ImageOwner
     }
 
     /**
+     * @param string $slug
+     */
+    public function setSlugAttribute(string $slug)
+    {
+        $this->attributes['slug'] = mb_strtolower($slug);
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function tags()

@@ -18,7 +18,7 @@ class NewImagesRequest extends StaffRequest
     public function hasNewImages(): bool
     {
         return $this->hasFile(self::PARAMETER)
-            || $this->hasFile(self::PARAMETER.'[0]');
+        || $this->hasFile(self::PARAMETER.'[0]');
     }
 
     /**
@@ -44,7 +44,7 @@ class NewImagesRequest extends StaffRequest
     public function rules(): array
     {
         return [
-            'new-image.*' => 'image|max:5000|mimes:jpeg',
+            'new-image.*' => 'max:10000|mimes:jpeg,jpg',
         ];
     }
 }

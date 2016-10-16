@@ -12,6 +12,7 @@ use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
 use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Generator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
@@ -72,13 +73,11 @@ class CatalogueRepository
     }
 
     /**
-     * @param int $limit
-     *
-     * @return Collection|Product[]
+     * @return Collection|LengthAwarePaginator|Product[]
      */
-    public function loadLatestProducts(int $limit = 100): Collection
+    public function loadLatestProducts()
     {
-        return $this->productRepository->loadLatest($limit);
+        return $this->productRepository->loadLatest();
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace ChingShop\Modules\Catalogue\Providers;
 
 use App;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder as ElasticsearchBuilder;
 use Illuminate\Support\ServiceProvider;
 use View;
 
@@ -32,6 +34,8 @@ class CatalogueServiceProvider extends ServiceProvider
      * services in the IoC container. If you wish, you may make additional
      * methods or service providers to keep the code more focused and granular.
      *
+     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     *
      * @return void
      */
     public function register()
@@ -44,6 +48,16 @@ class CatalogueServiceProvider extends ServiceProvider
         View::addNamespace(
             'catalogue',
             app_path('Modules/Catalogue/Resources/Views')
+        );
+
+        // Bind the Elasticsearch client to the container.
+        $this->app->bind(
+            Client::class,
+            function () {
+                return ElasticsearchBuilder::fromConfig(
+                    config('scout.elasticsearch.config')
+                );
+            }
         );
     }
 

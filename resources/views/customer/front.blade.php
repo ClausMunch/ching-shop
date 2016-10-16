@@ -9,7 +9,7 @@
         <form class="form top-center" method="get"
               action="{{route('catalogue.search')}}">
             <div class="input-group">
-                <input name="q" type="text" class="form-control top-search"
+                <input name="query" type="text" class="form-control top-search"
                        value="{{$query or ''}}"
                        placeholder="Search for...">
                 <span class="input-group-btn">

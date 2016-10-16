@@ -10,10 +10,12 @@
 
 @section('content')
 
+    {{$products->links()}}
+
     @if (count($products))
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                 <tr>
                     <th>
                         SKU
@@ -25,8 +27,8 @@
                         Image
                     </th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($products as $product)
                     <tr>
                         <td>
@@ -40,24 +42,26 @@
                         <td class="product-index-images">
                             <img src="{{ $product->mainImage()->sizeUrl('thumbnail') }}"
                                  @if ($product->mainImage()->isSelfHosted())
-                                    srcset="{{ $product->mainImage()->srcSet() }}"
+                                 srcset="{{ $product->mainImage()->srcSet() }}"
                                  @endif
                                  alt="{{ $product->mainImage()->alt_text }}"
                                  class="img-responsive
                                     img-rounded
                                     staff-product-image
-                                 " />
+                                 "/>
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
     @else
-    <p>
-        There are no products in the system. Would you like to
-        <a href="{{ route('products.create') }}">create one</a>?
-    </p>
+        <p>
+            There are no products in the system. Would you like to
+            <a href="{{ route('products.create') }}">create one</a>?
+        </p>
     @endif
+
+    {{$products->links()}}
 
 @endsection

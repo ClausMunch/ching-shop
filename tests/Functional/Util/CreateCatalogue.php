@@ -32,7 +32,7 @@ trait CreateCatalogue
                 [
                     'name'        => uniqid('', false),
                     'sku'         => uniqid('SKU', false),
-                    'slug'        => uniqid('slug-,', false),
+                    'slug'        => uniqid('slug-', false),
                     'description' => 'Description '.str_random(30),
                 ],
                 $attributes

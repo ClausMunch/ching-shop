@@ -58,6 +58,14 @@
         line: "memory_limit = 512M"
         regexp: "^memory_limit = "
 
+    - name: PHP upload limit
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
+        create: no
+        state: present
+        line: "upload_max_filesize = 11M"
+        regexp: "^memory_limit = "
+
     - name: install phpredis
       script: phpredis.sh
               creates=/etc/php/7.0/fpm/conf.d/20-redis.ini
@@ -147,6 +155,9 @@
 
     - name: UFW open HTTP
       ufw: rule=allow port=http
+
+    - name: UFW open HTTPS
+      ufw: rule=allow port=https
 
     - include_vars: keys.yml
 

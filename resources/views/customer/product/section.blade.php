@@ -9,11 +9,11 @@
                  src="{{ $product->mainImage()->sizeUrl('medium') }}">
         </div>
         <div class="col-md-8">
-            <h2>
+            <h{{$level or 2}}>
                 <a href="{{ $location->viewHrefFor($product) }}">
                     {{ $product->name() }}
                 </a>
-            </h2>
+            </h{{$level or 2}}>
             {{ $product->description() }}
             <hr>
             <div class="row">

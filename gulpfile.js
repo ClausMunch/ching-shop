@@ -4,20 +4,20 @@
 //noinspection JSUnresolvedVariable
 process.env.DISABLE_NOTIFIER = true;
 
-var elixir   = require("laravel-elixir");
-var gulp     = require("gulp");
-var clean    = require("gulp-clean");
-var shell    = require("gulp-shell");
-var typings  = require("gulp-typings");
-var ts       = require("gulp-typescript");
-var unzip    = require('gulp-unzip');
-var filter   = require('gulp-filter');
-var replace  = require('gulp-replace');
-var rename   = require('gulp-rename');
+var elixir = require("laravel-elixir");
+var gulp = require("gulp");
+var clean = require("gulp-clean");
+var shell = require("gulp-shell");
+var typings = require("gulp-typings");
+var ts = require("gulp-typescript");
+var unzip = require('gulp-unzip');
+var filter = require('gulp-filter');
+var replace = require('gulp-replace');
+var rename = require('gulp-rename');
 var scssLint = require('gulp-scss-lint');
-var tsLint   = require("gulp-tslint");
+var tsLint = require("gulp-tslint");
 
-var Task    = elixir.Task;
+var Task = elixir.Task;
 
 elixir.config.css.autoprefix = {
     enabled: true,
@@ -98,7 +98,7 @@ gulp.task("test-database", shell.task(
     [
         "rm -f ./database/test_db.sqlite",
         "sqlite3 ./database/test_db.sqlite ''",
-        "php artisan migrate:refresh --seed --database=testing --env=testing"
+        "ELASTICSEARCH_INDEX=ching-shop-test php artisan migrate:refresh --seed --database=testing --env=testing"
     ],
     {
         verbose: true

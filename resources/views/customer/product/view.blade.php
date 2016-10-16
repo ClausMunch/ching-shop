@@ -59,9 +59,26 @@
 
     </div>
 
+    <hr>
+
+    @if ($similar && count($similar))
+        <section class="product-section">
+
+            <h2>Similar products</h2>
+
+            @foreach ($similar as $similarProduct)
+                @include(
+                    'customer.product.section',
+                    ['product' => $similarProduct, 'level' => 3]
+                )
+            @endforeach
+
+        </section>
+    @endif
+
     <section class="product-section">
 
-        <h3>Product link</h3>
+        <h2>Product link</h2>
 
         <a href="{{ $location->viewHrefFor($product) }}"
            title="{{ $product->name() }}">

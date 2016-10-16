@@ -36,7 +36,7 @@ class CategoriesController extends Controller
      */
     public function viewAction()
     {
-        $products = $this->productRepository->loadLatest(500);
+        $products = $this->productRepository->loadLatest();
 
         return $this->viewFactory->make(
             'customer.product.category',
