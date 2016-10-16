@@ -2,6 +2,7 @@
 
 namespace Testing\Customer;
 
+use Artisan;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Http\Controllers\SearchController;
 use ChingShop\Modules\Catalogue\Http\Requests\SearchRequest;
@@ -56,6 +57,8 @@ class SearchTest extends FunctionalTest
 
     /**
      * Should be able to paginate through search results.
+     *
+     * @slowThreshold 5000
      */
     public function testSearchPagination()
     {
@@ -68,6 +71,9 @@ class SearchTest extends FunctionalTest
                 ['name' => uniqid("{$similarName} ", false)]
             );
         }
+
+        Artisan::call('scout:import', ['model' => Product::class]);
+        sleep(1);
 
         // When we search for that name;
         $this->searchFor($similarName);
