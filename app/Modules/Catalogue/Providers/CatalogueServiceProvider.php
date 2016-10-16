@@ -34,8 +34,9 @@ class CatalogueServiceProvider extends ServiceProvider
      * services in the IoC container. If you wish, you may make additional
      * methods or service providers to keep the code more focused and granular.
      *
-     * @return void
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     *
+     * @return void
      */
     public function register()
     {
