@@ -173,7 +173,7 @@ class ProductRepository
             'prices',
             'tags',
             'options' => function (HasMany $query) {
-                /** @var ProductOption $query */
+                /* @var ProductOption $query */
                 $query->orderBy('position', 'asc');
             },
             'options.availableStock',

@@ -35,8 +35,9 @@ class StockController extends Controller
      * @param int             $optionId
      * @param PutStockRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function putStock(int $optionId, PutStockRequest $request)
     {

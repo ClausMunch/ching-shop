@@ -114,7 +114,7 @@ class Product extends Model implements HasPresenter, ImageOwner
         return $query->whereHas(
             'options',
             function (Builder $query) {
-                /** @var ProductOption $query */
+                /* @var ProductOption $query */
                 $query->inStock();
             }
         );
@@ -127,7 +127,7 @@ class Product extends Model implements HasPresenter, ImageOwner
     {
         return $this->options->contains(
             function ($option) {
-                /** @var ProductOption $option */
+                /* @var ProductOption $option */
                 return $option->isInStock();
             }
         );
