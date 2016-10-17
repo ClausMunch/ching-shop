@@ -24,17 +24,23 @@ class TagsTableSeeder extends Seed
         for ($i = 0; $i < 16; $i++) {
             $this->seedTag();
         }
+
+        $this->seedTag('Christmas');
     }
 
     /**
      * Create a tag and attach to some products.
      *
-     * @throws \InvalidArgumentException
+     * @param string $name
      */
-    private function seedTag()
+    private function seedTag(string $name = null)
     {
         /** @var Tag $tag */
-        $tag = Tag::create(['name' => ucfirst($this->faker()->unique()->word)]);
+        $tag = Tag::create(
+            [
+                'name' => $name ?? ucfirst($this->faker()->unique()->word),
+            ]
+        );
         for ($i = 0, $count = random_int(1, 8); $i < $count; $i++) {
             $product = $this->products()->random();
             if ($tag->products->contains('id', $product->id)) {

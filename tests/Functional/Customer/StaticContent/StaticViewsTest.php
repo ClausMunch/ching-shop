@@ -46,4 +46,12 @@ class StaticViewsTest extends FunctionalTest
         $this->call('GET', route('customer.static', ['slug' => 'bad-path']));
         $this->seeStatusCode(404);
     }
+
+    /**
+     * Should be able to see the Christmas cards landing page.
+     */
+    public function testChristmasCardsLanding()
+    {
+        $this->visit('/christmas-cards')->assertResponseOk();
+    }
 }
