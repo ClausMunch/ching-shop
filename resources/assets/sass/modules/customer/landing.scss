@@ -1,0 +1,23 @@
+.home-title {
+  font-size: 1.8em;
+  margin: 5% auto;
+  text-align: center;
+
+  @include breakpoint(sm-up) {
+    font-size: 6vw;
+  }
+}
+
+.landing-title {
+  font-family: $font-brand;
+  font-size: 1.7em;
+  text-align: center;
+
+  @include breakpoint(sm-up) {
+    font-size: 5.5vw;
+  }
+}
+
+.landing-title-note {
+  font-family: $font-family-sans-serif;
+}

@@ -1,5 +1,13 @@
 <?php
 
+Route::get(
+    'christmas-cards',
+    [
+        'uses' => 'LandingController@christmasCardsAction',
+        'as'   => 'christmas-cards',
+    ]
+)->middleware(['customer']);
+
 Route::group(
     ['prefix' => 'catalogue'],
     function () {
