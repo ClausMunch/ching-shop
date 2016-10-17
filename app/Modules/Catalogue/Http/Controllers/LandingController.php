@@ -49,7 +49,7 @@ class LandingController extends Controller
                     ->with(
                         [
                             'products' => function ($query) {
-                                /** @var Product $query */
+                                /* @var Product $query */
                                 $query->inStock();
                                 $query->with(
                                     [
