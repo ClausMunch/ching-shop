@@ -40,12 +40,23 @@ class ProductRepository
     /**
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function loadLatest()
+    public function loadInStock()
     {
         return $this->productResource
             ->inStock()
             ->orderBy('updated_at', 'desc')
             ->has('images')
+            ->with($this->relations())
+            ->paginate();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function loadLatest()
+    {
+        return $this->productResource
+            ->orderBy('updated_at', 'desc')
             ->with($this->relations())
             ->paginate();
     }
@@ -115,6 +126,7 @@ class ProductRepository
     {
         return $this->productResource
             ->search($product->name)
+            ->take(4)
             ->get()
             ->filter(
                 function (Product $similarProduct) use ($product) {

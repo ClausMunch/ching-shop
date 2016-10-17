@@ -203,7 +203,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @param $name
+     * @param       $name
      * @param array $bindData
      *
      * @return View

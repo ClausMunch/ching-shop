@@ -75,6 +75,14 @@ class CatalogueRepository
     /**
      * @return Collection|LengthAwarePaginator|Product[]
      */
+    public function loadInStockProducts()
+    {
+        return $this->productRepository->loadInStock();
+    }
+
+    /**
+     * @return Collection|LengthAwarePaginator|Product[]
+     */
     public function loadLatestProducts()
     {
         return $this->productRepository->loadLatest();

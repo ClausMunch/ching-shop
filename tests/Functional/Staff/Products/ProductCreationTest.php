@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Staff\Products;
 
+use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use Testing\Functional\Staff\StaffUser;
 
 class ProductCreationTest extends ProductTest
@@ -57,9 +58,12 @@ class ProductCreationTest extends ProductTest
     public function testShowProduct()
     {
         $product = $this->createProduct();
-        $showRoute = route('products.show', [
-            'sku' => $product->sku,
-        ]);
+        $showRoute = route(
+            'products.show',
+            [
+                'sku' => $product->sku,
+            ]
+        );
 
         $this->actingAs($this->staffUser())
             ->visit($showRoute)
@@ -167,5 +171,28 @@ class ProductCreationTest extends ProductTest
             ->press('Save')
             ->see($newProductName)
             ->dontSee($oldProductName);
+    }
+
+    /**
+     * Should be able to see products with no stock in the staff area.
+     */
+    public function testCanSeeOutOfStockProduct()
+    {
+        // Given there is a product with no stock;
+        $product = $this->createProduct();
+        $option = $this->createProductOptionFor($product);
+        $option->stockItems->each(
+            function (StockItem $stock) {
+                $stock->delete();
+            }
+        );
+
+        // When we go to the staff products index;
+        $this->actingAs($this->staffUser())
+            ->visit(route('products.index'));
+
+        // Then we should see that product.
+        $this->see($product->name);
+        $this->see($product->sku);
     }
 }
