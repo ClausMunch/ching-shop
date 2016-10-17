@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
         $label.addClass("bg-info");
         let optionId = label.getAttribute("data-option-id");
         $.ajax(
-            `/staff/products/${productId}/options/${optionId}/label`,
+            `/catalogue/staff/products/${productId}/options/${optionId}/label`,
             {
                 data: JSON.stringify({
                     label: label.innerText,
