@@ -119,10 +119,9 @@
       composer: command=install working_dir=/var/www/ching-shop
 
     - name: configure nginx
-      template: src=${item.src} dest=${item.dest}
+      template: src={{item.src}} dest={{item.dest}}
       with_items:
         - {src: 'nginx.conf', dest: '/etc/nginx/sites-available/www.ching-shop.com.conf'}
-        - {src: 'gzip.conf', dest: '/etc/nginx/conf.d/gzip.conf'}
       notify:
         - restart php7.0-fpm
         - restart nginx
