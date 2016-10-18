@@ -18,7 +18,7 @@
                         </h3>
                         @if (count($product->images()))
                             <p class="price">
-                                {{$product->price()}} |
+                                {{$product->priceF()}} |
                                 @if ($product->isInStock())
                                     In stock
                                 @else

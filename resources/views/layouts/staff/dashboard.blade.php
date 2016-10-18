@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('html-head')
+    @parent
     <link href="{{ elixir('css/staff.css') }}"
           rel="stylesheet"
           property="stylesheet"

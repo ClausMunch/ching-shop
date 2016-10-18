@@ -1,12 +1,14 @@
 @extends('customer.front')
 
-@section('page-title')
-    {{ $product->name() }} ({{ $product->sku() }})
+@include('customer.product.meta')
+
+@section('item-type')
+    https://schema.org/Product
 @endsection
 
 @section('body')
 
-    <h1 class="product-title">{{ $product->name() }}</h1>
+    <h1 class="product-title" itemprop="name">{{ $product->name() }}</h1>
 
     <div class="row">
 
@@ -20,7 +22,7 @@
 
             @include('customer.product.add-to-basket')
 
-            <p class="product-price price">{{$product->price()}}</p>
+            <p class="product-price price">{{$product->priceF()}}</p>
 
             <p>{{ $product->description() }}</p>
 

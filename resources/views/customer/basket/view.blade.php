@@ -47,7 +47,7 @@
                     @endif
                 </td>
                 <td class="basket-item-price price">
-                    {{ $basketItem->productOption->product->price() }}
+                    {{ $basketItem->productOption->product->priceF() }}
                 </td>
                 <td>
                     <form method="post"

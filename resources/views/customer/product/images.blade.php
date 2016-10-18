@@ -4,6 +4,7 @@
             <img class="img-responsive photo"
                  id="product-main-image"
                  src="{{ $product->mainImage()->sizeUrl('large') }}"
+                 itemprop="image"
                  @if ($product->mainImage()->isSelfHosted())
                  srcset="{{ $product->mainImage()->srcSet() }}"
                  @endif
