@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <p class="price product-price">
-                        {{$product->price()}}
+                        {{$product->priceF()}}
                     </p>
                 </div>
                 <div class="col-md-10">

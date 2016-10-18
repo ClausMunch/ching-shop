@@ -172,7 +172,7 @@ class ProductPresenter extends BasePresenter implements
     /**
      * @return string
      */
-    public function price(): string
+    public function priceF(): string
     {
         /** @var Price $firstPrice */
         $firstPrice = $this->wrappedObject->prices->first();

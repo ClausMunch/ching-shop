@@ -205,7 +205,7 @@ class ProductPresenterTest extends UnitTest
     public function testPrice()
     {
         $this->mockProductPrice(5, 99);
-        $this->assertEquals('£5.99', $this->productPresenter->price());
+        $this->assertEquals('£5.99', $this->productPresenter->priceF());
     }
 
     /**

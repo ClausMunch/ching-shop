@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('html-head')
+    @parent
     <link href="{{ elixir('css/customer.css') }}"
           rel="stylesheet"
           property="stylesheet"
@@ -10,5 +11,5 @@
 @section('body-class', 'body-customer')
 
 @push('scripts')
-    <script async defer src="{{ elixir('js/customer.js') }}"></script>
+<script async defer src="{{ elixir('js/customer.js') }}"></script>
 @endpush

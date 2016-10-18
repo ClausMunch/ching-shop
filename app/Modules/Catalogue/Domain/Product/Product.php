@@ -67,6 +67,17 @@ class Product extends Model implements HasPresenter, ImageOwner
     }
 
     /**
+     * @return Price
+     */
+    public function price(): Price
+    {
+        /** @var Price $firstPrice */
+        $firstPrice = $this->prices->first();
+
+        return $firstPrice ?? new Price();
+    }
+
+    /**
      * @return bool
      */
     public function isStored(): bool
