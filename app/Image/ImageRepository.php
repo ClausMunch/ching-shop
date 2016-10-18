@@ -52,7 +52,7 @@ class ImageRepository
     public function storeUploadedImage(UploadedFile $upload): Image
     {
         $newImage = $this->imageResource->create(
-            ['filename' => uniqid('', true) . $upload->getClientOriginalName()]
+            ['filename' => uniqid('', true).$upload->getClientOriginalName()]
         );
         $upload->move(storage_path('image'), $newImage->filename());
 
@@ -62,8 +62,9 @@ class ImageRepository
     }
 
     /**
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function loadLatest()
     {

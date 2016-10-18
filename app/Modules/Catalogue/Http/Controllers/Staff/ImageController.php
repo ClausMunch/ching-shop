@@ -31,8 +31,9 @@ class ImageController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\View
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
