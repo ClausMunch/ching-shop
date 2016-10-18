@@ -2,7 +2,7 @@
 
 @include('customer.product.meta')
 
-@section('item-type')
+@section('schema-type')
     https://schema.org/Product
 @endsection
 
@@ -48,7 +48,7 @@
                             @foreach ($product->tags as $tag)
                                 <a href="{{ route(
                                     'tag::view', [$tag->id, $tag->name]
-                                ) }}">
+                                ) }}" class="product-tag">
                                 {{ $tag->name  }}<!--
                                 --></a>&nbsp;
                             @endforeach

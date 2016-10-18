@@ -12,11 +12,11 @@ use Illuminate\Database\Query\Builder;
 /**
  * ChingShop\Image\Image.
  *
- * @property int $id
- * @property string $filename
- * @property string $alt_text
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property int                                                     $id
+ * @property string                                                  $filename
+ * @property string                                                  $alt_text
+ * @property \Carbon\Carbon                                          $created_at
+ * @property \Carbon\Carbon                                          $updated_at
  *
  * @method static Builder|Image whereId($value)
  * @method static Builder|Image whereFilename($value)
@@ -25,8 +25,8 @@ use Illuminate\Database\Query\Builder;
  * @method static Builder|Image whereUpdatedAt($value)
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Product[] $products
- * @property string $url
- * @property string $deleted_at
+ * @property string                                                  $url
+ * @property string                                                  $deleted_at
  *
  * @method static Builder|Image whereUrl($value)
  * @method static Builder|Image whereDeletedAt($value)
@@ -155,7 +155,15 @@ class Image extends Model implements HttpCrudInterface
      */
     public function altText(): string
     {
-        return (string) $this->alt_text;
+        if ($this->alt_text) {
+            return (string) $this->alt_text;
+        }
+
+        if (count($this->products)) {
+            return "{$this->products->first()->name} #{$this->id}";
+        }
+
+        return "3D Pop-Up Greetings Card #{$this->id}";
     }
 
     /**
