@@ -2,6 +2,7 @@
 
 namespace ChingShop\Listeners;
 
+use Carbon\Carbon;
 use ChingShop\Events\NewImageEvent;
 use ChingShop\Image\Image;
 use ChingShop\Image\Imagick\ImagePreProcessor;
@@ -19,11 +20,6 @@ use SplTempFileObject;
  */
 class NewImageListener implements ShouldQueue
 {
-    const FILE_CONFIG = [
-        'visibility'   => Filesystem::VISIBILITY_PUBLIC,
-        'CacheControl' => 'max-age=315360000, public',
-    ];
-
     /** @var ImagePreProcessor */
     private $imagePreProcessor;
 
@@ -76,7 +72,7 @@ class NewImageListener implements ShouldQueue
             $this->publicFilesystem->getDriver()->put(
                 "image/{$imagick->getFilename()}",
                 $imagick->getImageBlob(),
-                self::FILE_CONFIG
+                self::fileConfig()
             );
         }
     }
@@ -136,5 +132,17 @@ class NewImageListener implements ShouldQueue
             ),
             '/'
         );
+    }
+
+    /**
+     * @return array
+     */
+    private static function fileConfig(): array
+    {
+        return [
+            'visibility'   => Filesystem::VISIBILITY_PUBLIC,
+            'CacheControl' => 'max-age=315360000, public',
+            'Expires'      => Carbon::maxValue()->format(DATE_RFC850),
+        ];
     }
 }

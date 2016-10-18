@@ -48,6 +48,13 @@ Route::group(
                         'as'   => 'catalogue.staff.products.images.destroy',
                     ]
                 );
+                Route::put(
+                    'products/images/{id}/alt-text',
+                    [
+                        'uses' => 'Staff\ImageController@putImageAltText',
+                        'as'   => 'catalogue.staff.products.images.put-alt',
+                    ]
+                );
                 Route::resource('products', 'Staff\ProductController');
                 Route::delete(
                     'product/{productId}/image/{imageId}',

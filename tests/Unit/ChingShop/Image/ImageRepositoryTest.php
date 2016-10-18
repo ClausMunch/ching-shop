@@ -122,22 +122,6 @@ class ImageRepositoryTest extends UnitTest
     }
 
     /**
-     * Should be able to load the latest image resources.
-     */
-    public function testLoadLatest()
-    {
-        $collection = new Collection([$this->makeMock(Image::class)]);
-        $this->imageResource->shouldReceive('orderBy->limit->get')
-            ->atLeast()
-            ->once()
-            ->andReturn($collection);
-
-        $loaded = $this->imageRepository->loadLatest();
-
-        $this->assertSame($collection, $loaded);
-    }
-
-    /**
      * Should be able to delete an image by ID.
      */
     public function testDeleteById()
@@ -168,13 +152,15 @@ class ImageRepositoryTest extends UnitTest
 
         $this->dispatcher->expects($this->atLeastOnce())
             ->method('fire')
-            ->with($this->callback(
-                function (NewImageEvent $event) use ($image) {
-                    $this->assertSame($image, $event->image());
+            ->with(
+                $this->callback(
+                    function (NewImageEvent $event) use ($image) {
+                        $this->assertSame($image, $event->image());
 
-                    return true;
-                }
-            ));
+                        return true;
+                    }
+                )
+            );
 
         $this->imageRepository->transferLocalImages();
     }

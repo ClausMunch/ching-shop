@@ -52,9 +52,7 @@ class ImageRepository
     public function storeUploadedImage(UploadedFile $upload): Image
     {
         $newImage = $this->imageResource->create(
-            [
-                'filename' => uniqid('', true).$upload->getClientOriginalName(),
-            ]
+            ['filename' => uniqid('', true) . $upload->getClientOriginalName()]
         );
         $upload->move(storage_path('image'), $newImage->filename());
 
@@ -64,16 +62,12 @@ class ImageRepository
     }
 
     /**
-     * @param int $limit
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @throws \InvalidArgumentException
      */
-    public function loadLatest(int $limit = 1000)
+    public function loadLatest()
     {
-        return $this->imageResource
-            ->orderBy('updated_at', 'desc')
-            ->limit($limit)
-            ->get();
+        return $this->imageResource->orderBy('updated_at', 'desc')->paginate();
     }
 
     /**

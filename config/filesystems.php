@@ -89,7 +89,7 @@ return [
             'key'    => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'region' => env('S3_REGION', 'us-east-1'),
-            'bucket' => env('S3_BUCKET', 'ching-shop-backup'),
+            'bucket' => 'ching-shop-backup',
         ],
 
         'rackspace' => [

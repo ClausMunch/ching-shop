@@ -17,6 +17,10 @@
            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
            font-src 'self' https://fonts.gstatic.com data:;">
     <title>@yield('page-title') | Ching Shop</title>
+    <link rel="icon"
+          type="image/png"
+          property="icon"
+          href="/img/favicon.png"/>
     <meta name="robots" content="@yield('meta-robots', 'index,follow')">
     <meta name="copyright" content="Ching Shop">
     <meta name="description" content="@yield('meta-description')">
@@ -40,10 +44,6 @@
       property='stylesheet'
       rel='stylesheet'
       type='text/css'>
-<link rel="icon"
-      type="image/png"
-      property="icon"
-      href="/img/favicon.png"/>
 
 @push('scripts')
 @if (\App::environment('production'))

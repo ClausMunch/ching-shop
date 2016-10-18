@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Catalogue\Http\Controllers\Staff;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Image\ImageRepository;
+use ChingShop\Modules\Catalogue\Http\Requests\Staff\PutImageAltTextRequest;
 
 /**
  * Class ImageController.
@@ -31,10 +32,11 @@ class ImageController extends Controller
 
     /**
      * @return \Illuminate\Contracts\View\View
+     * @throws \InvalidArgumentException
      */
     public function index()
     {
-        $images = $this->imageRepository->loadLatest(500);
+        $images = $this->imageRepository->loadLatest();
 
         return $this->webUi->view('staff.images.index', compact('images'));
     }
@@ -59,6 +61,28 @@ class ImageController extends Controller
     public function transferLocalImages()
     {
         $this->imageRepository->transferLocalImages();
+
+        return $this->redirectToImagesIndex();
+    }
+
+    /**
+     * @param int                    $imageId
+     * @param PutImageAltTextRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putImageAltText(
+        int $imageId,
+        PutImageAltTextRequest $request
+    ) {
+        $image = $this->imageRepository->loadById($imageId);
+
+        $image->alt_text = $request->altText();
+        $image->save();
+
+        $this->webUi->successMessage(
+            "Set the alt text for image {$image->id} to {$request->altText()}."
+        );
 
         return $this->redirectToImagesIndex();
     }
