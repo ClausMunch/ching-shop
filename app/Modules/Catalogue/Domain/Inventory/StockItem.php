@@ -27,6 +27,9 @@ class StockItem extends Model
 {
     use SoftDeletes;
 
+    /** @var string[] */
+    protected $touches = ['productOption'];
+
     /**
      * A stock item is a physical instance of a product option.
      *

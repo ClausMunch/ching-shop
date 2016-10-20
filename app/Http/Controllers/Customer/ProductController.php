@@ -3,9 +3,9 @@
 namespace ChingShop\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
+use ChingShop\Modules\Catalogue\Domain\CatalogueView;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -16,8 +16,8 @@ class ProductController extends Controller
     /** @var ProductRepository */
     private $productRepository;
 
-    /** @var ViewFactory */
-    private $viewFactory;
+    /** @var CatalogueView */
+    private $view;
 
     /** @var ResponseFactory */
     private $responseFactory;
@@ -26,16 +26,16 @@ class ProductController extends Controller
      * ProductController constructor.
      *
      * @param ProductRepository $productRepository
-     * @param ViewFactory       $viewFactory
+     * @param CatalogueView     $view
      * @param ResponseFactory   $responseFactory
      */
     public function __construct(
         ProductRepository $productRepository,
-        ViewFactory $viewFactory,
+        CatalogueView $view,
         ResponseFactory $responseFactory
     ) {
         $this->productRepository = $productRepository;
-        $this->viewFactory = $viewFactory;
+        $this->view = $view;
         $this->responseFactory = $responseFactory;
     }
 
@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function viewAction(int $productId, string $slug)
     {
-        $product = $this->productRepository->loadById($productId);
+        $product = $this->productRepository->loadAlone($productId);
         if (!$product->id) {
             throw new NotFoundHttpException();
         }
@@ -64,11 +64,11 @@ class ProductController extends Controller
             );
         }
 
-        return $this->viewFactory->make(
+        return $this->view->make(
             'customer.product.view',
             [
-                'product' => $product,
-                'similar' => $this->productRepository->loadSimilar($product),
+                'body' => $this->view->productBody($product),
+                'meta' => $this->view->productMeta($product),
             ]
         );
     }

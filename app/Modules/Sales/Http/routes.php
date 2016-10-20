@@ -18,7 +18,7 @@ Route::group(
                 'as'   => 'sales.customer.basket',
                 'uses' => 'Customer\BasketController@viewBasketAction',
             ]
-        )->middleware('customer');
+        )->middleware(['customer', 'suggestions']);
         Route::post(
             'remove-from-basket',
             [
@@ -88,7 +88,7 @@ Route::group(
                         'as'   => 'sales.customer.order.view',
                         'uses' => 'Customer\OrderController@viewAction',
                     ]
-                )->middleware('customer');
+                )->middleware(['customer', 'suggestions']);
             }
         );
 

@@ -10,6 +10,7 @@ use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
 use ChingShop\Modules\Catalogue\Domain\Tag\TagRepository;
 use Generator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -239,5 +240,23 @@ class CatalogueRepository
     public function loadOptionById(int $optionId): ProductOption
     {
         return $this->optionRepository->loadById($optionId);
+    }
+
+    /**
+     * @return Tag
+     */
+    public function tag(): Tag
+    {
+        return $this->tagRepository->resource();
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return Collection
+     */
+    public function loadSimilarProducts(Product $product)
+    {
+        return $this->productRepository->loadSimilar($product);
     }
 }

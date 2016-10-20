@@ -3,7 +3,7 @@
 Route::group(
     [
         'namespace'  => 'Customer',
-        'middleware' => 'customer',
+        'middleware' => ['customer', 'suggestions'],
     ],
     function () {
         Route::group(
@@ -62,7 +62,7 @@ Route::group(
 Route::group(
     [
         'namespace'  => 'Customer',
-        'middleware' => 'customer',
+        'middleware' => ['customer', 'suggestions'],
     ],
     function () {
         Route::get(
@@ -86,7 +86,7 @@ Route::get(
     '/',
     [
         'uses'       => 'Customer\RootController@getIndex',
-        'middleware' => 'customer',
+        'middleware' => ['customer', 'suggestions'],
     ]
 );
 

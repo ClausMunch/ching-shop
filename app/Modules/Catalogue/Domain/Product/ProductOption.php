@@ -37,6 +37,9 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     /** @var string[] */
     protected $fillable = ['label'];
 
+    /** @var string[] */
+    protected $touches = ['product'];
+
     /**
      * @return BelongsTo
      */

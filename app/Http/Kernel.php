@@ -2,6 +2,7 @@
 
 namespace ChingShop\Http;
 
+use ChingShop\Modules\Catalogue\Http\Middleware\Suggestions;
 use ChingShop\Modules\Sales\Http\Middleware\CheckoutMiddleware;
 use Fideloper\Proxy\TrustProxies;
 use GrahamCampbell\HTMLMin\Http\Middleware\MinifyMiddleware;
@@ -61,12 +62,15 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'       => Middleware\Authenticate::class,
-        'auth.basic' => AuthenticateWithBasicAuth::class,
-        'bindings'   => SubstituteBindings::class,
-        'guest'      => Middleware\RedirectIfAuthenticated::class,
-        'staff'      => Middleware\StaffOnly::class,
-        'customer'   => Middleware\Customer::class,
-        'checkout'   => CheckoutMiddleware::class,
+        'auth'        => Middleware\Authenticate::class,
+        'auth.basic'  => AuthenticateWithBasicAuth::class,
+        'bindings'    => SubstituteBindings::class,
+        'guest'       => Middleware\RedirectIfAuthenticated::class,
+        'staff'       => Middleware\StaffOnly::class,
+        'customer'    => Middleware\Customer::class,
+        'checkout'    => CheckoutMiddleware::class,
+
+        // Catalogue
+        'suggestions' => Suggestions::class,
     ];
 }

@@ -2,6 +2,8 @@
 
 namespace ChingShop\Providers;
 
+use App;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use ChingShop\Http\View\ReplyComposer;
 use ChingShop\Validation\IlluminateValidation;
 use ChingShop\Validation\ValidationInterface;
@@ -41,9 +43,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         if ($this->app->environment() === 'local' && \App::runningInConsole()) {
-            $this->app->register(
-                ArtisanBeansServiceProvider::class
-            );
+            $this->app->register(ArtisanBeansServiceProvider::class);
+            $this->app->register(IdeHelperServiceProvider::class);
         }
     }
 }

@@ -4,7 +4,6 @@ namespace ChingShop\Modules\Catalogue\Domain\Product;
 
 use Generator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 
 /**
@@ -46,7 +45,7 @@ class ProductRepository
             ->inStock()
             ->orderBy('updated_at', 'desc')
             ->has('images')
-            ->with($this->relations())
+            ->with(Product::standardRelations())
             ->paginate();
     }
 
@@ -57,7 +56,7 @@ class ProductRepository
     {
         return $this->productResource
             ->orderBy('updated_at', 'desc')
-            ->with($this->relations())
+            ->with(Product::standardRelations())
             ->paginate();
     }
 
@@ -98,7 +97,7 @@ class ProductRepository
     {
         $product = $this->productResource
             ->where('sku', $sku)
-            ->with($this->relations())
+            ->with(Product::standardRelations())
             ->first();
 
         return $product ?: new Product();
@@ -113,8 +112,18 @@ class ProductRepository
     {
         return $this->productResource
             ->where('id', $productId)
-            ->with($this->relations())
+            ->with(Product::standardRelations())
             ->first();
+    }
+
+    /**
+     * @param int $productId
+     *
+     * @return Product
+     */
+    public function loadAlone(int $productId): Product
+    {
+        return $this->productResource->where('id', $productId)->first();
     }
 
     /**
@@ -176,19 +185,10 @@ class ProductRepository
     }
 
     /**
-     * @return array
+     * @return Product
      */
-    private function relations(): array
+    public function resource(): Product
     {
-        return [
-            'images',
-            'prices',
-            'tags',
-            'options' => function (HasMany $query) {
-                /* @var ProductOption $query */
-                $query->orderBy('position', 'asc');
-            },
-            'options.availableStock',
-        ];
+        return $this->productResource;
     }
 }

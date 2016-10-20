@@ -143,6 +143,7 @@ return [
         Illuminate\Notifications\NotificationServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
