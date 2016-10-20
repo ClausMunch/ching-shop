@@ -3,6 +3,7 @@
 namespace Testing\Unit\ChingShop\Http\Middleware;
 
 use ChingShop\Http\Middleware\Customer;
+use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
 use ChingShop\Modules\Sales\Domain\Clerk;
 use Illuminate\Http\Request;
 use Testing\Unit\MockObject;
@@ -23,7 +24,10 @@ class CustomerTest extends MiddlewareTest
         parent::setUp();
 
         $this->clerk = $this->makeMock(Clerk::class);
-        $this->customerMiddleware = new Customer($this->clerk);
+        $this->customerMiddleware = new Customer(
+            $this->clerk,
+            $this->mockery(Tag::class)
+        );
     }
 
     /**
