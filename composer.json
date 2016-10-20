@@ -41,7 +41,9 @@
         "johnkary/phpunit-speedtrap": "^1.0.1",
         "pda/pheanstalk": "^3.0",
         "squizlabs/php_codesniffer": "^2.5",
-        "phpmd/phpmd" : "@stable"
+        "phpmd/phpmd" : "@stable",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "barryvdh/laravel-debugbar": "^2.3"
     },
 
     "autoload": {

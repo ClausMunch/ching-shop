@@ -16,16 +16,20 @@
            form-action 'self' {{ config('payment.paypal.base-url') }};
            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
            font-src 'self' https://fonts.gstatic.com data:;">
-    <title>@yield('page-title') | Ching Shop</title>
     <link rel="icon"
           type="image/png"
           property="icon"
           href="/img/favicon.png"/>
-    <meta name="robots" content="@yield('meta-robots', 'index,follow')">
-    <meta name="copyright" content="Ching Shop">
-    <meta name="description" content="@yield('meta-description')">
-    <meta name="keywords" content="@yield('meta-keywords')">
-    <link rel="canonical" href="@yield('canonical', URL::current())">
+    @if (isset($meta))
+        {!! $meta !!}
+    @else
+        <title>@yield('page-title') | Ching Shop</title>
+        <meta name="robots" content="@yield('meta-robots', 'index,follow')">
+        <meta name="copyright" content="Ching Shop">
+        <meta name="description" content="@yield('meta-description')">
+        <meta name="keywords" content="@yield('meta-keywords')">
+        <link rel="canonical" href="@yield('canonical', URL::current())">
+    @endif
     @yield('html-head')
 </head>
 <body class="@yield('body-class')" itemscope itemtype="@yield('schema-type')">

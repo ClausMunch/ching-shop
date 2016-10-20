@@ -6,7 +6,7 @@ Route::get(
         'uses' => 'LandingController@christmasCardsAction',
         'as'   => 'christmas-cards',
     ]
-)->middleware(['customer']);
+)->middleware(['customer', 'suggestions']);
 
 Route::group(
     ['prefix' => 'catalogue'],
@@ -17,7 +17,7 @@ Route::group(
                 'uses' => 'SearchController@searchAction',
                 'as'   => 'catalogue.search',
             ]
-        )->middleware(['customer']);
+        )->middleware(['customer', 'suggestions']);
         Route::group(
             [
                 'prefix'     => 'staff',

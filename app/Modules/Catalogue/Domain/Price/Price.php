@@ -2,7 +2,9 @@
 
 namespace ChingShop\Modules\Catalogue\Domain\Price;
 
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
@@ -17,9 +19,12 @@ use Illuminate\Database\Query\Builder;
  * @property int                                                      $units
  * @property int                                                      $subunits
  * @property string                                                   $currency
- * @property \Carbon\Carbon                                          $created_at
- * @property \Carbon\Carbon                                          $updated_at
- * @property string                                             $deleted_at
+ * @property \Carbon\Carbon
+ *           $created_at
+ * @property \Carbon\Carbon
+ *           $updated_at
+ * @property string
+ *           $deleted_at
  *
  * @method static Builder|Price whereId($value)
  * @method static Builder|Price whereUnits($value)
@@ -29,7 +34,8 @@ use Illuminate\Database\Query\Builder;
  * @method static Builder|Price whereUpdatedAt($value)
  * @method static Builder|Price whereDeletedAt($value)
  *
- * @property int                                                      $product_id
+ * @property int
+ *           $product_id
  * @property-read \ChingShop\Modules\Catalogue\Domain\Product\Product $product
  *
  * @method static Builder|Price whereProductId($value)
@@ -43,6 +49,9 @@ class Price extends Model
 
     /** @var array */
     protected $fillable = ['units', 'subunits', 'currency'];
+
+    /** @var string[] */
+    protected $touches = ['product'];
 
     /**
      * @return string
@@ -69,5 +78,13 @@ class Price extends Model
     public function asFloat(): float
     {
         return (float) ($this->units + ($this->subunits / 100));
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
     }
 }

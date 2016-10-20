@@ -3,6 +3,8 @@
 namespace ChingShop\Modules\Catalogue\Providers;
 
 use App;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductObserver;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder as ElasticsearchBuilder;
 use Illuminate\Support\ServiceProvider;
@@ -72,5 +74,6 @@ class CatalogueServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Product::observe(ProductObserver::class);
     }
 }

@@ -201,4 +201,39 @@ class Product extends Model implements HasPresenter, ImageOwner
     {
         return $this->images;
     }
+
+    /**
+     * Load the standard set of relations if not already loaded.
+     */
+    public function loadStandardRelations()
+    {
+        foreach (self::standardRelations() as $key => $value) {
+            if ($this->relationLoaded($key)) {
+                continue;
+            }
+
+            $this->load($value ? [$key => $value] : $key);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public static function standardRelations(): array
+    {
+        return [
+            'images'                 => function () {
+            },
+            'prices'                 => function () {
+            },
+            'tags'                   => function () {
+            },
+            'options'                => function (HasMany $query) {
+                /* @var ProductOption $query */
+                $query->orderBy('position', 'asc');
+            },
+            'options.availableStock' => function () {
+            },
+        ];
+    }
 }

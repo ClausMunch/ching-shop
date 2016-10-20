@@ -1,25 +1,22 @@
-@section('page-title')
-    {{ $product->name() }} | {{$product->priceF()}} | 3D Pop-Up Greetings Card
-@endsection
+<title>
+    {{ $product->name() }}
+    | {{$product->priceF()}}
+    | 3D Pop-Up Greetings Card
+    | Ching Shop
+</title>
 
-@section('canonical')
-    {{$product->url()}}
-@endsection
+<link rel="canonical" href="{{$product->url()}}">
 
-@section('meta-description')
+<meta name="description" content="
     {{$product->description()}}. From {{$product->priceF()}} at Ching Shop.
-@endsection
-
-@section('html-head')
-    @parent
-    @include('customer.product.partials.open-graph')
-    @include('customer.product.partials.twitter-card')
-@endsection
-
-@section('meta-keywords')
-    {{$product->name()}},
+">
+<meta name="keywords" content="
+{{$product->name()}},
     3D pop up greetings card,
     @foreach ($product->tags as $tag)
-        {{$tag->name}} greetings card
+{{$tag->name}} greetings card
     @endforeach
-@endsection
+        ">
+
+@include('customer.product.partials.open-graph')
+@include('customer.product.partials.twitter-card')

@@ -86,4 +86,12 @@ class TagRepository
     {
         $product->tags()->sync($tagIds);
     }
+
+    /**
+     * @return Tag
+     */
+    public function resource(): Tag
+    {
+        return $this->tagResource;
+    }
 }
