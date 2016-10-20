@@ -9,9 +9,25 @@
         <form class="form top-center" method="get"
               action="{{route('catalogue.search')}}">
             <div class="input-group">
-                <input name="query" type="text" class="form-control top-search"
+                <input name="query" type="search"
+                       class="form-control top-search"
                        value="{{$query or ''}}"
-                       placeholder="Search for...">
+                       placeholder="Search for
+                       @if (isset($suggestions))
+                       @foreach ($suggestions->shuffle()->take(3) as $tag)
+                       {{$tag->name}}{{$loop->last ? '...' : ','}}
+                       @endforeach
+                       @else
+                               Christmas, Romance, Nature...
+                        @endif"
+                       list="suggestions">
+                @if (isset($suggestions))
+                    <datalist id="suggestions">
+                        @foreach ($suggestions as $tag)
+                            <option value="{{$tag->name}}"></option>
+                        @endforeach
+                    </datalist>
+                @endif
                 <span class="input-group-btn">
                         <button class="btn btn-default"
                                 id="search-button"
