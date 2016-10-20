@@ -9,11 +9,17 @@
           content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U"/>
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self' https://static.ching-shop.com;
-           script-src 'self' https://static.ching-shop.com https://code.jquery.com/ https://*.google-analytics.com;
-           img-src 'self' https://static.ching-shop.com https://*.google-analytics.com;
-           child-src 'self';
-           object-src 'self';
-           form-action 'self' {{ config('payment.paypal.base-url') }};
+                  script-src 'self' https://static.ching-shop.com
+                  @if (env('APP_DEBUG'))
+                  'unsafe-inline'
+                  @endif
+                  https://code.jquery.com/
+                  https://*.google-analytics.com;
+                  img-src 'self' https://static.ching-shop.com
+                  https://*.google-analytics.com;
+                  child-src 'self';
+                  object-src 'self';
+                  form-action 'self' {{ config('payment.paypal.base-url') }};
            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
            font-src 'self' https://fonts.gstatic.com data:;">
     <link rel="icon"
