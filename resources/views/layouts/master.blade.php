@@ -8,12 +8,14 @@
     <meta name="google-site-verification"
           content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U"/>
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self' https://static.ching-shop.com;
+          content="default-src 'self'
+                  https://static.ching-shop.com;
                   script-src 'self' https://static.ching-shop.com
+                  https://code.jquery.com/
                   @if (env('APP_DEBUG'))
                   'unsafe-inline'
+                  *.fontawesome.com
                   @endif
-                  https://code.jquery.com/
                   https://*.google-analytics.com;
                   img-src 'self' https://static.ching-shop.com
                   https://*.google-analytics.com;

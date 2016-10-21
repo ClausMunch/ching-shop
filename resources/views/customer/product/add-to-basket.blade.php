@@ -1,7 +1,7 @@
 <form method="post"
       class="add-to-basket-form"
       action="{{ route('sales.customer.add-to-basket') }}">
-    {{ csrf_field()  }}
+    {{ csrf_field() }}
 
     @unless($product->isInStock())
         <div class="alert alert-danger">

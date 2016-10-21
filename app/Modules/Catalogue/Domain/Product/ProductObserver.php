@@ -29,6 +29,6 @@ class ProductObserver
      */
     public function saved(Product $product)
     {
-        $this->catalogueView->cleanProductView($product->id);
+        $this->catalogueView->cleanProduct($product->id);
     }
 }

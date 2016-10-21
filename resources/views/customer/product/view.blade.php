@@ -5,5 +5,5 @@
 @endsection
 
 @section('body')
-    {!! $body !!}
+    @include('customer.product.partials.body')
 @endsection
