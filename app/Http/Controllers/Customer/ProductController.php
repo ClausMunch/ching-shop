@@ -67,8 +67,9 @@ class ProductController extends Controller
         return $this->view->make(
             'customer.product.view',
             [
-                'body' => $this->view->productBody($product),
-                'meta' => $this->view->productMeta($product),
+                'product' => $this->view->getProduct($product),
+                'meta'    => $this->view->productMeta($product),
+                'similar' => $this->view->similarProducts($product),
             ]
         );
     }

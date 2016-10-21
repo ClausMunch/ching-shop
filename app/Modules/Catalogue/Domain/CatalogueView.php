@@ -8,6 +8,7 @@ use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
 use Illuminate\Cache\Repository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Produce catalogue views with caching.
@@ -62,24 +63,37 @@ class CatalogueView
     /**
      * @param Product $product
      *
-     * @return string
+     * @return Product
      */
-    public function productBody(Product $product): string
+    public function getProduct(Product $product): Product
     {
-        $key = $this->key("product.{$product->id}.body");
+        $key = $this->key("product.{$product->id}");
         if ($this->cache->has($key)) {
-            return (string) $this->cache->get($key);
+            return $this->cache->get($key);
         }
 
         $product->loadStandardRelations();
-        $similar = $this->catalogueRepository->loadSimilarProducts($product);
-        $content = $this->viewFactory->make(
-            'customer.product.partials.body',
-            compact('product', 'similar')
-        )->render();
-        $this->cache->put($key, $content, Carbon::tomorrow());
+        $this->cache->put($key, $product, Carbon::tomorrow());
 
-        return $content;
+        return $product;
+    }
+
+    /**
+     * @param Product $product
+     *
+     * @return Collection
+     */
+    public function similarProducts(Product $product): Collection
+    {
+        $key = $this->key("product.{$product->id}.similar");
+        if ($this->cache->has($key)) {
+            return $this->cache->get($key);
+        }
+
+        $similar = $this->catalogueRepository->loadSimilarProducts($product);
+        $this->cache->put($key, $similar, Carbon::now()->addDays(7));
+
+        return $similar;
     }
 
     /**
@@ -109,10 +123,11 @@ class CatalogueView
      *
      * @return bool
      */
-    public function cleanProductView(int $productId)
+    public function cleanProduct(int $productId)
     {
-        return $this->cache->forget($this->key("product.{$productId}.body"))
-        && $this->cache->forget($this->key("product.{$productId}.meta"));
+        return $this->cache->forget($this->key("product.{$productId}"))
+        && $this->cache->forget($this->key("product.{$productId}.meta"))
+        && $this->cache->forget($this->key("product.{$productId}.similar"));
     }
 
     /**
@@ -133,7 +148,7 @@ class CatalogueView
      */
     private function key(string $suffix)
     {
-        return self::KEY_PREFIX.$suffix;
+        return self::KEY_PREFIX . $suffix;
     }
 
     /**
