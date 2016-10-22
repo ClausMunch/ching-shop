@@ -1,6 +1,5 @@
 <form method="post"
-      enctype="multipart/form-data"
-      id="product-form"
+      id="product-form" data-toggle="validator" role="form"
       action="{{ $location->persistActionFor($product) }}">
     {{ csrf_field() }}
     {{ method_field($location->persistMethodFor($product)) }}
@@ -10,11 +9,12 @@
             Product name
         </label>
         <input type="text"
-               class="form-control"
+               class="form-control counted"
                id="name"
                name="name"
                minlength="10"
                maxlength="255"
+               data-ideal-length="50"
                required
                value="{{ $reply->oldInputOr('name', $product->name()) }}">
         @foreach($reply->errorsFor('name') as $error)
@@ -22,23 +22,50 @@
                 {{ $error }}
             </label>
         @endforeach
+        <label class="help-block pull-right" for="name">
+            Ideal length 50 |
+            <a href="https://moz.com/learn/seo/title-tag"
+               target="_blank"
+               title="Learn more about page titles."
+               class="help-link">
+                https://moz.com/learn/seo/title-tag
+            </a>
+        </label>
+        <label class="pull-left counter" for="name">
+            {{mb_strlen($reply->oldInputOr('name', $product->name()))}}
+        </label>
     </div>
+    <hr>
     <div class="form-group {{ $reply->putHasError('description') }}">
         <label for="description">
             Product description
         </label>
-        <textarea class="form-control"
-               id="description"
-               name="description"
-               minlength="16"
-               maxlength="512"
-               required>{{ $reply->oldInputOr('description', $product->description()) }}</textarea>
+        <textarea class="form-control counted"
+                  id="description"
+                  name="description"
+                  minlength="16"
+                  maxlength="512"
+                  data-ideal-length="155"
+                  required>{{ $reply->oldInputOr('description', $product->description()) }}</textarea>
         @foreach($reply->errorsFor('description') as $error)
             <label class="help-block" for="description">
                 {{ $error }}
             </label>
         @endforeach
+        <label class="help-block pull-right" for="name">
+            Ideal length 155 |
+            <a href="https://moz.com/learn/seo/meta-description"
+               target="_blank"
+               title="Learn more about page descriptions."
+               class="help-link">
+                https://moz.com/learn/seo/meta-description
+            </a>
+        </label>
+        <label class="pull-left counter" for="description">
+            {{mb_strlen($reply->oldInputOr('description', $product->description))}}
+        </label>
     </div>
+    <hr>
     <div class="form-group {{ $reply->putHasError('sku') }}">
         <label for="sku">
             Product SKU
