@@ -164,7 +164,7 @@ class CatalogueView
      */
     private function key(string $suffix)
     {
-        return self::KEY_PREFIX . $suffix;
+        return self::KEY_PREFIX.$suffix;
     }
 
     /**
