@@ -25,7 +25,7 @@
         <table class="table product-details">
             <tr>
                 <td>Reference</td>
-                <td>{{ $product->sku() }}</td>
+                <td id="sku">{{ $product->sku() }}</td>
             </tr>
             <tr>
                 <td>Name</td>
