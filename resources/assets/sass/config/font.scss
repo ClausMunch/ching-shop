@@ -1,4 +1,12 @@
 $font-brand: 'Lily Script One', cursive;
-$font-sans: 'Roboto Condensed', 'Roboto', 'Helvetica Neue', Helvetica, Arial,
-  'Droid Sans', sans-serif;
-$font-serif: 'Roboto Slab', Georgia, "Times New Roman", Times, serif;
+$font-sans: 'Source Sans Pro', 'Roboto Condensed', 'Roboto',
+'Helvetica Neue', Helvetica, Arial, 'Droid Sans', sans-serif;
+$font-serif: 'Crimson Text', 'Roboto Slab ', Georgia, "Times New Roman", Times,
+serif;
+$font-heading: 'PT Serif Caption', $font-sans;
+
+form,
+button,
+.btn {
+  font-family: $font-sans;
+}
