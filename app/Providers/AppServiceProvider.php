@@ -2,7 +2,6 @@
 
 namespace ChingShop\Providers;
 
-use App;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use ChingShop\Http\View\ReplyComposer;
 use ChingShop\Validation\IlluminateValidation;
@@ -35,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment() === 'local') {
             $this->app->register(GeneratorsServiceProvider::class);
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
 
         $this->app->singleton(
