@@ -26,8 +26,8 @@ window.addEventListener("load", function () {
 
     function toSlug(text: string) {
         return text.toString().toLowerCase()
-            .replace(/(\s+|--+|[\x00-\x7F])/g, "-")
-            .replace(/([^\w\-]+|^-+|-+$|&|with|and)/g, "");
+            .replace(/(\s+|--+|[^a-z0-9])/g, "-")
+            .replace(/([^\w\-]+|^-+|-+$|&|\bwith\b|\band\b)/g, "");
     }
 
     $("#use-name").click(function () {
