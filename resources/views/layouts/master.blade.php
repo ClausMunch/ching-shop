@@ -51,7 +51,7 @@
 
 @yield('footer')
 
-<link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Roboto+Slab|Roboto+Condensed:700'
+<link href='https://fonts.googleapis.com/css?family=Lily+Script+One|Crimson+Text|PT+Serif+Caption'
       property='stylesheet'
       rel='stylesheet'
       type='text/css'>
