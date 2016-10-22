@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
 
     function countedChange() {
         let input: JQuery = $(this);
-        let counter: JQuery = $(`.counter[for=${input.attr('name')}]`);
+        let counter: JQuery = $(`.counter[for=${input.attr("name")}]`);
         counter.text(input.val().length);
         if (Math.abs(input.data("ideal-length") - input.val().length) < 15) {
             input.addClass("bg-success");
