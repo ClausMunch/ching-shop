@@ -87,14 +87,22 @@
         <label for="slug">
             URL slug
         </label>
-        <input type="text"
-               class="form-control"
-               id="slug"
-               name="slug"
-               minlength="5"
-               maxlength="128"
-               required
-               value="{{ $reply->oldInputOr('slug', $product->slug()) }}">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control slug"
+                   id="slug"
+                   name="slug"
+                   minlength="5"
+                   maxlength="128"
+                   required
+                   value="{{ $reply->oldInputOr('slug', $product->slug()) }}">
+            <span class="input-group-btn">
+                        <button class="btn btn-default" id="use-name"
+                                type="button">
+                           Use name
+                        </button>
+                    </span>
+        </div>
         @foreach($reply->errorsFor('slug') as $error)
             <label class="help-block" for="name">
                 {{ $error }}
