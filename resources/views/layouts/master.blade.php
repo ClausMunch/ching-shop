@@ -62,11 +62,6 @@
 @else
     <script src="https://use.fontawesome.com/92925fa22c.js"></script>
 @endif
-<script async defer type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"
-        integrity="sha256-IxYUmOOk74FUrcx5FEMOHVmTJDb7ZAwnC/ivo/OQGxg="
-        crossorigin="anonymous">
-</script>
 @endpush
 
 @stack('scripts')
