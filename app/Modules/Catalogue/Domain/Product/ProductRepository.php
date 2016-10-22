@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Domain\Product;
 
 use Generator;
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 
@@ -23,6 +24,14 @@ class ProductRepository
     }
 
     /**
+     * @return Product
+     */
+    public function product(): Product
+    {
+        return $this->productResource;
+    }
+
+    /**
      * @return Generator|Product[]
      */
     public function iterateAll(): Generator
@@ -34,19 +43,6 @@ class ProductRepository
             }
             yield $product;
         }
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function loadInStock()
-    {
-        return $this->productResource
-            ->inStock()
-            ->orderBy('updated_at', 'desc')
-            ->has('images')
-            ->with(Product::standardRelations())
-            ->paginate();
     }
 
     /**
@@ -142,6 +138,19 @@ class ProductRepository
                     return $similarProduct->id !== $product->id;
                 }
             );
+    }
+
+    /**
+     * @return Paginator
+     */
+    public function loadInStock(): Paginator
+    {
+        return $this->productResource
+            ->inStock()
+            ->with(Product::standardRelations())
+            ->orderBy('updated_at', 'desc')
+            ->take(120)
+            ->paginate();
     }
 
     /**

@@ -119,6 +119,22 @@ class CatalogueView
     }
 
     /**
+     * @return Collection
+     */
+    public function frontProducts(): Collection
+    {
+        $key = $this->key('product.front');
+        if ($this->cache->has($key)) {
+            return $this->cache->get($key);
+        }
+
+        $products = $this->catalogueRepository->loadFrontProducts();
+        $this->cache->put($key, $products, Carbon::tomorrow());
+
+        return $products;
+    }
+
+    /**
      * @param int $productId
      *
      * @return bool
@@ -148,7 +164,7 @@ class CatalogueView
      */
     private function key(string $suffix)
     {
-        return self::KEY_PREFIX . $suffix;
+        return self::KEY_PREFIX.$suffix;
     }
 
     /**

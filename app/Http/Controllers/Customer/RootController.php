@@ -3,32 +3,22 @@
 namespace ChingShop\Http\Controllers\Customer;
 
 use ChingShop\Http\Controllers\Controller;
-use ChingShop\Modules\Catalogue\Domain\Product\ProductRepository;
-use Illuminate\Contracts\View\Factory as ViewFactory;
+use ChingShop\Modules\Catalogue\Domain\CatalogueView;
 
 /**
  * Class RootController.
  */
 class RootController extends Controller
 {
-    /** @var ProductRepository */
-    private $productRepository;
-
-    /** @var ViewFactory */
-    private $viewFactory;
+    /** @var CatalogueView */
+    private $view;
 
     /**
-     * ProductController constructor.
-     *
-     * @param ProductRepository $productRepository
-     * @param ViewFactory       $viewFactory
+     * @param CatalogueView $view
      */
-    public function __construct(
-        ProductRepository $productRepository,
-        ViewFactory $viewFactory
-    ) {
-        $this->productRepository = $productRepository;
-        $this->viewFactory = $viewFactory;
+    public function __construct(CatalogueView $view)
+    {
+        $this->view = $view;
     }
 
     /**
@@ -36,8 +26,11 @@ class RootController extends Controller
      */
     public function getIndex()
     {
-        $productRows = $this->productRepository->loadInStock()->chunk(4);
-
-        return $this->viewFactory->make('welcome', compact('productRows'));
+        return $this->view->make(
+            'welcome',
+            [
+                'productRows' => $this->view->frontProducts()->chunk(4),
+            ]
+        );
     }
 }

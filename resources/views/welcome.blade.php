@@ -8,23 +8,10 @@
 
     <section>
         @foreach($productRows as $products)
-            <div class="row">
+            <div class="row front-product-row">
                 @foreach($products as $product)
                     <div class="col-md-6 col-lg-3">
-                        <h3>
-                            <a href="{{ $location->viewHrefFor($product) }}">
-                                {{ $product->name() }}
-                            </a>
-                        </h3>
                         @if (count($product->images()))
-                            <p class="price">
-                                {{$product->priceF()}} |
-                                @if ($product->isInStock())
-                                    In stock
-                                @else
-                                    Out of stock
-                                @endif
-                            </p>
                             <a href="{{ $location->viewHrefFor($product) }}">
                                 <img src="{{ $product->mainImage()->sizeUrl() }}"
                                      @if ($product->mainImage()->isSelfHosted())
@@ -33,6 +20,11 @@
                                      class="img-responsive img-rounded photo">
                             </a>
                         @endif
+                        <h3 class="front-product-name">
+                            <a href="{{ $location->viewHrefFor($product) }}">
+                                {{ $product->name() }}
+                            </a>
+                        </h3>
                     </div>
                 @endforeach
             </div>

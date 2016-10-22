@@ -74,11 +74,17 @@ class CatalogueRepository
     }
 
     /**
-     * @return Collection|LengthAwarePaginator|Product[]
+     * @return Collection|Product[]
      */
-    public function loadInStockProducts()
+    public function loadFrontProducts(): Collection
     {
-        return $this->productRepository->loadInStock();
+        return $this->productRepository
+            ->product()
+            ->inStock()
+            ->with(['images'])
+            ->orderBy('updated_at', 'desc')
+            ->take(120)
+            ->get();
     }
 
     /**
