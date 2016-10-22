@@ -143,7 +143,8 @@ class CatalogueView
     {
         return $this->cache->forget($this->key("product.{$productId}"))
         && $this->cache->forget($this->key("product.{$productId}.meta"))
-        && $this->cache->forget($this->key("product.{$productId}.similar"));
+        && $this->cache->forget($this->key("product.{$productId}.similar"))
+        && $this->cache->forget('product.front');
     }
 
     /**
@@ -164,7 +165,7 @@ class CatalogueView
      */
     private function key(string $suffix)
     {
-        return self::KEY_PREFIX.$suffix;
+        return self::KEY_PREFIX . $suffix;
     }
 
     /**
