@@ -64,3 +64,16 @@ $image-size: 6em;
 .ui-sortable-helper {
   cursor: grabbing;
 }
+
+.help-link {
+  color: $gray-light;
+  font-weight: lighter;
+}
+
+.counter {
+  font-weight: lighter;
+
+  &.text-success {
+    font-weight: bold;
+  }
+}
