@@ -58,13 +58,21 @@
         line: "memory_limit = 512M"
         regexp: "^memory_limit = "
 
-    - name: PHP upload limit
+    - name: PHP max filesize
       lineinfile:
         dest: /etc/php/7.0/fpm/php.ini
         create: no
         state: present
-        line: "upload_max_filesize = 11M"
-        regexp: "^memory_limit = "
+        line: "upload_max_filesize = 20M"
+        regexp: "^upload_max_filesize = "
+
+    - name: PHP max filesize
+      lineinfile:
+        dest: /etc/php/7.0/fpm/php.ini
+        create: no
+        state: present
+        line: "post_max_size = 100M"
+        regexp: "^post_max_size = "
 
     - name: install phpredis
       script: phpredis.sh

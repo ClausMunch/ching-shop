@@ -20,6 +20,19 @@ window.addEventListener("load", function () {
         }
     }
 
+    $(".form-control.slug").change(function () {
+        this.value = toSlug(this.value);
+    });
+
+    function toSlug(text: string) {
+        return text.toString().toLowerCase()
+            .replace(/(\s+|--+)/g, "-")
+            .replace(/([^\w\-]+|^-+|-+$)/g, "");
+    }
+
+    $("#use-name").click(function () {
+        $("#slug").val($("#name").val()).change();
+    });
 });
 
 require("./images.js");
