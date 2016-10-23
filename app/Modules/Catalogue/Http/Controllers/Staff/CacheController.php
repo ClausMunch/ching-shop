@@ -8,8 +8,6 @@ use ChingShop\Modules\Catalogue\Domain\CatalogueView;
 
 /**
  * Staff user cache-management actions.
- *
- * @package ChingShop\Modules\Catalogue\Http\Controllers\Staff
  */
 class CacheController extends Controller
 {
@@ -30,8 +28,9 @@ class CacheController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \BadMethodCallException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function clearProductCache()
     {
