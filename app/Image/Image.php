@@ -50,6 +50,9 @@ class Image extends Model implements HttpCrudInterface
     /** @var array */
     protected $fillable = ['filename', 'alt_text', 'url'];
 
+    /** @var string[] */
+    protected $touches = ['products'];
+
     /**
      * @return BelongsToMany
      */
@@ -87,7 +90,7 @@ class Image extends Model implements HttpCrudInterface
     public function sizeUrl(string $size = 'large'): string
     {
         if ($this->isInternal()) {
-            return secure_asset(self::DIR.$this->filename());
+            return secure_asset(self::DIR . $this->filename());
         }
 
         $url = $this->url ? (string) $this->url : '';

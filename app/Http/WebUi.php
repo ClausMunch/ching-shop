@@ -72,6 +72,14 @@ class WebUi
     }
 
     /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectBack()
+    {
+        return redirect()->back();
+    }
+
+    /**
      * @param array $data
      * @param int   $status
      * @param array $headers

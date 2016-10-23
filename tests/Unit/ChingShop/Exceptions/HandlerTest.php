@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Mockery\Mock;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Log\LoggerInterface;
 use Testing\Unit\UnitTest;
@@ -64,8 +65,9 @@ class HandlerTest extends UnitTest
     {
         $exception = new Exception();
 
-        /** @var Request|MockObject $request */
+        /** @var Request|Mock $request */
         $request = $this->mockery(Request::class);
+        $request->shouldReceive('user')->andReturn(null);
 
         $response = $this->handler->render($request, $exception);
 

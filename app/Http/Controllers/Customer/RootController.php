@@ -23,6 +23,7 @@ class RootController extends Controller
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \BadMethodCallException
      */
     public function getIndex()
     {
