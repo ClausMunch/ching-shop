@@ -26,6 +26,7 @@
     "jquery": "^2",
     "jquery-ui": "^1",
     "laravel-elixir": "*",
-    "node-sass": "^3"
+    "node-sass": "^3",
+    "underscore": "^1.8.3"
   }
 }

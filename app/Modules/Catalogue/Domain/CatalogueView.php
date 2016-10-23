@@ -147,13 +147,15 @@ class CatalogueView
     /**
      * @param int $productId
      *
+     * @throws \BadMethodCallException
+     *
      * @return bool
      */
     public function clearProduct(int $productId)
     {
-        return $this->cache->forget($this->key("product.{$productId}"))
-        && $this->cache->forget($this->key("product.{$productId}.meta"))
-        && $this->cache->forget($this->key("product.{$productId}.similar"));
+        return $this->cacheForget("product.{$productId}")
+        && $this->cacheForget("product.{$productId}.meta")
+        && $this->cacheForget("product.{$productId}.similar");
     }
 
     /**
@@ -229,6 +231,16 @@ class CatalogueView
     private function cacheGet(string $key)
     {
         return $this->cache->tags(self::KEY_PREFIX)->get($this->key($key));
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \BadMethodCallException
+     */
+    private function cacheForget(string $key)
+    {
+        $this->cache->tags(self::KEY_PREFIX)->forget($this->key($key));
     }
 
     /**
