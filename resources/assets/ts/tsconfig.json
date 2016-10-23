@@ -2,6 +2,7 @@
     "filesGlob": [
         "./src/**/*.ts",
         "./test/**/*.ts",
-        "./typings/index.d.ts"
+        "./typings/index.d.ts",
+        "./typings/browser/index.d.ts"
     ]
 }

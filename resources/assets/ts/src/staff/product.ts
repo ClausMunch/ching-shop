@@ -1,3 +1,4 @@
+import underscoreString = require("underscore.string");
 window.addEventListener("load", function () {
     // @see resources/assets/ts/src/main.ts:11
     // noinspection TypeScriptUnresolvedFunction
@@ -20,16 +21,10 @@ window.addEventListener("load", function () {
         }
     }
 
+    let slugify = require("underscore.string/slugify");
     $(".form-control.slug").change(function () {
-        this.value = toSlug(this.value);
+        this.value = slugify(this.value.replace(/(with|and|in|on)/, ""));
     });
-
-    function toSlug(text: string) {
-        return text.toString().toLowerCase()
-            .replace(/(\s+|--+|[^a-z0-9])/g, "-")
-            .replace(/([^\w\-]+|^-+|-+$|&|\bwith\b|\band\b)/g, "")
-            .replace(/--+/g, "");
-    }
 
     $("#use-name").click(function () {
         $("#slug").val($("#name").val()).change();

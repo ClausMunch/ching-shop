@@ -104,8 +104,10 @@ class Handler extends ExceptionHandler
             )
         );
 
-        if ($request->fullUrlIs(URL::previous())) {
-            parent::render($request, $err);
+        if (!$request->headers->has('referer')
+            || $request->fullUrlIs(URL::previous())
+        ) {
+            return parent::render($request, $err);
         }
 
         return $this->webUi()->redirectBack();

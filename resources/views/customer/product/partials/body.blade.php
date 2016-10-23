@@ -53,6 +53,19 @@
 
 <hr>
 
+<section class="product-section">
+
+    <h2>Product link</h2>
+
+    <a href="{{ $location->viewHrefFor($product) }}"
+       title="{{ $product->name() }}">
+        {{ $location->viewHrefFor($product) }}
+    </a>
+
+</section>
+
+<hr>
+
 @if ($similar && count($similar))
     <section class="product-section">
 
@@ -67,14 +80,3 @@
 
     </section>
 @endif
-
-<section class="product-section">
-
-    <h2>Product link</h2>
-
-    <a href="{{ $location->viewHrefFor($product) }}"
-       title="{{ $product->name() }}">
-        {{ $location->viewHrefFor($product) }}
-    </a>
-
-</section>

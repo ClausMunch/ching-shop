@@ -78,9 +78,13 @@
 }
 
 .add-to-basket-form {
-  margin: auto;
+  margin: 1em auto 0;
   max-width: 25em;
   text-align: center;
+
+  @include breakpoint(sm-up) {
+    margin: auto;
+  }
 }
 
 .product-tag {
