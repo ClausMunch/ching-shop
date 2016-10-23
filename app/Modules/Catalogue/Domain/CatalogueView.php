@@ -42,8 +42,9 @@ class CatalogueView
     }
 
     /**
-     * @return string
      * @throws \BadMethodCallException
+     *
+     * @return string
      */
     public function suggestions(): string
     {
@@ -64,8 +65,9 @@ class CatalogueView
     /**
      * @param Product $product
      *
-     * @return Product
      * @throws \BadMethodCallException
+     *
+     * @return Product
      */
     public function getProduct(Product $product): Product
     {
@@ -83,8 +85,9 @@ class CatalogueView
     /**
      * @param Product $product
      *
-     * @return Collection
      * @throws \BadMethodCallException
+     *
+     * @return Collection
      */
     public function similarProducts(Product $product): Collection
     {
@@ -102,8 +105,9 @@ class CatalogueView
     /**
      * @param Product $product
      *
-     * @return string
      * @throws \BadMethodCallException
+     *
+     * @return string
      */
     public function productMeta(Product $product): string
     {
@@ -123,8 +127,9 @@ class CatalogueView
     }
 
     /**
-     * @return Collection
      * @throws \BadMethodCallException
+     *
+     * @return Collection
      */
     public function frontProducts(): Collection
     {
@@ -205,8 +210,9 @@ class CatalogueView
     /**
      * @param string $key
      *
-     * @return bool
      * @throws \BadMethodCallException
+     *
+     * @return bool
      */
     private function cacheHas(string $key): bool
     {
@@ -216,8 +222,9 @@ class CatalogueView
     /**
      * @param string $key
      *
-     * @return mixed
      * @throws \BadMethodCallException
+     *
+     * @return mixed
      */
     private function cacheGet(string $key)
     {
@@ -235,6 +242,6 @@ class CatalogueView
             return $suffix;
         }
 
-        return self::KEY_PREFIX . $suffix;
+        return self::KEY_PREFIX.$suffix;
     }
 }
