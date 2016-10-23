@@ -147,8 +147,9 @@ class CatalogueView
     /**
      * @param int $productId
      *
-     * @return bool
      * @throws \BadMethodCallException
+     *
+     * @return bool
      */
     public function clearProduct(int $productId)
     {
@@ -253,6 +254,6 @@ class CatalogueView
             return $suffix;
         }
 
-        return self::KEY_PREFIX . $suffix;
+        return self::KEY_PREFIX.$suffix;
     }
 }
