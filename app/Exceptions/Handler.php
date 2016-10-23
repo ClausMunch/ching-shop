@@ -2,12 +2,16 @@
 
 namespace ChingShop\Exceptions;
 
+use ChingShop\Http\WebUi;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use URL;
 
 /**
  * Class Handler.
@@ -27,10 +31,10 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Exception               $err
+     * @param Request    $request
+     * @param \Exception $err
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function render($request, Exception $err)
     {
@@ -42,13 +46,17 @@ class Handler extends ExceptionHandler
             $err = new NotFoundHttpException($err->getMessage(), $err);
         }
 
+        if ($request->user() && $request->user()->isStaff()) {
+            return $this->renderForStaff($request, $err);
+        }
+
         return parent::render($request, $err);
     }
 
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -67,5 +75,39 @@ class Handler extends ExceptionHandler
     private function log(): LoggerInterface
     {
         return $this->container->make(LoggerInterface::class);
+    }
+
+    /**
+     * @return WebUi
+     */
+    private function webUi(): WebUi
+    {
+        return $this->container->make(WebUi::class);
+    }
+
+    /**
+     * @param Request   $request
+     * @param Exception $err
+     *
+     * @return RedirectResponse
+     */
+    private function renderForStaff(
+        Request $request,
+        Exception $err
+    ) {
+        $this->webUi()->errorMessage(
+            sprintf(
+                '<strong>Error:</strong>&nbsp;%s (from %s:%s)',
+                $err->getMessage(),
+                $err->getFile(),
+                $err->getLine()
+            )
+        );
+
+        if ($request->fullUrlIs(URL::previous())) {
+            parent::render($request, $err);
+        }
+
+        return $this->webUi()->redirectBack();
     }
 }

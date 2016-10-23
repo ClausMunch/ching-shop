@@ -10,6 +10,18 @@
 
 @section('content')
 
+    <form method="post"
+          action="{{route('catalogue.staff.products.clear-cache')}}">
+        {{csrf_field()}}
+        {{method_field('DELETE')}}
+        <button type="submit" class="btn btn-warning btn-sm">
+            <span class="glyphicon glyphicon-floppy-remove"></span>
+            Clear product cache
+        </button>
+    </form>
+
+    <hr>
+
     {{$products->links()}}
 
     @if (count($products))

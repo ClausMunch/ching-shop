@@ -50,6 +50,9 @@ class Image extends Model implements HttpCrudInterface
     /** @var array */
     protected $fillable = ['filename', 'alt_text', 'url'];
 
+    /** @var string[] */
+    protected $touches = ['products'];
+
     /**
      * @return BelongsToMany
      */

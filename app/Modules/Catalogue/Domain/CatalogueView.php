@@ -42,20 +42,22 @@ class CatalogueView
     }
 
     /**
+     * @throws \BadMethodCallException
+     *
      * @return string
      */
     public function suggestions(): string
     {
-        $key = $this->key('suggestions');
-        if ($this->cache->has($key)) {
-            return (string) $this->cache->get($key);
+        $key = 'suggestions';
+        if ($this->cacheHas($key)) {
+            return (string) $this->cacheGet($key);
         }
 
         $content = $this->viewFactory->make(
             'customer.partials.suggestions',
             ['suggestions' => $this->loadSuggestions()]
         )->render();
-        $this->cache->put($key, $content, Carbon::tomorrow());
+        $this->cachePut($key, $content, Carbon::tomorrow());
 
         return $content;
     }
@@ -63,17 +65,19 @@ class CatalogueView
     /**
      * @param Product $product
      *
+     * @throws \BadMethodCallException
+     *
      * @return Product
      */
     public function getProduct(Product $product): Product
     {
         $key = $this->key("product.{$product->id}");
-        if ($this->cache->has($key)) {
-            return $this->cache->get($key);
+        if ($this->cacheHas($key)) {
+            return $this->cacheGet($key);
         }
 
         $product->loadStandardRelations();
-        $this->cache->put($key, $product, Carbon::tomorrow());
+        $this->cachePut($key, $product, Carbon::tomorrow());
 
         return $product;
     }
@@ -81,17 +85,19 @@ class CatalogueView
     /**
      * @param Product $product
      *
+     * @throws \BadMethodCallException
+     *
      * @return Collection
      */
     public function similarProducts(Product $product): Collection
     {
         $key = $this->key("product.{$product->id}.similar");
-        if ($this->cache->has($key)) {
-            return $this->cache->get($key);
+        if ($this->cacheHas($key)) {
+            return $this->cacheGet($key);
         }
 
         $similar = $this->catalogueRepository->loadSimilarProducts($product);
-        $this->cache->put($key, $similar, Carbon::now()->addDays(7));
+        $this->cachePut($key, $similar, Carbon::now()->addDays(7));
 
         return $similar;
     }
@@ -99,13 +105,15 @@ class CatalogueView
     /**
      * @param Product $product
      *
+     * @throws \BadMethodCallException
+     *
      * @return string
      */
     public function productMeta(Product $product): string
     {
-        $key = $this->key("product.{$product->id}.meta");
-        if ($this->cache->has($key)) {
-            return (string) $this->cache->get($key);
+        $key = "product.{$product->id}.meta";
+        if ($this->cacheHas($key)) {
+            return (string) $this->cacheGet($key);
         }
 
         $product->loadStandardRelations();
@@ -113,23 +121,25 @@ class CatalogueView
             'customer.product.meta',
             compact('product')
         )->render();
-        $this->cache->put($key, $content, Carbon::now()->addDays(7));
+        $this->cachePut($key, $content, Carbon::now()->addDays(7));
 
         return $content;
     }
 
     /**
+     * @throws \BadMethodCallException
+     *
      * @return Collection
      */
     public function frontProducts(): Collection
     {
         $key = $this->key('product.front');
-        if ($this->cache->has($key)) {
-            return $this->cache->get($key);
+        if ($this->cacheHas($key)) {
+            return $this->cacheGet($key);
         }
 
         $products = $this->catalogueRepository->loadFrontProducts();
-        $this->cache->put($key, $products, Carbon::tomorrow());
+        $this->cachePut($key, $products, Carbon::tomorrow());
 
         return $products;
     }
@@ -139,12 +149,19 @@ class CatalogueView
      *
      * @return bool
      */
-    public function cleanProduct(int $productId)
+    public function clearProduct(int $productId)
     {
         return $this->cache->forget($this->key("product.{$productId}"))
         && $this->cache->forget($this->key("product.{$productId}.meta"))
-        && $this->cache->forget($this->key("product.{$productId}.similar"))
-        && $this->cache->forget('product.front');
+        && $this->cache->forget($this->key("product.{$productId}.similar"));
+    }
+
+    /**
+     * @throws \BadMethodCallException
+     */
+    public function clearAll()
+    {
+        $this->cache->tags(self::KEY_PREFIX)->flush();
     }
 
     /**
@@ -156,16 +173,6 @@ class CatalogueView
     public function make(string $view, array $data = []): View
     {
         return $this->viewFactory->make($view, $data);
-    }
-
-    /**
-     * @param string $suffix
-     *
-     * @return string
-     */
-    private function key(string $suffix)
-    {
-        return self::KEY_PREFIX.$suffix;
     }
 
     /**
@@ -182,5 +189,59 @@ class CatalogueView
                     return str_singular(strtolower($tag->name));
                 }
             );
+    }
+
+    /**
+     * @param string    $key
+     * @param mixed     $value
+     * @param \DateTime $expiry
+     *
+     * @throws \BadMethodCallException
+     */
+    private function cachePut(string $key, $value, \DateTime $expiry)
+    {
+        $this->cache->tags(self::KEY_PREFIX)->put(
+            $this->key($key),
+            $value,
+            $expiry
+        );
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \BadMethodCallException
+     *
+     * @return bool
+     */
+    private function cacheHas(string $key): bool
+    {
+        return $this->cache->tags(self::KEY_PREFIX)->has($this->key($key));
+    }
+
+    /**
+     * @param string $key
+     *
+     * @throws \BadMethodCallException
+     *
+     * @return mixed
+     */
+    private function cacheGet(string $key)
+    {
+        return $this->cache->tags(self::KEY_PREFIX)->get($this->key($key));
+    }
+
+    /**
+     * @param string $suffix
+     *
+     * @return string
+     */
+    private function key(string $suffix)
+    {
+        if (strpos(self::KEY_PREFIX, $suffix) === 0) {
+            return $suffix;
+        }
+
+        return self::KEY_PREFIX.$suffix;
     }
 }

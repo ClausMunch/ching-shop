@@ -22,6 +22,8 @@ class RootController extends Controller
     }
 
     /**
+     * @throws \BadMethodCallException
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getIndex()

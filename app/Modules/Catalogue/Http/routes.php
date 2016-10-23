@@ -134,6 +134,13 @@ Route::group(
                         'as'   => 'catalogue.staff.products.put-tags',
                     ]
                 );
+                Route::delete(
+                    'product-cache',
+                    [
+                        'uses' => 'Staff\CacheController@clearProductCache',
+                        'as'   => 'catalogue.staff.products.clear-cache',
+                    ]
+                );
             }
         );
     }
