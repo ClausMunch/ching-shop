@@ -37,9 +37,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property string                          $slug
  * @property string                          $description
  * @property string                          $deleted_at
- *
  * @property Category                        $category
- *
  * @property-read Collection|Image[]         $images
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
