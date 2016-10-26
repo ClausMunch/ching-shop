@@ -18,7 +18,7 @@
     <rule ref="rulesets/codesize.xml/ExcessiveClassLength"/>
     <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
         <properties>
-            <property name="minimum" value="6"/>
+            <property name="minimum" value="7"/>
         </properties>
     </rule>
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount">

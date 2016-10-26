@@ -102,7 +102,7 @@ class TagsTest extends FunctionalTest
             ->see('Tags updated');
 
         $tagOption = $this->crawler()->filter("#tag-option-{$tag->id}");
-        $this->assertTrue($tagOption->attr('selected') === 'selected');
+        $this->assertEquals($tagOption->attr('selected'), 'selected');
 
         $product = Product::where('id', '=', $product->id)
             ->with('tags')

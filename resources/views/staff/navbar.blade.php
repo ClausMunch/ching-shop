@@ -59,6 +59,13 @@
                                 Tags
                             </a>
                         </li>
+                        <li class="{{ $location->putActive(
+                                'catalogue.staff.categories.index'
+                            ) }}">
+                            <a href="{{ route('categories.index') }}">
+                                Categories
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown

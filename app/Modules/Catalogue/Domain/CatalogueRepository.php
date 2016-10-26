@@ -40,6 +40,9 @@ class CatalogueRepository
     /** @var ProductOptionRepository */
     private $optionRepository;
 
+    /** @var Category */
+    private $category;
+
     /**
      * CatalogueRepository constructor.
      *
@@ -48,19 +51,22 @@ class CatalogueRepository
      * @param TagRepository           $tagRepository
      * @param ImageRepository         $imageRepository
      * @param ProductOptionRepository $optionRepository
+     * @param Category                $category
      */
     public function __construct(
         AttributeRepository $attributeRepository,
         ProductRepository $productRepository,
         TagRepository $tagRepository,
         ImageRepository $imageRepository,
-        ProductOptionRepository $optionRepository
+        ProductOptionRepository $optionRepository,
+        Category $category
     ) {
         $this->attributeRepository = $attributeRepository;
         $this->productRepository = $productRepository;
         $this->tagRepository = $tagRepository;
         $this->imageRepository = $imageRepository;
         $this->optionRepository = $optionRepository;
+        $this->category = $category;
     }
 
     /**
@@ -264,5 +270,13 @@ class CatalogueRepository
     public function loadSimilarProducts(Product $product)
     {
         return $this->productRepository->loadSimilar($product);
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function loadAllCategories(): Collection
+    {
+        return $this->category->all();
     }
 }

@@ -91,8 +91,17 @@ class ProductController extends Controller
         $product = $this->mustLoadProductBySku($sku);
         $tags = $this->catalogueRepository->loadAllTags();
         $colours = $this->catalogueRepository->loadAllColours();
+        $categories = $this->catalogueRepository->loadAllCategories();
 
-        return $this->buildView('show', compact('product', 'tags', 'colours'));
+        return $this->buildView(
+            'show',
+            compact(
+                'product',
+                'tags',
+                'colours',
+                'categories'
+            )
+        );
     }
 
     /**
