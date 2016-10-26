@@ -46,6 +46,19 @@
         </div>
     </section>
 
+    <section>
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h3>Category</h3>
+                    @include('catalogue::staff.products.category')
+                </div>
+            </div>
+        </div>
+    </section>
+
     <hr>
 
     <section id="images">

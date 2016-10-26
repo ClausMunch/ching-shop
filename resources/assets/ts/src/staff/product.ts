@@ -6,6 +6,10 @@ window.addEventListener("load", function () {
         enableFiltering: true,
         checkboxName: "tag-ids[]"
     });
+    $("#category-id").multiselect({
+        enableFiltering: true,
+        checkboxName: "category-id"
+    });
 
     $(".form-control.counted").change(countedChange).keyup(countedChange);
 

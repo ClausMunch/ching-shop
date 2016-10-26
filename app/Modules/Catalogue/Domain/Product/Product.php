@@ -4,11 +4,13 @@ namespace ChingShop\Modules\Catalogue\Domain\Product;
 
 use ChingShop\Image\Image;
 use ChingShop\Image\ImageOwner;
+use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,10 +38,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property string                          $description
  * @property string                          $deleted_at
  *
- * @method static Builder|Product whereSlug($value)
- * @method static Builder|Product whereDescription($value)
- * @method static Builder|Product whereDeletedAt($value)
- * @mixin \Eloquent
+ * @property Category                        $category
  *
  * @property-read Collection|Image[]         $images
  * @property-read Collection|Price[]         $prices
@@ -97,6 +96,16 @@ class Product extends Model implements HasPresenter, ImageOwner
         return $this->belongsToMany(Image::class)
             ->withPivot('position')
             ->orderBy('pivot_position', 'asc');
+    }
+
+    /**
+     * A product is in one category.
+     *
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

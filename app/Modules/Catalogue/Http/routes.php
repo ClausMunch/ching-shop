@@ -27,6 +27,14 @@ Route::group(
                 ],
             ],
             function () {
+                Route::resource('categories', 'Staff\CategoryController');
+                Route::put(
+                    'products/{sku}/category',
+                    [
+                        'uses' => 'Staff\CategoryController@putProductCategory',
+                        'as'   => 'catalogue.staff.products.put-category',
+                    ]
+                );
                 Route::get(
                     'products/images',
                     [

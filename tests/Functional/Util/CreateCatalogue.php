@@ -4,6 +4,7 @@ namespace Testing\Functional\Util;
 
 use ChingShop\Image\Image;
 use ChingShop\Modules\Catalogue\Domain\Attribute\Colour;
+use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
@@ -33,7 +34,7 @@ trait CreateCatalogue
                     'name'        => uniqid('', false),
                     'sku'         => uniqid('SKU', false),
                     'slug'        => uniqid('slug-', false),
-                    'description' => 'Description '.str_random(30),
+                    'description' => 'Description ' . str_random(30),
                 ],
                 $attributes
             )
@@ -48,6 +49,18 @@ trait CreateCatalogue
         return Tag::create(
             [
                 'name' => uniqid('Tag', false),
+            ]
+        );
+    }
+
+    /**
+     * @return Category
+     */
+    protected function createCategory(): Category
+    {
+        return Category::create(
+            [
+                'name' => uniqid('Category', false),
             ]
         );
     }
