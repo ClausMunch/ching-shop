@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string               $name
  * @property \Carbon\Carbon       $created_at
  * @property \Carbon\Carbon       $updated_at
- *
  * @property Collection|Product[] $products
  */
 class Category extends Model implements HttpCrudInterface
