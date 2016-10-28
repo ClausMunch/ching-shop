@@ -16,7 +16,6 @@ use League\Url\Url;
  * @property \Carbon\Carbon             $created_at
  * @property \Carbon\Carbon             $updated_at
  * @property Collection|Product[]       $products
- *
  * @property-read Category|null         $parent
  * @property-read Collection|Category[] $children
  *
@@ -52,8 +51,9 @@ class Category extends Node implements HttpCrudInterface
     }
 
     /**
-     * @return Url
      * @throws \RuntimeException
+     *
+     * @return Url
      */
     public function url(): Url
     {

@@ -33,8 +33,9 @@ class CategoryController extends Controller
      * @param int    $id
      * @param string $slug
      *
-     * @return View|RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return View|RedirectResponse
      */
     public function viewCategory(int $id, string $slug)
     {

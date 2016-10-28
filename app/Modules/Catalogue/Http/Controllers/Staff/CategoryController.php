@@ -126,8 +126,9 @@ class CategoryController extends Controller
      * @param int     $id
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function putCategoryParent(int $id, Request $request)
     {
