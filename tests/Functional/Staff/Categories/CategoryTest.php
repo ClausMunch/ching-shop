@@ -95,7 +95,7 @@ class CategoryTest extends FunctionalTest
     {
         // Given there are two categories;
         /**
-         * @var Category $categoryA
+         * @var Category
          * @var Category $categoryB
          */
         $categoryA = $this->createCategory();
