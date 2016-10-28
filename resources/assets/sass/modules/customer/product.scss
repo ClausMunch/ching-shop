@@ -3,11 +3,11 @@
   margin: .7em 0;
 
   @include breakpoint(sm-up) {
-    font-size: 5vw;
+    font-size: 4.8vw;
   }
 
   @include breakpoint(md-up) {
-    font-size: 3.6vw;
+    font-size: 3.2vw;
   }
 }
 

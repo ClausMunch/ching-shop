@@ -2,23 +2,36 @@
 
 namespace ChingShop\Modules\Catalogue\Domain;
 
+use Baum\Node;
+use ChingShop\Domain\PublicId;
 use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use League\Url\Url;
 
 /**
- * @property int                  $id
- * @property string               $name
- * @property \Carbon\Carbon       $created_at
- * @property \Carbon\Carbon       $updated_at
- * @property Collection|Product[] $products
+ * @property int                        $id
+ * @property string                     $name
+ * @property \Carbon\Carbon             $created_at
+ * @property \Carbon\Carbon             $updated_at
+ * @property Collection|Product[]       $products
+ *
+ * @property-read Category|null         $parent
+ * @property-read Collection|Category[] $children
+ *
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Illuminate\Database\Query\Builder
  */
-class Category extends Model implements HttpCrudInterface
+class Category extends Node implements HttpCrudInterface
 {
+    use PublicId;
+
     /** @var string[] */
     protected $fillable = ['name'];
+
+    /** @var string[] */
+    protected $guarded = ['id', 'parent_id', 'lft', 'rgt', 'depth'];
 
     /**
      * A category contains many products.
@@ -28,6 +41,25 @@ class Category extends Model implements HttpCrudInterface
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function slug(): string
+    {
+        return str_slug($this->name);
+    }
+
+    /**
+     * @return Url
+     * @throws \RuntimeException
+     */
+    public function url(): Url
+    {
+        return Url::createFromUrl(
+            route('category.view', [$this->publicId(), $this->slug()])
+        );
     }
 
     /**

@@ -27,7 +27,9 @@
         "spatie/laravel-backup": "^4.0",
         "thepixeldeveloper/sitemap": "^4.4",
         "laravel/scout": "^1.1",
-        "elasticsearch/elasticsearch": "^2.2"
+        "elasticsearch/elasticsearch": "^2.2",
+        "baum/baum": "^1.1",
+        "league/url": "^3.3"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

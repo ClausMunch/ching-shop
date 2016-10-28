@@ -1,3 +1,5 @@
+@include('customer.category.breadcrumb', ['leaf' => $product->category])
+
 <h1 class="product-title" itemprop="name">{{ $product->name() }}</h1>
 
 <div class="row">

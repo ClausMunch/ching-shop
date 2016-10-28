@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Staff\Categories;
 
+use ChingShop\Modules\Catalogue\Domain\Category;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
 use Testing\Functional\Util\CreateCatalogue;
@@ -85,5 +86,68 @@ class CategoryTest extends FunctionalTest
             "#category-option-{$category->id}"
         );
         $this->assertEquals($categoryOption->attr('selected'), 'selected');
+    }
+
+    /**
+     * Should be able to make one category the child of another.
+     */
+    public function testCanSetCategoryParent()
+    {
+        // Given there are two categories;
+        /**
+         * @var Category $categoryA
+         * @var Category $categoryB
+         */
+        $categoryA = $this->createCategory();
+        $categoryB = $this->createCategory();
+
+        // When we go to the categories index;
+        $this->actingAs($this->staffUser())
+            ->visit(route('categories.index'))
+            ->see($categoryA->name)
+            ->see($categoryB->name);
+
+        // And set Category A's parent to be Category B;
+        $this->select($categoryB->id, 'parent-id')
+            ->press("Set {$categoryA->name}'s parent");
+
+        // Then Category A should be a child of Category B.
+        $categoryA->reload();
+        $categoryB->reload();
+        $this->assertEquals($categoryA->parent->id, $categoryB->id);
+        $this->assertTrue($categoryB->isAncestorOf($categoryA));
+        $this->assertTrue($categoryA->isDescendantOf($categoryB));
+    }
+
+    /**
+     * Should be able to make a child category into a root category.
+     */
+    public function testCanMakeCategoryRoot()
+    {
+        // Given there is a category with a parent;
+        $parent = $this->createCategory();
+        /** @var Category $child */
+        $child = $this->createCategory()->makeChildOf($parent);
+
+        // When we go to the categories index;
+        $this->actingAs($this->staffUser())
+            ->visit(route('categories.index'))
+            ->see($parent->name)
+            ->see($child->name);
+        $this->assertEquals(
+            'selected',
+            $this->getElementAttribute(
+                "#category-{$child->id}-option-{$parent->id}",
+                'selected'
+            )
+        );
+
+        // And make the child a root category;
+        $this->select('-1', 'parent-id')
+            ->press("Set {$child->name}'s parent");
+
+        // Then it should be a root category.
+        $child->reload();
+        $this->assertTrue($child->isRoot());
     }
 }

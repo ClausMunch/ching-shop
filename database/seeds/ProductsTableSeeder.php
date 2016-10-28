@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seed
      */
     public function run()
     {
-        for ($i = 0; $i < 8; ++$i) {
+        for ($i = 0; $i < 16; ++$i) {
             $this->seedProduct();
         }
 
@@ -71,7 +71,7 @@ class ProductsTableSeeder extends Seed
                     'alt_text' => $this->faker()->words(3, true),
                     'url'      => secure_asset(
                         "/img/lorem/{$this->faker()->numberBetween(1, 5)}.jpg#"
-                        .uniqid('', true)
+                        . uniqid('', true)
                     ),
                 ]
             );
