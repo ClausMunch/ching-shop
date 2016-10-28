@@ -40,52 +40,9 @@
     {{$categories->links()}}
     <hr>
     @if (count($categories))
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>
-                        Category name
-                    </th>
-                    <th>
-                        Products
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($categories as $category)
-                    <tr>
-                        <td>
-                            {{$category->name}}
-                        </td>
-                        <td>
-                            <small>
-                                @foreach ($category->products as $product)
-                                    <a href="{{route('products.show', [$product->sku])}}">
-                                        {{$product->sku}}</a>&nbsp;
-                                @endforeach
-                            </small>
-                        </td>
-                        <td>
-                            <form method="post"
-                                  id="delete-image-form"
-                                  action="{{$location->deleteActionFor($category)}}">
-                                {{method_field('DELETE')}}
-                                {{csrf_field()}}
-                                <button type="submit"
-                                        class="btn btn-sm btn-danger"
-                                        id="delete-tag-{{$category->id}}">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+        @include(
+            'catalogue::staff.categories.display',
+            ['allCategories' => $categories]
+        )
     @endif
 @endsection

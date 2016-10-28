@@ -241,6 +241,8 @@ class Product extends Model implements HasPresenter, ImageOwner
             },
             'options.availableStock' => function () {
             },
+            'category'               => function () {
+            },
         ];
     }
 }

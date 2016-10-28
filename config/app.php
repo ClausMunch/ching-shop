@@ -149,6 +149,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Propaganistas\LaravelFakeId\FakeIdServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
 
         /*
          * Module Service Providers

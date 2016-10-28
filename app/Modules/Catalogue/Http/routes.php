@@ -8,6 +8,14 @@ Route::get(
     ]
 )->middleware(['customer', 'suggestions']);
 
+Route::get(
+    'category/{id}/{slug}',
+    [
+        'uses' => 'CategoryController@viewCategory',
+        'as'   => 'category.view',
+    ]
+)->middleware(['customer', 'suggestions']);
+
 Route::group(
     ['prefix' => 'catalogue'],
     function () {
@@ -33,6 +41,13 @@ Route::group(
                     [
                         'uses' => 'Staff\CategoryController@putProductCategory',
                         'as'   => 'catalogue.staff.products.put-category',
+                    ]
+                );
+                Route::put(
+                    'categories/{id}/parent',
+                    [
+                        'uses' => 'Staff\CategoryController@putCategoryParent',
+                        'as'   => 'categories.put-parent',
                     ]
                 );
                 Route::get(

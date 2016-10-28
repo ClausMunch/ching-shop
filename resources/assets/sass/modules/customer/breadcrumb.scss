@@ -1,0 +1,15 @@
+.breadcrumbs {
+  @extend %inline-list;
+
+  font-size: 1.2em;
+  margin-top: .8em;
+}
+
+.breadcrumbs-item {
+  & + &::before {
+    color: $gray-light;
+    content: ' > ';
+    font-weight: lighter;
+    margin: 0 .6em;
+  }
+}

@@ -51,7 +51,9 @@ class CategoryController extends Controller
             'catalogue::staff.categories.index',
             [
                 'categories' => $this->category
-                    ->with('products')
+                    ->roots()
+                    ->with(['products', 'children'])
+                    ->orderBy('depth', 'asc')
                     ->orderBy('created_at', 'desc')
                     ->paginate(),
             ]
@@ -118,5 +120,40 @@ class CategoryController extends Controller
         );
 
         return $this->webUi->redirect('products.show', [$product->sku]);
+    }
+
+    /**
+     * @param int     $id
+     * @param Request $request
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putCategoryParent(int $id, Request $request)
+    {
+        /** @var Category $category */
+        $category = $this->category->findOrFail($id);
+
+        if ((int) $request->get('parent-id') === -1) {
+            $category->makeRoot();
+            $this->webUi->successMessage(
+                "Made `{$category->name}` a root-level category."
+            );
+
+            return $this->webUi->redirect('categories.index');
+        }
+
+        /** @var Category $parent */
+        $parent = $this->category->findOrFail($request->get('parent-id'));
+        $category->makeChildOf(
+            $parent
+        );
+
+        $this->webUi->successMessage(
+            "Made `{$category->name}` a child of `{$parent->name}`."
+        );
+
+        return $this->webUi->redirect('categories.index');
     }
 }

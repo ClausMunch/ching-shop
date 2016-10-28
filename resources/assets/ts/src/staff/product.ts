@@ -33,6 +33,12 @@ window.addEventListener("load", function () {
     $("#use-name").click(function () {
         $("#slug").val($("#name").val()).change();
     });
+
+    $(".form-confirm").on("submit", function () {
+        return confirm(
+            this.getAttribute("data-confirm-message") || "Are you sure?"
+        );
+    });
 });
 
 require("./images.js");

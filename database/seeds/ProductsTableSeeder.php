@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seed
      */
     public function run()
     {
-        for ($i = 0; $i < 8; ++$i) {
+        for ($i = 0; $i < 16; ++$i) {
             $this->seedProduct();
         }
 

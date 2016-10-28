@@ -21,9 +21,12 @@ class CategoriesTableSeeder extends Seed
      */
     public function run()
     {
-        for ($i = 0; $i < 3; $i++) {
-            $this->seedCategory();
-        }
+        $this->repeat(
+            function () {
+                $this->seedCategory();
+            },
+            3
+        );
     }
 
     /**
@@ -33,9 +36,23 @@ class CategoriesTableSeeder extends Seed
      */
     private function seedCategory()
     {
-        /** @var Category $category */
-        $category = factory(Category::class)->make();
-        $category->save();
+        /** @var Category $parentCategory */
+        $parentCategory = factory(Category::class)->create();
+        $this->addProductsToCategory($parentCategory);
+
+        /** @var Category $childCategory */
+        $childCategory = factory(Category::class)->create();
+        $childCategory->makeChildOf($parentCategory);
+        $this->addProductsToCategory($childCategory);
+    }
+
+    /**
+     * @param Category $category
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function addProductsToCategory(Category $category)
+    {
         for ($i = 0, $count = random_int(2, 8); $i < $count; $i++) {
             $product = $this->products()->random();
             if ($category->products->contains('id', $product->id)) {
