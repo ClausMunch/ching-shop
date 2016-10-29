@@ -70,10 +70,10 @@ class SearchTest extends FunctionalTest
                 ['name' => uniqid("{$similarName} ", false)]
             );
         }
+        (new Product())->where('name', 'like', "{$similarName}%")->searchable();
 
         // When we search for that name;
         $this->searchFor($similarName);
-        $this->see($products[0]->name);
 
         // Then we should be able to navigate to the next page of results.
         $this->click('2');

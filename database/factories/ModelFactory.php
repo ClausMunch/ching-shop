@@ -28,7 +28,7 @@ $factory->define(
     \ChingShop\Modules\Catalogue\Domain\Category::class,
     function (\Faker\Generator $faker) {
         return [
-            'name' => ucfirst($faker->unique()->word),
+            'name' => ucwords($faker->unique()->words(random_int(2, 3), true)),
         ];
     }
 );
