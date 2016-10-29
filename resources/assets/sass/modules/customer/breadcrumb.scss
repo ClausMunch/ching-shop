@@ -1,15 +1,24 @@
 .breadcrumbs {
   @extend %inline-list;
 
-  font-size: 1.2em;
-  margin-top: .8em;
+  font-size: .8em;
+
+  @include breakpoint(sm-up) {
+    font-size: 1.2em;
+    margin-top: .6em;
+  }
 }
 
 .breadcrumbs-item {
-  & + &::before {
+  &::after {
     color: $gray-light;
     content: ' > ';
     font-weight: lighter;
-    margin: 0 .6em;
+
+    margin: 0 .3em;
+
+    @include breakpoint(sm-up) {
+      margin: 0 .6em;
+    }
   }
 }
