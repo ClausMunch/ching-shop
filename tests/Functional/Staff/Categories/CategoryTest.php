@@ -94,7 +94,7 @@ class CategoryTest extends FunctionalTest
     public function testCanSetCategoryParent()
     {
         // Given there are two categories;
-        /**
+        /*
          * @var Category
          * @var Category $categoryB
          */

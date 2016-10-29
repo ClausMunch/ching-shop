@@ -62,7 +62,7 @@ class CategoryController extends Controller
             ->load(
                 [
                     'products' => function ($query) {
-                        /** @var Product $query */
+                        /* @var Product $query */
                         $query->with(Product::standardRelations());
                     },
                 ]
