@@ -44,6 +44,9 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property-read Collection|ProductOption[] $options
  *
  * @method Builder inStock()
+ *
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin \Illuminate\Database\Query\Builder
  */
 class Product extends Model implements HasPresenter, ImageOwner
 {
