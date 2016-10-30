@@ -65,7 +65,7 @@ elixir(function (mix) {
         .browserify("staff.js")
         .browserify("staff/product-options.js")
         .browserify("customer.js")
-        .browserify("ga.js")
+        .browserify("analytics.js")
         .version([
             "css/staff.css",
             "css/customer.css",
