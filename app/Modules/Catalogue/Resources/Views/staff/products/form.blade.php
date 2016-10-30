@@ -66,22 +66,45 @@
         </label>
     </div>
     <hr>
-    <div class="form-group {{ $reply->putHasError('sku') }}">
-        <label for="sku">
-            Product SKU
-        </label>
-        <input type="text"
-               class="form-control"
-               id="sku"
-               name="sku"
-               maxlength="255"
-               required
-               value="{{ $reply->oldInputOr('sku', $product->sku()) }}">
-        @foreach($reply->errorsFor('sku') as $error)
-            <label class="help-block" for="name">
-                {{ $error }}
-            </label>
-        @endforeach
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group {{ $reply->putHasError('sku') }}">
+                <label for="sku">
+                    Product SKU
+                </label>
+                <input type="text"
+                       class="form-control"
+                       id="sku"
+                       name="sku"
+                       maxlength="255"
+                       required
+                       value="{{ $reply->oldInputOr('sku', $product->sku()) }}">
+                @foreach($reply->errorsFor('sku') as $error)
+                    <label class="help-block" for="name">
+                        {{ $error }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group {{$reply->putHasError('supplier_number')}}">
+                <label for="supplier_number">
+                    Supplier number
+                </label>
+                <input type="text"
+                       class="form-control supplier_number"
+                       id="supplier_number"
+                       name="supplier_number"
+                       minlength="1"
+                       maxlength="63"
+                       value="{{$reply->oldInputOr('supplier_number', $product->supplier_number)}}">
+                @foreach($reply->errorsFor('supplier_number') as $error)
+                    <label class="help-block" for="name">
+                        {{ $error }}
+                    </label>
+                @endforeach
+            </div>
+        </div>
     </div>
     <div class="form-group {{ $reply->putHasError('slug') }}">
         <label for="slug">

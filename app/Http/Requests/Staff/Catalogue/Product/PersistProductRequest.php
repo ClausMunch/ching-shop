@@ -28,22 +28,27 @@ class PersistProductRequest extends StaffRequest
     public function rules(HttpRequest $request): array
     {
         return [
-            'name' => $this->uniqueFieldRules(
+            'name'            => $this->uniqueFieldRules(
                 'required|min:3|max:255|unique:products',
                 'name',
                 $request
             ),
-            'sku' => $this->uniqueFieldRules(
+            'sku'             => $this->uniqueFieldRules(
                 'required|alpha_dash|min:3|max:255|unique:products',
                 'sku',
                 $request
             ),
-            'slug' => $this->uniqueFieldRules(
+            'slug'            => $this->uniqueFieldRules(
                 'required|alpha_dash|min:5|max:128|unique:products',
                 'slug',
                 $request
             ),
-            'description' => 'required|min:16|max:512',
+            'supplier_number' => $this->uniqueFieldRules(
+                'alpha_dash|min:1|max:63|unique:products',
+                'supplier_number',
+                $request
+            ),
+            'description'     => 'required|min:16|max:512',
         ];
     }
 
