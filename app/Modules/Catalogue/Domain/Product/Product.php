@@ -27,9 +27,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property \Carbon\Carbon                  $deleted_at
  * @property \Carbon\Carbon                  $created_at
  * @property \Carbon\Carbon                  $updated_at
- *
  * @property-read Category|null              $category
- *
  * @property-read Collection|Image[]         $images
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
