@@ -2,6 +2,7 @@
 <meta property="og:type" content="product">
 <meta property="og:image" content="{{$product->mainImage()->sizeUrl('large')}}">
 <meta property="og:url" content="{{$product->url()}}">
+<meta property="og:site_name" content="Ching Shop">
 <meta property="og:description" content="@yield('meta-description')">
 
 <meta property="product:original_price:amount"

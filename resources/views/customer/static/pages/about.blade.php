@@ -40,6 +40,20 @@
         questions asked.
     </p>
 
+    <h2>Follow Ching Shop</h2>
+
+    <p>
+        <a href="/" title="Like Ching Shop on Facebook">
+            <span class="icon icon-facebook-with-circle"></span>
+            <span class="sr-only">Ching Shop Facebook</span>
+        </a>
+        <a href="https://twitter.com/ChingShopCom"
+           title="Follow Ching Shop on Twitter">
+            <span class="icon icon-twitter-with-circle"></span>
+            <span class="sr-only">Ching Shop Twitter</span>
+        </a>
+    </p>
+
     <h2>Questions</h2>
 
     <p>
