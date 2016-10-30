@@ -97,7 +97,7 @@
                        name="supplier_number"
                        minlength="1"
                        maxlength="63"
-                       value="{{$reply->oldInputOr('supplier_number', $product->supplier_number)}}">
+                       value="{{$reply->oldInputOr('supplier_number', $product->supplier_number ?? '')}}">
                 @foreach($reply->errorsFor('supplier_number') as $error)
                     <label class="help-block" for="name">
                         {{ $error }}
@@ -118,7 +118,7 @@
                    minlength="5"
                    maxlength="128"
                    required
-                   value="{{ $reply->oldInputOr('slug', $product->slug()) }}">
+                   value="{{$reply->oldInputOr('slug', $product->slug())}}">
             <span class="input-group-btn">
                         <button class="btn btn-default" id="use-name"
                                 type="button">
