@@ -224,7 +224,7 @@ class ProductPresenter extends BasePresenter implements
      */
     public function pinterestShareUrl(): string
     {
-        return 'https://pinterest.com/pin/create/button'.http_build_query(
+        return 'https://pinterest.com/pin/create/button?'.http_build_query(
             [
                 'url'         => $this->wrappedObject->url(),
                 'description' => $this->wrappedObject->description,
@@ -240,7 +240,7 @@ class ProductPresenter extends BasePresenter implements
      */
     public function facebookShareUrl(): string
     {
-        return 'https://www.facebook.com/sharer/sharer.php'.http_build_query(
+        return 'https://www.facebook.com/sharer/sharer.php?'.http_build_query(
             [
                 'u' => $this->wrappedObject->url(),
             ]
@@ -254,7 +254,7 @@ class ProductPresenter extends BasePresenter implements
      */
     public function twitterShareUrl(): string
     {
-        return 'https://twitter.com/intent/tweet'.http_build_query(
+        return 'https://twitter.com/intent/tweet?'.http_build_query(
             [
                 'url'  => $this->wrappedObject->url(),
                 'text' => $this->name(),
