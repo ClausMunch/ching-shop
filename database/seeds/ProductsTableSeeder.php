@@ -29,14 +29,20 @@ class ProductsTableSeeder extends Seed
     {
         $product = Product::create(
             [
-                'name'        => sprintf(
+                'name'            => sprintf(
                     '%s %s',
                     ucwords($this->faker()->words(3, true)),
                     '3D Pop-Up Greetings Card'
                 ),
-                'sku'         => mb_strtoupper($this->faker()->lexify('?????')),
-                'slug'        => $this->faker()->slug(),
-                'description' => $this->faker()->paragraph,
+                'sku'             => mb_strtoupper(
+                    $this->faker()->lexify('?????')
+                ),
+                'slug'            => $this->faker()->slug(),
+                'description'     => $this->faker()->paragraph,
+                'supplier_number' => $this->faker()->unique()->numberBetween(
+                    1000,
+                    10000
+                ),
             ]
         );
 

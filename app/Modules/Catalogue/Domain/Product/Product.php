@@ -18,26 +18,16 @@ use Laravel\Scout\Searchable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * ChingShop\Modules\Catalogue\Domain\Product\Product.
- *
  * @property int                             $id
  * @property string                          $sku
- * @property \Carbon\Carbon                  $created_at
- * @property \Carbon\Carbon                  $updated_at
- *
- * @method static Builder|Product whereId($value)
- * @method static Builder|Product whereSku($value)
- * @method static Builder|Product whereCreatedAt($value)
- * @method static Builder|Product whereUpdatedAt($value)
- *
  * @property string                          $name
- *
- * @method static Builder|Product whereName($value)
- *
  * @property string                          $slug
  * @property string                          $description
- * @property string                          $deleted_at
- * @property Category                        $category
+ * @property string                          $supplier_number
+ * @property \Carbon\Carbon                  $deleted_at
+ * @property \Carbon\Carbon                  $created_at
+ * @property \Carbon\Carbon                  $updated_at
+ * @property-read Category|null              $category
  * @property-read Collection|Image[]         $images
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
@@ -53,7 +43,13 @@ class Product extends Model implements HasPresenter, ImageOwner
     use SoftDeletes, Searchable;
 
     /** @var array */
-    protected $fillable = ['name', 'sku', 'slug', 'description'];
+    protected $fillable = [
+        'name',
+        'sku',
+        'slug',
+        'description',
+        'supplier_number',
+    ];
 
     /** @var BelongsToMany */
     private $imagesRelationship;
