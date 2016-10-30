@@ -199,4 +199,62 @@ class ProductPresenter extends BasePresenter implements
 
         return $firstPrice ? $firstPrice->subUnitsFormatted() : 0;
     }
+
+    /**
+     * @return string
+     */
+    public function emailShareUrl(): string
+    {
+        return 'mailto:?' . http_build_query(
+            [
+                'subject' => "{$this->name()} on Ching Shop",
+                'body'    => sprintf(
+                    "%s \n\r\n\r%s",
+                    "{$this->name()} on Ching Shop",
+                    $this->wrappedObject->url()
+                ),
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     * @throws \RuntimeException
+     */
+    public function pinterestShareUrl(): string
+    {
+        return 'https://pinterest.com/pin/create/button' . http_build_query(
+            [
+                'url'         => $this->wrappedObject->url(),
+                'description' => $this->wrappedObject->description,
+                'media'       => $this->mainImage()->sizeUrl('large'),
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     * @throws \RuntimeException
+     */
+    public function facebookShareUrl(): string
+    {
+        return 'https://www.facebook.com/sharer/sharer.php' . http_build_query(
+            [
+                'u' => $this->wrappedObject->url(),
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     * @throws \RuntimeException
+     */
+    public function twitterShareUrl(): string
+    {
+        return 'https://twitter.com/intent/tweet' . http_build_query(
+            [
+                'url' => $this->wrappedObject->url(),
+            ]
+        );
+    }
 }

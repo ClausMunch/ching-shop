@@ -1,0 +1,10 @@
+.icon-link {
+  font-size: 3em;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}

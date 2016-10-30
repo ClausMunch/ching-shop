@@ -55,14 +55,45 @@
 
 <hr>
 
-<section class="product-section">
+<section class="row product-section">
 
-    <h2>Product link</h2>
+    <div class="col-md-6">
+        <h2>Share</h2>
 
-    <a href="{{ $location->viewHrefFor($product) }}"
-       title="{{ $product->name() }}">
-        {{ $location->viewHrefFor($product) }}
-    </a>
+        <p>
+            <a href="{{$product->emailShareUrl()}}" class="icon-link"
+               title="Share by Email" target="_blank">
+                <span class="icon icon-mail4"></span>
+                <span class="sr-only">Share by e-mail</span>
+            </a>&nbsp;
+            <a href="{{$product->pinterestShareUrl()}}"
+               target="_blank"
+               class="pin-it-button icon-link"
+               title="Pin on Pinterest">
+                <span class="icon icon-pinterest-with-circle"></span>
+                <span class="sr-only">Pin on Pinterest</span>
+            </a>&nbsp;
+            <a target="_blank" title="Share on Facebook" class="icon-link"
+               href="{{$product->facebookShareUrl()}}">
+                <span class="icon icon-facebook-with-circle"></span>
+                <span class="sr-only">Share on Facebook</span>
+            </a>&nbsp;
+            <a target="_blank" title="Share on Twitter" class="icon-link"
+               href="{{$product->twitterShareUrl()}}">
+                <span class="icon icon-twitter-with-circle"></span>
+                <span class="sr-only">Share on Twitter</span>
+            </a>
+        </p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Product link</h2>
+
+        <a href="{{ $location->viewHrefFor($product) }}"
+           title="{{ $product->name() }}">
+            {{ $location->viewHrefFor($product) }}
+        </a>
+    </div>
 
 </section>
 

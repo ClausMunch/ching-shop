@@ -72,7 +72,7 @@ elixir(function (mix) {
             "js/staff.js",
             "js/product-options.js",
             "js/customer.js",
-            "js/ga.js"
+            "js/analytics.js"
         ])
         .copy("resources/assets/img", "public/img")
         .copy("resources/assets/fonts", "public/fonts")

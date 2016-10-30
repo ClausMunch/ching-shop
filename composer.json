@@ -29,7 +29,7 @@
         "laravel/scout": "^1.1",
         "elasticsearch/elasticsearch": "^2.2",
         "baum/baum": "^1.1",
-        "league/url": "^3.3"
+        "league/uri": "^4.2"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
@@ -43,11 +43,10 @@
         "johnkary/phpunit-speedtrap": "^1.0.1",
         "pda/pheanstalk": "^3.0",
         "squizlabs/php_codesniffer": "^2.5",
-        "phpmd/phpmd" : "@stable",
+        "phpmd/phpmd": "@stable",
         "barryvdh/laravel-ide-helper": "^2.2",
         "barryvdh/laravel-debugbar": "^2.3"
     },
-
     "autoload": {
         "classmap": [
             "database"

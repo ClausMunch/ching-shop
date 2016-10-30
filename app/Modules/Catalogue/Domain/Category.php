@@ -8,7 +8,7 @@ use ChingShop\Http\View\Staff\HttpCrudInterface;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use League\Url\Url;
+use League\Uri\Schemes\Http;
 
 /**
  * @property int                        $id
@@ -53,11 +53,11 @@ class Category extends Node implements HttpCrudInterface
     /**
      * @throws \RuntimeException
      *
-     * @return Url
+     * @return Http
      */
-    public function url(): Url
+    public function url(): Http
     {
-        return Url::createFromUrl(
+        return Http::createFromString(
             route('category.view', [$this->publicId(), $this->slug()])
         );
     }

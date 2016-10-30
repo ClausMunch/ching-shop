@@ -58,7 +58,7 @@
 
 @push('scripts')
 @if (\App::environment('production'))
-    <script async defer src="{{ elixir('js/ga.js') }}"></script>
+    <script async defer src="{{elixir('js/analytics.js')}}"></script>
 @else
     <script src="https://use.fontawesome.com/92925fa22c.js"></script>
 @endif
