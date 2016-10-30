@@ -218,8 +218,9 @@ class ProductPresenter extends BasePresenter implements
     }
 
     /**
-     * @return string
      * @throws \RuntimeException
+     *
+     * @return string
      */
     public function pinterestShareUrl(): string
     {
@@ -233,8 +234,9 @@ class ProductPresenter extends BasePresenter implements
     }
 
     /**
-     * @return string
      * @throws \RuntimeException
+     *
+     * @return string
      */
     public function facebookShareUrl(): string
     {
@@ -246,14 +248,17 @@ class ProductPresenter extends BasePresenter implements
     }
 
     /**
-     * @return string
      * @throws \RuntimeException
+     *
+     * @return string
      */
     public function twitterShareUrl(): string
     {
         return 'https://twitter.com/intent/tweet' . http_build_query(
             [
-                'url' => $this->wrappedObject->url(),
+                'url'  => $this->wrappedObject->url(),
+                'text' => $this->name(),
+                'via'  => 'ChingShopCom',
             ]
         );
     }
