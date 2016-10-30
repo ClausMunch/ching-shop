@@ -83,6 +83,9 @@ elixir(function (mix) {
 });
 
 gulp.task("clean", function () {
+    if (elixir.config.production) {
+        return;
+    }
     return gulp.src(
         [
             "./resources/assets/js/*",
