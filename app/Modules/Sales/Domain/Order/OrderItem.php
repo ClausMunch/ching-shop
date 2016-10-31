@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @mixin \Eloquent
  *
  * @property int             $id
- * @property double          $price
+ * @property float          $price
  * @property \Carbon\Carbon  $created_at
  * @property \Carbon\Carbon  $updated_at
  * @property \Carbon\Carbon  $deleted_at
@@ -62,6 +62,6 @@ class OrderItem extends Model
      */
     public function priceAsFloat(): float
     {
-        return (double) $this->price;
+        return (float) $this->price;
     }
 }
