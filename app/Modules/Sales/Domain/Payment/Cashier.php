@@ -111,6 +111,7 @@ class Cashier
     private function basketItemToOrderItem(BasketItem $basketItem, Order $order)
     {
         $orderItem = new OrderItem();
+        $orderItem->price = $basketItem->priceAsFloat();
         $orderItem->basketItem()->associate($basketItem);
 
         $stockItem = $this->inventory->allocate(

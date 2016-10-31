@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @mixin \Eloquent
  *
  * @property int             $id
+ * @property float          $price
  * @property \Carbon\Carbon  $created_at
  * @property \Carbon\Carbon  $updated_at
  * @property \Carbon\Carbon  $deleted_at
@@ -22,6 +23,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrderItem extends Model
 {
     use SoftDeletes;
+
+    /** @var array */
+    protected $casts = [
+        'price' => 'double',
+    ];
 
     /**
      * An order item is part of an order.
@@ -56,6 +62,6 @@ class OrderItem extends Model
      */
     public function priceAsFloat(): float
     {
-        return $this->basketItem->priceAsFloat();
+        return (float) $this->price;
     }
 }
