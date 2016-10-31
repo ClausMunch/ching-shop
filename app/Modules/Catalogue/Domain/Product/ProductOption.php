@@ -19,6 +19,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 /**
  * @property int                         $id
  * @property string                      $label
+ * @property string                      $supplier_number
  * @property int                         $product_id
  * @property-read Product                $product
  * @property-read Collection|Image[]     $images
@@ -35,7 +36,7 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     use SoftDeletes;
 
     /** @var string[] */
-    protected $fillable = ['label'];
+    protected $fillable = ['label', 'supplier_number'];
 
     /** @var string[] */
     protected $touches = ['product'];

@@ -7,6 +7,7 @@ use ChingShop\Http\Requests\Staff\Catalogue\ImageOrderRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\NewProductOptionRequest;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionColour;
 use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutOptionLabel;
+use ChingShop\Http\Requests\Staff\Catalogue\Product\Option\PutSupplierNumber;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\CatalogueRepository;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
@@ -104,6 +105,30 @@ class ProductOptionController extends Controller
 
         $this->webUi->successMessage(
             "Updated the colour for option `{$option->label}`."
+        );
+
+        return $this->redirectToOptionProduct($option);
+    }
+
+    /**
+     * @param int               $optionId
+     * @param PutSupplierNumber $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putSupplierNumber(int $optionId, PutSupplierNumber $request)
+    {
+        $option = $this->catalogueRepository->loadOptionById($optionId);
+
+        $option->supplier_number = $request->supplierNumber();
+        $option->save();
+
+        $this->webUi->successMessage(
+            sprintf(
+                'Set the supplier number for the `%s` option to `%s`.',
+                $option->label,
+                $option->supplier_number
+            )
         );
 
         return $this->redirectToOptionProduct($option);

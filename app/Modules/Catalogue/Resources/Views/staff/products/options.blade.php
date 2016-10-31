@@ -8,7 +8,7 @@
                 Label
             </th>
             <th>
-                Colour
+                Supplier number
             </th>
             <th>
                 Images
@@ -31,39 +31,50 @@
                 </td>
                 <td>
                     <form method="post"
-                          id="option-{{$option->id}}-colour-form"
+                          id="option-{{$option->id}}-supplier-number-form"
                           class="form-inline"
                           action="{{ route(
-                            'catalogue.staff.products.options.put-colour',
+                            'catalogue.staff.products.options.put-supplier-number',
                             [$option->id]
                           ) }}">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="form-group form-group-sm">
-                            <label for="option-{{$option->id}}-colour"
+                            <input type="hidden" name="id"
+                                   value="{{$option->id}}">
+                            <label for="option-{{$option->id}}-supplier-number"
                                    class="sr-only">
-                                Select colour
+                                Supplier number
                             </label>
-                            <select class="form-control"
-                                    name="colour"
-                                    id="option-{{$option->id}}-colour">
-                                @foreach ($colours as $colour)
-                                    <option id="colour-option-{{ $colour->id }}"
-                                            @if ($option->hasColour($colour->id))
-                                            selected
-                                            @endif
-                                            value="{{ $colour->id }}">
-                                        {{ $colour->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="input-group input-group-sm">
+                                <input type="text"
+                                       name="supplier-number"
+                                       id="option-{{$option->id}}-supplier-number"
+                                       class="form-control"
+                                       value="{{$reply->oldInputOr(
+                                           'supplier-number',
+                                           $option->supplier_number ?? ''
+                                       )}}"
+                                       minlength="2"
+                                       maxlength="63"/>
+                                <span class="input-group-btn">
+                                    <button type="submit"
+                                            class="btn btn-success">
+                                        <span class="glyphicon glyphicon-check">
+                                        </span>
+                                        <span class="sr-only">
+                                            Set {{$option->label}} supplier number
+                                        </span>
+                                    </button>
+                                </span>
+                            </div>
+                            @foreach($reply->errorsFor('supplier-number') as $error)
+                                <label class="help-block"
+                                       for="option-{{$option->id}}-supplier-number">
+                                    {{$error}}
+                                </label>
+                            @endforeach
                         </div>
-                        <button class="btn btn-sm btn-default"
-                                type="submit"
-                                id="set-option-{{ $option->id }}-colour"
-                                form="option-{{ $option->id }}-colour-form">
-                            Set colour
-                        </button>
                     </form>
                 </td>
                 <td>

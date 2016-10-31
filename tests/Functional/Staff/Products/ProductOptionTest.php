@@ -31,31 +31,6 @@ class ProductOptionTest extends ProductTest
     }
 
     /**
-     * Should be able to set the colour for a product option.
-     *
-     * @slowThreshold 800
-     */
-    public function testCanSetColourForOption()
-    {
-        $product = $this->createProduct();
-        $option = $this->createProductOptionFor($product);
-        $colour = $this->createColour();
-
-        $this->actingAs($this->staffUser())
-            ->visit(route('products.show', [$product->sku]))
-            ->see($option->label)
-            ->select($colour->id, 'colour')
-            ->press('Set colour')
-            ->seePageIs(route('products.show', [$product->sku]))
-            ->see('Updated the colour for option');
-
-        $colourOption = $this->crawler()
-            ->filter("#colour-option-{$colour->id}")
-            ->first();
-        $this->assertTrue((bool) $colourOption->attr('selected'));
-    }
-
-    /**
      * Should be able to set the label for a product option.
      */
     public function testCanSetOptionLabel()
@@ -186,5 +161,30 @@ class ProductOptionTest extends ProductTest
             ->first()
             ->children();
         $this->assertEmpty($productImages->getNode(0));
+    }
+
+    /**
+     * Should be able to set the supplier number for a product option.
+     */
+    public function testCanSetSupplierNumber()
+    {
+        // Given there is a product option;
+        $product = $this->createProduct();
+        $option = $this->createProductOptionFor($product);
+
+        // When we visit the product staff view for that option;
+        $this->actingAs($this->staffUser())
+            ->visit(route('products.show', [$product->sku]))
+            ->see($option->label);
+
+        // And we set the supplier number;
+        $supplierNumber = str_random();
+        $this->type($supplierNumber, 'supplier-number')
+            ->press("Set {$option->label} supplier number");
+
+        // Then the supplier number should be set.
+        $this->see('Set the supplier number')
+            ->see($supplierNumber);
+        $this->assertEquals($supplierNumber, $option->fresh()->supplier_number);
     }
 }

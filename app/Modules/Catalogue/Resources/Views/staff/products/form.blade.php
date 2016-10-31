@@ -99,7 +99,7 @@
                        maxlength="63"
                        value="{{$reply->oldInputOr('supplier_number', $product->supplier_number ?? '')}}">
                 @foreach($reply->errorsFor('supplier_number') as $error)
-                    <label class="help-block" for="name">
+                    <label class="help-block" for="supplier_number">
                         {{ $error }}
                     </label>
                 @endforeach
