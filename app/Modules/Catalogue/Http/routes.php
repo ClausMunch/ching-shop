@@ -114,6 +114,13 @@ Route::group(
                         'as'   => 'catalogue.staff.products.options.put-colour',
                     ]
                 );
+                Route::put(
+                    'products/options/{optionId}/supplier-number',
+                    [
+                        'uses' => 'Staff\ProductOptionController@putSupplierNumber',
+                        'as'   => 'catalogue.staff.products.options.put-supplier-number',
+                    ]
+                );
                 Route::post(
                     'products/{sku}/images',
                     [
