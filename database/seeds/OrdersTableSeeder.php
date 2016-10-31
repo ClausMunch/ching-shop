@@ -77,6 +77,7 @@ class OrdersTableSeeder extends Seed
                 [
                     'basket_item_id' => $basketItem->id,
                     'order_id'       => $order->id,
+                    'price'          => $basketItem->priceAsFloat(),
                 ]
             );
             $orderItem->stockItem()->save($stockItem);
@@ -84,8 +85,8 @@ class OrdersTableSeeder extends Seed
 
         Payment::create(
             [
-                'order_id'      => $order->id,
-                'settlement_id' => PayPalSettlement::create(
+                'order_id'        => $order->id,
+                'settlement_id'   => PayPalSettlement::create(
                     [
                         'payment_id' => $this->faker()->uuid,
                         'payer_id'   => $this->faker()->uuid,

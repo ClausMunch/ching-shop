@@ -11,7 +11,7 @@
     <div class="alert alert-info" role="alert">
         <span class="icon icon-truck"></span>&nbsp;
         Delivery is <strong>free</strong> for all UK orders. The usual
-        delivery time is <strong>2-3 days</strong>.
+        delivery time is <strong>2-3 working days</strong>.
     </div>
 
     <form method="post"
