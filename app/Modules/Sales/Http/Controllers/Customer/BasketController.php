@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
+use Analytics;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
@@ -61,6 +62,13 @@ class BasketController extends Controller
             )
         );
 
+        Analytics::trackEvent(
+            'basket',
+            'add',
+            $productOption->product->sku,
+            $productOption->label
+        );
+
         return $this->webUi->redirect('sales.customer.basket');
     }
 
@@ -103,6 +111,12 @@ class BasketController extends Controller
                 $item->productOption->label,
                 ' was removed from your basket.'
             )
+        );
+
+        Analytics::trackEvent(
+            'basket',
+            'remove',
+            $request->basketItemId()
         );
 
         return $this->webUi->redirect('sales.customer.basket');

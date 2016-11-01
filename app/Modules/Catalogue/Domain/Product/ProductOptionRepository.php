@@ -29,7 +29,10 @@ class ProductOptionRepository
      */
     public function loadById(int $optionId)
     {
-        return $this->optionResource->where('id', '=', $optionId)->first();
+        return $this->optionResource
+            ->with('product')
+            ->where('id', '=', $optionId)
+            ->first();
     }
 
     /**
