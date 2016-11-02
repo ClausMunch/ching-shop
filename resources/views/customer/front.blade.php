@@ -27,6 +27,36 @@
                 Great Customer Service
             </div>
         </div>
+        <div class="row top-cats">
+            <div class="col-xs-6 col-sm-3">
+                <a href="/category/2095146762/christmas-cards"
+                   class="top-cats-link">
+                    <span class="icon icon-snowflake"></span>&nbsp;
+                    Christmas <span class="hidden-xs">Cards</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="/category/1392771656/birthday-cards"
+                   class="top-cats-link">
+                    <span class="icon icon-cake"></span>&nbsp;
+                    Birthday <span class="hidden-xs">Cards</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="/category/617978927/romantic-cards"
+                   class="top-cats-link">
+                    <span class="glyphicon glyphicon-heart"></span>&nbsp;
+                    Romantic <span class="hidden-xs">Cards</span>
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <a href="/category/617978927/romantic-cards"
+                   class="top-cats-link">
+                    <span class="icon icon-wedding-rings"></span>&nbsp;
+                    Wedding <span class="hidden-xs">Cards</span>
+                </a>
+            </div>
+        </div>
     </div>
 
 @endsection
