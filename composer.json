@@ -29,7 +29,8 @@
         "laravel/scout": "^1.1",
         "elasticsearch/elasticsearch": "^2.2",
         "baum/baum": "^1.1",
-        "league/uri": "^4.2"
+        "league/uri": "^4.2",
+        "ipunkt/laravel-analytics": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

@@ -2,11 +2,11 @@
 
 namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
+use Analytics;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Data\Model\Country;
 use ChingShop\Modules\Sales\Domain\CheckoutAssistant;
-use ChingShop\Modules\Sales\Domain\Clerk;
 use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
 
 /**
@@ -14,9 +14,6 @@ use ChingShop\Modules\Sales\Http\Requests\Customer\SaveAddressRequest;
  */
 class CheckoutController extends Controller
 {
-    /** @var Clerk */
-    private $clerk;
-
     /** @var CheckoutAssistant */
     private $checkoutAssistant;
 
@@ -24,16 +21,13 @@ class CheckoutController extends Controller
     private $webUi;
 
     /**
-     * @param Clerk             $clerk
      * @param CheckoutAssistant $checkoutAssistant
      * @param WebUi             $webUi
      */
     public function __construct(
-        Clerk $clerk,
         CheckoutAssistant $checkoutAssistant,
         WebUi $webUi
     ) {
-        $this->clerk = $clerk;
         $this->checkoutAssistant = $checkoutAssistant;
         $this->webUi = $webUi;
     }
@@ -66,6 +60,8 @@ class CheckoutController extends Controller
         $this->webUi->successMessage(
             '&#10004; The delivery address for your order has been saved.'
         );
+
+        Analytics::trackEvent('address', 'add');
 
         return $this->webUi->redirect('sales.customer.checkout.choose-payment');
     }

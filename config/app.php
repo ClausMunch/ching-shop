@@ -150,6 +150,7 @@ return [
         Propaganistas\LaravelFakeId\FakeIdServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -220,7 +221,8 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
 
-        'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
+        'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
+        'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
 
     ],
 
