@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Security-Policy"
               content="default-src 'self'
                   https://static.ching-shop.com;
-                  script-src 'self' https://static.ching-shop.com
+                  script-src 'self' unsafe-inline https://static.ching-shop.com
                   https://code.jquery.com/
                   https://*.cloudflare.com
                   https://*.google-analytics.com;
