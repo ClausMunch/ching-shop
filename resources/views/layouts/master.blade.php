@@ -7,21 +7,25 @@
     <meta name="theme-color" content="#ef4560"/>
     <meta name="google-site-verification"
           content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests">
     @unless(env('APP_DEBUG'))
         <meta http-equiv="Content-Security-Policy"
               content="default-src 'self'
-                  https://static.ching-shop.com;
-                  script-src 'self' unsafe-inline https://static.ching-shop.com
-                  https://code.jquery.com/
-                  https://*.cloudflare.com
-                  https://*.google-analytics.com;
-                  img-src 'self' https://static.ching-shop.com
-                  https://*.google-analytics.com;
-                  child-src 'self';
-                  object-src 'self';
-                  form-action 'self' {{ config('payment.paypal.base-url') }};
-                  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                  font-src 'self' https://fonts.gstatic.com data:;">
+              https://static.ching-shop.com;
+              script-src 'self' https://static.ching-shop.com
+              'nonce-{{Analytics::cspNonce()}}'
+              {{Analytics::cspHash()}}
+                      https://code.jquery.com/
+                      https://*.cloudflare.com
+                      https://*.google-analytics.com;
+                      img-src 'self' https://static.ching-shop.com
+                      https://*.google-analytics.com;
+                      child-src 'self';
+                      object-src 'self';
+                      form-action 'self' {{ config('payment.paypal.base-url') }};
+              style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+              font-src 'self' https://fonts.gstatic.com data:;">
     @endunless
     <link rel="icon"
           type="image/png"
