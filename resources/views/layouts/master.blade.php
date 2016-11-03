@@ -61,8 +61,8 @@
       type='text/css'>
 
 @push('scripts')
+{!! Analytics::render() !!}
 @if (\App::environment('production'))
-    {!! Analytics::render() !!}
 @else
     <script src="https://use.fontawesome.com/92925fa22c.js"></script>
 @endif

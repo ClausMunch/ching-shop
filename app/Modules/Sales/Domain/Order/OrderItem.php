@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Domain\Order;
 
+use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @mixin \Eloquent
  *
  * @property int             $id
- * @property float          $price
+ * @property float           $price
  * @property \Carbon\Carbon  $created_at
  * @property \Carbon\Carbon  $updated_at
  * @property \Carbon\Carbon  $deleted_at
@@ -63,5 +64,32 @@ class OrderItem extends Model
     public function priceAsFloat(): float
     {
         return (float) $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function name()
+    {
+        return $this->basketItem->productOption->name();
+    }
+
+    /**
+     * @return string
+     */
+    public function sku()
+    {
+        return $this->basketItem->productOption->supplier_number;
+    }
+
+    /**
+     * @return \ChingShop\Modules\Catalogue\Domain\Category
+     */
+    public function category()
+    {
+        return $this->basketItem
+            ->productOption
+            ->product
+            ->category ?? new Category();
     }
 }

@@ -42,6 +42,14 @@ class ProductOption extends Model implements HasPresenter, ImageOwner
     protected $touches = ['product'];
 
     /**
+     * @return string
+     */
+    public function name(): string
+    {
+        return "{$this->product->name} ({$this->label})";
+    }
+
+    /**
      * @return BelongsTo
      */
     public function product(): BelongsTo
