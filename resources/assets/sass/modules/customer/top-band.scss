@@ -3,6 +3,7 @@
 
   min-height: 2em;
   overflow: auto;
+  position: relative;
 
   @include breakpoint(sm-up) {
     padding: 0;
