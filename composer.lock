@@ -1239,7 +1239,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hughgrigg/laravel-analytics",
-                "reference": "bf2c045e43a0d5e4e0719538bb1536d78776732e"
+                "reference": "c3321cf52669d30b925a8c8f631af4b937d0814e"
             },
             "require": {
                 "illuminate/config": "~5.0",
@@ -1274,7 +1274,7 @@
                 "php",
                 "statistics"
             ],
-            "time": "2016-11-02 22:28:12"
+            "time": "2016-11-02 23:41:26"
         },
         {
             "name": "jakub-onderka/php-console-color",

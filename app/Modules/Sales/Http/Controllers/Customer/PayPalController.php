@@ -2,9 +2,12 @@
 
 namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
+use Analytics;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Clerk;
+use ChingShop\Modules\Sales\Domain\Order\Order;
+use ChingShop\Modules\Sales\Domain\Order\OrderItem;
 use ChingShop\Modules\Sales\Domain\PayPal\PayPalRepository;
 use ChingShop\Modules\Sales\Http\Requests\Customer\PayPalReturnRequest;
 use Illuminate\Http\RedirectResponse;
@@ -76,6 +79,8 @@ class PayPalController extends Controller
         if ($order && $order->id) {
             $this->webUi->successMessage('Thank you; your order is confirmed.');
 
+            $this->trackOrder($order);
+
             return $this->webUi->redirect(
                 'sales.customer.order.view',
                 [$order->publicId()]
@@ -109,5 +114,32 @@ class PayPalController extends Controller
         );
 
         return $this->webUi->redirect('sales.customer.checkout.choose-payment');
+    }
+
+    /**
+     * @param Order $order
+     */
+    private function trackOrder(Order $order)
+    {
+        Analytics::enableEcommerceTracking();
+        Analytics::ecommerceAddTransaction(
+            $order->publicId(),
+            config('app.name'),
+            $order->totalPrice(),
+            0.00,
+            0.00
+        );
+        $order->orderItems->each(
+            function (OrderItem $item) {
+                Analytics::ecommerceAddItem(
+                    $item->id,
+                    $item->name(),
+                    $item->sku(),
+                    $item->category()->name,
+                    $item->priceAsFloat(),
+                    1
+                );
+            }
+        );
     }
 }
