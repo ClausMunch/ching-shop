@@ -2,16 +2,6 @@
 
 @section('top')
 
-    <div class="top-band">
-
-        @include('customer.partials.top-band-logo')
-
-        @include('customer.partials.search')
-
-        @include('customer.partials.mini-basket')
-
-    </div>
-
     <div class="container-fluid">
         <div class="row top-points">
             <div class="col-sm-6 col-md-4 top-points-item">
@@ -27,6 +17,19 @@
                 Great Customer Service
             </div>
         </div>
+    </div>
+
+    <div class="top-band">
+
+        @include('customer.partials.top-band-logo')
+
+        @include('customer.partials.search')
+
+        @include('customer.partials.mini-basket')
+
+    </div>
+
+    <div class="container-fluid">
         <div class="row top-cats">
             <div class="col-xs-6 col-sm-3">
                 <a href="/category/2095146762/christmas-cards"
