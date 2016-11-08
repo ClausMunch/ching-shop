@@ -52,7 +52,7 @@ class PayPalExecution
      *
      * @return bool
      */
-    public function isApproved(): bool
+    public function approve(): bool
     {
         return strtolower($this->payment()->getState()) === 'approved';
     }

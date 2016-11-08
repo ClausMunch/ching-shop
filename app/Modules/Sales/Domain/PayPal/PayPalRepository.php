@@ -110,23 +110,22 @@ class PayPalRepository
      */
     public function executePayment(string $paymentId, string $payerId)
     {
+        $settlement = PayPalSettlement::create(
+            [
+                'payment_id' => $paymentId,
+                'payer_id'   => $payerId,
+            ]
+        );
         $this->log->info("Executing PayPal payment {$paymentId} / {$payerId}");
         $execution = $this->createExecution($paymentId, $payerId);
+        $order = $this->cashier->settle($execution->basket(), $settlement);
 
         try {
-            if ($execution->isApproved()) {
-                $settlement = PayPalSettlement::create(
-                    [
-                        'payment_id' => $paymentId,
-                        'payer_id'   => $payerId,
-                    ]
-                );
-
-                return $this->cashier->settle(
-                    $execution->basket(),
-                    $settlement
-                );
+            if ($execution->approve()) {
+                return $order;
             }
+
+            return new Order();
         } catch (\Throwable $e) {
             $this->log->error(
                 sprintf(

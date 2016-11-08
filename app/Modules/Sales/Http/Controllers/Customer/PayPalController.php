@@ -71,6 +71,8 @@ class PayPalController extends Controller
             return $this->failure();
         }
 
+        // check stock here
+
         $order = $this->payPalRepository->executePayment(
             $request->paymentId(),
             $request->payerId()
