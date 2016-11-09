@@ -69,8 +69,7 @@ class PayPalRepository
      */
     public function createInitiation(
         PayPalCheckout $payPalCheckout
-    ): PayPalInitiation
-    {
+    ): PayPalInitiation {
         /** @var PayPalInitiation $payPalInitiation */
         $payPalInitiation = PayPalInitiation::firstOrNew(
             [
