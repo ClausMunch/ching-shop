@@ -22,19 +22,7 @@ trait MockPayPal
      */
     private function customerWillReturnFromPayPal(string $status = 'approved')
     {
-        $this->mockPayPalPayment()
-            ->shouldReceive('getApprovalLink')
-            ->zeroOrMoreTimes()
-            ->andReturn(
-                route(
-                    PayPalCheckout::RETURN_ROUTE,
-                    [
-                        'token'     => uniqid('paypal-token', false),
-                        'paymentId' => $this->mockPayPalPaymentId(),
-                        'payerID'   => uniqid('paypal-payer', false),
-                    ]
-                )
-            );
+        $this->customerWillGoToPayPal();
 
         $this->mockPayPalPayment()
             ->shouldReceive('get')
@@ -95,5 +83,27 @@ trait MockPayPal
         }
 
         return $this->mockPayPalPayment()->id;
+    }
+
+    /**
+     * Mock the customer going to PayPal checkout.
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function customerWillGoToPayPal()
+    {
+        $this->mockPayPalPayment()
+            ->shouldReceive('getApprovalLink')
+            ->zeroOrMoreTimes()
+            ->andReturn(
+                route(
+                    PayPalCheckout::RETURN_ROUTE,
+                    [
+                        'token'     => uniqid('paypal-token', false),
+                        'paymentId' => $this->mockPayPalPaymentId(),
+                        'payerID'   => uniqid('paypal-payer', false),
+                    ]
+                )
+            );
     }
 }
