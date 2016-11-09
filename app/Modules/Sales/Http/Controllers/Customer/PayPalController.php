@@ -8,9 +8,12 @@ use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Clerk;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Order\OrderItem;
+use ChingShop\Modules\Sales\Domain\Payment\StockAllocationException;
 use ChingShop\Modules\Sales\Domain\PayPal\PayPalRepository;
 use ChingShop\Modules\Sales\Http\Requests\Customer\PayPalReturnRequest;
 use Illuminate\Http\RedirectResponse;
+use Log;
+use Throwable;
 
 /**
  * Class PayPalController.
@@ -71,25 +74,38 @@ class PayPalController extends Controller
             return $this->failure();
         }
 
-        // check stock here
+        try {
+            $order = $this->payPalRepository->executePayment(
+                $request->paymentId(),
+                $request->payerId()
+            );
+        } catch (StockAllocationException $e) {
+            Log::error(
+                "Error executing PayPal payment: {$e->getMessage()}."
+            );
 
-        $order = $this->payPalRepository->executePayment(
-            $request->paymentId(),
-            $request->payerId()
-        );
-
-        if ($order && $order->id) {
-            $this->webUi->successMessage('Thank you; your order is confirmed.');
-
-            $this->trackOrder($order);
+            $this->webUi->warningMessage(
+                'Sorry, we were not able to allocate stock for your order.'
+            );
 
             return $this->webUi->redirect(
-                'sales.customer.order.view',
-                [$order->publicId()]
+                'sales.customer.checkout.choose-payment'
             );
+        } catch (Throwable $e) {
+            Log::error(
+                "Error executing PayPal payment: {$e->getMessage()}."
+            );
+
+            return $this->failure();
         }
 
-        return $this->failure();
+        $this->webUi->successMessage('Thank you; your order is confirmed.');
+        $this->trackOrder($order);
+
+        return $this->webUi->redirect(
+            'sales.customer.order.view',
+            [$order->publicId()]
+        );
     }
 
     /**

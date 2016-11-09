@@ -119,7 +119,7 @@ class Cashier
         );
 
         if (!$stockItem->isAvailable()) {
-            throw new \RuntimeException(
+            throw new StockAllocationException(
                 sprintf(
                     'Failed to allocate stock for product option `%s`.',
                     $basketItem->productOption->id

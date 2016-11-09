@@ -3,11 +3,11 @@
 namespace ChingShop\Modules\Sales\Domain\PayPal;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
-use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Payment\Cashier;
 use PayPal\Api\Payment;
 use PayPal\Rest\ApiContext;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 /**
  * Manages persistence of PayPal-related models.
@@ -104,7 +104,7 @@ class PayPalRepository
      *
      * @throws \Exception
      * @throws \InvalidArgumentException
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return \ChingShop\Modules\Sales\Domain\Order\Order
      */
@@ -120,31 +120,18 @@ class PayPalRepository
         $execution = $this->createExecution($paymentId, $payerId);
         $order = $this->cashier->settle($execution->basket(), $settlement);
 
-        try {
-            if ($execution->approve()) {
-                return $order;
-            }
-
-            return new Order();
-        } catch (\Throwable $e) {
-            $this->log->error(
-                sprintf(
-                    'Error executing PayPal payment %s / %s: %s',
-                    $paymentId,
-                    $payerId,
-                    $e->getMessage()
-                )
-            );
+        if ($execution->approve()) {
+            return $order;
         }
 
-        return new Order();
+        throw new RuntimeException('PayPal payment was not approved.');
     }
 
     /**
      * @param string $paymentId
      * @param string $payerId
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      *
      * @return PayPalExecution
      */
@@ -155,7 +142,7 @@ class PayPalRepository
 
         $initiation = $this->loadInitiation($paymentId);
         if (!$initiation instanceof PayPalInitiation || !$initiation->id) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 "Failed to load PayPal initiation for payment `{$paymentId}`."
             );
         }

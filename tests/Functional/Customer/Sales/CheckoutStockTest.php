@@ -21,7 +21,7 @@ class CheckoutStockTest extends FunctionalTest
     {
         // Given there is a product option with 6 stock items;
         $product = $this->createProductAndAddToBasket($this);
-        $option = $product->options[0];
+        $option = $product->options->first();
         for ($i = 0; $i < 5; $i++) {
             $option->stockItems()->save(new StockItem());
         }
@@ -38,5 +38,36 @@ class CheckoutStockTest extends FunctionalTest
             5,
             $this->getElementAttribute("#option-{$option->id}-stock", 'value')
         );
+    }
+
+    /**
+     * It should not be possible to buy more stock than is available.
+     *
+     * @slowThreshold 2000
+     */
+    public function testCantBuyMoreStockThanAvailable()
+    {
+        // Given there is a product option with 2 stock items;
+        $product = $this->createProductAndAddToBasket($this);
+        $option = $product->options->first();
+        $option->stockItems()->save(new StockItem());
+
+        // And we add it to the basket 3 times;
+        for ($i = 0; $i < 3; $i++) {
+            $this->addProductToBasket($product, $this);
+        }
+
+        // Then we should not be able to make payment;
+        $this->customerWillGoToPayPal();
+        $this->mockPayPalPayment()
+            ->shouldReceive('get')
+            ->zeroOrMoreTimes()
+            ->andReturnSelf();
+        $this->mockPayPalPayment()->shouldReceive('getState')->never();
+
+        // When we try to complete checkout.
+        $this->completeCheckoutToAddress($this);
+        $this->press('Pay with PayPal');
+        $this->see('not able to allocate stock');
     }
 }
