@@ -46,8 +46,9 @@ class BasketController extends Controller
     /**
      * @param AddToBasketRequest $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \ChingShop\Modules\Sales\Domain\Payment\StockAllocationException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function addProductOptionAction(AddToBasketRequest $request)
     {

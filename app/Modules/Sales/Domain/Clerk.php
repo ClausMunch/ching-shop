@@ -64,8 +64,9 @@ class Clerk
     /**
      * @param ProductOption $productOption
      *
-     * @return bool
      * @throws \ChingShop\Modules\Sales\Domain\Payment\StockAllocationException
+     *
+     * @return bool
      */
     public function addProductOptionToBasket(ProductOption $productOption)
     {
