@@ -50,7 +50,7 @@ class Basket extends Model implements HasPresenter
     {
         return $this->basketItems->filter(
             function ($item) use ($option) {
-                /** @var BasketItem $item */
+                /* @var BasketItem $item */
                 return $item->productOption->id === $option->id;
             }
         );
