@@ -17,7 +17,7 @@ $factory->define(
     function (Faker\Generator $faker) {
         return [
             'name'           => $faker->name,
-            'email'          => $faker->email,
+            'email'          => str_random().'@test.ching-shop.dev',
             'password'       => bcrypt(str_random(10)),
             'remember_token' => str_random(10),
         ];
@@ -30,5 +30,19 @@ $factory->define(
         return [
             'name' => ucwords($faker->unique()->words(random_int(2, 3), true)),
         ];
+    }
+);
+
+$factory->define(
+    \ChingShop\Modules\Catalogue\Domain\Inventory\StockItem::class,
+    function () {
+        return [];
+    }
+);
+
+$factory->define(
+    \ChingShop\Modules\Sales\Domain\Basket\BasketItem::class,
+    function () {
+        return [];
     }
 );

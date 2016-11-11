@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
+use ChingShop\Modules\Sales\Domain\Payment\StockAllocationException;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Session\Store;
@@ -63,16 +64,22 @@ class Clerk
     /**
      * @param ProductOption $productOption
      *
+     * @throws \ChingShop\Modules\Sales\Domain\Payment\StockAllocationException
+     *
      * @return bool
      */
     public function addProductOptionToBasket(ProductOption $productOption)
     {
-        $basketItem = new BasketItem();
-        $basketItem->productOption()->associate($productOption);
-
         // Ensure basket saved before associating.
         $this->basket = $this->getBasket();
         $this->saveBasket();
+
+        // Check stock.
+        $this->checkStock($productOption);
+
+        // Add to basket.
+        $basketItem = new BasketItem();
+        $basketItem->productOption()->associate($productOption);
 
         $saved = (bool) $this->basket->basketItems()->save($basketItem);
 
@@ -156,5 +163,26 @@ class Clerk
         }
 
         return new Basket();
+    }
+
+    /**
+     * @param ProductOption $productOption
+     *
+     * @throws \ChingShop\Modules\Sales\Domain\Payment\StockAllocationException
+     */
+    private function checkStock(ProductOption $productOption)
+    {
+        $inBasketCount = $this->basket->itemsForOption($productOption)->count();
+        $availableCount = $productOption->availableStock()->count();
+        if ($inBasketCount + 1 > $availableCount) {
+            throw new StockAllocationException(
+                sprintf(
+                    'Only %d %s are available, and there %s.',
+                    $availableCount,
+                    $productOption->name(),
+                    "are already {$inBasketCount} in the basket"
+                )
+            );
+        }
     }
 }

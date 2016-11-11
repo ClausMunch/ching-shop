@@ -2,7 +2,6 @@
 
 namespace Testing\Functional\Customer;
 
-use ChingShop\Actions\MakeUser;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Support\Collection;
 
@@ -29,11 +28,7 @@ trait CustomerUsers
     public function newCustomerUser(): User
     {
         $this->customerUsers()->prepend(
-            app(MakeUser::class)->make(
-                uniqid('customer', false).'@ching-shop.dev', // email
-                'customer', // password
-                false // is staff?
-            )
+            factory(User::class)->create()
         );
 
         return $this->customerUsers()->first();

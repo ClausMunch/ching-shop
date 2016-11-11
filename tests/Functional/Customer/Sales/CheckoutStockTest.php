@@ -3,6 +3,8 @@
 namespace Testing\Functional\Customer\Sales;
 
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
+use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
 use Testing\Functional\Util\SalesInteractions;
@@ -41,6 +43,31 @@ class CheckoutStockTest extends FunctionalTest
     }
 
     /**
+     * It should not be possible to add more stock than is available to the
+     * basket.
+     */
+    public function testCantAddMoreStockToBasketThanIsAvailable()
+    {
+        // Given there is a product option with 2 stock items;
+        $product = $this->createProductAndAddToBasket($this);
+        /** @var ProductOption $option */
+        $option = $product->options->first();
+        $option->stockItems()->save(new StockItem());
+
+        // When we try to add it to the basket 2 more times;
+        $this->addProductToBasket($product, $this);
+        $this->see($option->label);
+        $this->see('added to your basket');
+        $this->addProductToBasket($product, $this);
+
+        // Then we should get a message explaining why we can't add more;
+        $this->see('are available');
+
+        // And there should be 2 in the basket.
+        $this->assertCount(2, $this->basket()->itemsForOption($option));
+    }
+
+    /**
      * It should not be possible to buy more stock than is available.
      *
      * @slowThreshold 2000
@@ -49,12 +76,18 @@ class CheckoutStockTest extends FunctionalTest
     {
         // Given there is a product option with 2 stock items;
         $product = $this->createProductAndAddToBasket($this);
+        /** @var ProductOption $option */
         $option = $product->options->first();
         $option->stockItems()->save(new StockItem());
 
-        // And we add it to the basket 3 times;
+        // And somehow we have it in the basket three times;
         for ($i = 0; $i < 3; $i++) {
-            $this->addProductToBasket($product, $this);
+            factory(BasketItem::class)->times(3)->create(
+                [
+                    'product_option_id' => $option->id,
+                    'basket_id'         => $this->basket()->id,
+                ]
+            );
         }
 
         // Then we should not be able to make payment;

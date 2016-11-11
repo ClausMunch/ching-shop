@@ -79,4 +79,14 @@ abstract class FunctionalTest extends TestCase
     {
         return trim($this->getElement($selector)->attr($attribute));
     }
+
+    /**
+     * @param string $search
+     *
+     * @return int
+     */
+    public function countOnPage(string $search): int
+    {
+        return mb_substr_count($this->crawler()->html(), $search);
+    }
 }
