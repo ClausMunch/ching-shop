@@ -7,6 +7,7 @@ use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionRepository;
 use ChingShop\Modules\Sales\Domain\Clerk;
+use ChingShop\Modules\Sales\Domain\Payment\StockAllocationException;
 use ChingShop\Modules\Sales\Http\Requests\Customer\AddToBasketRequest;
 use ChingShop\Modules\Sales\Http\Requests\Customer\RemoveFromBasketRequest;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -46,13 +47,21 @@ class BasketController extends Controller
      * @param AddToBasketRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \ChingShop\Modules\Sales\Domain\Payment\StockAllocationException
      */
     public function addProductOptionAction(AddToBasketRequest $request)
     {
         $productOption = $this->optionRepository->loadById(
             $request->optionId()
         );
-        $this->clerk->addProductOptionToBasket($productOption);
+
+        try {
+            $this->clerk->addProductOptionToBasket($productOption);
+        } catch (StockAllocationException $e) {
+            $this->webUi->warningMessage($e->getMessage());
+
+            return $this->webUi->redirectAway($productOption->product->url());
+        }
 
         $this->webUi->successMessage(
             sprintf(

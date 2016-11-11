@@ -2,13 +2,16 @@
 
 namespace ChingShop\Modules\User\Model;
 
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
@@ -16,14 +19,16 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class UserResource.
  *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Role[] $roles
+ * @property int                    $id
+ * @property string                 $name
+ * @property string                 $email
+ * @property string                 $password
+ * @property string
+ *           $remember_token
+ * @property \Carbon\Carbon         $created_at
+ * @property \Carbon\Carbon         $updated_at
+ * @property Basket|null            $basket
+ * @property-read Collection|Role[] $roles
  *
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereName($value)
@@ -33,7 +38,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static Builder|User whereCreatedAt($value)
  * @method static Builder|User whereUpdatedAt($value)
  *
- * @property string $deleted_at
+ * @property string                 $deleted_at
  *
  * @method static Builder|User whereDeletedAt($value)
  * @mixin \Eloquent
@@ -103,5 +108,13 @@ class User extends Model implements
             self::FOREIGN_KEY,
             Role::FOREIGN_KEY
         );
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function basket(): HasOne
+    {
+        return $this->hasOne(Basket::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Domain\Basket;
 
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
@@ -38,6 +39,21 @@ class Basket extends Model implements HasPresenter
     public function basketItems(): HasMany
     {
         return $this->hasMany(BasketItem::class);
+    }
+
+    /**
+     * @param ProductOption $option
+     *
+     * @return Collection|BasketItem[]
+     */
+    public function itemsForOption(ProductOption $option): Collection
+    {
+        return $this->basketItems->filter(
+            function ($item) use ($option) {
+                /** @var BasketItem $item */
+                return $item->productOption->id === $option->id;
+            }
+        );
     }
 
     /**

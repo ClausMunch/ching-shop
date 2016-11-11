@@ -5,7 +5,9 @@ namespace Testing\Functional\Util;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Address;
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Order\Order;
+use Illuminate\Database\Eloquent\Model;
 use Testing\Functional\Customer\CustomerUsers;
 use Testing\Functional\FunctionalTest;
 
@@ -85,6 +87,26 @@ trait SalesInteractions
             ->visit(route('product::view', [$product->id, $product->slug]))
             ->see($product->name)
             ->press('Add to basket');
+    }
+
+    /**
+     * @return Basket|Model
+     */
+    private function basket(): Basket
+    {
+        $basket = Basket::where(
+            'user_id',
+            '=',
+            $this->customerUser()->id
+        )->first();
+        if ($basket) {
+            return $basket->load('basketItems.productOption');
+        }
+
+        $basket = new Basket();
+        $this->customerUser()->basket()->save($basket);
+
+        return $basket;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Customer\Sales;
 
+use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\SalesInteractions;
@@ -118,7 +119,10 @@ class BasketTest extends FunctionalTest
     {
         // Given there is a product with an option;
         $product = $this->createProduct();
-        $this->createProductOptionFor($product);
+        $option = $this->createProductOptionFor($product);
+        $option->stockItems()->saveMany(
+            factory(StockItem::class)->times(5)->make()
+        );
 
         // And we have an empty basket;
         $this->actingAs($this->customerUser())
@@ -152,7 +156,10 @@ class BasketTest extends FunctionalTest
     {
         // Given there is a product with a price;
         $product = $this->createProduct();
-        $this->createProductOptionFor($product);
+        $option = $this->createProductOptionFor($product);
+        $option->stockItems()->saveMany(
+            factory(StockItem::class)->times(5)->make()
+        );
         $price = $this->createPriceForProduct($product);
 
         // When we add it to the basket three times;
