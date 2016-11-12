@@ -97,6 +97,11 @@
                         Tools <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="/staff/logs">
+                                Logs
+                            </a>
+                        </li>
                         <li class="{{ $location->putActive(
                                 'staff.tools.telegram'
                             ) }}">

@@ -153,6 +153,7 @@ return [
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         NotificationChannels\Telegram\TelegramServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Module Service Providers
