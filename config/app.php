@@ -151,6 +151,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Module Service Providers
