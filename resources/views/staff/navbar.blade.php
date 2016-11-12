@@ -87,6 +87,26 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown
+                    {{ $location->putActive('staff.tools') }}">
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       role="button"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        Tools <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ $location->putActive(
+                                'staff.tools.telegram'
+                            ) }}">
+                            <a href="{{ route('telegram.index') }}">
+                                <span class="icon icon-telegram"></span>
+                                Telegram
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
 

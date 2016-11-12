@@ -66,13 +66,15 @@ elixir(function (mix) {
         .browserify("staff/product-options.js")
         .browserify("customer.js")
         .browserify("analytics.js")
+        .scripts("../components/staff/Telegram.vue")
         .version([
             "css/staff.css",
             "css/customer.css",
             "js/staff.js",
             "js/product-options.js",
             "js/customer.js",
-            "js/analytics.js"
+            "js/analytics.js",
+            "js/Telegram.js"
         ])
         .copy("resources/assets/img", "public/img")
         .copy("resources/assets/fonts", "public/fonts")

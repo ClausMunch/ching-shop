@@ -151,6 +151,8 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        NotificationChannels\Telegram\TelegramServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -223,6 +225,7 @@ return [
 
         'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
 
     ],
 

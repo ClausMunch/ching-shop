@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Notifications;
 
+use App;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Bus\Queueable;
@@ -9,6 +10,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Telegram\TelegramChannel;
+use NotificationChannels\Telegram\TelegramMessage;
 
 /**
  * Class NewOrder.
@@ -33,11 +36,20 @@ class NewOrderNotification extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
+     * @param Notifiable|User $notifiable
+     *
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
-        return ['mail'];
+        if (isset($notifiable->notifyVia)) {
+            return (array) $notifiable->notifyVia;
+        }
+
+        return [
+            TelegramChannel::class,
+            'mail',
+        ];
     }
 
     /**
@@ -65,6 +77,24 @@ class NewOrderNotification extends Notification implements ShouldQueue
                 "A new order has been made for £{$this->order->totalPrice()}."
             )
             ->action(
+                "View new order #{$this->order->publicId()}",
+                route('orders.show', [$this->order])
+            );
+    }
+
+    /**
+     * @return TelegramMessage
+     */
+    public function toTelegram()
+    {
+        $env = App::environment();
+
+        return TelegramMessage::create()
+            ->content(
+                "New Order in *{$env}* {$this->order->publicId()}\n".
+                "Total £{$this->order->totalPrice()}"
+            )
+            ->button(
                 "View new order #{$this->order->publicId()}",
                 route('orders.show', [$this->order])
             );
