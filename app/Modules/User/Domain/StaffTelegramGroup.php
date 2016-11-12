@@ -23,7 +23,7 @@ class StaffTelegramGroup
      */
     public static function id(): int
     {
-        return (int) env('TELEGRAM_STAFF_GROUP');
+        return (int) config('telegram.staff_group');
     }
 
     /**

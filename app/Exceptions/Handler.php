@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
             $err = new NotFoundHttpException($err->getMessage(), $err);
         }
 
-        if (!env('APP_DEBUG')
+        if (config('app.debug')
             && $request->user()
             && $request->user()->isStaff()
         ) {

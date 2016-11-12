@@ -15,6 +15,8 @@ return [
     */
     'bot_token'           => env('TELEGRAM_STAFF_KEY'),
 
+    'staff_group'         => env('TELEGRAM_STAFF_GROUP'),
+
     /*
     |--------------------------------------------------------------------------
     | Asynchronous Requests [Optional]
