@@ -91,8 +91,11 @@ class NewOrderNotification extends Notification implements ShouldQueue
 
         return TelegramMessage::create()
             ->content(
-                "New Order in *{$env}* {$this->order->publicId()}\n".
-                "Total £{$this->order->totalPrice()}"
+                sprintf(
+                    "%s\n%s",
+                    "New Order in *{$env}* {$this->order->publicId()}",
+                    "Total £{$this->order->totalPrice()}"
+                )
             )
             ->button(
                 "View new order #{$this->order->publicId()}",

@@ -40,8 +40,12 @@ class SendStaffOrderNotifications implements ShouldQueue
      */
     public function handle(NewOrderEvent $event)
     {
+        $recipients = $this->staffUsers();
+        if (\App::environment() !== 'testing') {
+            $recipients->add(app(StaffTelegramGroup::class));
+        }
         $this->notificationFactory->send(
-            $this->staffUsers()->add(app(StaffTelegramGroup::class)),
+            $recipients,
             new NewOrderNotification($event->order)
         );
     }
