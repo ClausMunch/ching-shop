@@ -55,6 +55,7 @@ Route::group(
                 'as'   => 'staff.dashboard',
             ]
         );
+        Route::resource('telegram', 'Staff\TelegramController');
         Route::get('php-info', 'Staff\DashboardController@getPhpInfo');
         Route::get(
             'logs',

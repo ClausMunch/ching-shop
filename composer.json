@@ -30,7 +30,9 @@
         "elasticsearch/elasticsearch": "^2.2",
         "baum/baum": "^1.1",
         "league/uri": "^4.2",
-        "ipunkt/laravel-analytics": "dev-content-security-policy"
+        "ipunkt/laravel-analytics": "dev-content-security-policy",
+        "laravel-notification-channels/telegram": "^0.0.1",
+        "irazasyed/telegram-bot-sdk": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",

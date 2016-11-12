@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('/fonts/icomoon.eot?ohoby7');
-  src:  url('/fonts/icomoon.eot?ohoby7#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?ohoby7') format('truetype'),
-    url('/fonts/icomoon.woff?ohoby7') format('woff'),
-    url('/fonts/icomoon.svg?ohoby7#icomoon') format('svg');
+  src:  url('/fonts/icomoon.eot?6395lj');
+  src:  url('/fonts/icomoon.eot?6395lj#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?6395lj') format('truetype'),
+    url('/fonts/icomoon.woff?6395lj') format('woff'),
+    url('/fonts/icomoon.svg?6395lj#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -50,6 +50,9 @@
 }
 .icon-mail4:before {
   content: "\eee5";
+}
+.icon-telegram:before {
+  content: "\eef4";
 }
 .icon-paypal:before {
   content: "\ef37";

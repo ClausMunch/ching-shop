@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Sales\Listeners;
 
 use ChingShop\Modules\Sales\Events\NewOrderEvent;
 use ChingShop\Modules\Sales\Notifications\NewOrderNotification;
+use ChingShop\Modules\User\Domain\StaffTelegramGroup;
 use ChingShop\Modules\User\Model\Role;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Contracts\Notifications\Factory;
@@ -39,8 +40,12 @@ class SendStaffOrderNotifications implements ShouldQueue
      */
     public function handle(NewOrderEvent $event)
     {
+        $recipients = $this->staffUsers();
+        if (\App::environment() !== 'testing') {
+            $recipients->add(app(StaffTelegramGroup::class));
+        }
         $this->notificationFactory->send(
-            $this->staffUsers(),
+            $recipients,
             new NewOrderNotification($event->order)
         );
     }
