@@ -22,13 +22,15 @@
                       https://*.cloudflare.com
                       https://*.google-analytics.com;
                       img-src 'self' https://static.ching-shop.com
-                      https://*.google-analytics.com;
-                      child-src 'self';
-                      object-src 'self';
-                      form-action 'self' {{ config('payment.paypal.base-url') }};
-              style-src 'self' 'unsafe-inline' https://*.stripe.com
-              https://fonts.googleapis.com;
-              font-src 'self' https://fonts.gstatic.com data:;">
+                      https://*.google-analytics.com https://*.stripe.com;
+                      child-src 'self' https://*.stripe.com;
+                      object-src 'self' https://*.stripe.com;
+                      form-action 'self' {{ config('payment.paypal.base-url') }}
+                      https://*.stripe.com;
+                  style-src 'self' 'unsafe-inline' https://*.stripe.com
+                  https://fonts.googleapis.com;
+                  connect-src 'self' https://*.stripe.com;
+                  font-src 'self' https://fonts.gstatic.com data:;">
     @endunless
     <link rel="icon"
           type="image/png"
