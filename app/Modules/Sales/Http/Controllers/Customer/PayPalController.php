@@ -2,12 +2,11 @@
 
 namespace ChingShop\Modules\Sales\Http\Controllers\Customer;
 
-use Analytics;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Clerk;
 use ChingShop\Modules\Sales\Domain\Order\Order;
-use ChingShop\Modules\Sales\Domain\Order\OrderItem;
+use ChingShop\Modules\Sales\Domain\Order\TracksOrders;
 use ChingShop\Modules\Sales\Domain\Payment\StockAllocationException;
 use ChingShop\Modules\Sales\Domain\PayPal\PayPalRepository;
 use ChingShop\Modules\Sales\Http\Requests\Customer\PayPalReturnRequest;
@@ -20,6 +19,8 @@ use Throwable;
  */
 class PayPalController extends Controller
 {
+    use TracksOrders;
+
     /** @var Clerk */
     private $clerk;
 
@@ -75,6 +76,7 @@ class PayPalController extends Controller
         }
 
         try {
+            /** @var Order $order */
             $order = $this->payPalRepository->executePayment(
                 $request->paymentId(),
                 $request->payerId()
@@ -87,6 +89,10 @@ class PayPalController extends Controller
             $this->webUi->warningMessage(
                 'Sorry, we were not able to allocate stock for your order.'
             );
+
+            if (isset($order)) {
+                $order->deAllocate();
+            }
 
             return $this->webUi->redirect(
                 'sales.customer.checkout.choose-payment'
@@ -132,32 +138,5 @@ class PayPalController extends Controller
         );
 
         return $this->webUi->redirect('sales.customer.checkout.choose-payment');
-    }
-
-    /**
-     * @param Order $order
-     */
-    private function trackOrder(Order $order)
-    {
-        Analytics::enableEcommerceTracking();
-        Analytics::ecommerceAddTransaction(
-            $order->publicId(),
-            config('app.name'),
-            $order->totalPrice(),
-            0.00,
-            0.00
-        );
-        $order->orderItems->each(
-            function (OrderItem $item) {
-                Analytics::ecommerceAddItem(
-                    $item->id,
-                    $item->name(),
-                    $item->sku(),
-                    $item->category()->name,
-                    $item->priceAsFloat(),
-                    1
-                );
-            }
-        );
     }
 }

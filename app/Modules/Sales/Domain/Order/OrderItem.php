@@ -13,13 +13,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @mixin \Eloquent
  *
- * @property int             $id
- * @property float           $price
- * @property \Carbon\Carbon  $created_at
- * @property \Carbon\Carbon  $updated_at
- * @property \Carbon\Carbon  $deleted_at
- * @property-read Order      $order
- * @property-read BasketItem $basketItem
+ * @property int                 $id
+ * @property float               $price
+ * @property \Carbon\Carbon      $created_at
+ * @property \Carbon\Carbon      $updated_at
+ * @property \Carbon\Carbon      $deleted_at
+ * @property-read Order          $order
+ * @property-read BasketItem     $basketItem
+ * @property-read StockItem|null $stockItem
  */
 class OrderItem extends Model
 {
@@ -91,5 +92,19 @@ class OrderItem extends Model
             ->productOption
             ->product
             ->category ?? new Category();
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @return bool|null
+     */
+    public function deAllocate()
+    {
+        if ($this->stockItem) {
+            $this->stockItem->orderItem()->dissociate()->save();
+        }
+
+        return $this->delete();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace ChingShop\Modules\Sales\Domain;
 
+use ChingShop\Modules\Sales\Domain\Basket\Basket;
+
 /**
  * Class CheckoutAssistant.
  */
@@ -35,5 +37,13 @@ class CheckoutAssistant
         $this->clerk->basket()->save();
 
         return $address;
+    }
+
+    /**
+     * @return Basket
+     */
+    public function basket(): Basket
+    {
+        return $this->clerk->basket();
     }
 }

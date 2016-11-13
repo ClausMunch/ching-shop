@@ -28,10 +28,26 @@
   @extend %plain-list;
 }
 
-.payment-choice {
+.stripe-checkout-form {
+  text-align: center;
+
+  .stripe-button-el {
+    > span {
+      background: none;
+      font-size: 1.1em;
+      font-weight: normal;
+      height: auto;
+      padding: .5em;
+      text-shadow: none;
+    }
+  }
+}
+
+.payment-choice,
+.stripe-button-el {
   display: block;
   font-size: 1.1em;
-  margin: 1.5em auto;
+  margin: 1em auto;
   max-width: 100%;
   width: 17em;
 

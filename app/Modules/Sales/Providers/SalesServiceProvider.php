@@ -10,6 +10,8 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
 use PayPal\Rest\ApiContext;
+use Stripe\Charge;
+use Stripe\Stripe;
 use View;
 
 /**
@@ -85,6 +87,15 @@ class SalesServiceProvider extends ServiceProvider
                 );
 
                 return $apiContext;
+            }
+        );
+
+        $this->app->bind(
+            Charge::class,
+            function () {
+                Stripe::setApiKey(config('services.stripe.secret'));
+
+                return new Charge();
             }
         );
     }

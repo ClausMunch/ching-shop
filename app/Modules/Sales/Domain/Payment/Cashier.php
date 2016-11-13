@@ -3,8 +3,10 @@
 namespace ChingShop\Modules\Sales\Domain\Payment;
 
 use ChingShop\Modules\Catalogue\Domain\Inventory\Inventory;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionPresenter;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
+use ChingShop\Modules\Sales\Domain\Basket\BasketItemPresenter;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Order\OrderItem;
 use ChingShop\Modules\Sales\Events\NewOrderEvent;
@@ -91,6 +93,9 @@ class Cashier
         $basket->order()->associate($order);
 
         foreach ($basket->basketItems as $basketItem) {
+            if ($basketItem instanceof BasketItemPresenter) {
+                $basketItem = $basketItem->getWrappedObject();
+            }
             $this->basketItemToOrderItem($basketItem, $order);
         }
 
@@ -114,9 +119,11 @@ class Cashier
         $orderItem->price = $basketItem->priceAsFloat();
         $orderItem->basketItem()->associate($basketItem);
 
-        $stockItem = $this->inventory->allocate(
-            $basketItem->productOption
-        );
+        $productOption = $basketItem->productOption;
+        if ($productOption instanceof ProductOptionPresenter) {
+            $productOption = $productOption->getWrappedObject();
+        }
+        $stockItem = $this->inventory->allocate($productOption);
 
         if (!$stockItem->isAvailable()) {
             throw new StockAllocationException(
