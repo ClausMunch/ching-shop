@@ -4,25 +4,25 @@
 //noinspection JSUnresolvedVariable
 process.env.DISABLE_NOTIFIER = true;
 
-var elixir = require("laravel-elixir");
-var gulp = require("gulp");
-var clean = require("gulp-clean");
-var shell = require("gulp-shell");
-var typings = require("gulp-typings");
-var ts = require("gulp-typescript");
-var unzip = require('gulp-unzip');
-var filter = require('gulp-filter');
-var replace = require('gulp-replace');
-var rename = require('gulp-rename');
+var elixir   = require("laravel-elixir");
+var gulp     = require("gulp");
+var clean    = require("gulp-clean");
+var shell    = require("gulp-shell");
+var typings  = require("gulp-typings");
+var ts       = require("gulp-typescript");
+var unzip    = require('gulp-unzip');
+var filter   = require('gulp-filter');
+var replace  = require('gulp-replace');
+var rename   = require('gulp-rename');
 var scssLint = require('gulp-scss-lint');
-var tsLint = require("gulp-tslint");
+var tsLint   = require("gulp-tslint");
 
 var Task = elixir.Task;
 
 elixir.config.css.autoprefix = {
     enabled: true,
     options: {
-        cascade: true,
+        cascade:  true,
         browsers: ["last 3 versions", "> 1%"]
     }
 };
@@ -139,7 +139,7 @@ gulp.task("scss-lint", function () {
         "!**/vendor/**",
         "!**/bootstrap-variables.scss"
     ])
-        .pipe(scssLint())
+        .pipe(scssLint({config: "./tests/analysis/scss-lint.yml"}))
         .pipe(scssLint.failReporter());
 });
 

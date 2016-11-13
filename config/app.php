@@ -154,6 +154,7 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         NotificationChannels\Telegram\TelegramServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
         /*
          * Module Service Providers
@@ -227,6 +228,7 @@ return [
         'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
+        'Stripe'    => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 
     ],
 

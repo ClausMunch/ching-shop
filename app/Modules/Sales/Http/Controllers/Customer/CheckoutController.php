@@ -73,7 +73,11 @@ class CheckoutController extends Controller
     {
         return $this->webUi->view(
             'customer.checkout.choose-payment',
-            ['progress' => 50]
+            [
+                'basket'      => $this->checkoutAssistant->basket(),
+                'progress'    => 50,
+                'stripeNonce' => random_int(0, PHP_INT_MAX),
+            ]
         );
     }
 }

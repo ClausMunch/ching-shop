@@ -14,7 +14,9 @@
               content="default-src 'self'
               https://static.ching-shop.com;
               script-src 'self' https://static.ching-shop.com
-              'nonce-{{Analytics::cspNonce()}}'
+              https://*.stripe.com
+              @stack('script-src')
+                      'nonce-{{Analytics::cspNonce()}}'
               {{Analytics::cspHash()}}
                       https://code.jquery.com/
                       https://*.cloudflare.com
@@ -24,7 +26,8 @@
                       child-src 'self';
                       object-src 'self';
                       form-action 'self' {{ config('payment.paypal.base-url') }};
-              style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+              style-src 'self' 'unsafe-inline' https://*.stripe.com
+              https://fonts.googleapis.com;
               font-src 'self' https://fonts.gstatic.com data:;">
     @endunless
     <link rel="icon"

@@ -134,4 +134,12 @@ class Basket extends Model implements HasPresenter
             0.0
         );
     }
+
+    /**
+     * @return float
+     */
+    public function subUnitPrice(): float
+    {
+        return $this->totalPrice() * 100;
+    }
 }

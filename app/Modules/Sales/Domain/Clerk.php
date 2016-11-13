@@ -117,7 +117,9 @@ class Clerk
         ) {
             $this->basket->user_id = $this->guard->user()->getAuthIdentifier();
         }
-        $this->basket->save();
+        if ($this->basket->exists()) {
+            $this->basket->save();
+        }
         $this->session->set(self::SESSION_BASKET, $this->basket->id);
     }
 

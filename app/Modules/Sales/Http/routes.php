@@ -54,6 +54,13 @@ Route::group(
                     ]
                 )->middleware(['customer', 'checkout']);
                 Route::post(
+                    'stripe/payment',
+                    [
+                        'as'   => 'sales.customer.stripe.pay',
+                        'uses' => 'Customer\StripeController@payAction',
+                    ]
+                );
+                Route::post(
                     'paypal/express-checkout',
                     [
                         'as'   => 'sales.customer.paypal.start',

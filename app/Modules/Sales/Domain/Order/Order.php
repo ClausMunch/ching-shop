@@ -89,4 +89,19 @@ class Order extends Model
             0.0
         );
     }
+
+    /**
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deAllocate()
+    {
+        $this->orderItems->each(
+            function (OrderItem $item) {
+                $item->deAllocate();
+            }
+        );
+
+        return $this->delete();
+    }
 }
