@@ -13,7 +13,7 @@ use Log;
 use Stripe\Error\Card;
 
 /**
- * Stripe card payment actions
+ * Stripe card payment actions.
  */
 class StripeController extends Controller
 {
@@ -40,8 +40,9 @@ class StripeController extends Controller
     /**
      * @param StripePaymentRequest $request
      *
-     * @return string
      * @throws \Exception
+     *
+     * @return string
      */
     public function payAction(StripePaymentRequest $request)
     {
