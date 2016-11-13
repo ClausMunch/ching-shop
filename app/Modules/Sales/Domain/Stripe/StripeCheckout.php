@@ -39,8 +39,9 @@ class StripeCheckout
     /**
      * @param string $stripeToken
      *
-     * @return Order
      * @throws \Exception
+     *
+     * @return Order
      */
     public function pay(string $stripeToken): Order
     {

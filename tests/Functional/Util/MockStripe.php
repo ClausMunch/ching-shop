@@ -28,8 +28,9 @@ trait MockStripe
     }
 
     /**
-     * @return MockInterface
      * @throws \InvalidArgumentException
+     *
+     * @return MockInterface
      */
     private function mockStripeCharge(): MockInterface
     {

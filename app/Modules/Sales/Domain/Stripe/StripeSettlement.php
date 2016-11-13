@@ -18,19 +18,17 @@ use Stripe\Charge;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
- *
  * @property string         $stripe_id
  * @property int            $amount
  * @property string         $balance_transaction
  * @property bool           $captured
- * @property integer        $created
+ * @property int        $created
  * @property string         $currency
  * @property string         $description
  * @property string         $failure_code
  * @property string         $failure_message
  * @property bool           $paid
  * @property string         $status
- *
  * @property string         $address_zip
  * @property string         $name
  */

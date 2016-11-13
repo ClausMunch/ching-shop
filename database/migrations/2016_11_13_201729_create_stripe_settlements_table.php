@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateStripeSettlementsTable
+ * Class CreateStripeSettlementsTable.
  */
 class CreateStripeSettlementsTable extends Migration
 {
