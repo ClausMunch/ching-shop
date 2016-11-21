@@ -11,7 +11,7 @@ apt-get dist-upgrade --quiet --yes --allow-change-held-packages \
 
 apt-get install htop imagemagick ruby --quiet --yes \
     -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
-apt-get install php-imagick php7.0-mbstring php7.0-gmp --quiet --yes \
+apt-get install php-imagick php7.0-mbstring php7.0-gmp php7.0-intl --quiet --yes \
     -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 
 gem install bundler

@@ -9,6 +9,11 @@ use ChingShop\Modules\Sales\Domain\Clerk;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Session\Store;
 use Illuminate\Support\ServiceProvider;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\AggregateMoneyFormatter;
+use Money\Formatter\IntlMoneyFormatter;
+use Money\MoneyFormatter;
+use NumberFormatter;
 use PayPal\Rest\ApiContext;
 use Stripe\Charge;
 use Stripe\Stripe;
@@ -96,6 +101,25 @@ class SalesServiceProvider extends ServiceProvider
                 Stripe::setApiKey(config('services.stripe.secret'));
 
                 return new Charge();
+            }
+        );
+
+        $this->app->singleton(
+            MoneyFormatter::class,
+            function () {
+                $intl = new IntlMoneyFormatter(
+                    new NumberFormatter(
+                        'en_GB',
+                        NumberFormatter::CURRENCY
+                    ),
+                    new ISOCurrencies()
+                );
+
+                return new AggregateMoneyFormatter(
+                    [
+                        'GBP' => $intl,
+                    ]
+                );
             }
         );
     }

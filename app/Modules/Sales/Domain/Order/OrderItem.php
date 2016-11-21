@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
+use ChingShop\Modules\Sales\Domain\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -60,11 +61,23 @@ class OrderItem extends Model
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
+     * @return Money
+     */
+    public function price(): Money
+    {
+        return Money::fromDecimal($this->price);
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     *
      * @return float
      */
     public function priceAsFloat(): float
     {
-        return (float) $this->price;
+        return $this->price()->asFloat();
     }
 
     /**

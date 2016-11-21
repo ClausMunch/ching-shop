@@ -23,10 +23,12 @@ class BasketPresenter extends BasePresenter
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return string
      */
     public function totalPrice(): string
     {
-        return number_format($this->wrappedObject->totalPrice(), 2);
+        return $this->wrappedObject->totalPrice()->formatted();
     }
 }

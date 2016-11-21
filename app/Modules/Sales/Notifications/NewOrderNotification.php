@@ -57,6 +57,8 @@ class NewOrderNotification extends Notification implements ShouldQueue
      *
      * @param Notifiable|User $notifiable
      *
+     * @throws \InvalidArgumentException
+     *
      * @return MailMessage
      */
     public function toMail($notifiable): MailMessage
@@ -65,8 +67,8 @@ class NewOrderNotification extends Notification implements ShouldQueue
             ->to($notifiable->email)
             ->subject(
                 sprintf(
-                    'New ChingShop order for £%s (%s)',
-                    $this->order->totalPrice(),
+                    'New ChingShop order for %s (%s)',
+                    $this->order->totalPrice()->formatted(),
                     $this->order->publicId()
                 )
             )
@@ -74,7 +76,8 @@ class NewOrderNotification extends Notification implements ShouldQueue
                 "Hi {$notifiable->name},"
             )
             ->line(
-                "A new order has been made for £{$this->order->totalPrice()}."
+                'A new order has been made for'
+                ." {$this->order->totalPrice()->formatted()}."
             )
             ->action(
                 "View new order #{$this->order->publicId()}",
@@ -83,6 +86,8 @@ class NewOrderNotification extends Notification implements ShouldQueue
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return TelegramMessage
      */
     public function toTelegram()
@@ -94,7 +99,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
                 sprintf(
                     "%s\n%s",
                     "New Order in *{$env}* {$this->order->publicId()}",
-                    "Total £{$this->order->totalPrice()}"
+                    "Total {$this->order->totalPrice()->formatted()}"
                 )
             )
             ->button(

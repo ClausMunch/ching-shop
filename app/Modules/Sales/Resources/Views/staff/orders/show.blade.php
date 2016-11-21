@@ -5,7 +5,7 @@
 @endsection
 
 @section('header')
-    Order #{{ $order->publicId() }} (£{{ $order->totalPrice() }})
+    Order #{{ $order->publicId() }} ({{ $order->totalPrice()->formatted() }})
 @endsection
 
 @section('content')
@@ -24,7 +24,7 @@
                                 {{ $item->basketItem->productOption->label }}
                             </td>
                             <td class="price">
-                                £{{ $item->priceAsFloat() }}
+                                {{ $item->price()->formatted() }}
                             </td>
                         </tr>
                     @endforeach
@@ -38,18 +38,18 @@
                 <p>PayPal</p>
                 <table class="table table-striped">
                     <tbody>
-                        <tr>
-                            <td>Payment ID:</td>
-                            <td>
-                                {{ $order->payment->settlement->payment_id }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Payer ID:</td>
-                            <td>
-                                {{ $order->payment->settlement->payer_id }}
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>Payment ID:</td>
+                        <td>
+                            {{ $order->payment->settlement->payment_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Payer ID:</td>
+                        <td>
+                            {{ $order->payment->settlement->payer_id }}
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             @endif

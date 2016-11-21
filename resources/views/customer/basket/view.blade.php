@@ -3,7 +3,7 @@
 @section('page-title')
     Basket ({{ $basket->basketItems->count() }}
     {{ str_plural('item', $basket->basketItems->count()) }},
-    £{{ $basket->totalPrice() }})
+    {{$basket->totalPrice()}})
 @endsection
 
 @section('meta-robots')
@@ -73,8 +73,8 @@
             <td></td>
             <td class="price basket-total">
                 @if ($basket->basketItems->count())
-                    £<span class="basket-total-amount"><!--
-                        -->{{ $basket->totalPrice() }}
+                    <span class="basket-total-amount"><!--
+                        -->{{$basket->totalPrice()}}
                     </span>
                 @endif
             </td>

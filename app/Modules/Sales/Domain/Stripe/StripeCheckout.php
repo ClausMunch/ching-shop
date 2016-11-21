@@ -45,9 +45,13 @@ class StripeCheckout
      */
     public function pay(string $stripeToken): Order
     {
-        $total = $this->basket()->subUnitPrice();
         Log::info(
-            "Taking Stripe payment for `£{$total}` with token `{$stripeToken}`."
+            sprintf(
+                'Taking Stripe payment for %s (%s) with token `%s`.',
+                $this->basket()->totalPrice()->formatted(),
+                $this->basket()->totalPrice()->amount(),
+                $stripeToken
+            )
         );
         $settlement = StripeSettlement::create(['token' => $stripeToken]);
         $order = $this->cashier->settle($this->basket(), $settlement);
@@ -58,7 +62,7 @@ class StripeCheckout
         /** @var Charge $charge */
         $charge = $this->charge->create(
             [
-                'amount'      => $total,
+                'amount'      => $this->basket()->totalPrice()->amount(),
                 'currency'    => 'gbp',
                 'source'      => $stripeToken,
                 'description' => "ching-shop.com order {$order->publicId()}",

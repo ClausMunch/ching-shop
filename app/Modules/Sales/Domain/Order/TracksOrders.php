@@ -11,6 +11,8 @@ trait TracksOrders
 {
     /**
      * @param Order $order
+     *
+     * @throws \InvalidArgumentException
      */
     private function trackOrder(Order $order)
     {
@@ -18,7 +20,7 @@ trait TracksOrders
         Analytics::ecommerceAddTransaction(
             $order->publicId(),
             config('app.name'),
-            $order->totalPrice(),
+            $order->totalPrice()->asFloat(),
             0.00,
             0.00
         );

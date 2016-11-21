@@ -15,9 +15,12 @@ class ProductPriceTest extends ProductTest
     {
         $product = $this->createProduct();
 
-        $showProductRoute = route('products.show', [
-            'SKU' => $product->sku,
-        ]);
+        $showProductRoute = route(
+            'products.show',
+            [
+                'SKU' => $product->sku,
+            ]
+        );
         $this->actingAs($this->staffUser())
             ->visit($showProductRoute)
             ->see($product->sku)
@@ -36,9 +39,12 @@ class ProductPriceTest extends ProductTest
     {
         $product = $this->createProduct();
 
-        $showProductRoute = route('products.show', [
-            'SKU' => $product->sku,
-        ]);
+        $showProductRoute = route(
+            'products.show',
+            [
+                'SKU' => $product->sku,
+            ]
+        );
         $this->actingAs($this->staffUser())
             ->visit($showProductRoute)
             ->see($product->sku)
@@ -46,10 +52,13 @@ class ProductPriceTest extends ProductTest
             ->type(5, 'subunits')
             ->press('Set price');
 
-        $viewProductRoute = route('product::view', [
-            'id'  => $product->id,
-            'sku' => $product->sku,
-        ]);
+        $viewProductRoute = route(
+            'product::view',
+            [
+                'id'  => $product->id,
+                'sku' => $product->sku,
+            ]
+        );
         $this->visit($viewProductRoute)
             ->see($product->sku)
             ->see($product->name)
