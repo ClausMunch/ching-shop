@@ -61,8 +61,9 @@ class OrderItem extends Model
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function price(): Money
     {
@@ -70,8 +71,9 @@ class OrderItem extends Model
     }
 
     /**
-     * @return float
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function priceAsFloat(): float
     {

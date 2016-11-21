@@ -77,8 +77,9 @@ class Order extends Model
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function totalPrice(): Money
     {

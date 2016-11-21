@@ -122,8 +122,9 @@ class Basket extends Model implements HasPresenter
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function totalPrice(): Money
     {
@@ -140,8 +141,9 @@ class Basket extends Model implements HasPresenter
     }
 
     /**
-     * @return float
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function subUnitPrice(): float
     {
