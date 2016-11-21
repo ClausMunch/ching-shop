@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Domain\Price;
 
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Sales\Domain\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -53,12 +54,19 @@ class Price extends Model
     /** @var string[] */
     protected $touches = ['product'];
 
+    /** @var array */
+    protected $casts = [
+        'units'    => 'integer',
+        'subunits' => 'integer',
+    ];
+
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function formatted(): string
     {
-        return '£'.number_format($this->asFloat(), 2);
+        return $this->asMoney()->formatted();
     }
 
     /**
@@ -73,11 +81,21 @@ class Price extends Model
     }
 
     /**
+     * @return Money
+     * @throws \InvalidArgumentException
+     */
+    public function asMoney(): Money
+    {
+        return Money::fromSplit((int) $this->units, (int) $this->subunits);
+    }
+
+    /**
      * @return float
+     * @throws \InvalidArgumentException
      */
     public function asFloat(): float
     {
-        return (float) ($this->units + ($this->subunits / 100));
+        return $this->asMoney()->asFloat();
     }
 
     /**

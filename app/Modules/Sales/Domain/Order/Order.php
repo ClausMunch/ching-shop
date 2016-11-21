@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Domain\PublicId;
 use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -76,17 +77,20 @@ class Order extends Model
     }
 
     /**
-     * @return float
+     * @return Money
+     * @throws \InvalidArgumentException
      */
-    public function totalPrice(): float
+    public function totalPrice(): Money
     {
-        return (float) array_reduce(
-            $this->orderItems->all(),
-            function (float $total, $item) {
-                /* @var OrderItem $item */
-                return $total + $item->priceAsFloat();
-            },
-            0.0
+        return Money::fromDecimal(
+            array_reduce(
+                $this->orderItems->all(),
+                function (float $total, $item) {
+                    /* @var OrderItem $item */
+                    return $total + $item->priceAsFloat();
+                },
+                0.0
+            )
         );
     }
 

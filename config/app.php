@@ -154,7 +154,6 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         NotificationChannels\Telegram\TelegramServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
         /*
          * Module Service Providers

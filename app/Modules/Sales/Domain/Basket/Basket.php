@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Sales\Domain\Basket;
 
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Address;
+use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -121,25 +122,29 @@ class Basket extends Model implements HasPresenter
     }
 
     /**
-     * @return float
+     * @return Money
+     * @throws \InvalidArgumentException
      */
-    public function totalPrice(): float
+    public function totalPrice(): Money
     {
-        return (float) array_reduce(
-            $this->basketItems->all(),
-            function (float $total, $item) {
-                /* @var BasketItem $item */
-                return $total + $item->priceAsFloat();
-            },
-            0.0
+        return Money::fromDecimal(
+            array_reduce(
+                $this->basketItems->all(),
+                function (float $total, $item) {
+                    /* @var BasketItem $item */
+                    return $total + $item->priceAsFloat();
+                },
+                0.0
+            )
         );
     }
 
     /**
      * @return float
+     * @throws \InvalidArgumentException
      */
     public function subUnitPrice(): float
     {
-        return $this->totalPrice() * 100;
+        return $this->totalPrice()->asFloat() * 100;
     }
 }

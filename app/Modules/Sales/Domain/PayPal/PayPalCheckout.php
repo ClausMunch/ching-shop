@@ -144,7 +144,7 @@ class PayPalCheckout
         return (new Details())
             ->setShipping(0)
             ->setTax(0)
-            ->setSubtotal($this->basket->totalPrice());
+            ->setSubtotal($this->basket->totalPrice()->asFloat());
     }
 
     /**
@@ -156,7 +156,7 @@ class PayPalCheckout
     {
         return (new Amount())
             ->setCurrency(self::DEFAULT_CURRENCY)
-            ->setTotal($this->basket->totalPrice())
+            ->setTotal($this->basket->totalPrice()->asFloat())
             ->setDetails($this->details());
     }
 

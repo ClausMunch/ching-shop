@@ -196,7 +196,7 @@ class BasketTest extends FunctionalTest
         $this->actingAs($this->customerUser())
             ->visit(route('sales.customer.basket'))
             ->assertSame(
-                '5.00',
+                '£5.00',
                 trim($this->getElementText('.basket-total-amount'))
             );
     }
@@ -221,7 +221,7 @@ class BasketTest extends FunctionalTest
         $this->actingAs($this->customerUser())
             ->visit(route('sales.customer.basket'))
             ->assertSame(
-                '4.20',
+                '£4.20',
                 trim($this->getElementText('.basket-total-amount'))
             );
     }
