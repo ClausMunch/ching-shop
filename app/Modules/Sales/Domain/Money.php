@@ -17,7 +17,7 @@ class Money
     private $currency;
 
     /**
-     * @param int    $amount in sub-units
+     * @param int    $amount   in sub-units
      * @param string $currency
      *
      * @throws \InvalidArgumentException
@@ -31,8 +31,9 @@ class Money
     /**
      * @param float $amount
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public static function fromDecimal(float $amount): self
     {
@@ -43,8 +44,9 @@ class Money
      * @param int $units
      * @param int $subunits
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public static function fromSplit(int $units, int $subunits): self
     {
@@ -62,8 +64,9 @@ class Money
     /**
      * @param int $amount
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function add(int $amount): self
     {

@@ -61,8 +61,9 @@ class Price extends Model
     ];
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function formatted(): string
     {
@@ -81,8 +82,9 @@ class Price extends Model
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function asMoney(): Money
     {
@@ -90,8 +92,9 @@ class Price extends Model
     }
 
     /**
-     * @return float
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function asFloat(): float
     {

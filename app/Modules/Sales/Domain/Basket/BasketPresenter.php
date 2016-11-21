@@ -23,8 +23,9 @@ class BasketPresenter extends BasePresenter
     }
 
     /**
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function totalPrice(): string
     {

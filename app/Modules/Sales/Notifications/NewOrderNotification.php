@@ -57,8 +57,9 @@ class NewOrderNotification extends Notification implements ShouldQueue
      *
      * @param Notifiable|User $notifiable
      *
-     * @return MailMessage
      * @throws \InvalidArgumentException
+     *
+     * @return MailMessage
      */
     public function toMail($notifiable): MailMessage
     {
@@ -85,8 +86,9 @@ class NewOrderNotification extends Notification implements ShouldQueue
     }
 
     /**
-     * @return TelegramMessage
      * @throws \InvalidArgumentException
+     *
+     * @return TelegramMessage
      */
     public function toTelegram()
     {
