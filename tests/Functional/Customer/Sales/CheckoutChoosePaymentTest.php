@@ -34,13 +34,4 @@ class CheckoutChoosePaymentTest extends FunctionalTest
             ->see($address->post_code)
             ->see($address->country);
     }
-
-    /**
-     * Should be able to go to the pay by card page from the choose payment
-     * method page.
-     */
-    public function testCanGoToPayByCard()
-    {
-        self::markTestIncomplete('Card payment is not yet implemented');
-    }
 }

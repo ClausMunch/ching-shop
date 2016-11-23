@@ -86,7 +86,7 @@ class StripeCheckout
     private function basket(): Basket
     {
         /** @var Basket $basket */
-        $basket = $this->clerk->basket()->fresh();
+        $basket = $this->clerk->basket();
         if ($basket instanceof BasketPresenter) {
             $basket = $basket->getWrappedObject();
         }
