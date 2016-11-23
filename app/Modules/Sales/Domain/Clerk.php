@@ -72,7 +72,7 @@ class Clerk
     {
         // Ensure basket saved before associating.
         $this->basket = $this->getBasket();
-        $this->saveBasket();
+        $this->basket->save();
 
         // Check stock.
         $this->checkStock($productOption);
@@ -117,7 +117,7 @@ class Clerk
         ) {
             $this->basket->user_id = $this->guard->user()->getAuthIdentifier();
         }
-        if ($this->basket->exists()) {
+        if ($this->basket->exists) {
             $this->basket->save();
         }
         $this->session->set(self::SESSION_BASKET, $this->basket->id);
