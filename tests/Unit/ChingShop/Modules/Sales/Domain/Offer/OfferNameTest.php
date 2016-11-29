@@ -20,7 +20,7 @@ class OfferNameTest extends TestCase
     public function testName(Offer $offer, string $expectedName)
     {
         $name = new OfferName($offer);
-        $this->assertEquals($expectedName, (string ) $name);
+        $this->assertEquals($expectedName, (string) $name);
     }
 
     /**

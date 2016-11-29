@@ -1,4 +1,5 @@
 <?php
+
 use ChingShop\Modules\Sales\Domain\Offer\Offer;
 
 /**
