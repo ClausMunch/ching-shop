@@ -12,6 +12,8 @@
 */
 
 /** @var Illuminate\Database\Eloquent\Factory $factory */
+use ChingShop\Domain\Colour;
+
 $factory->define(
     ChingShop\Modules\User\Model\User::class,
     function (Faker\Generator $faker) {
@@ -44,5 +46,38 @@ $factory->define(
     \ChingShop\Modules\Sales\Domain\Basket\BasketItem::class,
     function () {
         return [];
+    }
+);
+
+$factory->define(
+    \ChingShop\Modules\Sales\Domain\Offer\Offer::class,
+    function (\Faker\Generator $faker) {
+        if ($faker->boolean()) {
+            $price = $faker->numberBetween(1, 20) * 100 ?? null;
+
+            return [
+                'price'    => $price,
+                'quantity' => $faker->numberBetween(1, 5),
+                'colour'   => Colour::fromHex(
+                    $faker->hexColor
+                )->mix(Colour::brand())->pastel()->toHex(),
+                'effect'   => $faker->randomElement(
+                    \ChingShop\Modules\Sales\Domain\Offer\Offer::EFFECTS
+                ),
+            ];
+        }
+
+        $percentage = $faker->numberBetween(1, 19) * 5 ?? null;
+
+        return [
+            'percentage' => $percentage,
+            'quantity'   => $faker->numberBetween(1, 5),
+            'colour'     => Colour::fromHex(
+                $faker->hexColor
+            )->mix(Colour::brand())->pastel()->toHex(),
+            'effect'     => $faker->randomElement(
+                \ChingShop\Modules\Sales\Domain\Offer\Offer::EFFECTS
+            ),
+        ];
     }
 );

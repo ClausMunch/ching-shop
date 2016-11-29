@@ -1,0 +1,24 @@
+.offer-name {
+  color: $floral-white;
+  display: table-cell;
+  font-size: 110%;
+  font-weight: bold;
+  padding: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.offer-name-short {
+  border-radius: 50%;
+  height: 5em;
+  width: 5em;
+}
+
+.offer-name-long {
+  border-radius: $border-radius-large;
+}
+
+.colour-suggestion {
+  color: $floral-white;
+  font-family: monospace;
+}

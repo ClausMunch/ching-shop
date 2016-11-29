@@ -64,6 +64,7 @@ elixir(function (mix) {
         .typescript()
         .browserify("staff.js")
         .browserify("staff/product-options.js")
+        .browserify("staff/colours.js")
         .browserify("customer.js")
         .browserify("analytics.js")
         .scripts("../components/staff/Telegram.vue")
@@ -72,6 +73,7 @@ elixir(function (mix) {
             "css/customer.css",
             "js/staff.js",
             "js/product-options.js",
+            "js/colours.js",
             "js/customer.js",
             "js/analytics.js",
             "js/Telegram.js"

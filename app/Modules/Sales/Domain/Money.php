@@ -17,7 +17,7 @@ class Money
     private $currency;
 
     /**
-     * @param int    $amount   in sub-units
+     * @param int    $amount in sub-units
      * @param string $currency
      *
      * @throws \InvalidArgumentException
@@ -90,6 +90,14 @@ class Money
     public function formatted(): string
     {
         return app(MoneyFormatter::class)->format($this->money);
+    }
+
+    /**
+     * @return string
+     */
+    public function intFormatted(): string
+    {
+        return str_replace_last('.00', '', $this->formatted());
     }
 
     /**

@@ -1,12 +1,12 @@
 <form method="post"
       id="product-tags-form"
       class="form-inline"
-      action="{{ route(
+      action="{{route(
                   'catalogue.staff.products.put-tags',
                   ['sku' => $product->sku()]
-              ) }}">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
+              )}}">
+    {{csrf_field()}}
+    {{method_field('PUT')}}
     <label for="tag-ids">
         Select tags
     </label>
@@ -15,13 +15,13 @@
             id="tag-ids"
             multiple="multiple">
         @foreach ($tags as $tag)
-            <option value="{{ $tag->id }}"
-                    id="tag-option-{{ $tag->id  }}"
+            <option value="{{$tag->id}}"
+                    id="tag-option-{{$tag->id}}"
                     @if ($product->tags->contains('id', $tag->id))
                     selected
                     @endif
             >
-                {{ $tag->name }}
+                {{$tag->name}}
             </option>
         @endforeach
     </select>

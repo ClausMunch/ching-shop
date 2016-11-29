@@ -34,7 +34,9 @@
         "laravel-notification-channels/telegram": "^0.0.1",
         "irazasyed/telegram-bot-sdk": "^2.0",
         "stripe/stripe-php": "^4.1",
-        "moneyphp/money": "^3.0"
+        "moneyphp/money": "^3.0",
+        "sofa/eloquence": "^5.3",
+        "roave/security-advisories": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
