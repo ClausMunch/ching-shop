@@ -105,10 +105,19 @@ Route::group(
                 'middleware' => [
                     'auth',
                     'staff',
+                    'web',
                 ],
             ],
             function () {
                 Route::resource('orders', 'Staff\OrderController');
+                Route::resource('offers', 'Staff\OfferController');
+                Route::put(
+                    'offers/{id}/products',
+                    [
+                        'uses' => 'Staff\OfferController@putProducts',
+                        'as'   => 'offers.put-products',
+                    ]
+                );
             }
         );
     }

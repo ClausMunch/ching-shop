@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ColoursTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
+        $this->call(OffersTableSeeder::class);
 
         Model::reguard();
     }

@@ -7,6 +7,7 @@ use ChingShop\Image\ImageOwner;
 use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Tag\Tag;
+use ChingShop\Modules\Sales\Domain\Offer\Offer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property-read Collection|Price[]         $prices
  * @property-read Collection|Tag[]           $tags
  * @property-read Collection|ProductOption[] $options
+ * @property-read Collection|Offer[]         $offers
  *
  * @method Builder inStock()
  *
@@ -119,6 +121,14 @@ class Product extends Model implements HasPresenter, ImageOwner
     public function options(): HasMany
     {
         return $this->hasMany(ProductOption::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function offers(): BelongsToMany
+    {
+        return $this->belongsToMany(Offer::class);
     }
 
     /**

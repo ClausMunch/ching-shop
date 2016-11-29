@@ -10,6 +10,9 @@ window.addEventListener("load", function () {
         enableFiltering: true,
         checkboxName: "category-id"
     });
+    $(".multiselect").multiselect({
+        enableFiltering: true
+    });
 
     $(".form-control.counted").change(countedChange).keyup(countedChange);
 

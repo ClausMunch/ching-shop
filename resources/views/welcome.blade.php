@@ -4,7 +4,7 @@
 
 @section('body')
 
-    <h1 class="home-title">Beautiful 3D Pop-Up Cards</h1>
+    <h1 class="home-title">Beautiful Greetings Cards</h1>
 
     <section>
         @foreach($productRows as $products)

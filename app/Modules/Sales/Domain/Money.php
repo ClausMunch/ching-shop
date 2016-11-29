@@ -93,6 +93,14 @@ class Money
     }
 
     /**
+     * @return string
+     */
+    public function intFormatted(): string
+    {
+        return str_replace_last('.00', '', $this->formatted());
+    }
+
+    /**
      * @return float
      */
     public function asFloat(): float

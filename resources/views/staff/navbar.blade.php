@@ -69,20 +69,27 @@
                     </ul>
                 </li>
                 <li class="dropdown
-                    {{ $location->putActive('staff.orders') }}">
+                    {{ $location->putActive('shopping') }}">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"
                        role="button"
                        aria-haspopup="true"
                        aria-expanded="false">
-                        Orders <span class="caret"></span>
+                        Sales <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="{{ $location->putActive(
                                 'shopping.staff.orders.index'
                             ) }}">
                             <a href="{{ route('orders.index') }}">
-                                View all
+                                Orders
+                            </a>
+                        </li>
+                        <li class="{{ $location->putActive(
+                                'shopping.staff.offers'
+                            ) }}">
+                            <a href="{{ route('offers.index') }}">
+                                Offers
                             </a>
                         </li>
                     </ul>
