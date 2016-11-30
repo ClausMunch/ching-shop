@@ -22,9 +22,6 @@
             <thead>
             <tr>
                 <th>Preview</th>
-                <th>Amount</th>
-                <th>Effect</th>
-                <th>Min. Quantity</th>
                 <th>Edit</th>
                 <th>Products</th>
                 <th>Delete</th>
@@ -34,9 +31,6 @@
             @foreach($offers->all() as $offer)
                 <tr>
                     <td class="text-center">{!! $offer->name->render() !!}</td>
-                    <td>{{$offer->amount()}}</td>
-                    <td>{{$offer->effect}}</td>
-                    <td>{{$offer->quantity}}</td>
                     <td>
                         <a class="btn btn-default"
                            href="{{route('offers.edit', [$offer->id])}}">
@@ -54,7 +48,7 @@
                             <label for="offer-{{$offer->id}}-product-ids">
                                 <span class="sr-only">Select products</span>
                             </label>
-                            <select class="form-control multiselect"
+                            <select class="form-control multi"
                                     name="product-ids[]"
                                     id="offer-{{$offer->id}}-product-ids"
                                     multiple="multiple">

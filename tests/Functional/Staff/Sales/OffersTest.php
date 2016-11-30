@@ -142,7 +142,18 @@ class OffersTest extends FunctionalTest
      */
     public function testCanSetOffersForProduct()
     {
-        $this->markTestIncomplete();
+        /** @var Offer $offer */
+        $offer = factory(Offer::class)->create();
+        $product = $this->createProduct();
+
+        $this->actingAs($this->staffUser())
+            ->visit(route('products.show', ['sku' => $product->sku]))
+            ->select($offer->id, 'offer-ids[]')
+            ->press('Save offers')
+            ->see('Set offers');
+
+        $product->fresh('offers');
+        $this->assertContains($offer->id, $product->offers->pluck('id'));
     }
 
     /**

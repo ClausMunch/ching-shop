@@ -39,6 +39,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  *
  * @method Builder inStock()
  *
+ * @mixin \Eloquent
  * @mixin \Illuminate\Database\Eloquent\Builder
  * @mixin \Illuminate\Database\Query\Builder
  */

@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         enableFiltering: true,
         checkboxName: "category-id"
     });
-    $(".multiselect").multiselect({
+    $("select.multi").multiselect({
         enableFiltering: true
     });
 
