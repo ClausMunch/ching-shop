@@ -172,6 +172,26 @@ class OfferController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param string  $sku
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putProductOffers(Request $request, string $sku)
+    {
+        $product = Product::where('sku', '=', $sku)->firstOrFail();
+        $product->offers()->sync((array) $request->get('offer-ids'));
+
+        $this->webUi->successMessage(
+            "Set offers for product `{$product->sku}`."
+        );
+
+        return $this->webUi->redirect('products.show', ['sku' => $sku]);
+    }
+
+    /**
      * @param string $name
      * @param array  $bindData
      *

@@ -9,6 +9,7 @@ use ChingShop\Http\Requests\Staff\Catalogue\Product\PersistProductRequest;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\CatalogueRepository;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Sales\Domain\Offer\Offer;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -92,6 +93,7 @@ class ProductController extends Controller
         $tags = $this->catalogueRepository->loadAllTags();
         $colours = $this->catalogueRepository->loadAllColours();
         $categories = $this->catalogueRepository->loadAllCategories();
+        $offers = Offer::all();
 
         return $this->buildView(
             'show',
@@ -99,7 +101,8 @@ class ProductController extends Controller
                 'product',
                 'tags',
                 'colours',
-                'categories'
+                'categories',
+                'offers'
             )
         );
     }

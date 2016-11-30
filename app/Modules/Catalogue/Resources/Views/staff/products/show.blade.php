@@ -49,6 +49,10 @@
     <section>
         <div class="row">
             <div class="col-md-6">
+                <div class="well">
+                    <h3>Offers</h3>
+                    @include('catalogue::staff.products.offers')
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="well">

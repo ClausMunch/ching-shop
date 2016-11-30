@@ -118,6 +118,13 @@ Route::group(
                         'as'   => 'offers.put-products',
                     ]
                 );
+                Route::put(
+                    'products/{id}/offers',
+                    [
+                        'uses' => 'Staff\OfferController@putProductOffers',
+                        'as'   => 'product.put-offers',
+                    ]
+                );
             }
         );
     }
