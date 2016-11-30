@@ -9,29 +9,29 @@
           content="QW-UE9NaiIzGxJTlPs8jjb6VegQjV1KJGuNxgUvkU1U"/>
     <meta http-equiv="Content-Security-Policy"
           content="upgrade-insecure-requests">
-    @unless(env('APP_DEBUG'))
-        <meta http-equiv="Content-Security-Policy"
-              content="default-src 'self'
-              https://static.ching-shop.com;
-              script-src 'self' https://static.ching-shop.com
-              https://*.stripe.com
-              @stack('script-src')
-                      'nonce-{{Analytics::cspNonce()}}'
-              {{Analytics::cspHash()}}
-                      https://code.jquery.com/
-                      https://*.cloudflare.com
-                      https://*.google-analytics.com;
-                      img-src 'self' https://static.ching-shop.com
-                      https://*.google-analytics.com https://*.stripe.com;
-                      child-src 'self' https://*.stripe.com;
-                      object-src 'self' https://*.stripe.com;
-                      form-action 'self' {{ config('payment.paypal.base-url') }}
-                      https://*.stripe.com;
-                  style-src 'self' 'unsafe-inline' https://*.stripe.com
-                  https://fonts.googleapis.com;
-                  connect-src 'self' https://*.stripe.com;
-                  font-src 'self' https://fonts.gstatic.com data:;">
-    @endunless
+    {{--@unless(env('APP_DEBUG'))--}}
+    {{--<meta http-equiv="Content-Security-Policy"--}}
+    {{--content="default-src 'self'--}}
+    {{--https://static.ching-shop.com;--}}
+    {{--script-src 'self' https://static.ching-shop.com--}}
+    {{--https://*.stripe.com--}}
+    {{--@stack('script-src')--}}
+    {{--'nonce-{{Analytics::cspNonce()}}'--}}
+    {{--{{Analytics::cspHash()}}--}}
+    {{--https://code.jquery.com/--}}
+    {{--https://*.cloudflare.com--}}
+    {{--https://*.google-analytics.com;--}}
+    {{--img-src 'self' https://static.ching-shop.com--}}
+    {{--https://*.google-analytics.com https://*.stripe.com;--}}
+    {{--child-src 'self' https://*.stripe.com;--}}
+    {{--object-src 'self' https://*.stripe.com;--}}
+    {{--form-action 'self' {{ config('payment.paypal.base-url') }}--}}
+    {{--https://*.stripe.com;--}}
+    {{--style-src 'self' 'unsafe-inline' https://*.stripe.com--}}
+    {{--https://fonts.googleapis.com;--}}
+    {{--connect-src 'self' https://*.stripe.com;--}}
+    {{--font-src 'self' https://fonts.gstatic.com data:;">--}}
+    {{--@endunless--}}
     <link rel="icon"
           type="image/png"
           property="icon"
