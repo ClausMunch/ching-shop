@@ -20,11 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property OfferName                 $name
  * @property string                    $code
  * @property Money                     $price
- * @property integer                   $percentage
- * @property integer                   $quantity
+ * @property int                   $percentage
+ * @property int                   $quantity
  * @property string                    $effect
  * @property Colour                    $colour
- *
  * @property-read Collection|Product[] $products
  */
 class Offer extends Model implements HttpCrudInterface
@@ -116,8 +115,9 @@ class Offer extends Model implements HttpCrudInterface
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function getPriceAttribute()
     {

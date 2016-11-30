@@ -17,7 +17,7 @@ class Money
     private $currency;
 
     /**
-     * @param int    $amount in sub-units
+     * @param int    $amount   in sub-units
      * @param string $currency
      *
      * @throws \InvalidArgumentException
