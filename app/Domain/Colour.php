@@ -3,7 +3,7 @@
 namespace ChingShop\Domain;
 
 /**
- * Colour value object
+ * Colour value object.
  */
 class Colour
 {
@@ -123,7 +123,7 @@ class Colour
      */
     public function pastel(): Colour
     {
-        return $this->mix(new Colour(255, 200, 255));
+        return $this->mix(new self(255, 200, 255));
     }
 
     /**

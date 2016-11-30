@@ -36,8 +36,9 @@ class OfferController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -88,10 +89,11 @@ class OfferController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function edit($id)
     {
@@ -107,9 +109,10 @@ class OfferController extends Controller
      * @param PersistOfferRequest $request
      * @param int                 $id
      *
-     * @return \Illuminate\Http\Response
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(PersistOfferRequest $request, int $id)
     {
@@ -126,11 +129,12 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
-     * @return \Illuminate\Http\Response
      * @throws \Exception
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
     {
@@ -150,8 +154,9 @@ class OfferController extends Controller
      * @param Request $request
      * @param int     $id
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function putProducts(Request $request, int $id)
     {
@@ -170,8 +175,9 @@ class OfferController extends Controller
      * @param Request $request
      * @param string  $sku
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function putProductOffers(Request $request, string $sku)
     {
