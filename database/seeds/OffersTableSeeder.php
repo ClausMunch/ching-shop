@@ -1,5 +1,6 @@
 <?php
 
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Offer\Offer;
 
 /**
@@ -14,6 +15,12 @@ class OffersTableSeeder extends Seed
      */
     public function run()
     {
-        factory(Offer::class)->times(7)->create();
+        factory(Offer::class)->times(7)->create()->each(
+            function (Offer $offer) {
+                $offer->products()->saveMany(
+                    Product::inRandomOrder()->take(3)->get()
+                );
+            }
+        );
     }
 }
