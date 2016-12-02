@@ -18,6 +18,12 @@
 
         <p class="product-price price">{{$product->priceF()}}</p>
 
+        @unless($product->offers->isEmpty())
+            <p>
+                <strong>{{$product->offers->first()->name}}</strong>
+            </p>
+        @endunless
+
         <p>{{ $product->description() }}</p>
 
         <div class="alert alert-info" role="alert">
