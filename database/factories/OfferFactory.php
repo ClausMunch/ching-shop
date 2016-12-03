@@ -30,7 +30,7 @@ $percentage = function (Generator $faker) {
     ];
 };
 
-/** @var Illuminate\Database\Eloquent\Factory $factory */
+/* @var Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(
     Offer::class,
     function (Generator $faker) use ($priced, $percentage) {
