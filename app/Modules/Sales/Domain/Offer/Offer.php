@@ -20,8 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property OfferName                 $name
  * @property string                    $code
  * @property Money                     $price
- * @property int                   $percentage
- * @property int                   $quantity
+ * @property int                       $percentage
+ * @property int                       $quantity
  * @property string                    $effect
  * @property Colour                    $colour
  * @property-read Collection|Product[] $products
@@ -122,10 +122,10 @@ class Offer extends Model implements HttpCrudInterface
     public function getPriceAttribute()
     {
         if (array_key_exists('price', $this->attributes)) {
-            return new Money((int) $this->attributes['price'] ?? 0);
+            return Money::fromInt((int) $this->attributes['price'] ?? 0);
         }
 
-        return new Money(0);
+        return Money::fromInt(0);
     }
 
     /**
@@ -168,6 +168,15 @@ class Offer extends Model implements HttpCrudInterface
             0,
             6
         );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPriced(): bool
+    {
+        return isset($this->attributes['price'])
+            && (bool) $this->attributes['price'];
     }
 
     /**

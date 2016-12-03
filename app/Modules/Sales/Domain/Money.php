@@ -6,51 +6,69 @@ use Money\Currency;
 use Money\MoneyFormatter;
 
 /**
- * Convenience wrapper for money-php.
+ * A monetary amount.
+ * Wrapper for money-php.
  */
 class Money
 {
     /** @var \Money\Money */
     private $money;
 
-    /** @var Currency */
-    private $currency;
+    /**
+     * @param \Money\Money $money
+     */
+    public function __construct(\Money\Money $money)
+    {
+        $this->money = $money;
+    }
 
     /**
-     * @param int    $amount   in sub-units
+     * @param int    $amount
      * @param string $currency
      *
+     * @return Money
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $amount, string $currency = 'GBP')
-    {
-        $this->currency = new Currency($currency);
-        $this->money = new \Money\Money($amount, $this->currency);
+    public static function fromInt(
+        int $amount,
+        string $currency = 'GBP'
+    ): Money {
+        return new self(
+            new \Money\Money($amount, new Currency($currency))
+        );
     }
 
     /**
-     * @param float $amount
+     * @param float  $amount
      *
-     * @throws \InvalidArgumentException
+     * @param string $currency
      *
      * @return Money
+     * @throws \InvalidArgumentException
      */
-    public static function fromDecimal(float $amount): self
-    {
-        return new self((int) ($amount * 100));
+    public static function fromDecimal(
+        float $amount,
+        string $currency = 'GBP'
+    ): Money {
+        return new self(
+            new \Money\Money((int) ($amount * 100), new Currency($currency))
+        );
     }
 
     /**
-     * @param int $units
-     * @param int $subunits
-     *
-     * @throws \InvalidArgumentException
+     * @param int    $units
+     * @param int    $subunits
+     * @param string $currency
      *
      * @return Money
+     * @throws \InvalidArgumentException
      */
-    public static function fromSplit(int $units, int $subunits): self
-    {
-        return new self((int) (($units * 100) + $subunits));
+    public static function fromSplit(
+        int $units,
+        int $subunits,
+        string $currency = 'GBP'
+    ): Money {
+        return self::fromInt((int) (($units * 100) + $subunits), $currency);
     }
 
     /**
@@ -62,18 +80,44 @@ class Money
     }
 
     /**
-     * @param int $amount
+     * @param Money $amount
      *
      * @throws \InvalidArgumentException
      *
      * @return Money
      */
-    public function add(int $amount): self
+    public function add(Money $amount): Money
     {
-        return new self(
-            (int) $this->money->getAmount() + $amount,
-            $this->currency->getCode()
-        );
+        return new self($this->money->add($amount->wrapped()));
+    }
+
+    /**
+     * @param Money $amount
+     *
+     * @return Money
+     * @throws \InvalidArgumentException
+     */
+    public function subtract(Money $amount): Money
+    {
+        return new self($this->money->subtract($amount->wrapped()));
+    }
+
+    /**
+     * @param float $multiplier
+     *
+     * @return Money
+     */
+    public function multiply(float $multiplier): Money
+    {
+        return new self($this->money->multiply($multiplier));
+    }
+
+    /**
+     * @return Money
+     */
+    public function negative(): Money
+    {
+        return new self($this->money->multiply(-1));
     }
 
     /**
@@ -105,6 +149,14 @@ class Money
      */
     public function asFloat(): float
     {
-        return (float) $this->money->getAmount() / 100;
+        return (float) ($this->money->getAmount() / 100);
+    }
+
+    /**
+     * @return \Money\Money
+     */
+    public function wrapped(): \Money\Money
+    {
+        return $this->money;
     }
 }
