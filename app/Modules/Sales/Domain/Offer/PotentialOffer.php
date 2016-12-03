@@ -67,8 +67,9 @@ class PotentialOffer
     /**
      * The discount amount as a negative price.
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function price(): Money
     {
@@ -86,8 +87,9 @@ class PotentialOffer
     /**
      * What would the offer components have cost without the offer?
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     private function originalPrice(): Money
     {
@@ -100,8 +102,9 @@ class PotentialOffer
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     private function priceFromAbsolute(): Money
     {
@@ -119,8 +122,9 @@ class PotentialOffer
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     private function priceFromRelative(): Money
     {

@@ -12,7 +12,6 @@
 */
 
 /** @var Illuminate\Database\Eloquent\Factory $factory */
-
 $factory->define(
     ChingShop\Modules\User\Model\User::class,
     function (Faker\Generator $faker) {
@@ -47,4 +46,3 @@ $factory->define(
         return [];
     }
 );
-

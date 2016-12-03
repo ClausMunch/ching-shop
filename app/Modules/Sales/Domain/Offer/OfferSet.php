@@ -27,8 +27,9 @@ class OfferSet
     }
 
     /**
-     * @return Collection|PotentialOffer[]
      * @throws \InvalidArgumentException
+     *
+     * @return Collection|PotentialOffer[]
      */
     public function collection(): Collection
     {
@@ -40,12 +41,13 @@ class OfferSet
     }
 
     /**
-     * @return Collection|PotentialOffer[]
      * @throws \InvalidArgumentException
+     *
+     * @return Collection|PotentialOffer[]
      */
     private function collect(): Collection
     {
-        /**
+        /*
          * Create buckets for each offer, keeping duplicate offers.
          * Assign each product to the first applicable bucket with spaces left.
          * Filter the buckets to those that are full.
@@ -90,8 +92,9 @@ class OfferSet
     /**
      * Buckets for each potential offer, keeping duplicate offers.
      *
-     * @return Collection|PotentialOffer[]
      * @throws \InvalidArgumentException
+     *
+     * @return Collection|PotentialOffer[]
      */
     private function potentials(): Collection
     {

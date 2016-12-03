@@ -26,8 +26,9 @@ class Money
      * @param int    $amount
      * @param string $currency
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public static function fromInt(
         int $amount,
@@ -40,11 +41,11 @@ class Money
 
     /**
      * @param float  $amount
-     *
      * @param string $currency
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public static function fromDecimal(
         float $amount,
@@ -60,8 +61,9 @@ class Money
      * @param int    $subunits
      * @param string $currency
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public static function fromSplit(
         int $units,
@@ -94,8 +96,9 @@ class Money
     /**
      * @param Money $amount
      *
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function subtract(Money $amount): Money
     {
