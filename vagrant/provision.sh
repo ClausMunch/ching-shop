@@ -32,26 +32,6 @@ source $HOME/.bashrc
 git config --global core.excludesfile ~/.gitignore_global
 echo '.idea' > ~/.gitignore_global
 
-composer global require "squizlabs/php_codesniffer=@stable" --quiet
-composer global require "phpmd/phpmd=@stable" --quiet
-
-function appSetup
-{
-    cd ~/ching-shop
-    cp -n .env.example .env
-    composer install --quiet --no-interaction --no-scripts
-    bundler install
-    php ~/ching-shop/artisan config:clear
-    php artisan key:generate
-    php artisan migrate --seed
-    npm install --silent
-    gulp --silent
-    phpcs --config-set colors 1
-    phpcs --config-set severity 1
-    composer install --quiet --no-interaction
-}
-appSetup
-
 if [ ! -d ~/.bash_it ]; then
     echo 'Installing bash-it'
     git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
@@ -63,3 +43,25 @@ if ! grep -q 'gulp --completion' ~/.bashrc; then
     echo $'\n# Gulp tab completion' >> ~/.bashrc
     echo 'eval "$(gulp --completion=bash)"' >> ~/.bashrc
 fi
+
+composer global require "squizlabs/php_codesniffer=@stable" --quiet
+composer global require "phpmd/phpmd=@stable" --quiet
+
+function appSetup
+{
+    cd ~/ching-shop
+    cp -n .env.example .env
+    composer install --quiet --no-interaction --no-scripts
+    bundler install
+    php ~/ching-shop/artisan config:clear
+    php artisan key:generate
+    php artisan migrate:refresh --seed
+    npm install --silent
+    npm rebuild node-sass
+    gulp --silent
+    phpcs --config-set colors 1
+    phpcs --config-set severity 1
+    composer install --quiet --no-interaction
+    ./test.sh
+}
+appSetup

@@ -26,6 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.provision "shell", path: afterScriptPath
     end
 
+    config.ssh.forward_agent = true
+
     config.vm.provision "shell", path: "./vagrant/root-provision.sh", privileged: true
     config.vm.provision "shell", path: "./vagrant/provision.sh", privileged: false
 end
