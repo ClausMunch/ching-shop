@@ -1,9 +1,11 @@
 .offer-name {
+  align-items: center;
   border: .23em solid $floral-white;
   color: $floral-white;
-  display: table-cell;
+  display: flex;
   font-size: 90%;
   font-weight: bold;
+  justify-content: center;
   padding: 1em;
   text-align: center;
   vertical-align: middle;

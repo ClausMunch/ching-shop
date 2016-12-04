@@ -84,7 +84,7 @@ class OfferSet
             // Order offers in ascending discount amount.
             ->sort(
                 function (PotentialOffer $offer) {
-                    return $offer->price()->negative()->amount();
+                    return $offer->linePrice()->negative()->amount();
                 }
             );
     }
