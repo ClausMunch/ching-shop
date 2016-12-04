@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain\Basket;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Money;
+use ChingShop\Modules\Sales\Domain\Offer\OfferSet;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -148,5 +149,10 @@ class Basket extends Model implements HasPresenter
     public function subUnitPrice(): float
     {
         return $this->totalPrice()->asFloat() * 100;
+    }
+
+    public function offers(): OfferSet
+    {
+        return new OfferSet($this->basketItems);
     }
 }

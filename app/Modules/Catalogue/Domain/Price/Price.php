@@ -61,6 +61,17 @@ class Price extends Model
     ];
 
     /**
+     * @param int $units
+     * @param int $subunits
+     *
+     * @return Price
+     */
+    public static function fromSplit(int $units, int $subunits): Price
+    {
+        return new self(['units' => $units, 'subunits' => $subunits]);
+    }
+
+    /**
      * @throws \InvalidArgumentException
      *
      * @return string

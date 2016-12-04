@@ -1,5 +1,5 @@
 .offer-name {
-  border: .17em solid $floral-white;
+  border: .23em solid $floral-white;
   color: $floral-white;
   display: table-cell;
   font-size: 90%;
@@ -9,7 +9,7 @@
   vertical-align: middle;
 
   @include breakpoint(sm-up) {
-    font-size: 110%;
+    font-size: 117%;
   }
 }
 

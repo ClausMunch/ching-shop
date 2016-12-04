@@ -3,7 +3,9 @@
 namespace ChingShop\Modules\Sales\Domain\Basket;
 
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
+use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
+use ChingShop\Modules\Sales\Domain\Offer\OfferComponent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +21,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property Basket         $basket
  * @property ProductOption  $productOption
  */
-class BasketItem extends Model implements HasPresenter
+class BasketItem extends Model implements OfferComponent, HasPresenter
 {
     use SoftDeletes;
 
@@ -68,5 +70,21 @@ class BasketItem extends Model implements HasPresenter
         }
 
         return $this->productOption->product->prices->first()->asFloat();
+    }
+
+    /**
+     * @return int
+     */
+    public function id(): int
+    {
+        return (int) $this->id;
+    }
+
+    /**
+     * @return Product
+     */
+    public function product(): Product
+    {
+        return $this->productOption->product ?? new Product();
     }
 }
