@@ -538,8 +538,7 @@ class OfferSetTest extends FunctionalTest
 
         return (new Collection(array_fill(0, $count, '')))->map(
             function () use ($product, &$componentId) {
-                return new class($product, ++$componentId) implements OfferComponent
-                {
+                return new class($product, ++$componentId) implements OfferComponent {
                     /** @var Product */
                     private $product;
 

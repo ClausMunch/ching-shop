@@ -62,8 +62,9 @@ class BasketItem extends Model implements
     }
 
     /**
-     * @return float
      * @throws \InvalidArgumentException
+     *
+     * @return float
      */
     public function priceAsFloat(): float
     {
@@ -96,8 +97,9 @@ class BasketItem extends Model implements
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function linePrice(): Money
     {

@@ -157,8 +157,9 @@ class Basket extends Model implements HasPresenter
     }
 
     /**
-     * @return \Illuminate\Support\Collection|LinePriced[]
      * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Support\Collection|LinePriced[]
      */
     public function lines(): \Illuminate\Support\Collection
     {

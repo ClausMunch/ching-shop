@@ -3,9 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain;
 
 /**
- * Interface LinePriced
- *
- * @package ChingShop\Modules\Sales\Domain
+ * Interface LinePriced.
  */
 interface LinePriced
 {
