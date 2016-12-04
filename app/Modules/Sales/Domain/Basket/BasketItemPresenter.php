@@ -45,8 +45,9 @@ class BasketItemPresenter extends BasePresenter implements
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function linePrice(): Money
     {
