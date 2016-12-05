@@ -1,8 +1,7 @@
 <?php
 
-namespace Testing\Functional\Staff\Sales;
+namespace Testing\Functional\Customer\Sales;
 
-use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Sales\Domain\Offer\Offer;
 use ChingShop\Modules\Sales\Domain\Offer\OfferComponent;
@@ -10,12 +9,15 @@ use ChingShop\Modules\Sales\Domain\Offer\OfferSet;
 use ChingShop\Modules\Sales\Domain\Offer\PotentialOffer;
 use Illuminate\Support\Collection;
 use Testing\Functional\FunctionalTest;
+use Testing\Functional\Util\CreateCatalogue;
 
 /**
  * Test offer gathering and fulfillment logic.
  */
 class OfferSetTest extends FunctionalTest
 {
+    use CreateCatalogue;
+
     /** @var int */
     private $mockComponentId = 1;
 
@@ -276,7 +278,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product with a normal price of £3.50;
-        $product = $this->productWithPrice(3, 50);
+        $product = $this->createProductWithPrice(3, 50);
         $offer->products()->save($product);
 
         // When we have enough applicable components;
@@ -286,8 +288,11 @@ class OfferSetTest extends FunctionalTest
         $this->assertCount(1, $offerSet->collection());
         /** @var PotentialOffer $potentialOffer */
         $potentialOffer = $offerSet->collection()->first();
-        $this->assertEquals(-50, $potentialOffer->price()->amount());
-        $this->assertEquals('-£0.50', $potentialOffer->price()->formatted());
+        $this->assertEquals(-50, $potentialOffer->linePrice()->amount());
+        $this->assertEquals(
+            '-£0.50',
+            $potentialOffer->linePrice()->formatted()
+        );
     }
 
     /**
@@ -302,7 +307,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product;
-        $product = $this->productWithPrice(10);
+        $product = $this->createProductWithPrice(10);
         $offer->products()->save($product);
 
         // When we have enough applicable components;
@@ -312,8 +317,11 @@ class OfferSetTest extends FunctionalTest
         $this->assertCount(1, $offerSet->collection());
         /** @var PotentialOffer $potentialOffer */
         $potentialOffer = $offerSet->collection()->first();
-        $this->assertEquals(-500, $potentialOffer->price()->amount());
-        $this->assertEquals('-£5.00', $potentialOffer->price()->formatted());
+        $this->assertEquals(-500, $potentialOffer->linePrice()->amount());
+        $this->assertEquals(
+            '-£5.00',
+            $potentialOffer->linePrice()->formatted()
+        );
     }
 
     /**
@@ -328,7 +336,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product with a normal price of £2.95;
-        $product = $this->productWithPrice(2, 95);
+        $product = $this->createProductWithPrice(2, 95);
         $offer->products()->save($product);
 
         // When we have enough applicable components;
@@ -338,8 +346,11 @@ class OfferSetTest extends FunctionalTest
         $this->assertCount(1, $offerSet->collection());
         /** @var PotentialOffer $potentialOffer */
         $potentialOffer = $offerSet->collection()->first();
-        $this->assertEquals(-221, $potentialOffer->price()->amount());
-        $this->assertEquals('-£2.21', $potentialOffer->price()->formatted());
+        $this->assertEquals(-221, $potentialOffer->linePrice()->amount());
+        $this->assertEquals(
+            '-£2.21',
+            $potentialOffer->linePrice()->formatted()
+        );
     }
 
     /**
@@ -354,7 +365,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product with a normal price of £3.25;
-        $product = $this->productWithPrice(3, 25);
+        $product = $this->createProductWithPrice(3, 25);
         $offer->products()->save($product);
 
         // When we have enough applicable components;
@@ -364,8 +375,11 @@ class OfferSetTest extends FunctionalTest
         $this->assertCount(1, $offerSet->collection());
         /** @var PotentialOffer $potentialOffer */
         $potentialOffer = $offerSet->collection()->first();
-        $this->assertEquals(-488, $potentialOffer->price()->amount());
-        $this->assertEquals('-£4.88', $potentialOffer->price()->formatted());
+        $this->assertEquals(-488, $potentialOffer->linePrice()->amount());
+        $this->assertEquals(
+            '-£4.88',
+            $potentialOffer->linePrice()->formatted()
+        );
     }
 
     /**
@@ -381,7 +395,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product with a normal price of £3.85;
-        $product = $this->productWithPrice(3, 85);
+        $product = $this->createProductWithPrice(3, 85);
         $offer->products()->save($product);
 
         // When we have enough applicable components to get the offer 3 times;
@@ -391,10 +405,13 @@ class OfferSetTest extends FunctionalTest
         $this->assertCount(3, $offerSet->collection());
         $offerSet->collection()->each(
             function (PotentialOffer $potentialOffer) {
-                $this->assertEquals(-355, $potentialOffer->price()->amount());
+                $this->assertEquals(
+                    -355,
+                    $potentialOffer->linePrice()->amount()
+                );
                 $this->assertEquals(
                     '-£3.55',
-                    $potentialOffer->price()->formatted()
+                    $potentialOffer->linePrice()->formatted()
                 );
             }
         );
@@ -413,7 +430,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // For a product with a normal price of £6;
-        $productA = $this->productWithPrice(6, 00);
+        $productA = $this->createProductWithPrice(6, 00);
         $offerA->products()->save($productA);
 
         // And another offer with an absolute price of £10;
@@ -423,7 +440,7 @@ class OfferSetTest extends FunctionalTest
         );
 
         // For a product with a normal price of £8;
-        $productB = $this->productWithPrice(8, 00);
+        $productB = $this->createProductWithPrice(8, 00);
         $offerB->products()->save($productB);
 
         // When we have enough components to get both offers;
@@ -440,15 +457,21 @@ class OfferSetTest extends FunctionalTest
         /** @var PotentialOffer $potentialOfferA */
         $potentialOfferA = $potentialOffers->pop();
         $this->assertEquals($potentialOfferA->offer()->id, $offerA->id);
-        $this->assertEquals(-300, $potentialOfferA->price()->amount());
-        $this->assertEquals('-£3.00', $potentialOfferA->price()->formatted());
+        $this->assertEquals(-300, $potentialOfferA->linePrice()->amount());
+        $this->assertEquals(
+            '-£3.00',
+            $potentialOfferA->linePrice()->formatted()
+        );
 
         // And another discount of £6 for the second offer.
         /** @var PotentialOffer $potentialOfferB */
         $potentialOfferB = $potentialOffers->pop();
         $this->assertEquals($potentialOfferB->offer()->id, $offerB->id);
-        $this->assertEquals(-600, $potentialOfferB->price()->amount());
-        $this->assertEquals('-£6.00', $potentialOfferB->price()->formatted());
+        $this->assertEquals(-600, $potentialOfferB->linePrice()->amount());
+        $this->assertEquals(
+            '-£6.00',
+            $potentialOfferB->linePrice()->formatted()
+        );
     }
 
     /**
@@ -464,11 +487,11 @@ class OfferSetTest extends FunctionalTest
         );
 
         // With a product costing £4.50;
-        $productA = $this->productWithPrice(4, 50);
+        $productA = $this->createProductWithPrice(4, 50);
         $offer->products()->save($productA);
 
         // And a product costing £5.00;
-        $productB = $this->productWithPrice(5, 00);
+        $productB = $this->createProductWithPrice(5, 00);
         $offer->products()->save($productB);
 
         // When we have enough components to get the offer twice with mixed
@@ -487,14 +510,20 @@ class OfferSetTest extends FunctionalTest
         // One for £1.50: (£4.50 + £4.50 + £4.50) - £1.50 = £12;
         /** @var PotentialOffer $potentialOfferA */
         $potentialOfferA = $potentialOffers->pop();
-        $this->assertEquals(-150, $potentialOfferA->price()->amount());
-        $this->assertEquals('-£1.50', $potentialOfferA->price()->formatted());
+        $this->assertEquals(-150, $potentialOfferA->linePrice()->amount());
+        $this->assertEquals(
+            '-£1.50',
+            $potentialOfferA->linePrice()->formatted()
+        );
 
         // And one for £3.00: (£5.00 + £5.00 + £5.00) - £3.00 = £12;
         /** @var PotentialOffer $potentialOfferB */
         $potentialOfferB = $potentialOffers->pop();
-        $this->assertEquals(-300, $potentialOfferB->price()->amount());
-        $this->assertEquals('-£3.00', $potentialOfferB->price()->formatted());
+        $this->assertEquals(-300, $potentialOfferB->linePrice()->amount());
+        $this->assertEquals(
+            '-£3.00',
+            $potentialOfferB->linePrice()->formatted()
+        );
     }
 
     /**
@@ -544,19 +573,5 @@ class OfferSetTest extends FunctionalTest
                 };
             }
         );
-    }
-
-    /**
-     * @param $units
-     * @param $subunits
-     *
-     * @return Product
-     */
-    private function productWithPrice(int $units, int $subunits = 0): Product
-    {
-        $product = factory(Product::class)->create();
-        $product->prices()->save(Price::fromSplit($units, $subunits));
-
-        return $product;
     }
 }

@@ -42,6 +42,24 @@ trait CreateCatalogue
     }
 
     /**
+     * @param int $units
+     * @param int $subunits
+     *
+     * @return Product
+     */
+    protected function createProductWithPrice(
+        int $units,
+        int $subunits = 0
+    ): Product {
+        /** @var Product $product */
+        $product = factory(Product::class)->create();
+        $this->createProductOptionFor($product);
+        $product->prices()->save(Price::fromSplit($units, $subunits));
+
+        return $product;
+    }
+
+    /**
      * @return Tag
      */
     protected function createTag(): Tag
@@ -90,12 +108,7 @@ trait CreateCatalogue
      */
     protected function createPriceForProduct(Product $product): Price
     {
-        $price = new Price(
-            [
-                'units'    => random_int(1, 99),
-                'subunits' => random_int(0, 99),
-            ]
-        );
+        $price = Price::fromSplit(random_int(1, 99), random_int(0, 99));
         $product->prices()->save($price);
 
         return $price;

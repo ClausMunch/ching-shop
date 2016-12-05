@@ -3,13 +3,14 @@
 namespace ChingShop\Modules\Sales\Domain\Offer;
 
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
+use ChingShop\Modules\Sales\Domain\LinePriced;
 use ChingShop\Modules\Sales\Domain\Money;
 use Illuminate\Support\Collection;
 
 /**
  * An offer that might be applied.
  */
-class PotentialOffer
+class PotentialOffer implements LinePriced
 {
     /** @var Offer */
     private $offer;
@@ -71,7 +72,7 @@ class PotentialOffer
      *
      * @return Money
      */
-    public function price(): Money
+    public function linePrice(): Money
     {
         if (!$this->requirementsAreMet()) {
             return Money::fromInt(0);
@@ -82,6 +83,28 @@ class PotentialOffer
         }
 
         return $this->priceFromRelative();
+    }
+
+    /**
+     * @return string
+     */
+    public function listComponents(): string
+    {
+        $identifiers = $this->components->map(
+            function (OfferComponent $component) {
+                return $component->product()->sku;
+            }
+        );
+
+        if ($identifiers->count() > 1) {
+            return sprintf(
+                '%s and %s',
+                $identifiers->slice(0, -1)->implode(', '),
+                $identifiers->last()
+            );
+        }
+
+        return $identifiers->pop();
     }
 
     /**

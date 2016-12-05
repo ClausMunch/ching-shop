@@ -5,6 +5,9 @@ namespace ChingShop\Modules\Sales\Domain\Basket;
 use ChingShop\Modules\Catalogue\Domain\Price\Price;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
+use ChingShop\Modules\Catalogue\Domain\Product\ProductPresenter;
+use ChingShop\Modules\Sales\Domain\LinePriced;
+use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OfferComponent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +24,10 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property Basket         $basket
  * @property ProductOption  $productOption
  */
-class BasketItem extends Model implements OfferComponent, HasPresenter
+class BasketItem extends Model implements
+    OfferComponent,
+    HasPresenter,
+    LinePriced
 {
     use SoftDeletes;
 
@@ -56,20 +62,13 @@ class BasketItem extends Model implements OfferComponent, HasPresenter
     }
 
     /**
+     * @throws \InvalidArgumentException
+     *
      * @return float
      */
     public function priceAsFloat(): float
     {
-        /* @noinspection IsEmptyFunctionUsageInspection */
-        if (empty($this->productOption->product->prices)) {
-            return 0.0;
-        }
-
-        if (!$this->productOption->product->prices->first() instanceof Price) {
-            return 0.0;
-        }
-
-        return $this->productOption->product->prices->first()->asFloat();
+        return $this->linePrice()->asFloat();
     }
 
     /**
@@ -85,6 +84,34 @@ class BasketItem extends Model implements OfferComponent, HasPresenter
      */
     public function product(): Product
     {
-        return $this->productOption->product ?? new Product();
+        $product = $this->productOption->product;
+        if ($product instanceof Product) {
+            return $product;
+        }
+
+        if ($product instanceof ProductPresenter) {
+            return $product->getWrappedObject();
+        }
+
+        return new Product();
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     *
+     * @return Money
+     */
+    public function linePrice(): Money
+    {
+        /* @noinspection IsEmptyFunctionUsageInspection */
+        if (empty($this->productOption->product->prices)) {
+            return Money::fromInt(0);
+        }
+
+        if (!$this->productOption->product->prices->first() instanceof Price) {
+            return Money::fromInt(0);
+        }
+
+        return $this->productOption->product->price()->asMoney();
     }
 }

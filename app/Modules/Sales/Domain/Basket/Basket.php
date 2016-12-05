@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Sales\Domain\Basket;
 
 use ChingShop\Modules\Catalogue\Domain\Product\ProductOption;
 use ChingShop\Modules\Sales\Domain\Address;
+use ChingShop\Modules\Sales\Domain\LinePriced;
 use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OfferSet;
 use ChingShop\Modules\Sales\Domain\Order\Order;
@@ -129,15 +130,11 @@ class Basket extends Model implements HasPresenter
      */
     public function totalPrice(): Money
     {
-        return Money::fromDecimal(
-            array_reduce(
-                $this->basketItems->all(),
-                function (float $total, $item) {
-                    /* @var BasketItem $item */
-                    return $total + $item->priceAsFloat();
-                },
-                0.0
-            )
+        return $this->lines()->reduce(
+            function (Money $total, LinePriced $line) {
+                return $total->add($line->linePrice());
+            },
+            Money::fromInt(0)
         );
     }
 
@@ -151,8 +148,21 @@ class Basket extends Model implements HasPresenter
         return $this->totalPrice()->asFloat() * 100;
     }
 
+    /**
+     * @return OfferSet
+     */
     public function offers(): OfferSet
     {
         return new OfferSet($this->basketItems);
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     *
+     * @return \Illuminate\Support\Collection|LinePriced[]
+     */
+    public function lines(): \Illuminate\Support\Collection
+    {
+        return $this->offers()->collection()->merge($this->basketItems);
     }
 }

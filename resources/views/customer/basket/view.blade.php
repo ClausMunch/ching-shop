@@ -21,7 +21,7 @@
         {{ str_plural('item', $basket->basketItems->count()) }})
     </h1>
 
-    <table class="table table-striped table-condensed">
+    <table class="table table-striped basket-items">
         @foreach ($basket->basketItems as $basketItem)
             <tr>
                 <td>
@@ -67,7 +67,33 @@
                 </td>
             </tr>
         @endforeach
+        @if ($basket->offers()->collection()->count())
+            <tr>
+                <th colspan="4"><h4>Discounts</h4></th>
+            </tr>
+            @foreach($basket->offers()->collection() as $potentialOffer)
+                <tr>
+                    <td>
+                        <strong>{{$potentialOffer->offer()->name}}</strong>
+                        on
+                        {{$potentialOffer->listComponents()}}, saving you
+                        {{$potentialOffer->linePrice()
+                            ->negative()->formatted()}}.
+                    </td>
+                    <td>
+                        {!! $potentialOffer->offer()->name->render() !!}
+                    </td>
+                    <td class="basket-item-price price">
+                        {{$potentialOffer->linePrice()->formatted()}}
+                    </td>
+                    <td></td>
+                </tr>
+            @endforeach
+        @endif
         <tfoot>
+        <tr>
+            <th colspan="4"><h4>Total</h4></th>
+        </tr>
         <tr>
             <td></td>
             <td></td>
