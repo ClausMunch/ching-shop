@@ -108,13 +108,21 @@ class PotentialOffer implements LinePriced
     }
 
     /**
+     * @return string
+     */
+    public function description(): string
+    {
+        return "{$this->offer()->name} on {$this->listComponents()}";
+    }
+
+    /**
      * What would the offer components have cost without the offer?
      *
      * @throws \InvalidArgumentException
      *
      * @return Money
      */
-    private function originalPrice(): Money
+    public function originalPrice(): Money
     {
         return $this->components->reduce(
             function (Money $price, OfferComponent $component) {

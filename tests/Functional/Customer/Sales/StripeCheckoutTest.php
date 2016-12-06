@@ -2,7 +2,6 @@
 
 namespace Testing\Functional\Customer\Sales;
 
-use ChingShop\Modules\Sales\Http\Requests\Customer\StripePaymentRequest;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\MockStripe;
 use Testing\Functional\Util\SalesInteractions;
@@ -23,28 +22,9 @@ class StripeCheckoutTest extends FunctionalTest
         $this->completeCheckoutToAddress($this);
 
         // When we pay with Stripe;
-        $this->payWithStripe();
+        $this->payWithStripe($this, $this->customerUser());
 
         // Then the order should be complete.
         $this->see('order is confirmed');
-    }
-
-    /**
-     * @throws \InvalidArgumentException
-     */
-    private function payWithStripe()
-    {
-        $this->customerWillPayWithStripe();
-
-        return $this->actingAs($this->customerUser())
-            ->visit(route('sales.customer.checkout.choose-payment'))
-            ->post(
-                route('sales.customer.stripe.pay'),
-                [
-                    StripePaymentRequest::TOKEN => 'mock-token',
-                    'csrf_token'                => csrf_token(),
-                ]
-            )
-            ->followRedirects();
     }
 }

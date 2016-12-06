@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
+use ChingShop\Modules\Sales\Domain\LinePriced;
 use ChingShop\Modules\Sales\Domain\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read BasketItem     $basketItem
  * @property-read StockItem|null $stockItem
  */
-class OrderItem extends Model
+class OrderItem extends Model implements LinePriced
 {
     use SoftDeletes;
 
@@ -65,7 +66,7 @@ class OrderItem extends Model
      *
      * @return Money
      */
-    public function price(): Money
+    public function linePrice(): Money
     {
         return Money::fromDecimal($this->price);
     }
@@ -77,7 +78,7 @@ class OrderItem extends Model
      */
     public function priceAsFloat(): float
     {
-        return $this->price()->asFloat();
+        return $this->linePrice()->asFloat();
     }
 
     /**
@@ -102,9 +103,9 @@ class OrderItem extends Model
     public function category()
     {
         return $this->basketItem
-            ->productOption
-            ->product
-            ->category ?? new Category();
+                ->productOption
+                ->product
+                ->category ?? new Category();
     }
 
     /**

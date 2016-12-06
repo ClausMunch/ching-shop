@@ -4,6 +4,7 @@ namespace ChingShop\Modules\Sales\Domain\PayPal;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
+use ChingShop\Modules\Sales\Domain\Offer\PotentialOffer;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -102,19 +103,41 @@ class PayPalCheckout
     private function itemList(): ItemList
     {
         return (new ItemList())->setItems(
-            array_map(
-                function (BasketItem $basketItem) {
-                    $item = new Item();
-                    $item->setName($basketItem->productOption->fullName())
-                        ->setQuantity(1)
-                        ->setCurrency(self::DEFAULT_CURRENCY)
-                        ->setSku($basketItem->productOption->id)
-                        ->setPrice($basketItem->productOption->priceAsFloat());
+            $this->basket->basketItems
+                // Purchases
+                ->map(
+                    function (BasketItem $basketItem) {
+                        $item = new Item();
+                        $item->setName($basketItem->productOption->fullName())
+                            ->setQuantity(1)
+                            ->setCurrency(self::DEFAULT_CURRENCY)
+                            ->setSku($basketItem->productOption->id)
+                            ->setPrice(
+                                $basketItem->productOption->priceAsFloat()
+                            );
 
-                    return $item;
-                },
-                $this->basket->basketItems->all()
-            )
+                        return $item;
+                    }
+                )
+                // Discounts from offers
+                ->merge(
+                    $this->basket->offers()->collection()->map(
+                        function (PotentialOffer $offer) {
+                            $item = new Item();
+                            $item->setName((string) $offer->offer()->name)
+                                ->setDescription(
+                                    "Discount: {$offer->description()}"
+                                )
+                                ->setQuantity(1)
+                                ->setCurrency(self::DEFAULT_CURRENCY)
+                                ->setSku(str_slug($offer->offer()->name))
+                                ->setPrice($offer->linePrice()->asFloat());
+
+                            return $item;
+                        }
+                    )
+                )
+                ->all()
         )->setShippingAddress($this->shippingAddress());
     }
 

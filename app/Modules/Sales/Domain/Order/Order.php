@@ -5,7 +5,9 @@ namespace ChingShop\Modules\Sales\Domain\Order;
 use ChingShop\Domain\PublicId;
 use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use ChingShop\Modules\Sales\Domain\LinePriced;
 use ChingShop\Modules\Sales\Domain\Money;
+use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -18,13 +20,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @mixin \Eloquent
  *
- * @property int                    $id
- * @property \Carbon\Carbon         $created_at
- * @property \Carbon\Carbon         $updated_at
- * @property \Carbon\Carbon         $deleted_at
- * @property OrderItem[]|Collection $orderItems
- * @property User                   $user
- * @property Address                $address
+ * @property int                     $id
+ * @property \Carbon\Carbon          $created_at
+ * @property \Carbon\Carbon          $updated_at
+ * @property \Carbon\Carbon          $deleted_at
+ * @property OrderItem[]|Collection  $orderItems
+ * @property OrderOffer[]|Collection $orderOffers
+ * @property User                    $user
+ * @property Address                 $address
  */
 class Order extends Model
 {
@@ -38,6 +41,16 @@ class Order extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * An order may have order offers.
+     *
+     * @return HasMany
+     */
+    public function orderOffers(): HasMany
+    {
+        return $this->hasMany(OrderOffer::class);
     }
 
     /**
@@ -83,16 +96,15 @@ class Order extends Model
      */
     public function totalPrice(): Money
     {
-        return Money::fromDecimal(
-            array_reduce(
-                $this->orderItems->all(),
-                function (float $total, $item) {
-                    /* @var OrderItem $item */
-                    return $total + $item->priceAsFloat();
+        return (new \Illuminate\Support\Collection())
+            ->merge($this->orderItems)
+            ->merge($this->orderOffers)
+            ->reduce(
+                function (Money $total, LinePriced $item) {
+                    return $total->add($item->linePrice());
                 },
-                0.0
-            )
-        );
+                Money::fromInt(0)
+            );
     }
 
     /**

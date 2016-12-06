@@ -2,19 +2,21 @@
 
 namespace Testing;
 
+use Illuminate\Support\Collection;
+
 trait TestUtil
 {
     /**
      * @param int      $times
      * @param callable $action
      *
-     * @return array
+     * @return Collection
      */
-    private function repeat(int $times, callable $action): array
+    private function repeat(int $times, callable $action): Collection
     {
-        $results = [];
+        $results = new Collection();
         for ($i = 0; $i < $times; $i++) {
-            $results[] = $action();
+            $results->push($action());
         }
 
         return $results;

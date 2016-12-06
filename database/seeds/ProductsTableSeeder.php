@@ -101,7 +101,7 @@ class ProductsTableSeeder extends Seed
             function () use ($productOption) {
                 $productOption->stockItems()->save(new StockItem());
             },
-            random_int(1, 3)
+            random_int(5, 10)
         );
 
         $imagesIDs = [];

@@ -24,7 +24,7 @@
                                 {{ $item->basketItem->productOption->label }}
                             </td>
                             <td class="price">
-                                {{ $item->price()->formatted() }}
+                                {{ $item->linePrice()->formatted() }}
                             </td>
                         </tr>
                     @endforeach

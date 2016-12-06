@@ -12,8 +12,12 @@
     <a href="{{ route('sales.customer.checkout.address') }}" rel="back">
         &larr; Back to address
     </a>
-    <h2>Payment method</h2>
-    <p>How would you like to pay for this order?</p>
+
+    <div class="text-center">
+        <h2>Payment method</h2>
+
+        <p>How would you like to pay for this order?</p>
+    </div>
 
     <form action="{{route('sales.customer.stripe.pay')}}"
           method="post" class="stripe-checkout-form">
