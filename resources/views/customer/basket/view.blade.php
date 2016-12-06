@@ -72,7 +72,7 @@
                 <th colspan="4"><h4>Discounts</h4></th>
             </tr>
             @foreach($basket->offers()->collection() as $potentialOffer)
-                <tr>
+                <tr class="discount-{{$potentialOffer->offer()->id}}">
                     <td>
                         <strong>{{$potentialOffer->offer()->name}}</strong>
                         on

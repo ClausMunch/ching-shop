@@ -7,6 +7,8 @@ use ChingShop\Modules\Catalogue\Domain\Product\ProductOptionPresenter;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItem;
 use ChingShop\Modules\Sales\Domain\Basket\BasketItemPresenter;
+use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
+use ChingShop\Modules\Sales\Domain\Offer\PotentialOffer;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Domain\Order\OrderItem;
 use ChingShop\Modules\Sales\Events\NewOrderEvent;
@@ -61,6 +63,14 @@ class Cashier
         $payment = $this->paymentForSettlement($settlement);
 
         $order->payment()->save($payment);
+
+        $basket->offers()->collection()->each(
+            function (PotentialOffer $offer) use ($order) {
+                $order->orderOffers()->save(
+                    OrderOffer::makeFrom($order, $offer)
+                );
+            }
+        );
 
         $this->dispatcher->fire(new NewOrderEvent($order));
 

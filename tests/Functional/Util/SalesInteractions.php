@@ -41,16 +41,12 @@ trait SalesInteractions
         $this->press('Pay with PayPal');
         $this->see('order-id');
 
-        $this->orders[] = Order::where(
-            'id',
-            '=',
-            Order::privateId($test->getElementText('#order-id'))
-        )->first();
+        $order = $this->orderFromPage($test);
 
         $test->assertInstanceOf(Address::class, $this->address);
-        $test->assertInstanceOf(Order::class, end($this->orders));
+        $test->assertInstanceOf(Order::class, $order);
 
-        return end($this->orders);
+        return $order;
     }
 
     /**
@@ -143,5 +139,21 @@ trait SalesInteractions
         $this->address = Address::where('name', '=', $addressName)->first();
 
         return $this->address;
+    }
+
+    /**
+     * @param FunctionalTest $test
+     *
+     * @return Order|null
+     */
+    private function orderFromPage(FunctionalTest $test): Order
+    {
+        $this->orders[] = Order::where(
+            'id',
+            '=',
+            Order::privateId($test->getElementText('#order-id'))
+        )->first();
+
+        return end($this->orders);
     }
 }

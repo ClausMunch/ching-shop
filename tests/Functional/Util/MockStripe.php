@@ -2,9 +2,12 @@
 
 namespace Testing\Functional\Util;
 
+use ChingShop\Modules\Sales\Http\Requests\Customer\StripePaymentRequest;
+use ChingShop\Modules\User\Model\User;
 use Mockery;
 use Mockery\MockInterface;
 use Stripe\Charge;
+use Testing\Functional\FunctionalTest;
 
 /**
  * Mock out Stripe interactions in tests.
@@ -13,6 +16,30 @@ trait MockStripe
 {
     /** @var Charge|MockInterface */
     private $mockStripeCharge;
+
+    /**
+     * @param FunctionalTest $test
+     * @param User           $user
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return FunctionalTest
+     */
+    private function payWithStripe(FunctionalTest $test, User $user)
+    {
+        $this->customerWillPayWithStripe();
+
+        return $test->actingAs($user)
+            ->visit(route('sales.customer.checkout.choose-payment'))
+            ->post(
+                route('sales.customer.stripe.pay'),
+                [
+                    StripePaymentRequest::TOKEN => 'mock-token',
+                    'csrf_token'                => csrf_token(),
+                ]
+            )
+            ->followRedirects();
+    }
 
     /**
      * @param string $status

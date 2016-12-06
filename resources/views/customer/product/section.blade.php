@@ -14,7 +14,7 @@
                     {{ $product->name() }}
                 </a>
             </h{{$level or 2}}>
-            {{ $product->description() }}
+            <p>{{$product->description()}}</p>
             <hr>
             <div class="row">
                 <div class="col-md-2">
