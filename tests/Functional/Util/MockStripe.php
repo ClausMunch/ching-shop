@@ -21,8 +21,9 @@ trait MockStripe
      * @param FunctionalTest $test
      * @param User           $user
      *
-     * @return FunctionalTest
      * @throws \InvalidArgumentException
+     *
+     * @return FunctionalTest
      */
     private function payWithStripe(FunctionalTest $test, User $user)
     {

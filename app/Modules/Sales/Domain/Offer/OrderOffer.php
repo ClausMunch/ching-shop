@@ -16,11 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Carbon\Carbon  $created_at
  * @property \Carbon\Carbon  $updated_at
  * @property \Carbon\Carbon  $deleted_at
- *
  * @property string          $offer_name
  * @property Money           $amount
  * @property Money           $original_price
- *
  * @property-read Order      $order
  * @property-read Offer|null $offer
  */
@@ -41,14 +39,15 @@ class OrderOffer extends Model implements LinePriced
      * @param Order          $order
      * @param PotentialOffer $potentialOffer
      *
-     * @return OrderOffer
      * @throws \InvalidArgumentException
+     *
+     * @return OrderOffer
      */
     public static function makeFrom(
         Order $order,
         PotentialOffer $potentialOffer
     ): OrderOffer {
-        return new OrderOffer(
+        return new self(
             [
                 'order_id'       => $order->id,
                 'offer_id'       => $potentialOffer->offer()->id,
@@ -60,8 +59,9 @@ class OrderOffer extends Model implements LinePriced
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function getAmountAttribute()
     {
@@ -69,8 +69,9 @@ class OrderOffer extends Model implements LinePriced
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function getOriginalPriceAttribute()
     {
@@ -78,8 +79,9 @@ class OrderOffer extends Model implements LinePriced
     }
 
     /**
-     * @return Money
      * @throws \InvalidArgumentException
+     *
+     * @return Money
      */
     public function linePrice(): Money
     {
