@@ -99,8 +99,4 @@ window.addEventListener("load", function () {
 
     suggestColours();
     $(".suggest-colours").on("click", suggestColours);
-
-    $("input.pastel").change(function () {
-        this.value = Colour.fromHex(this.value).pastel().hexCode();
-    });
 });

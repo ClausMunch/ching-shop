@@ -9,6 +9,7 @@ use ChingShop\Modules\Sales\Domain\Money;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use League\Uri\Schemes\Http;
 
 /**
  * @mixin \Eloquent
@@ -207,5 +208,23 @@ class Offer extends Model implements HttpCrudInterface
     public function crudId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return Http
+     */
+    public function url(): Http
+    {
+        return Http::createFromString(
+            route('offers.view', [$this->id, $this->slug()])
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function slug(): string
+    {
+        return str_slug($this->name);
     }
 }

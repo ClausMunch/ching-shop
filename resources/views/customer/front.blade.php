@@ -39,6 +39,13 @@
                 </a>
             </div>
             <div class="col-xs-6 col-sm-3">
+                <a href="{{route('offers.products')}}"
+                   class="top-cats-link">
+                    <span class="glyphicon glyphicon-star-empty"></span>&nbsp;
+                    <span class="hidden-xs">Special</span> Offers
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-3">
                 <a href="/category/1392771656/birthday-cards"
                    class="top-cats-link">
                     <span class="icon icon-cake"></span>&nbsp;
@@ -50,13 +57,6 @@
                    class="top-cats-link">
                     <span class="glyphicon glyphicon-heart"></span>&nbsp;
                     Romantic <span class="hidden-xs">Cards</span>
-                </a>
-            </div>
-            <div class="col-xs-6 col-sm-3">
-                <a href="/category/617978927/romantic-cards"
-                   class="top-cats-link">
-                    <span class="icon icon-wedding-rings"></span>&nbsp;
-                    Wedding <span class="hidden-xs">Cards</span>
                 </a>
             </div>
         </div>

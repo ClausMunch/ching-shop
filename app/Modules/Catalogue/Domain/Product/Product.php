@@ -253,6 +253,8 @@ class Product extends Model implements HasPresenter, ImageOwner
             },
             'category'               => function () {
             },
+            'offers'                 => function () {
+            },
         ];
     }
 }

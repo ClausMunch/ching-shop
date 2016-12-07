@@ -13,6 +13,11 @@
   @include breakpoint(sm-up) {
     font-size: 117%;
   }
+
+  &:hover {
+    border-color: $text-color;
+    color: $floral-white;
+  }
 }
 
 .offer-name-short {
