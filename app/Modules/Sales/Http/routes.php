@@ -26,6 +26,20 @@ Route::group(
                 'uses' => 'Customer\BasketController@removeBasketItemAction',
             ]
         );
+        Route::get(
+            'special-offers/products',
+            [
+                'as'   => 'offers.products',
+                'uses' => 'Customer\OffersController@products',
+            ]
+        )->middleware(['customer']);
+        Route::get(
+            'special-offers/{id}/{slug}',
+            [
+                'as'   => 'offers.view',
+                'uses' => 'Customer\OffersController@view',
+            ]
+        )->middleware(['customer']);
 
         Route::group(
             [

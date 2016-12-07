@@ -1,6 +1,11 @@
 <section class="product-section">
     <div class="row">
         <div class="col-md-4">
+            @unless($product->offers->isEmpty())
+                <div class="offer-overlay">
+                    {!! $product->offers->first()->name->render() !!}
+                </div>
+            @endunless
             <img class="img-responsive photo"
                  alt="{{ $product->mainImage()->altText() }}"
                  @if ($product->mainImage()->isSelfHosted())

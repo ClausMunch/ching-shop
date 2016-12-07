@@ -3,6 +3,7 @@
 namespace ChingShop\Modules\Sales\Domain\Offer;
 
 use Illuminate\Contracts\View\View;
+use League\Uri\Schemes\Http;
 
 /**
  * Presentation object for the name of an offer.
@@ -56,6 +57,14 @@ class OfferName
         }
 
         return view('sales::offer.name-short', ['name' => $this]);
+    }
+
+    /**
+     * @return Http
+     */
+    public function url(): Http
+    {
+        return $this->offer->url();
     }
 
     /**

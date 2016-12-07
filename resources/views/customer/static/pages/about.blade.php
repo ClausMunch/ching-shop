@@ -21,7 +21,7 @@
     <p>Delivery to the UK is fast and free for all orders.</p>
 
     <p>
-        We dispatch from London and always send first class, meaning you get
+        We dispatch from London and always send quickly, meaning you get
         your order as soon as possible.
     </p>
 

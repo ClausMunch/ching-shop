@@ -20,7 +20,9 @@
 
         @unless($product->offers->isEmpty())
             <p>
-                <strong>{{$product->offers->first()->name}}</strong>
+                <a href="{{$product->offers->first()->url()}}">
+                    {{$product->offers->first()->name}}
+                </a>
             </p>
         @endunless
 

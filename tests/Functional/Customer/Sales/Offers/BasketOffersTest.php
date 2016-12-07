@@ -1,6 +1,6 @@
 <?php
 
-namespace Testing\Functional\Customer\Sales;
+namespace Testing\Functional\Customer\Sales\Offers;
 
 use ChingShop\Modules\Catalogue\Domain\Inventory\StockItem;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
