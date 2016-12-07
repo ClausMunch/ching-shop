@@ -49,8 +49,9 @@ class OffersController extends Controller
      * @param int    $offerId
      * @param string $slug
      *
-     * @return View|RedirectResponse
      * @throws ModelNotFoundException
+     *
+     * @return View|RedirectResponse
      */
     public function view(int $offerId, string $slug)
     {
@@ -66,7 +67,7 @@ class OffersController extends Controller
         $products = Product::whereHas(
             'offers',
             function ($query) use ($offer) {
-                /** @var Builder $query */
+                /* @var Builder $query */
                 $query->where('id', '=', $offer->id);
             }
         )->with(Product::standardRelations())->paginate();
