@@ -49,7 +49,7 @@ class OfferNameTest extends TestCase
                         'price'    => 1000,
                     ]
                 ),
-                '2 for £10',
+                'Any 2 for £10',
             ],
             [
                 new Offer(
@@ -59,7 +59,7 @@ class OfferNameTest extends TestCase
                         'price'    => 575,
                     ]
                 ),
-                '3 for £5.75',
+                'Any 3 for £5.75',
             ],
             [
                 new Offer(
