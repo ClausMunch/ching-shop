@@ -10,7 +10,8 @@ use League\Uri\Schemes\Http;
  */
 class OfferName
 {
-    const LENGTH_SHORT = 10;
+    const LENGTH_SHORT = 15;
+
     /** @var string */
     private $preSet;
 
@@ -98,7 +99,7 @@ class OfferName
     {
         if ($this->offer->isAbsolute()) {
             return sprintf(
-                '%d for %s',
+                'Any %d for %s',
                 $this->offer->quantity,
                 $this->offer->price->intFormatted()
             );
