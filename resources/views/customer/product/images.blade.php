@@ -1,10 +1,5 @@
 <div class="row">
     <div class="col-sm-10 col-sm-push-2">
-        @unless($product->offers->isEmpty())
-            <div class="offer-overlay">
-                {!! $product->offers->first()->name->render() !!}
-            </div>
-        @endunless
         @if ($product->mainImage())
             <img class="img-responsive photo"
                  id="product-main-image"
@@ -15,6 +10,11 @@
                  @endif
                  alt="{{ $product->mainImage()->altText() }}">
         @endif
+        @unless($product->offers->isEmpty())
+            <div class="offer-overlay">
+                {!! $product->offers->first()->name->render() !!}
+            </div>
+        @endunless
     </div>
     <div class="col-sm-2 col-sm-pull-10">
         @foreach($product->images() as $i => $image)
