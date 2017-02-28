@@ -23,8 +23,9 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      *
-     * @return void
      * @throws \InvalidArgumentException
+     *
+     * @return void
      */
     public function boot()
     {

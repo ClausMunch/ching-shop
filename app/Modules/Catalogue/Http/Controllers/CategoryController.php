@@ -63,7 +63,7 @@ class CategoryController extends Controller
             ->load(
                 [
                     'products' => function (HasMany $query) {
-                        /** @var Product|HasMany $query */
+                        /* @var Product|HasMany $query */
                         $query->with(Product::standardRelations());
                     },
                 ]
