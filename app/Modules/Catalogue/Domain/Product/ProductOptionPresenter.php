@@ -8,8 +8,9 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 /**
  * Class ProductOptionPresenter.
  */
-class ProductOptionPresenter extends BasePresenter
-    implements ProductOptionInterface, HttpCrudInterface
+class ProductOptionPresenter extends BasePresenter implements
+    ProductOptionInterface,
+    HttpCrudInterface
 {
     /** @var ProductOption */
     protected $wrappedObject;
