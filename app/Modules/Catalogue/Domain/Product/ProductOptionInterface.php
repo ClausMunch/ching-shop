@@ -3,9 +3,7 @@
 namespace ChingShop\Modules\Catalogue\Domain\Product;
 
 /**
- * Interface ProductOptionInterface
- *
- * @package ChingShop\Modules\Catalogue\Domain\Product
+ * Interface ProductOptionInterface.
  */
 interface ProductOptionInterface
 {

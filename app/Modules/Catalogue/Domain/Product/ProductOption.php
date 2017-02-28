@@ -31,8 +31,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  *
  * @mixin \Eloquent
  */
-class ProductOption extends Model
-    implements ProductOptionInterface, HasPresenter, ImageOwner
+class ProductOption extends Model implements ProductOptionInterface, HasPresenter, ImageOwner
 {
     use SoftDeletes;
 
