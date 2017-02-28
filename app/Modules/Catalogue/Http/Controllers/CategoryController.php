@@ -7,6 +7,7 @@ use ChingShop\Http\WebUi;
 use ChingShop\Modules\Catalogue\Domain\Category;
 use ChingShop\Modules\Catalogue\Domain\Product\Product;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\RedirectResponse;
 
 /**
@@ -61,8 +62,8 @@ class CategoryController extends Controller
         $tree = $category->getDescendantsAndSelf()
             ->load(
                 [
-                    'products' => function ($query) {
-                        /* @var Product $query */
+                    'products' => function (HasMany $query) {
+                        /* @var Product|HasMany $query */
                         $query->with(Product::standardRelations());
                     },
                 ]

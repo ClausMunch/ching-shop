@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property OrderOffer[]|Collection $orderOffers
  * @property User                    $user
  * @property Address                 $address
+ * @property-read Payment            $payment
  */
 class Order extends Model
 {

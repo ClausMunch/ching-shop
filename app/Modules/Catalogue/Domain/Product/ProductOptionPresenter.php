@@ -8,7 +8,9 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 /**
  * Class ProductOptionPresenter.
  */
-class ProductOptionPresenter extends BasePresenter implements HttpCrudInterface
+class ProductOptionPresenter extends BasePresenter implements
+    ProductOptionInterface,
+    HttpCrudInterface
 {
     /** @var ProductOption */
     protected $wrappedObject;
@@ -50,5 +52,13 @@ class ProductOptionPresenter extends BasePresenter implements HttpCrudInterface
     public function crudId(): string
     {
         return $this->wrappedObject->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInStock(): bool
+    {
+        return $this->wrappedObject->isInStock();
     }
 }

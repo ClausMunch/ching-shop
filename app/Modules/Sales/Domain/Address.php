@@ -7,6 +7,7 @@ use ChingShop\Modules\Sales\Domain\Order\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 /**
  * @mixin \Eloquent
@@ -52,5 +53,22 @@ class Address extends Model
     public function order(): HasOne
     {
         return $this->hasOne(Order::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (new Collection(
+            [
+                $this->name,
+                $this->line_one,
+                $this->line_two,
+                $this->city,
+                $this->post_code,
+                $this->country_code,
+            ]
+        ))->filter()->implode(', ');
     }
 }

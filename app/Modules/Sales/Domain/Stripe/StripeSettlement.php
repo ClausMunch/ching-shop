@@ -7,6 +7,7 @@ use ChingShop\Modules\Sales\Domain\Payment\Settlement;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use League\Uri\Schemes\Http;
 use Stripe\Charge;
 
 /**
@@ -22,7 +23,7 @@ use Stripe\Charge;
  * @property int            $amount
  * @property string         $balance_transaction
  * @property bool           $captured
- * @property int        $created
+ * @property int            $created
  * @property string         $currency
  * @property string         $description
  * @property string         $failure_code
@@ -52,6 +53,14 @@ class StripeSettlement extends Model implements Settlement
     public function type(): string
     {
         return 'stripe';
+    }
+
+    /**
+     * @return string
+     */
+    public function id(): string
+    {
+        return (string) $this->stripe_id;
     }
 
     /**
@@ -90,5 +99,17 @@ class StripeSettlement extends Model implements Settlement
     public function payment(): MorphOne
     {
         return $this->morphOne(Payment::class, 'settlement');
+    }
+
+    /**
+     * Get a URL for information about this settlement.
+     *
+     * @return Http
+     */
+    public function url(): Http
+    {
+        return Http::createFromString(
+            "https://dashboard.stripe.com/payments/{$this->stripe_id}"
+        );
     }
 }
