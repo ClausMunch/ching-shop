@@ -2,8 +2,9 @@
 
 namespace ChingShop\Providers;
 
+use ChingShop\Modules\User\Model\User;
+use Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 /**
  * Class AuthServiceProvider.
@@ -23,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      * Register any authentication / authorization services.
      *
      * @return void
+     * @throws \InvalidArgumentException
      */
     public function boot()
     {

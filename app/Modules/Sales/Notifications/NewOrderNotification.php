@@ -3,7 +3,10 @@
 namespace ChingShop\Modules\Sales\Notifications;
 
 use App;
+use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Order\Order;
+use ChingShop\Modules\Sales\Domain\Order\OrderItem;
+use ChingShop\Modules\Sales\Domain\Payment\Settlement;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -63,7 +66,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage())
+        $message = (new MailMessage())
             ->to($notifiable->email)
             ->subject(
                 sprintf(
@@ -73,16 +76,42 @@ class NewOrderNotification extends Notification implements ShouldQueue
                 )
             )
             ->line(
-                "Hi {$notifiable->name},"
-            )
-            ->line(
                 'A new order has been made for'
                 ." {$this->order->totalPrice()->formatted()}."
             )
-            ->action(
-                "View new order #{$this->order->publicId()}",
-                route('orders.show', [$this->order])
-            );
+            ->line((string) $this->order->address);
+
+        $this->order->orderItems->each(
+            function (OrderItem $item) use ($message) {
+                $message->line(
+                    "{$item->name()} ({$item->sku()}): {$item->linePrice()}"
+                );
+            }
+        );
+        $this->order->orderOffers->each(
+            function (OrderOffer $offer) use ($message) {
+                $message->line("{$offer->offer_name}: {$offer->linePrice()}");
+            }
+        );
+
+        $message->action(
+            "View new order #{$this->order->publicId()}",
+            route('orders.show', [$this->order])
+        );
+
+        /** @var Settlement $settlement */
+        $settlement = $this->order->payment->settlement;
+        $message->action(
+            sprintf(
+                'View %s payment %s for order #%s',
+                $settlement->type(),
+                $settlement->id(),
+                $this->order->publicId()
+            ),
+            $settlement->url()
+        );
+
+        return $message;
     }
 
     /**
@@ -94,6 +123,9 @@ class NewOrderNotification extends Notification implements ShouldQueue
     {
         $env = App::environment();
 
+        /** @var Settlement $settlement */
+        $settlement = $this->order->payment->settlement;
+
         return TelegramMessage::create()
             ->content(
                 sprintf(
@@ -102,9 +134,32 @@ class NewOrderNotification extends Notification implements ShouldQueue
                     "Total {$this->order->totalPrice()->formatted()}"
                 )
             )
+            ->content(
+                $this->order->orderItems->map(
+                    function (OrderItem $item) {
+                        return $item->name();
+                    }
+                )->implode(', ')
+            )
+            ->content(
+                $this->order->orderOffers->map(
+                    function (OrderOffer $offer) {
+                        return $offer->offer_name;
+                    }
+                )->implode(', ')
+            )
             ->button(
                 "View new order #{$this->order->publicId()}",
                 route('orders.show', [$this->order])
+            )
+            ->button(
+                sprintf(
+                    'View %s payment %s for order #%s',
+                    $settlement->type(),
+                    $settlement->id(),
+                    $this->order->publicId()
+                ),
+                $settlement->url()
             );
     }
 

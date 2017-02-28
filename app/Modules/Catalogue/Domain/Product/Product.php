@@ -154,8 +154,7 @@ class Product extends Model implements HasPresenter, ImageOwner
     public function isInStock(): bool
     {
         return $this->options->contains(
-            function ($option) {
-                /* @var ProductOption $option */
+            function (ProductOptionInterface $option) {
                 return $option->isInStock();
             }
         );

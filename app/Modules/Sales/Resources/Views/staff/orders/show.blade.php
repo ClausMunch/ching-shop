@@ -41,13 +41,38 @@
                     <tr>
                         <td>Payment ID:</td>
                         <td>
-                            {{ $order->payment->settlement->payment_id }}
+                            <a href="{{$order->payment->settlement->url()}}"
+                               title="View payment in PayPal">
+                                {{$order->payment->settlement->payment_id}}
+                            </a>
                         </td>
                     </tr>
                     <tr>
                         <td>Payer ID:</td>
                         <td>
                             {{ $order->payment->settlement->payer_id }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            @endif
+            @if ($order->payment->settlement->type() === 'stripe')
+                <p>Stripe</p>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Payment ID:</td>
+                        <td>
+                            <a href="{{$order->payment->settlement->url()}}"
+                               title="View payment in Stripe">
+                                {{$order->payment->settlement->stripe_id}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Payer:</td>
+                        <td>
+                            {{$order->payment->settlement->name}}
                         </td>
                     </tr>
                     </tbody>
