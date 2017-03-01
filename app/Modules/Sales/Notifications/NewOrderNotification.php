@@ -101,14 +101,14 @@ class NewOrderNotification extends Notification implements ShouldQueue
 
         /** @var Settlement $settlement */
         $settlement = $this->order->payment->settlement;
-        $message->action(
+        $message->line(
             sprintf(
-                'View %s payment %s for order #%s',
+                '<a href="%s">View %s payment %s for order #%s</a>',
                 $settlement->type(),
                 $settlement->id(),
-                $this->order->publicId()
-            ),
-            $settlement->url()
+                $this->order->publicId(),
+                $settlement->url()
+            )
         );
 
         return $message;
@@ -159,7 +159,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
                     $settlement->id(),
                     $this->order->publicId()
                 ),
-                $settlement->url()
+                (string) $settlement->url()
             );
     }
 
