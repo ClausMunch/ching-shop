@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string                $payment_id
  * @property float                 $amount
  * @property Basket|null           $basket
- *
  * @property-read PayPalSettlement $settlement
  */
 class PayPalInitiation extends Model
