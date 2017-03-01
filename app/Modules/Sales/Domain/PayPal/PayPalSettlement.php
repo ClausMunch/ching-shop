@@ -5,6 +5,7 @@ namespace ChingShop\Modules\Sales\Domain\PayPal;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\Sales\Domain\Payment\Settlement;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use League\Uri\Schemes\Http;
@@ -14,19 +15,22 @@ use League\Uri\Schemes\Http;
  *
  * @mixin \Eloquent
  *
- * @property int            $id
- * @property string         $payment_id
- * @property string         $payer_id
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $deleted_at
+ * @property int                   $id
+ * @property string                $payment_id
+ * @property string                $transaction_id
+ * @property string                $payer_id
+ * @property \Carbon\Carbon        $created_at
+ * @property \Carbon\Carbon        $updated_at
+ * @property \Carbon\Carbon        $deleted_at
+ *
+ * @property-read PayPalInitiation $initiation
  */
 class PayPalSettlement extends Model implements Settlement
 {
     use SoftDeletes;
 
     /** @var string[] */
-    protected $fillable = ['payment_id', 'payer_id'];
+    protected $fillable = ['payment_id', 'transaction_id', 'payer_id'];
 
     /** @var string */
     protected $table = 'paypal_settlements';
@@ -37,6 +41,18 @@ class PayPalSettlement extends Model implements Settlement
     public function payment(): MorphOne
     {
         return $this->morphOne(Payment::class, 'settlement');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function initiation(): HasOne
+    {
+        return $this->hasOne(
+            PayPalInitiation::class,
+            'payment_id',
+            'payment_id'
+        );
     }
 
     /**
@@ -52,6 +68,10 @@ class PayPalSettlement extends Model implements Settlement
      */
     public function id(): string
     {
+        if (isset($this->transaction_id)) {
+            return $this->transaction_id;
+        }
+
         return (string) $this->payment_id;
     }
 
@@ -60,8 +80,12 @@ class PayPalSettlement extends Model implements Settlement
      */
     public function url(): Http
     {
-        return Http::createFromString(
-            config('payment.paypal.base-url')
-        )->withPath("/activity/payment/{$this->payment_id}");
+        $base = Http::createFromString(config('payment.paypal.base-url'));
+
+        if (empty($this->transaction_id)) {
+            return $base;
+        }
+
+        return $base->withPath("/activity/payment/{$this->transaction_id}");
     }
 }
