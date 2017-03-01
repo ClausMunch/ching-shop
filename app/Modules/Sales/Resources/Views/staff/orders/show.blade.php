@@ -39,12 +39,18 @@
                 <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <td>Payment ID:</td>
+                        <td>Transaction ID:</td>
                         <td>
                             <a href="{{$order->payment->settlement->url()}}"
-                               title="View payment in PayPal">
-                                {{$order->payment->settlement->payment_id}}
+                               title="View transaction in PayPal">
+                                {{$order->payment->settlement->id()}}
                             </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Payment ID:</td>
+                        <td>
+                            {{$order->payment->settlement->payment_id}}
                         </td>
                     </tr>
                     <tr>

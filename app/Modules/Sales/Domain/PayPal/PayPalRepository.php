@@ -4,10 +4,13 @@ namespace ChingShop\Modules\Sales\Domain\PayPal;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
 use ChingShop\Modules\Sales\Domain\Payment\Cashier;
+use ChingShop\Modules\Sales\Events\NewPayPalSettlementEvent;
+use Log;
 use PayPal\Api\Payment;
 use PayPal\Rest\ApiContext;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use Throwable;
 
 /**
  * Manages persistence of PayPal-related models.
@@ -121,6 +124,8 @@ class PayPalRepository
         $order = $this->cashier->settle($execution->basket(), $settlement);
 
         if ($execution->approve()) {
+            $this->dispatchSettlement($settlement);
+
             return $order;
         }
 
@@ -155,5 +160,17 @@ class PayPalRepository
             ),
             $this->apiContext
         );
+    }
+
+    /**
+     * @param $settlement
+     */
+    private function dispatchSettlement($settlement)
+    {
+        try {
+            event(new NewPayPalSettlementEvent($settlement));
+        } catch (Throwable $e) {
+            Log::warning($e->getMessage());
+        }
     }
 }

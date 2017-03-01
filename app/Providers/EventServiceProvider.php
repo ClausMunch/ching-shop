@@ -5,7 +5,9 @@ namespace ChingShop\Providers;
 use ChingShop\Events\NewImageEvent;
 use ChingShop\Listeners\NewImageListener;
 use ChingShop\Modules\Sales\Events\NewOrderEvent;
+use ChingShop\Modules\Sales\Events\NewPayPalSettlementEvent;
 use ChingShop\Modules\Sales\Listeners\SendStaffOrderNotifications;
+use ChingShop\Modules\Sales\Listeners\SetPayPalTransactionId;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as Provider;
 
 /**
@@ -19,11 +21,14 @@ class EventServiceProvider extends Provider
      * @var array
      */
     protected $listen = [
-        NewImageEvent::class => [
+        NewImageEvent::class            => [
             NewImageListener::class,
         ],
-        NewOrderEvent::class => [
+        NewOrderEvent::class            => [
             SendStaffOrderNotifications::class,
+        ],
+        NewPayPalSettlementEvent::class => [
+            SetPayPalTransactionId::class,
         ],
     ];
 }

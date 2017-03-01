@@ -129,24 +129,20 @@ class NewOrderNotification extends Notification implements ShouldQueue
         return TelegramMessage::create()
             ->content(
                 sprintf(
-                    "%s\n%s",
+                    "%s\n%s\n%s\n%s",
                     "New Order in *{$env}* {$this->order->publicId()}",
-                    "Total {$this->order->totalPrice()->formatted()}"
+                    "Total {$this->order->totalPrice()->formatted()}",
+                    $this->order->orderItems->map(
+                        function (OrderItem $item) {
+                            return $item->name();
+                        }
+                    )->implode(', '),
+                    $this->order->orderOffers->map(
+                        function (OrderOffer $offer) {
+                            return $offer->offer_name;
+                        }
+                    )->implode(', ')
                 )
-            )
-            ->content(
-                $this->order->orderItems->map(
-                    function (OrderItem $item) {
-                        return $item->name();
-                    }
-                )->implode(', ')
-            )
-            ->content(
-                $this->order->orderOffers->map(
-                    function (OrderOffer $offer) {
-                        return $offer->offer_name;
-                    }
-                )->implode(', ')
             )
             ->button(
                 "View new order #{$this->order->publicId()}",
