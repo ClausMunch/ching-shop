@@ -103,7 +103,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
         $settlement = $this->order->payment->settlement;
         $message->line(
             sprintf(
-                '<a href="%s">View %s payment %s for order #%s</a>',
+                'View %s payment %s for order #%s: %s',
                 $settlement->type(),
                 $settlement->id(),
                 $this->order->publicId(),
