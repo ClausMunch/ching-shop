@@ -77,7 +77,7 @@ trait MockStripe
             $this->mockStripeCharge = Mockery::mock(Charge::class);
             $this->mockStripeCharge->shouldReceive('__construct')->passthru();
             $this->mockStripeCharge->shouldIgnoreMissing()->asUndefined();
-            /** @noinspection ImplicitMagicMethodCallInspection */
+            /* @noinspection ImplicitMagicMethodCallInspection */
             $this->mockStripeCharge->__construct(); // Work in constructor :(.
 
             foreach (self::$attributes as $attribute) {

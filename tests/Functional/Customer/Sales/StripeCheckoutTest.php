@@ -39,7 +39,7 @@ class StripeCheckoutTest extends FunctionalTest
 
         // And we have a enter an email address in the Stripe checkout;
         $emailAddress = 'test@ching-shop.com';
-        /** @noinspection PhpUndefinedFieldInspection */
+        /* @noinspection PhpUndefinedFieldInspection */
         $this->mockStripeCharge()->source = (object) ['name' => $emailAddress];
 
         // When we pay with Stripe;
