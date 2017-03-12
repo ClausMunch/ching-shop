@@ -28,7 +28,7 @@ class SendCustomerOrderNotification implements ShouldQueue
      */
     public function handle(NewOrderEvent $event)
     {
-        if (empty($event->order->customer_email)) {
+        if (empty($event->order->payerEmail())) {
             return;
         }
 

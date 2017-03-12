@@ -49,10 +49,8 @@ class StripeCheckoutTest extends FunctionalTest
         $this->see('order is confirmed');
 
         // And the payer email should be stored for the order.
-        $order = Order::where(
-            'id',
-            '=',
-            Order::privateId($this->getElementText('#order-id'))
+        $order = Order::wherePublicId(
+            $this->getElementText('#order-id')
         )->firstOrFail();
 
         $this->assertEquals($emailAddress, $order->payerEmail());

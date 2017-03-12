@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa35237f3bb733d57d21064fb1fc614f",
-    "content-hash": "f433b5ab021c118d8ea1b7610a818d20",
+    "hash": "d3868ed9a3d23cf06a3279dcc2897f82",
+    "content-hash": "0786ad55f9cb867b0ebd14c595afcbcc",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -5262,54 +5262,6 @@
                 "test"
             ],
             "time": "2016-01-20 08:20:44"
-        },
-        {
-            "name": "johnkary/phpunit-speedtrap",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/johnkary/phpunit-speedtrap.git",
-                "reference": "ad242a6e84b0d63d2e50832babad77d6d545bc0a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/johnkary/phpunit-speedtrap/zipball/ad242a6e84b0d63d2e50832babad77d6d545bc0a",
-                "reference": "ad242a6e84b0d63d2e50832babad77d6d545bc0a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "phpunit/phpunit": ">=4.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JohnKary": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Kary",
-                    "email": "john@johnkary.net"
-                }
-            ],
-            "description": "Find slow tests in your PHPUnit test suite",
-            "homepage": "https://github.com/johnkary/phpunit-speedtrap",
-            "keywords": [
-                "phpunit",
-                "profile",
-                "slow"
-            ],
-            "time": "2017-02-13 15:22:35"
         },
         {
             "name": "laracasts/generators",

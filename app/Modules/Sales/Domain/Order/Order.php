@@ -10,6 +10,7 @@ use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\User\Model\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,6 +35,16 @@ use Illuminate\Notifications\Notifiable;
 class Order extends Model
 {
     use SoftDeletes, PublicId, Notifiable;
+
+    /**
+     * @param int $publicId
+     *
+     * @return $this|Model|Builder
+     */
+    public static function wherePublicId(int $publicId)
+    {
+        return self::where('id', '=', self::privateId($publicId));
+    }
 
     /**
      * An order contains order items.

@@ -47,7 +47,6 @@
         "symfony/css-selector": "^3.0",
         "mockery/mockery": ">=0.9.4",
         "hamcrest/hamcrest-php": "^2.0.0",
-        "johnkary/phpunit-speedtrap": "^1.0.1",
         "pda/pheanstalk": "^3.0",
         "squizlabs/php_codesniffer": "^2.5",
         "phpmd/phpmd": "@stable",
