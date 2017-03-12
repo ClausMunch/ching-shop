@@ -25,7 +25,6 @@ use Illuminate\Notifications\Notifiable;
  * @property \Carbon\Carbon               $created_at
  * @property \Carbon\Carbon               $updated_at
  * @property \Carbon\Carbon               $deleted_at
- *
  * @property-read OrderItem[]|Collection  $orderItems
  * @property-read OrderOffer[]|Collection $orderOffers
  * @property-read User                    $user
