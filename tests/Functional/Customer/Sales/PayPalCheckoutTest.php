@@ -2,6 +2,7 @@
 
 namespace Testing\Functional\Customer\Sales;
 
+use ChingShop\Modules\Sales\Domain\Order\Order;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Util\SalesInteractions;
 
@@ -67,5 +68,46 @@ class PayPalCheckoutTest extends FunctionalTest
         // Then we should see a reassuring and useful page.
         $this->see('No worries');
         $this->see('cancelled');
+    }
+
+    /**
+     * The payer's email address should be stored after PayPal checkout.
+     */
+    public function testPayPalPayerEmail()
+    {
+        // Given we are at the payment method page in the checkout process;
+        $this->createProductAndAddToBasket($this);
+        $this->completeCheckoutToAddress($this);
+
+        // And we have a PayPal email address;
+        $emailAddress = 'test@ching-shop.com';
+        $this->mockPayPalPayment()
+            ->shouldReceive('getPayer')
+            ->zeroOrMoreTimes()
+            ->andReturnSelf();
+        $this->mockPayPalPayment()
+            ->shouldReceive('getPayerInfo')
+            ->zeroOrMoreTimes()
+            ->andReturnSelf();
+        $this->mockPayPalPayment()
+            ->shouldReceive('getEmail')
+            ->zeroOrMoreTimes()
+            ->andReturn($emailAddress);
+
+        // When we pay with PayPal;
+        $this->customerWillReturnFromPayPal('approved');
+        $this->press('Pay with PayPal');
+
+        // Then our order should be confirmed;
+        $this->see('order is confirmed');
+
+        // And the email address should be stored for the order.
+        $order = Order::where(
+            'id',
+            '=',
+            Order::privateId($this->getElementText('#order-id'))
+        )->firstOrFail();
+
+        $this->assertEquals($emailAddress, $order->payerEmail());
     }
 }

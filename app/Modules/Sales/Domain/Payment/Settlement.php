@@ -25,4 +25,9 @@ interface Settlement
      * @return Http
      */
     public function url(): Http;
+
+    /**
+     * @return string
+     */
+    public function payerEmail(): string;
 }

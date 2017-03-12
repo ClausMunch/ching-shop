@@ -3,7 +3,7 @@
 namespace ChingShop\Modules\Sales\Listeners;
 
 use ChingShop\Modules\Sales\Events\NewOrderEvent;
-use ChingShop\Modules\Sales\Notifications\NewOrderNotification;
+use ChingShop\Modules\Sales\Notifications\StaffOrderNotification;
 use ChingShop\Modules\User\Domain\StaffTelegramGroup;
 use ChingShop\Modules\User\Model\Role;
 use ChingShop\Modules\User\Model\User;
@@ -46,7 +46,7 @@ class SendStaffOrderNotifications implements ShouldQueue
         }
         $this->notificationFactory->send(
             $recipients,
-            new NewOrderNotification($event->order)
+            new StaffOrderNotification($event->order)
         );
     }
 

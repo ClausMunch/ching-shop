@@ -3,12 +3,14 @@
 namespace ChingShop\Modules\Sales\Domain\PayPal;
 
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
+use Log;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
+use Throwable;
 
 /**
  * Wrapper around work to execute a PayPal payment after return from PayPal
@@ -73,6 +75,23 @@ class PayPalExecution
     public function basket(): Basket
     {
         return $this->initiation->basket;
+    }
+
+    /**
+     * @return string
+     */
+    public function payerEmail(): string
+    {
+        try {
+            return (string) $this->payment()
+                ->getPayer()
+                ->getPayerInfo()
+                ->getEmail();
+        } catch (Throwable $e) {
+            Log::error("Error getting PayPal payer email: {$e->getMessage()}");
+        }
+
+        return '';
     }
 
     /**

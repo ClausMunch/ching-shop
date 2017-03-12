@@ -32,13 +32,20 @@ use Stripe\Charge;
  * @property string         $status
  * @property string         $address_zip
  * @property string         $name
+ * @property string         $payer_email
  */
 class StripeSettlement extends Model implements Settlement
 {
     use SoftDeletes;
 
     /** @var string[] */
-    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'payer_email',
+    ];
 
     protected $casts = [
         'amount'   => 'integer',
@@ -88,6 +95,7 @@ class StripeSettlement extends Model implements Settlement
 
         if (isset($charge->source->name)) {
             $this->name = $charge->source->name;
+            $this->payer_email = $charge->source->name;
         }
 
         return $this;
@@ -111,5 +119,13 @@ class StripeSettlement extends Model implements Settlement
         return Http::createFromString(
             "https://dashboard.stripe.com/payments/{$this->stripe_id}"
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function payerEmail(): string
+    {
+        return (string) $this->payer_email;
     }
 }

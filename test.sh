@@ -2,6 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+sudo service elasticsearch restart
 phpcs -v --standard=./tests/analysis/phpcs.xml app
 phpmd --strict app text ./tests/analysis/phpmd.xml
 gulp scss-lint
