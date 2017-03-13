@@ -113,7 +113,7 @@ class PayPalRepository
      */
     public function executePayment(string $paymentId, string $payerId)
     {
-        $settlement = PayPalSettlement::create(
+        $settlement = new PayPalSettlement(
             [
                 'payment_id' => $paymentId,
                 'payer_id'   => $payerId,
@@ -121,6 +121,8 @@ class PayPalRepository
         );
         $this->log->info("Executing PayPal payment {$paymentId} / {$payerId}");
         $execution = $this->createExecution($paymentId, $payerId);
+        $settlement->payer_email = $execution->payerEmail();
+        $settlement->save();
         $order = $this->cashier->settle($execution->basket(), $settlement);
 
         if ($execution->approve()) {

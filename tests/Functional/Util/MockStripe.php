@@ -14,6 +14,20 @@ use Testing\Functional\FunctionalTest;
  */
 trait MockStripe
 {
+    private static $attributes = [
+        'id',
+        'amount',
+        'balance_transaction',
+        'captured',
+        'created',
+        'currency',
+        'description',
+        'failure_code',
+        'failure_message',
+        'paid',
+        'status',
+    ];
+
     /** @var Charge|MockInterface */
     private $mockStripeCharge;
 
@@ -42,16 +56,14 @@ trait MockStripe
     }
 
     /**
-     * @param string $status
-     *
      * @throws \InvalidArgumentException
      */
-    private function customerWillPayWithStripe(string $status = 'succeeded')
+    private function customerWillPayWithStripe()
     {
         $this->mockStripeCharge()
             ->shouldReceive('create')
             ->zeroOrMoreTimes()
-            ->andReturn($status);
+            ->andReturnSelf();
     }
 
     /**
@@ -63,7 +75,14 @@ trait MockStripe
     {
         if ($this->mockStripeCharge === null) {
             $this->mockStripeCharge = Mockery::mock(Charge::class);
+            $this->mockStripeCharge->shouldReceive('__construct')->passthru();
             $this->mockStripeCharge->shouldIgnoreMissing()->asUndefined();
+            /* @noinspection ImplicitMagicMethodCallInspection */
+            $this->mockStripeCharge->__construct(); // Work in constructor :(.
+
+            foreach (self::$attributes as $attribute) {
+                $this->mockStripeCharge->{$attribute} = 'foobar';
+            }
 
             app()->extend(
                 Charge::class,

@@ -19,7 +19,7 @@ use NotificationChannels\Telegram\TelegramMessage;
 /**
  * Class NewOrder.
  */
-class NewOrderNotification extends Notification implements ShouldQueue
+class StaffOrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 

@@ -19,6 +19,7 @@ use League\Uri\Schemes\Http;
  * @property string                $payment_id
  * @property string                $transaction_id
  * @property string                $payer_id
+ * @property string                $payer_email
  * @property \Carbon\Carbon        $created_at
  * @property \Carbon\Carbon        $updated_at
  * @property \Carbon\Carbon        $deleted_at
@@ -29,7 +30,12 @@ class PayPalSettlement extends Model implements Settlement
     use SoftDeletes;
 
     /** @var string[] */
-    protected $fillable = ['payment_id', 'transaction_id', 'payer_id'];
+    protected $fillable = [
+        'payment_id',
+        'transaction_id',
+        'payer_id',
+        'payer_email',
+    ];
 
     /** @var string */
     protected $table = 'paypal_settlements';
@@ -86,5 +92,13 @@ class PayPalSettlement extends Model implements Settlement
         }
 
         return $base->withPath("/activity/payment/{$this->transaction_id}");
+    }
+
+    /**
+     * @return string
+     */
+    public function payerEmail(): string
+    {
+        return (string) $this->payer_email;
     }
 }

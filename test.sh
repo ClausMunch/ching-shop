@@ -8,6 +8,5 @@ gulp scss-lint
 gulp ts-lint
 php artisan route:cache
 php artisan config:clear
-phpunit --testsuite unit --repeat 3
 gulp test-database
-phpunit --coverage-html build --coverage-clover build/clover.xml
+./vendor/phpunit/phpunit/phpunit -c phpunit.xml --coverage-html build --coverage-clover build/clover.xml

@@ -10,29 +10,41 @@ use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\User\Model\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @mixin \Eloquent
  *
- * @property int                     $id
- * @property \Carbon\Carbon          $created_at
- * @property \Carbon\Carbon          $updated_at
- * @property \Carbon\Carbon          $deleted_at
- * @property OrderItem[]|Collection  $orderItems
- * @property OrderOffer[]|Collection $orderOffers
- * @property User                    $user
- * @property Address                 $address
- * @property-read Payment            $payment
+ * @property int                          $id
+ * @property \Carbon\Carbon               $created_at
+ * @property \Carbon\Carbon               $updated_at
+ * @property \Carbon\Carbon               $deleted_at
+ * @property-read OrderItem[]|Collection  $orderItems
+ * @property-read OrderOffer[]|Collection $orderOffers
+ * @property-read User                    $user
+ * @property-read Address                 $address
+ * @property-read Payment                 $payment
  */
 class Order extends Model
 {
-    use SoftDeletes, PublicId;
+    use SoftDeletes, PublicId, Notifiable;
+
+    /**
+     * @param int $publicId
+     *
+     * @return $this|Model|Builder
+     */
+    public static function wherePublicId(int $publicId)
+    {
+        return self::where('id', '=', self::privateId($publicId));
+    }
 
     /**
      * An order contains order items.
@@ -106,6 +118,18 @@ class Order extends Model
                 },
                 Money::fromInt(0)
             );
+    }
+
+    /**
+     * @return string
+     */
+    public function payerEmail(): string
+    {
+        if (empty($this->payment->settlement)) {
+            return '';
+        }
+
+        return $this->payment->settlement->payerEmail();
     }
 
     /**

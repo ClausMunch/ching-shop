@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Sales;
 
-use ChingShop\Modules\Sales\Notifications\NewOrderNotification;
+use ChingShop\Modules\Sales\Notifications\StaffOrderNotification;
 use Illuminate\Support\Facades\Notification;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
@@ -32,8 +32,8 @@ class OrderNotificationTest extends FunctionalTest
         // Then the staff user should have been notified about it.
         Notification::assertSentTo(
             $this->staffUser(),
-            NewOrderNotification::class,
-            function (NewOrderNotification $notification) {
+            StaffOrderNotification::class,
+            function (StaffOrderNotification $notification) {
                 return $notification->order->id === $this->orders[0]->id;
             }
         );
