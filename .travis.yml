@@ -26,6 +26,10 @@ install:
   - php artisan storage:link
   - php artisan route:cache; php artisan config:cache; php artisan optimize
 script:
+  - ls
+  - ls tests
+  - cat phpunit.xml
+  - ./vendor/phpunit/phpunit/phpunit --version
   - ./test.sh
 after_success:
   - travis_retry php vendor/bin/coveralls
