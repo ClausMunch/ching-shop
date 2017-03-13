@@ -25,8 +25,9 @@ abstract class TestCase extends \Illuminate\Foundation\Testing\TestCase
     /**
      * Creates the application.
      *
-     * @return \Illuminate\Foundation\Application
      * @throws \PHPUnit_Framework_Exception
+     *
+     * @return \Illuminate\Foundation\Application
      */
     public function createApplication()
     {
