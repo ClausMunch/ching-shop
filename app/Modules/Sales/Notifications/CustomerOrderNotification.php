@@ -43,7 +43,7 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      *
      * @return MailMessage
      */
-    public function toMail(Order $order)
+    public function toMail(Order $order): MailMessage
     {
         Log::debug(
             "Building customer email about order #{$order->id}."

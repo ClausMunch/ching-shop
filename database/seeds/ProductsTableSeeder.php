@@ -54,7 +54,7 @@ class ProductsTableSeeder extends Seed
 
         $price = new Price(
             [
-                'units'    => random_int(1, 100),
+                'units'    => random_int(1, 10),
                 'subunits' => random_int(0, 99),
                 'currency' => 'GBP',
             ]

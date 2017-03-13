@@ -36,6 +36,9 @@ class Order extends Model
 {
     use SoftDeletes, PublicId, Notifiable;
 
+    /** @var string */
+    public $notifyVia = 'mail';
+
     /**
      * @param int $publicId
      *
@@ -118,6 +121,14 @@ class Order extends Model
                 },
                 Money::fromInt(0)
             );
+    }
+
+    /**
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->payerEmail();
     }
 
     /**
