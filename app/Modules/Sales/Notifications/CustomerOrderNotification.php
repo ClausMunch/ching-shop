@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
+use Log;
 
 /**
  * Notification for a customer of their new order.
@@ -44,8 +45,12 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      */
     public function toMail(Order $order)
     {
+        Log::debug(
+            "Building customer email about order #{$order->id}."
+        );
+
         return (new MailMessage())
-            ->to($order->customer_email)
+            ->to($order->payerEmail())
             ->view('sales::email.customer-order');
     }
 }
