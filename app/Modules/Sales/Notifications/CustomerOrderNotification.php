@@ -43,7 +43,7 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
      *
      * @return MailMessage
      */
-    public function toMail(Order $order)
+    public function toMail(Order $order): MailMessage
     {
         Log::debug(
             "Building customer email about order #{$order->id}."
@@ -51,6 +51,6 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
 
         return (new MailMessage())
             ->to($order->payerEmail())
-            ->view('sales::email.customer-order');
+            ->view('sales::email.customer-order', ['order' => $order]);
     }
 }

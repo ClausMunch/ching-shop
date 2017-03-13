@@ -32,10 +32,10 @@
     <div class="container-fluid">
         <div class="row top-cats">
             <div class="col-xs-6 col-sm-3">
-                <a href="/category/617978927/valentines-cards"
+                <a href="/category/1264984359/mothers-day-cards"
                    class="top-cats-link">
-                    <span class="glyphicon glyphicon-heart"></span>&nbsp;
-                    Valentine's <span class="hidden-xs">Cards</span>
+                    <span class="icon icon-flower"></span>&nbsp;
+                    Mother's Day <span class="hidden-xs">Cards</span>
                 </a>
             </div>
             <div class="col-xs-6 col-sm-3">
