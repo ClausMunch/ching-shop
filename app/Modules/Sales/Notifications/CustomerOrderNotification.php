@@ -51,6 +51,6 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
 
         return (new MailMessage())
             ->to($order->payerEmail())
-            ->view('sales::email.customer-order');
+            ->view('sales::email.customer-order', ['order' => $order]);
     }
 }

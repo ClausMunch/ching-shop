@@ -60,6 +60,10 @@ trait MockPayPal
             $this->payPalPayment = Mockery::mock(Payment::class);
             $this->payPalPayment->shouldIgnoreMissing()->asUndefined();
 
+            $this->payPalPayment->shouldReceive(
+                'getPayer->getPayerInfo->getEmail'
+            )->zeroOrMoreTimes()->andReturn('test@ching-shop.com');
+
             app()->extend(
                 Payment::class,
                 function () {
