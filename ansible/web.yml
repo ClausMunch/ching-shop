@@ -111,8 +111,6 @@
         version=master
         update=yes
         force=yes
-      notify:
-        - restart workers
 
     - name: install composer
       shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -146,8 +144,6 @@
     - name: configure supervisor
       template: src=ching-shop-worker.conf
                 dest=/etc/supervisor/conf.d/ching-shop-worker.conf
-      notify:
-        - restart workers
 
     - name: Copy public key into /var/www
       authorized_key: user=www-data
@@ -294,7 +290,3 @@
 
     - name: restart redis
       service: name=redis-server state=restarted
-
-    - name: restart workers
-      supervisorctl: name=`ching-shop-worker:*`
-                     state=restarted
