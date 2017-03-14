@@ -51,6 +51,7 @@ class CustomerOrderNotification extends Notification implements ShouldQueue
 
         return (new MailMessage())
             ->to($order->payerEmail())
+            ->subject("Ching-Shop.com Order #{$order->publicId()}")
             ->view('sales::email.customer-order', ['order' => $order]);
     }
 }

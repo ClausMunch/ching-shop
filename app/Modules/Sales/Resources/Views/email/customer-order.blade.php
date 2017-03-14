@@ -1,11 +1,19 @@
-<img src="{{secure_asset('img/logo-text.png')}}" alt="ChingShop.com"
-     style="max-width: 100%;"/>
+<a href="https://www.ching-shop.com/" title="Ching-Shop.com">
+    <img src="{{secure_asset('img/logo-text.png')}}" alt="Ching-Shop.com"
+         style="width: 256px; max-width: 100%; height: auto;"/>
+</a>
 
 <hr>
 
 <p>Dear {{$order->address->name}},</p>
 
-<p>Thank you for your ChingShop.com order #{{$order->publicId()}}.</p>
+<p>
+    Thank you for your Ching-Shop.com order
+    <a href="{{route('sales.customer.order.view', [$order->publicId()])}}"
+       title="View your order">
+        #{{$order->publicId()}}
+    </a>.
+</p>
 
 <h2>What you're getting</h2>
 
@@ -49,5 +57,5 @@
 </p>
 
 <p>
-    Thank you for shopping at ChingShop.com.
+    Thank you for shopping at Ching-Shop.com.
 </p>
