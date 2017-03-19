@@ -162,6 +162,7 @@ return [
         ChingShop\Modules\Catalogue\Providers\CatalogueServiceProvider::class,
         ChingShop\Modules\Sales\Providers\RouteServiceProvider::class,
         ChingShop\Modules\Sales\Providers\SalesServiceProvider::class,
+        ChingShop\Modules\Shipping\Providers\ShippingServiceProvider::class,
         ChingShop\Modules\User\Providers\RouteServiceProvider::class,
         ChingShop\Modules\User\Providers\UserServiceProvider::class,
 

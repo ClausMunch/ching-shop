@@ -2,6 +2,7 @@
 
 namespace ChingShop\Modules\Sales\Domain\Order;
 
+use Carbon\Carbon;
 use ChingShop\Domain\PublicId;
 use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Basket\Basket;
@@ -9,6 +10,7 @@ use ChingShop\Modules\Sales\Domain\LinePriced;
 use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
+use ChingShop\Modules\Shipping\Domain\Dispatch;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,6 +30,7 @@ use Illuminate\Notifications\Notifiable;
  * @property \Carbon\Carbon               $deleted_at
  * @property-read OrderItem[]|Collection  $orderItems
  * @property-read OrderOffer[]|Collection $orderOffers
+ * @property-read Dispatch[]|Collection   $dispatches
  * @property-read User                    $user
  * @property-read Address                 $address
  * @property-read Payment                 $payment
@@ -67,6 +70,14 @@ class Order extends Model
     public function orderOffers(): HasMany
     {
         return $this->hasMany(OrderOffer::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function dispatches(): HasMany
+    {
+        return $this->hasMany(Dispatch::class, 'order_id', 'id');
     }
 
     /**
@@ -141,6 +152,30 @@ class Order extends Model
         }
 
         return $this->payment->settlement->payerEmail();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBeenDispatched(): bool
+    {
+        if ($this->relationLoaded('dispatches')) {
+            return $this->dispatches->count() > 0;
+        }
+
+        return $this->dispatches()->exists();
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function dispatchedAt(): Carbon
+    {
+        if ($this->dispatches->isNotEmpty()) {
+            return $this->dispatches->first()->created_at;
+        }
+
+        return new Carbon();
     }
 
     /**
