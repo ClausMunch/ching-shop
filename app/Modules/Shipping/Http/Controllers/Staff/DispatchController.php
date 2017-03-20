@@ -5,7 +5,6 @@ namespace ChingShop\Modules\Shipping\Http\Controllers\Staff;
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
 use ChingShop\Modules\Sales\Domain\Order\Order;
-use ChingShop\Modules\Shipping\Domain\Dispatch;
 use Illuminate\Http\Request;
 
 /**
@@ -13,9 +12,6 @@ use Illuminate\Http\Request;
  */
 class DispatchController extends Controller
 {
-    /** @var Dispatch */
-    private $dispatchResource;
-
     /** @var Order */
     private $orderResource;
 
@@ -23,18 +19,11 @@ class DispatchController extends Controller
     private $webUi;
 
     /**
-     * DispatchController constructor.
-     *
-     * @param Dispatch $dispatchResource
-     * @param Order    $orderResource
-     * @param WebUi    $webUi
+     * @param Order $orderResource
+     * @param WebUi $webUi
      */
-    public function __construct(
-        Dispatch $dispatchResource,
-        Order $orderResource,
-        WebUi $webUi
-    ) {
-        $this->dispatchResource = $dispatchResource;
+    public function __construct(Order $orderResource, WebUi $webUi)
+    {
         $this->orderResource = $orderResource;
         $this->webUi = $webUi;
     }
@@ -55,8 +44,7 @@ class DispatchController extends Controller
             $request->get('order-id')
         )->firstOrFail();
 
-        if ($order->dispatches->isEmpty()) {
-            $order->dispatches()->save(new Dispatch());
+        if ($order->markAsDispatched()) {
             $this->webUi->successMessage(
                 "Marked #{$order->publicId()} as dispatched."
             );
