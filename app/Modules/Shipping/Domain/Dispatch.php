@@ -23,4 +23,12 @@ class Dispatch extends Model
     {
         return $this->belongsTo(Order::class, 'order_id', 'id', 'order');
     }
+
+    /**
+     * @return string
+     */
+    public function timeTaken(): string
+    {
+        return $this->created_at->diffForHumans($this->order->created_at, true);
+    }
 }

@@ -62,6 +62,8 @@ class DispatchController extends Controller
             );
         }
 
-        return $this->webUi->redirect('orders.index');
+        return $this->webUi->redirectAway(
+            route('orders.index')."#order-{$order->publicId()}"
+        );
     }
 }
