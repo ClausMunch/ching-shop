@@ -26,21 +26,18 @@
                 <th>
                     Dispatched?
                 </th>
-                <th>
-                    Last updated
-                </th>
             </tr>
             </thead>
             <tbody>
             @foreach($orders->all() as $order)
-                <tr>
+                <tr id="order-{{$order->publicId()}}">
                     <td>
                         <a href="{{ route('orders.show', $order) }}">
                             {{ $order->publicId() }}
                         </a>
                     </td>
-                    <td>
-                        <ul>
+                    <td class="small">
+                        <ul class="list-unstyled">
                             @if ($order->orderItems)
                                 @foreach ($order->orderItems as $item)
                                     <li>
@@ -51,24 +48,16 @@
                             @endif
                         </ul>
                     </td>
-                    <td>
-                        @if ($order->address)
-                            {{ $order->address->name }}<br>
-                            {{ $order->address->line_one }}<br>
-                            @if($order->address->line_two)
-                                {{ $order->address->line_two }}<br>
-                            @endif
-                            {{ $order->address->city }}<br>
-                            {{ $order->address->post_code }}<br>
-                            {{ $order->address->country_code }}
-                        @endif
-                    </td>
+                    <td class="small">{{$order->address}}</td>
                     <td>
                         @if ($order->hasBeenDispatched())
                             <span class="text-success">
                                 <span class="icon icon-package"></span>
                                 &nbsp;
                                 {{$order->dispatchedAt()}}
+                                <small>
+                                    ({{$order->dispatch()->timeTaken()}})
+                                </small>
                             </span>
                         @else
                             <form method="post"
@@ -84,11 +73,11 @@
                                         Mark #{{$order->publicId()}} as dispatched
                                     </span>
                                 </button>
+                                <span class="text-danger">
+                                    Waiting {{$order->waitingForDispatch()}}&hellip;
+                                </span>
                             </form>
                         @endif
-                    </td>
-                    <td>
-                        {{ $order->updated_at }}
                     </td>
                 </tr>
             @endforeach

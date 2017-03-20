@@ -159,11 +159,19 @@ class Order extends Model
      */
     public function hasBeenDispatched(): bool
     {
-        if ($this->relationLoaded('dispatches')) {
-            return $this->dispatches->count() > 0;
+        return $this->dispatches->isNotEmpty();
+    }
+
+    /**
+     * @return Dispatch
+     */
+    public function dispatch(): Dispatch
+    {
+        if ($this->hasBeenDispatched()) {
+            return $this->dispatches->first();
         }
 
-        return $this->dispatches()->exists();
+        return new Dispatch();
     }
 
     /**
@@ -171,11 +179,23 @@ class Order extends Model
      */
     public function dispatchedAt(): Carbon
     {
-        if ($this->dispatches->isNotEmpty()) {
-            return $this->dispatches->first()->created_at;
+        if ($this->hasBeenDispatched()) {
+            return $this->dispatch()->created_at;
         }
 
         return new Carbon();
+    }
+
+    /**
+     * @return string
+     */
+    public function waitingForDispatch(): string
+    {
+        if ($this->hasBeenDispatched()) {
+            return $this->dispatch()->timeTaken();
+        }
+
+        return (new Carbon())->diffForHumans($this->created_at, true);
     }
 
     /**
