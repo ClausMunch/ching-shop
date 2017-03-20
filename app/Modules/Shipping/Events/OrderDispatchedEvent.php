@@ -7,9 +7,7 @@ use ChingShop\Modules\Shipping\Domain\Dispatch;
 use Illuminate\Queue\SerializesModels;
 
 /**
- * Class OrderDispatchedEvent
- *
- * @package ChingShop\Modules\Shipping\Events
+ * Class OrderDispatchedEvent.
  */
 class OrderDispatchedEvent extends Event
 {
