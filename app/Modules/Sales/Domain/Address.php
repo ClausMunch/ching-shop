@@ -56,6 +56,66 @@ class Address extends Model
     }
 
     /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getNameAttribute($value)
+    {
+        return title_case($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getLineOneAttribute($value)
+    {
+        return title_case($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getLineTwoAttribute($value)
+    {
+        return title_case($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getCityAttribute($value)
+    {
+        return title_case($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getPostCodeAttribute($value)
+    {
+        return mb_strtoupper($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getCountryCodeAttribute($value)
+    {
+        return mb_strtoupper($value);
+    }
+
+    /**
      * @return string
      */
     public function __toString()
