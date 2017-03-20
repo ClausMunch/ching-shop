@@ -9,6 +9,8 @@ use ChingShop\Modules\Sales\Events\NewPayPalSettlementEvent;
 use ChingShop\Modules\Sales\Listeners\SendCustomerOrderNotification;
 use ChingShop\Modules\Sales\Listeners\SendStaffOrderNotifications;
 use ChingShop\Modules\Sales\Listeners\SetPayPalTransactionId;
+use ChingShop\Modules\Shipping\Events\OrderDispatchedEvent;
+use ChingShop\Modules\Shipping\Listeners\SendCustomerDispatchNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as Provider;
 
 /**
@@ -31,6 +33,9 @@ class EventServiceProvider extends Provider
         ],
         NewPayPalSettlementEvent::class => [
             SetPayPalTransactionId::class,
+        ],
+        OrderDispatchedEvent::class     => [
+            SendCustomerDispatchNotification::class,
         ],
     ];
 }

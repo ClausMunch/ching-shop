@@ -11,6 +11,7 @@ use ChingShop\Modules\Sales\Domain\Money;
 use ChingShop\Modules\Sales\Domain\Offer\OrderOffer;
 use ChingShop\Modules\Sales\Domain\Payment\Payment;
 use ChingShop\Modules\Shipping\Domain\Dispatch;
+use ChingShop\Modules\Shipping\Events\OrderDispatchedEvent;
 use ChingShop\Modules\User\Model\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -152,6 +153,22 @@ class Order extends Model
         }
 
         return $this->payment->settlement->payerEmail();
+    }
+
+    /**
+     * @return bool
+     */
+    public function markAsDispatched(): bool
+    {
+        if (!$this->hasBeenDispatched()) {
+            $dispatch = new Dispatch();
+            $this->dispatches()->save($dispatch);
+            event(new OrderDispatchedEvent($dispatch));
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
