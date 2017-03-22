@@ -62,7 +62,7 @@ trait MockStripe
     {
         $this->mockStripeCharge()
             ->shouldReceive('create')
-            ->zeroOrMoreTimes()
+            ->atLeast(1)
             ->andReturnSelf();
     }
 
@@ -83,14 +83,14 @@ trait MockStripe
             foreach (self::$attributes as $attribute) {
                 $this->mockStripeCharge->{$attribute} = 'foobar';
             }
-
-            app()->extend(
-                Charge::class,
-                function () {
-                    return $this->mockStripeCharge;
-                }
-            );
         }
+
+        app()->extend(
+            Charge::class,
+            function () {
+                return $this->mockStripeCharge;
+            }
+        );
 
         return $this->mockStripeCharge;
     }

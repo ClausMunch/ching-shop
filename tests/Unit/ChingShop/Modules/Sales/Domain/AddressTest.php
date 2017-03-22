@@ -3,12 +3,12 @@
 namespace Testing\Unit\ChingShop\Modules\Sales\Domain;
 
 use ChingShop\Modules\Sales\Domain\Address;
-use Testing\TestCase;
+use Testing\BrowserKitTestCase;
 
 /**
  * Test shipping address unit behaviour.
  */
-class AddressTest extends TestCase
+class AddressTest extends BrowserKitTestCase
 {
     /**
      * Should apply formatting rules to the address.

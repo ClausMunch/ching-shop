@@ -20,7 +20,6 @@ class ProductOptionPresenter extends BasePresenter implements
      */
     public function __construct(ProductOption $resource)
     {
-        parent::__construct($resource);
         $this->wrappedObject = $resource;
     }
 

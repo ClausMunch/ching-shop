@@ -23,8 +23,6 @@ class BasketItemPresenter extends BasePresenter implements
      */
     public function __construct(BasketItem $resource)
     {
-        parent::__construct($resource);
-
         $this->wrappedObject = $resource;
     }
 

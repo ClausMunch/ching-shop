@@ -5,10 +5,10 @@ namespace Testing\Unit;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use Testing\BrowserKitTestCase;
 use Testing\Generator\GeneratesValues;
-use Testing\TestCase;
 
-abstract class UnitTest extends TestCase
+abstract class UnitTest extends BrowserKitTestCase
 {
     use GeneratesValues;
 

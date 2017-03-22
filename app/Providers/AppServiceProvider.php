@@ -7,7 +7,7 @@ use ChingShop\Http\View\ReplyComposer;
 use ChingShop\Validation\IlluminateValidation;
 use ChingShop\Validation\ValidationInterface;
 use Illuminate\Support\ServiceProvider;
-use Laracasts\Generators\GeneratorsServiceProvider;
+use Laravel\Tinker\TinkerServiceProvider;
 use Pvm\ArtisanBeans\ArtisanBeansServiceProvider;
 
 /**
@@ -33,8 +33,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->app->environment() === 'local') {
-            $this->app->register(GeneratorsServiceProvider::class);
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+            $this->app->register(TinkerServiceProvider::class);
         }
 
         $this->app->singleton(

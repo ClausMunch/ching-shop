@@ -148,6 +148,8 @@ trait SalesInteractions
      */
     private function orderFromPage(FunctionalTest $test): Order
     {
+        $test->see('id="order-id"');
+
         $this->orders[] = Order::where(
             'id',
             '=',

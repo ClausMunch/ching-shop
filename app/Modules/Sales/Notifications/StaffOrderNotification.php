@@ -58,16 +58,13 @@ class StaffOrderNotification extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param Notifiable|User $notifiable
-     *
      * @throws \InvalidArgumentException
      *
      * @return MailMessage
      */
-    public function toMail($notifiable): MailMessage
+    public function toMail(): MailMessage
     {
         $message = (new MailMessage())
-            ->to($notifiable->email)
             ->subject(
                 sprintf(
                     'New ChingShop order for %s (%s)',

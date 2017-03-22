@@ -194,7 +194,5 @@ class OffersTest extends FunctionalTest
             ->see($offer->name)
             ->press("Delete {$offer->name}")
             ->see('Deleted');
-
-        $this->markTestIncomplete();
     }
 }

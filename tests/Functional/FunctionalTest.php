@@ -3,13 +3,13 @@
 namespace Testing\Functional;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Testing\BrowserKitTestCase;
 use Testing\Generator\GeneratesValues;
-use Testing\TestCase;
 
 /**
  * Class FunctionalTest.
  */
-abstract class FunctionalTest extends TestCase
+abstract class FunctionalTest extends BrowserKitTestCase
 {
     use GeneratesValues, DatabaseTransactions;
 

@@ -120,7 +120,7 @@ class Clerk
         if (!$this->basket->deleted_at) {
             $this->basket->save();
         }
-        $this->session->set(self::SESSION_BASKET, $this->basket->id);
+        $this->session->put(self::SESSION_BASKET, $this->basket->id);
     }
 
     /**

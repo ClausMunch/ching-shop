@@ -33,8 +33,6 @@ class ProductPresenter extends BasePresenter implements
      */
     public function __construct(Product $resource)
     {
-        parent::__construct($resource);
-
         $this->wrappedObject = $resource;
     }
 

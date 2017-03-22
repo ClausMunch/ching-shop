@@ -20,7 +20,6 @@ class TagPresenter extends BasePresenter implements HttpCrudInterface
      */
     public function __construct(Tag $resource)
     {
-        parent::__construct($resource);
         $this->wrappedObject = $resource;
     }
 

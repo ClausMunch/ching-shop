@@ -9,7 +9,7 @@
         "php": "^7.0",
         "ext-imagick": "^3.4",
         "ext-redis": "*",
-        "laravel/framework": "^5.3",
+        "laravel/framework": "5.4.*",
         "graham-campbell/htmlmin": "^4.1",
         "doctrine/dbal": "^2.5",
         "predis/predis": "^1.0",
@@ -18,7 +18,7 @@
         "aws/aws-sdk-php": "~3.0",
         "pmatseykanets/artisan-beans": "^0.1.4",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "mccool/laravel-auto-presenter": "^4.2",
+        "mccool/laravel-auto-presenter": "^5.0",
         "laracasts/flash": "^2.0",
         "guzzlehttp/guzzle": "^6.2",
         "rap2hpoutre/laravel-log-viewer": "^0.7.0",
@@ -26,8 +26,8 @@
         "propaganistas/laravel-fakeid": "^2",
         "spatie/laravel-backup": "^4.0",
         "thepixeldeveloper/sitemap": "^4.4",
-        "laravel/scout": "^1.1",
-        "elasticsearch/elasticsearch": "^2.2",
+        "laravel/scout": "^3.0",
+        "elasticsearch/elasticsearch": "^5.0",
         "baum/baum": "^1.1",
         "league/uri": "^4.2",
         "ipunkt/laravel-analytics": "dev-content-security-policy",
@@ -35,14 +35,13 @@
         "irazasyed/telegram-bot-sdk": "^2.0",
         "stripe/stripe-php": "^4.1",
         "moneyphp/money": "^3.0",
-        "sofa/eloquence": "^5.3",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "tamayo/laravel-scout-elastic": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
-        "phpunit/phpunit": "^5.7",
+        "phpunit/phpunit": "~5.7",
         "laravel/homestead": "^3.0.1",
-        "laracasts/generators": "^1.1",
         "symfony/dom-crawler": "^3.0",
         "symfony/css-selector": "^3.0",
         "mockery/mockery": ">=0.9.4",
@@ -51,7 +50,9 @@
         "squizlabs/php_codesniffer": "^2.5",
         "phpmd/phpmd": "@stable",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "barryvdh/laravel-debugbar": "^2.3"
+        "barryvdh/laravel-debugbar": "~2.3",
+        "laravel/tinker": "^1.0",
+        "laravel/browser-kit-testing": "^1.0"
     },
     "autoload": {
         "classmap": [
@@ -64,7 +65,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "tests/BrowserKitTestCase.php"
         ]
     },
     "scripts": {
