@@ -24,7 +24,7 @@ class OrderOffersTest extends FunctionalTest
         // Given there is an offer with a minimum quantity of 3 and a fixed
         // price of £10;
         /** @var Offer $offer */
-        $offer = factory(Offer::class)->states('price')->create(
+        $offer = factory(Offer::class)->states(['price'])->create(
             [
                 'quantity' => 3,
                 'effect'   => Offer::ABSOLUTE,

@@ -117,4 +117,12 @@ class User extends Model implements
     {
         return $this->hasOne(Basket::class);
     }
+
+    /**
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email();
+    }
 }

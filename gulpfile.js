@@ -104,6 +104,7 @@ gulp.task("clean", function () {
 gulp.task("test-database", shell.task(
     [
         "rm -f ./database/test_db.sqlite",
+        "curl -X DELETE 'localhost:9200/ching-shop-test'",
         "sqlite3 ./database/test_db.sqlite ''",
         "ELASTICSEARCH_INDEX=ching-shop-test php artisan migrate:refresh --seed --database=testing --env=testing"
     ],

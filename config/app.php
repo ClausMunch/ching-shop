@@ -154,6 +154,7 @@ return [
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
         NotificationChannels\Telegram\TelegramServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
 
         /*
          * Module Service Providers

@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Dispatch extends Model
 {
+    /** @var string */
+    public $notifyVia = 'mail';
+
     /**
      * @return BelongsTo
      */
@@ -30,5 +33,13 @@ class Dispatch extends Model
     public function timeTaken(): string
     {
         return $this->created_at->diffForHumans($this->order->created_at, true);
+    }
+
+    /**
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->order->payerEmail();
     }
 }

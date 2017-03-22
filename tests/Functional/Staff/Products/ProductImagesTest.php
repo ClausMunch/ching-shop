@@ -2,7 +2,7 @@
 
 namespace Testing\Functional\Staff\Products;
 
-use Illuminate\Foundation\Testing\HttpException;
+use Exception;
 use Testing\Functional\Staff\StaffUser;
 
 /**
@@ -36,7 +36,7 @@ class ProductImagesTest extends ProductTest
                 ->attach([$testImageFile], 'new-image')
                 ->press('Add general images')
                 ->assertResponseOk();
-        } catch (HttpException $e) {
+        } catch (Exception $e) {
             $this->assertContains(
                 'Received status code [500]',
                 $e->getMessage()

@@ -22,6 +22,7 @@ class SearchTest extends FunctionalTest
     {
         // Given there is a product;
         $product = $this->createProduct();
+        sleep(1); // Allow ES to update.
 
         // When we search for the product's name;
         $this->searchFor($product->name);
@@ -39,6 +40,7 @@ class SearchTest extends FunctionalTest
     {
         // Given there is a product with one name;
         $product = $this->createProduct();
+        sleep(1); // Allow ES to update.
 
         // And another product with a different name;
         $otherProduct = $this->createProduct(['name' => uniqid('', false)]);
@@ -63,13 +65,12 @@ class SearchTest extends FunctionalTest
     {
         // Given there are products with similar names;
         $similarName = 'foobar';
-        /** @var Product[] $products */
-        $products = [];
         for ($i = 0; $i < SearchController::PAGE_SIZE + 5; $i++) {
-            $products[] = $this->createProduct(
+            $this->createProduct(
                 ['name' => uniqid("{$similarName} ", false)]
             );
         }
+        sleep(1); // Allow ES to update.
         (new Product())->where('name', 'like', "{$similarName}%")->searchable();
 
         // When we search for that name;

@@ -6,6 +6,8 @@ use Generator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
+use Log;
+use Throwable;
 
 /**
  * Class ProductRepository.
@@ -129,15 +131,21 @@ class ProductRepository
      */
     public function loadSimilar(Product $product): Collection
     {
-        return $this->productResource
-            ->search($product->name)
-            ->take(4)
-            ->get()
-            ->filter(
-                function (Product $similarProduct) use ($product) {
-                    return $similarProduct->id !== $product->id;
-                }
-            );
+        try {
+            return $this->productResource
+                ->search($product->name)
+                ->take(4)
+                ->get()
+                ->filter(
+                    function (Product $similarProduct) use ($product) {
+                        return $similarProduct->id !== $product->id;
+                    }
+                );
+        } catch (Throwable $e) {
+            Log::error($e->getMessage());
+
+            return new Collection();
+        }
     }
 
     /**

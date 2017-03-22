@@ -4,12 +4,12 @@ namespace Testing\Unit\ChingShop\Modules\Sales\Domain\Offer;
 
 use ChingShop\Modules\Sales\Domain\Offer\Offer;
 use ChingShop\Modules\Sales\Domain\Offer\OfferName;
-use Testing\TestCase;
+use Testing\BrowserKitTestCase;
 
 /**
  * Test offer name presentation behaviour.
  */
-class OfferNameTest extends TestCase
+class OfferNameTest extends BrowserKitTestCase
 {
     /**
      * @param Offer  $offer

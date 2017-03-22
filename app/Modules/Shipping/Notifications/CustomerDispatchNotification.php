@@ -49,7 +49,6 @@ class CustomerDispatchNotification extends Notification implements ShouldQueue
         );
 
         return (new MailMessage())
-            ->to($order->payerEmail())
             ->subject(
                 "Dispatch update for Ching-Shop.com Order #{$order->publicId()}"
             )
