@@ -5,8 +5,8 @@ namespace Testing\Unit;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Testing\Generator\GeneratesValues;
 use Testing\BrowserKitTestCase;
+use Testing\Generator\GeneratesValues;
 
 abstract class UnitTest extends BrowserKitTestCase
 {
