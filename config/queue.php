@@ -1,5 +1,7 @@
 <?php
 
+use ChingShop\Modules\Sales\Jobs\PrintOrderAddress;
+
 return [
 
     /*
@@ -54,6 +56,18 @@ return [
             'key'    => env('AWS_KEY'),
             'secret' => env('AWS_SECRET'),
             'queue'  => env('SQS_QUEUE'),
+            'region' => 'us-east-1',
+        ],
+
+        PrintOrderAddress::QUEUE_CONNECTION => [
+            'driver' => env('PRINT_QUEUE_DRIVER', 'beanstalkd'),
+            'queue'  => PrintOrderAddress::QUEUE_NAME,
+            // Beanstalkd print job queue config.
+            'host'   => env('PRINT_QUEUE_HOST', 'localhost'),
+            'ttr'    => 60,
+            // SQS print job queue config.
+            'key'    => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
             'region' => 'us-east-1',
         ],
 

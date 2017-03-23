@@ -71,13 +71,11 @@ return [
     */
 
     'elasticsearch' => [
-        'index' => env('ELASTICSEARCH_INDEX', 'ching-shop'),
-
-        'config' => [
-            'hosts' => [
-                env('ELASTICSEARCH_HOST', 'http://localhost'),
-            ],
+        'index'  => env('ELASTICSEARCH_INDEX', 'ching-shop'),
+        'hosts'  => [
+            env('ELASTICSEARCH_HOST', 'http://localhost'),
         ],
+        'config' => [],
     ],
 
 ];
