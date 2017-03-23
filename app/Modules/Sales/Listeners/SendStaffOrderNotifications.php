@@ -84,6 +84,7 @@ class SendStaffOrderNotifications implements ShouldQueue
             'queued_at' => date(DATE_W3C),
             'order_id'  => $address->order->publicId(),
             'address'   => $address->toArray(),
+            'attempts'  => 0, // To keep Laravel happy.
         ];
 
         Queue::connection(PrintOrderAddress::QUEUE_CONNECTION)->pushRaw(

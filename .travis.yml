@@ -4,6 +4,7 @@ php:
 sudo: false
 services:
   - elasticsearch
+  - redis-server
 install:
   - export PATH=$PATH:$PWD/vendor/bin/
   - mkdir -p build/logs
