@@ -28,7 +28,7 @@ class PrintOrderAddress implements ShouldQueue
      */
     public function __construct(array $addressParts)
     {
-        /** @noinspection UnusedConstructorDependenciesInspection */
+        /* @noinspection UnusedConstructorDependenciesInspection */
         $this->addressParts = $addressParts;
     }
 

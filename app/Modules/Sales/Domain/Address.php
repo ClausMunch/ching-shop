@@ -22,7 +22,6 @@ use Illuminate\Support\Collection;
  * @property string          $city
  * @property string          $post_code
  * @property string          $country_code
- *
  * @property-read Order|null $order
  */
 class Address extends Model
