@@ -2,11 +2,13 @@
 
 namespace ChingShop\Modules\Sales\Jobs;
 
+use ChingShop\Modules\Sales\Domain\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Log;
+use Queue;
 
 /**
  * Physically print the shipping address label for an order.
@@ -30,6 +32,23 @@ class PrintOrderAddress implements ShouldQueue
     {
         /* @noinspection UnusedConstructorDependenciesInspection */
         $this->addressParts = $addressParts;
+    }
+
+    /**
+     * @param Address $address
+     */
+    public static function dispatch(Address $address)
+    {
+        $job = [
+            'queued_at' => date(DATE_W3C),
+            'order_id'  => $address->order->publicId(),
+            'address'   => $address->toArray(),
+            'attempts'  => 0, // To keep Laravel happy.
+        ];
+
+        Queue::connection(self::QUEUE_CONNECTION)->pushRaw(
+            json_encode($job)
+        );
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Testing\Functional\Staff\Shipping;
 
+use ChingShop\Modules\Sales\Jobs\PrintOrderAddress;
+use Queue;
 use Testing\Functional\FunctionalTest;
 use Testing\Functional\Staff\StaffUser;
 use Testing\Functional\Util\SalesInteractions;
@@ -38,5 +40,29 @@ class OrderDispatchTest extends FunctionalTest
             $order->hasBeenDispatched(),
             'Order should be logged as dispatched.'
         );
+    }
+
+    /**
+     * Should be able to manually trigger the printing of an order address.
+     */
+    public function testCanPrintOrderAddress()
+    {
+        // Given there is an order;
+        $order = $this->completeOrder($this);
+
+        // When a staff user views it;
+        $this->actingAs($this->staffUser())
+            ->visit(route('orders.index'))
+            ->see($order->publicId());
+
+        // And clicks the print button;
+        $this->actingAs($this->staffUser())
+            ->press("Print #{$order->publicId()}")
+            ->see("Sent print job for order #{$order->publicId()}.");
+
+        // Then there should be a print job for it.
+        $job = Queue::connection(PrintOrderAddress::QUEUE_CONNECTION)->pop();
+        $content = json_decode($job->getRawBody());
+        $this->assertEquals($order->publicId(), $content->order_id);
     }
 }

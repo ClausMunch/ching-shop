@@ -1,0 +1,5 @@
+pystalkd==1.2.2
+brother_ql
+cairosvg
+boto3
+ansible==2.0.0.2

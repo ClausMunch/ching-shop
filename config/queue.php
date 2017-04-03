@@ -61,7 +61,10 @@ return [
 
         PrintOrderAddress::QUEUE_CONNECTION => [
             'driver'     => env('PRINT_QUEUE_DRIVER', 'beanstalkd'),
-            'queue'      => PrintOrderAddress::QUEUE_NAME,
+            'queue'      => env(
+                'PRINT_QUEUE_NAME',
+                PrintOrderAddress::QUEUE_NAME
+            ),
             // Beanstalkd print job queue config.
             'host'       => env('PRINT_QUEUE_HOST', 'localhost'),
             'ttr'        => 60,
