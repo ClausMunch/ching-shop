@@ -262,4 +262,12 @@ class Country
     {
         return implode(',', array_keys(self::CODES));
     }
+
+    /**
+     * @return string
+     */
+    public static function acceptableCodes(): string
+    {
+        return 'GB';
+    }
 }
