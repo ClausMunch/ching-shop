@@ -81,8 +81,32 @@ class CheckoutAddressTest extends FunctionalTest
         // And the problems should be explained.
         $this->see('name field is required')
             ->see('line one field is required')
-            ->dontSee('line two field is required') // (because it's not)
+            ->dontSee('line two field is required')// (because it's not)
             ->see('city field is required')
             ->see('post code field is required');
+    }
+
+    /**
+     * The address should be rejected if the country code is not GB.
+     */
+    public function testCountryCodeMustBeGB()
+    {
+        // Given we have an item in the basket;
+        $this->createProductAndAddToBasket($this);
+
+        // When we fill out the address with a non-GB country code;
+        $this->actingAs($this->customerUser())
+            ->visit(route('sales.customer.checkout.address'))
+            ->type('Fooey McBar', 'name')
+            ->type('42 Some Street', 'line_one')
+            ->type('Some Town', 'line_two')
+            ->type('London', 'city')
+            ->type('FOO BAR', 'post_code')
+            ->select('US', 'country_code')
+            ->press('Continue');
+
+        // Then the address should have been rejected;
+        $this->seePageIs(route('sales.customer.checkout.address'));
+        $this->see('The selected country code is invalid.');
     }
 }

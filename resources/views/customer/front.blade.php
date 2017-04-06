@@ -32,10 +32,10 @@
     <div class="container-fluid">
         <div class="row top-cats">
             <div class="col-xs-6 col-sm-3">
-                <a href="/category/1264984359/mothers-day-cards"
+                <a href="/category/1547154054/easter-cards"
                    class="top-cats-link">
                     <span class="icon icon-flower"></span>&nbsp;
-                    Mother's Day <span class="hidden-xs">Cards</span>
+                    Easter <span class="hidden-xs">Cards</span>
                 </a>
             </div>
             <div class="col-xs-6 col-sm-3">

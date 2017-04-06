@@ -21,7 +21,7 @@ class SaveAddressRequest extends Request
             'line_two'     => 'string|max:255',
             'city'         => 'required|string|min:2|max:255',
             'post_code'    => 'required|string|min:3|max:31',
-            'country_code' => 'required|in:'.Country::codesString(),
+            'country_code' => 'required|in:'.Country::acceptableCodes(),
         ];
     }
 
