@@ -52,8 +52,9 @@ class DispatchController extends Controller
     /**
      * @param Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function printAddress(Request $request)
     {
@@ -71,8 +72,9 @@ class DispatchController extends Controller
     /**
      * @param Request $request
      *
-     * @return Order
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     *
+     * @return Order
      */
     private function findOrder(Request $request): Order
     {
