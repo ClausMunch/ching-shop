@@ -48,7 +48,22 @@
                             @endif
                         </ul>
                     </td>
-                    <td class="small">{{$order->address}}</td>
+                    <td class="small">
+                        <p>{{$order->address}}</p>
+                        <form method="post"
+                              action="{{route('print-address')}}">
+                            {{csrf_field()}}
+                            <input type="hidden" name="order-id"
+                                   value="{{$order->id}}">
+                            <button type="submit" class="btn btn-link"
+                                    title="Print this address">
+                                <span class="sr-only">
+                                    Print #{{$order->publicId()}}
+                                </span>
+                                <span class="glyphicon glyphicon-print"></span>
+                            </button>
+                        </form>
+                    </td>
                     <td>
                         @if ($order->hasBeenDispatched())
                             <span class="text-success">

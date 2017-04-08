@@ -71,6 +71,6 @@ All tests and static analyses can be run with:
 ## Deployment
  
 ```bash
-pip install -r requirements.txt
-ansible-playbook ./ansible/web.yml
+pip install -r ./infrastructure/requirements.txt
+ansible-playbook ./infrastructure/ansible/web.yml
 ```

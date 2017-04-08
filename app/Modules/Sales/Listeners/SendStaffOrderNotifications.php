@@ -14,7 +14,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Log;
-use Queue;
 use Throwable;
 
 /**
@@ -80,16 +79,6 @@ class SendStaffOrderNotifications implements ShouldQueue
      */
     private function dispatchPrintAddressJob(Address $address)
     {
-        $job = [
-            'queued_at' => date(DATE_W3C),
-            'order_id'  => $address->order->publicId(),
-            'address'   => $address->toArray(),
-            'attempts'  => 0, // To keep Laravel happy.
-        ];
-
-        Queue::connection(PrintOrderAddress::QUEUE_CONNECTION)->pushRaw(
-            json_encode($job),
-            PrintOrderAddress::QUEUE_NAME
-        );
+        PrintOrderAddress::dispatch($address);
     }
 }

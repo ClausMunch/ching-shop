@@ -16,6 +16,13 @@ Route::group(
             ],
             function () {
                 Route::resource('dispatches', 'Staff\DispatchController');
+                Route::post(
+                    'print-address',
+                    [
+                        'as'   => 'print-address',
+                        'uses' => 'Staff\DispatchController@printAddress',
+                    ]
+                );
             }
         );
     }
