@@ -29,6 +29,7 @@ class BeanstalkQueue:
 
 class SqsQueue:
     sqs_queue = None
+    buffer = []
 
     def __init__(self, queue_name='ching-shop-print-jobs'):
         self.queue_name = queue_name
@@ -41,7 +42,9 @@ class SqsQueue:
         return self.sqs_queue
 
     def pop(self):
-        return self.sqs.receive_messages()
+        while not self.buffer:
+            self.buffer = self.sqs.receive_messages()
+        return self.buffer.pop(0)
 
 
 class PrintWorker:
@@ -147,4 +150,5 @@ else:
     raise ValueError('Unknown source queue {}'.format(args.source))
 
 worker = PrintWorker(source_queue=queue, printer=Printer())
+print('Listening on {}'.format(args.source))
 worker.run()
