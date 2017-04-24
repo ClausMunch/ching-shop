@@ -64,7 +64,7 @@ class PrintWorker:
         if not job:
             return
         decoded = json.loads(job.body)
-        self.printer.print(order_id=decoded['order_id'], address=decoded['address'])
+        self.printer.print(order_id=x_str(decoded.get('order_id')), address=decoded.get('address'))
         job.delete()
 
 
@@ -77,12 +77,12 @@ class Printer:
             '\n'.join(filter(
                 None,
                 [
-                    address['name'],
-                    address['line_one'],
-                    address['line_two'],
-                    address['city'],
-                    address['post_code'],
-                    address['country_code'],
+                    x_str(address.get('name')),
+                    x_str(address.get('line_one')),
+                    x_str(address.get('line_two')),
+                    x_str(address.get('city')),
+                    x_str(address.get('post_code')),
+                    x_str(address.get('country_code')),
                 ]
             ))
         )
@@ -109,22 +109,22 @@ class AddressLabel:
         with io.open(template_path, 'r', encoding='utf-8') as f:
             template = f.read()
             template = template.replace('##NAME##',
-                                        self.address['name'])
+                                        x_str(self.address.get('name')))
             template = template.replace('##LINE_ONE##',
-                                        self.address['line_one'])
+                                        x_str(self.address.get('line_one')))
             template = template.replace('##LINE_TWO##',
-                                        self.address['line_two'])
+                                        x_str(self.address.get('line_two')))
             template = template.replace('##CITY##',
-                                        self.address['city'])
+                                        x_str(self.address.get('city')))
             template = template.replace('##POST_CODE##',
-                                        self.address['post_code'])
+                                        x_str(self.address.get('post_code')))
             template = template.replace('##COUNTRY_CODE##',
-                                        self.address['country_code'])
+                                        x_str(self.address.get('country_code')))
             f.close()
         return str(template)
 
     def image_path(self):
-        png_out_path = '/tmp/cs-address-{}.png'.format(self.address['id'])
+        png_out_path = '/tmp/cs-address-{}.png'.format(x_str(self.address.get('id')))
         with open(png_out_path, 'wb') as png_out:
             print('Writing address image to {}'.format(png_out_path))
             svg2png(bytestring=bytes(str(self), 'UTF-8'), write_to=png_out)
@@ -132,7 +132,7 @@ class AddressLabel:
         return png_out_path
 
     def label_path(self):
-        raster_out_path = '/tmp/cs-address-{}.bin'.format(self.address['id'])
+        raster_out_path = '/tmp/cs-address-{}.bin'.format(x_str(self.address.get('id')))
         print('Writing address label to {}'.format(raster_out_path))
         os.system(
             'brother_ql_create --model QL-570 {} > {}'.format(
@@ -140,6 +140,10 @@ class AddressLabel:
             )
         )
         return raster_out_path
+
+
+def x_str(s):
+    return '' if s is None else str(s)
 
 parser = argparse.ArgumentParser(description='Print address labels from a queue.')
 parser.add_argument('--source', '-s', choices=('beanstalkd', 'sqs'),
