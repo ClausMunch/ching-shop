@@ -2,6 +2,7 @@ from pystalkd.Beanstalkd import Connection
 import json
 from cairosvg import svg2png
 import os
+import time
 import io
 import boto3
 import argparse
@@ -57,6 +58,9 @@ class PrintWorker:
 
     def run(self):
         while True:
+            print('Waiting for printer at /dev/usb/lp0 ...')
+            while not os.path.exists('/dev/usb/lp0'):
+                time.sleep(1)
             self.print(job=self.queue.pop())
 
     def print(self, job):
