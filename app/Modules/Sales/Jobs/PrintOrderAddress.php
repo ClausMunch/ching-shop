@@ -41,7 +41,7 @@ class PrintOrderAddress implements ShouldQueue
     {
         $job = [
             'queued_at' => date(DATE_W3C),
-            'order_id'  => $address->order->publicId(),
+            'order_id'  => $address->orderId(),
             'address'   => $address->toArray(),
             'attempts'  => 0, // To keep Laravel happy.
         ];

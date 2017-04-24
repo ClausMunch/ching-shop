@@ -26,12 +26,7 @@ use Illuminate\Support\Collection;
  */
 class Address extends Model
 {
-    use SoftDeletes;
-
-    /**
-     * @var array
-     */
-    protected $fillable = [
+    const LINES = [
         'name',
         'line_one',
         'line_two',
@@ -39,6 +34,30 @@ class Address extends Model
         'post_code',
         'country_code',
     ];
+
+    use SoftDeletes;
+
+    /** @var string[] */
+    protected $fillable = self::LINES;
+
+    /**
+     * @param string $raw
+     *
+     * @return Address
+     */
+    public static function fromString(string $raw): Address
+    {
+        return new self(
+            collect(explode("\n", $raw))
+                ->take(count(self::LINES))
+                ->mapWithKeys(
+                    function (string $line, int $index) {
+                        return [self::LINES[$index] => $line];
+                    }
+                )
+                ->all()
+        );
+    }
 
     /**
      * @return HasOne
@@ -61,7 +80,7 @@ class Address extends Model
      *
      * @return string
      */
-    public function getNameAttribute($value)
+    public function getNameAttribute($value): string
     {
         return title_case($value);
     }
@@ -71,7 +90,7 @@ class Address extends Model
      *
      * @return string
      */
-    public function getLineOneAttribute($value)
+    public function getLineOneAttribute($value): string
     {
         return title_case($value);
     }
@@ -81,7 +100,7 @@ class Address extends Model
      *
      * @return string
      */
-    public function getLineTwoAttribute($value)
+    public function getLineTwoAttribute($value): string
     {
         return title_case($value);
     }
@@ -91,7 +110,7 @@ class Address extends Model
      *
      * @return string
      */
-    public function getCityAttribute($value)
+    public function getCityAttribute($value): string
     {
         return title_case($value);
     }
@@ -101,7 +120,7 @@ class Address extends Model
      *
      * @return string
      */
-    public function getPostCodeAttribute($value)
+    public function getPostCodeAttribute($value): string
     {
         return mb_strtoupper($value);
     }
@@ -111,9 +130,21 @@ class Address extends Model
      *
      * @return string
      */
-    public function getCountryCodeAttribute($value)
+    public function getCountryCodeAttribute($value): string
     {
         return mb_strtoupper($value);
+    }
+
+    /**
+     * @return int
+     */
+    public function orderId(): int
+    {
+        if (isset($this->order->id)) {
+            return $this->order->publicId();
+        }
+
+        return 0;
     }
 
     /**

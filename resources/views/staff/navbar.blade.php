@@ -105,6 +105,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
+                            <a href="{{route('print-address-form')}}">
+                                <span class="glyphicon glyphicon-print"></span>
+                                Print address
+                            </a>
+                        </li>
+                        <li>
                             <a href="/staff/logs">
                                 Logs
                             </a>

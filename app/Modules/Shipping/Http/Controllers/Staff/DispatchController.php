@@ -4,8 +4,11 @@ namespace ChingShop\Modules\Shipping\Http\Controllers\Staff;
 
 use ChingShop\Http\Controllers\Controller;
 use ChingShop\Http\WebUi;
+use ChingShop\Modules\Sales\Domain\Address;
 use ChingShop\Modules\Sales\Domain\Order\Order;
 use ChingShop\Modules\Sales\Jobs\PrintOrderAddress;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -34,9 +37,9 @@ class DispatchController extends Controller
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $order = $this->findOrder($request);
 
@@ -54,9 +57,9 @@ class DispatchController extends Controller
      *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function printAddress(Request $request)
+    public function printAddress(Request $request): RedirectResponse
     {
         $order = $this->findOrder($request);
 
@@ -67,6 +70,33 @@ class DispatchController extends Controller
         );
 
         return $this->webUi->redirect('orders.index');
+    }
+
+    /**
+     * @return View
+     */
+    public function printAddressForm(): View
+    {
+        return $this->webUi->view('sales::staff.address.print');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    public function printGenericAddress(Request $request): RedirectResponse
+    {
+        $address = Address::fromString($request->get('address'));
+        PrintOrderAddress::dispatch(
+            $address
+        );
+
+        $this->webUi->successMessage(
+            "Sent print job for:\n{$address->__toString()}."
+        );
+
+        return $this->webUi->redirect('print-address-form');
     }
 
     /**

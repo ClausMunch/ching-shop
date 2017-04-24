@@ -58,9 +58,6 @@ class PrintWorker:
 
     def run(self):
         while True:
-            print('Waiting for printer at /dev/usb/lp0 ...')
-            while not os.path.exists('/dev/usb/lp0'):
-                time.sleep(1)
             self.print(job=self.queue.pop())
 
     def print(self, job):
@@ -91,6 +88,9 @@ class Printer:
         )
         print('Printing address for order #{}'.format(order_id))
         label_path = AddressLabel(address).label_path()
+        print('Waiting for printer at /dev/usb/lp0 ...')
+        while not os.path.exists('/dev/usb/lp0'):
+            time.sleep(1)
         os.system('brother_ql_print {} /dev/usb/lp0'.format(label_path))
         print('\n')
 

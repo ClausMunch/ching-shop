@@ -47,7 +47,10 @@ class OrderDispatchTest extends FunctionalTest
      */
     public function testCanPrintOrderAddress()
     {
-        // Given there is an order;
+        // Given there are no print jobs;
+        $this->printQueueIsEmpty();
+
+        // And there is an order;
         $order = $this->completeOrder($this);
 
         // When a staff user views it;
@@ -61,8 +64,62 @@ class OrderDispatchTest extends FunctionalTest
             ->see("Sent print job for order #{$order->publicId()}.");
 
         // Then there should be a print job for it.
-        $job = Queue::connection(PrintOrderAddress::QUEUE_CONNECTION)->pop();
+        $job = $this->printJobs()->pop();
         $content = json_decode($job->getRawBody());
         $this->assertEquals($order->publicId(), $content->order_id);
+    }
+
+    /**
+     * Should be able to print a generic address.
+     */
+    public function testCanPrintGenericAddress()
+    {
+        // Given there are no print jobs;
+        $this->printQueueIsEmpty();
+
+        // And we are on the print address page;
+        $this->actingAs($this->staffUser())->visit(route('print-address-form'));
+
+        // And we fill in an address;
+        $this->type(
+            <<<ADR
+Fooey McBar
+23 Foo Street
+FooBar District
+Test Town
+FOO BAR
+GB
+ADR
+            ,
+            'address'
+        );
+
+        // When we press the 'print' button;
+        $this->press('Print');
+
+        // Then a print job for that address should have been dispatched.
+        $this->see('Sent print job for');
+        $this->see('23 Foo Street');
+        $job = $this->printJobs()->pop();
+        $content = json_decode($job->getRawBody());
+        $this->assertEquals('23 Foo Street', trim($content->address->line_one));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Queue\Queue
+     */
+    private function printJobs(): \Illuminate\Contracts\Queue\Queue
+    {
+        return Queue::connection(PrintOrderAddress::QUEUE_CONNECTION);
+    }
+
+    /**
+     * Clear all jobs from the print queue.
+     */
+    private function printQueueIsEmpty()
+    {
+        while ($this->printJobs()->pop()) {
+            $this->printJobs()->pop();
+        }
     }
 }

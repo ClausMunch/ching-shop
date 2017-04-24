@@ -23,6 +23,20 @@ Route::group(
                         'uses' => 'Staff\DispatchController@printAddress',
                     ]
                 );
+                Route::get(
+                    'print-address',
+                    [
+                        'as'   => 'print-address-form',
+                        'uses' => 'Staff\DispatchController@printAddressForm',
+                    ]
+                );
+                Route::post(
+                    'print-generic-address',
+                    [
+                        'as'   => 'print-generic-address',
+                        'uses' => 'Staff\DispatchController@printGenericAddress',
+                    ]
+                );
             }
         );
     }
