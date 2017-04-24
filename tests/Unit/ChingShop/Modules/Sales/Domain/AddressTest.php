@@ -11,6 +11,37 @@ use Testing\BrowserKitTestCase;
 class AddressTest extends BrowserKitTestCase
 {
     /**
+     * Should be able to convert a line-broken string into an address.
+     */
+    public function testFromString()
+    {
+        // When we make an address from a string;
+        $address = Address::fromString(
+            <<<ADR
+Fooey McBar
+23 Foo Street
+FooBar District
+Test Town
+FOO BAR
+GB
+ADR
+        );
+
+        // Then it should have the right attributes;
+        self::assertEquals(
+            [
+                'name'         => 'Fooey Mcbar',
+                'line_one'     => '23 Foo Street',
+                'line_two'     => 'Foobar District',
+                'city'         => 'Test Town',
+                'post_code'    => 'FOO BAR',
+                'country_code' => 'GB',
+            ],
+            $address->toArray()
+        );
+    }
+
+    /**
      * Should apply formatting rules to the address.
      */
     public function testAddressFormatting()
@@ -31,7 +62,7 @@ class AddressTest extends BrowserKitTestCase
         $addressString = (string) $address;
 
         // Then it should be nicely formatted.
-        $this->assertEquals(
+        self::assertEquals(
             'Ms Foo Bar, Some House, Some Street, Foobar City, AB5 DE6, GB',
             $addressString
         );

@@ -31,6 +31,6 @@ script:
   - ls tests
   - cat phpunit.xml
   - ./vendor/phpunit/phpunit/phpunit --version
-  - ./test.sh
+  - make test
 after_success:
   - travis_retry php vendor/bin/coveralls
